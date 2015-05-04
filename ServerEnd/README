@@ -1,0 +1,24 @@
+CONTENTS OF THIS FILE
+---------------------
+   
+ * Introduction
+ * Status
+
+
+
+INTRODUCTION
+------------
+The server end module will be responsible for accepting front 
+end connections from the client side python interface. Connections
+will be handled via TCP sockets. This may have to run as either a 
+daemon or actual process.
+
+
+
+STATUS
+----------
+Unimplemented....
+
+
+
+

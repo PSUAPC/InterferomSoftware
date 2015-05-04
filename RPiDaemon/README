@@ -1,0 +1,22 @@
+CONTENTS OF THIS FILE
+---------------------
+   
+ * Introduction
+ * Status
+
+
+
+INTRODUCTION
+------------
+This module is a daemon to run on the RPi at the telescope site.
+It will be responsible for GPIO communication, communication with 
+wireless module, and internal network communication protocols.
+
+
+STATUS
+----------
+Yet to be implemented.
+
+
+
+

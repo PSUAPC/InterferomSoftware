@@ -1,0 +1,30 @@
+CONTENTS OF THIS FILE
+---------------------
+   
+ * Introduction
+ * Status
+ * Running
+
+
+
+INTRODUCTION
+------------
+The client end module is designed to provide the user with a graphical interface
+capable of displaying telescope status and data on a local machine.
+The client module will have to connect to a server side module to further connect
+to the telescope. This module should be primarily written in python for simplicity.
+
+
+
+STATUS
+----------
+The current status is test phase. Currently a simple command line with history is 
+implemented via wxWidgets. Further visual modules are required.
+
+
+
+RUNNING
+---------
+
+Execute via: python testWx.py&
+
