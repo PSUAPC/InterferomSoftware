@@ -1,0 +1,3 @@
+def soSomething(a)
+	return a*2
+
