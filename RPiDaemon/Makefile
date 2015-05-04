@@ -2,7 +2,7 @@ CC := g++
 
 SRCDIR := src
 BUILDDIR := build
-TARGET := bin/runner
+TARGET := bin/commService
  
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
@@ -19,6 +19,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
 	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
+
 clean:
 	@echo " Cleaning..."; 
 	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
@@ -27,9 +28,9 @@ clean:
 # tester:
 #   $(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
 #
-#   # Spikes
-#ticket:
-#	$(CC) $(CFLAGS) spikes/ticket.cpp $(INC) $(LIB) -o bin/ticket
+#   # runner
+DaemonRunner:
+	$(CC) $(CFLAGS) runner/main_runner.cpp $(INC) $(LIB) -o bin/runner
 
 .PHONY: clean 
 
