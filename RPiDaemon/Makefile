@@ -2,7 +2,7 @@ CC := g++
 
 SRCDIR := src
 BUILDDIR := build
-TARGET := bin/commService
+TARGET := bin/APCAcommService
  
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
@@ -30,7 +30,7 @@ clean:
 #
 #   # runner
 DaemonRunner:
-	$(CC) $(CFLAGS) runner/main_runner.cpp $(INC) $(LIB) -o bin/runner
+	$(CC) $(CFLAGS) runner/main_runner.cpp $(INC) $(LIB) -o bin/APCACommRunner
 
 .PHONY: clean 
 

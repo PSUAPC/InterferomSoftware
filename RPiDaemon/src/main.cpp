@@ -32,7 +32,7 @@ int main(void)
         umask(0);
                 
         // Open any logs here         
-        plog = fopen("/TelescopeDaemonLog.log","w");
+        plog = fopen("/TelescopeDaemonLog.log","a+");
 	if( !plog )
 		exit(EXIT_FAILURE);
 		        

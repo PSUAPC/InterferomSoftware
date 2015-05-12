@@ -10,11 +10,13 @@
 #include <ctype.h>
 #include <dirent.h>
 #include <libgen.h>
+#include <string>
+using std::string;
 
 // pre-processors
 #define LOG_FILE "/RunnerDaemonLog.log"
-#define PROC_NAME ""
-
+#define PROC_NAME "APCAcommService"
+#define PROC_PATH "/home/jfixelle/APC/InterferometerSoftware/RPiDaemon/bin/"
 
 // checks if the string is purely an integer
 // we can do it with `strtol' also
@@ -50,7 +52,7 @@ int *pidof (char *pname)
     return NULL;
   }
  
-  pidlist = malloc (sizeof (int) * PID_LIST_BLOCK);
+  pidlist = (int*)malloc (sizeof (int) * PID_LIST_BLOCK);
   if (pidlist == NULL)
   {
     return NULL;
@@ -80,7 +82,7 @@ int *pidof (char *pname)
           if (pidlist_index == PID_LIST_BLOCK * pidlist_realloc_count)
           {
             pidlist_realloc_count++;
-            pidlist = realloc (pidlist, sizeof (int) * PID_LIST_BLOCK * pidlist_realloc_count); //Error check todo
+            pidlist = (int*)realloc (pidlist, sizeof (int) * PID_LIST_BLOCK * pidlist_realloc_count); //Error check todo
             if (pidlist == NULL)
             {
               return NULL;
@@ -122,7 +124,7 @@ int main(void)
         umask(0);
                 
         // Open any logs here         
-        plog = fopen(LOG_FILE,"w");
+        plog = fopen(LOG_FILE,"a+");
 	if( !plog )
 		exit(EXIT_FAILURE);
 		        
@@ -168,13 +170,20 @@ int main(void)
   		}
 		if( (i > 1) || (i == 0) )
 		{
-			fprintf(plog, "Warning: %i proc found\n", i);	
+			fprintf(plog, "Warning: %i proc found\n", i);
+			fflush(plog);	
 		}
 
 		// restart the daemon if for some reason none are running
 		if( i == 0 )
 		{
 			// restart the daemon here
+			string execStr = ".";
+			execStr = execStr + PROC_PATH;
+			execStr = execStr + PROC_NAME;
+			
+			system(execStr.c_str());
+			
 		}
 
   		free (list);
