@@ -1,0 +1,69 @@
+/// 
+///   Name: CommBuffer.h
+///   Purpose: Describe the Fixed buffer for reading / sending comm data
+///
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#ifndef COMMBUFFER_H
+#define COMMBUFFER_H
+
+/// -------------- NOTES ---------------
+///   + App reading sequence:
+///		Fcn: uint8* ReadData(int& len) : returns data and length read
+///     		len = m_RecvBuff.GetFilledSize();
+///			if ((len > 0) && (len < m_BuffSize) )
+///			{
+///				outDat = new uint8[len];
+///				memcpy(outDat, m_RecvBuff.GetBuffStart(), len);
+///				m_RecvBuff.Clear();
+///			}
+///
+///   + App writing sequence
+///   		Fcn: int SendData(int len, char* data): returns sent length
+/// 			int32 freeSpace = m_SendBuff.GetEmptySize();
+///			if (freeSpace > 0)
+///			{
+///				if (freeSpace > len)
+///				{
+///					outLen = len;
+///					memcpy(m_SendBuff.GetBuff(), data, len);
+///					m_SendBuff.SetBuffReadLen(len);
+///				}
+///				else
+///				{
+///					outLen = len - freeSpace;
+///					memcpy(m_SendBuff.GetBuff(), data, outLen);
+///					m_SendBuff.SetBuffReadLen(outLen);
+///
+///				}
+///			}
+///			else
+///			{
+///				outLen = 0;
+///			}
+///
+///	+ Comm Writing sequence
+///
+
+class CommBuffer
+{
+public:
+	CommBuffer(int buffSize);
+	~CommBuffer();
+
+	void Clear();
+	int GetEmptySize();
+	int GetFilledSize();
+	char* GetBuff();
+	char* GetBuffStart();
+	void SetBuffReadLen(int len);
+
+private:
+	int m_BuffSize;
+	int m_BuffLoc;
+	char* m_Buff;
+};
+
+#endif //COMMBUFFER_H
