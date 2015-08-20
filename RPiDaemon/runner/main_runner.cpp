@@ -16,7 +16,7 @@ using std::string;
 // pre-processors
 #define LOG_FILE "/RunnerDaemonLog.log"
 #define PROC_NAME "APCAcommService"
-#define PROC_PATH "/home/jfixelle/APC/InterferometerSoftware/RPiDaemon/bin/"
+#define PROC_PATH "/home/pi/InterferomSoftware/RPiDaemon/bin/"
 
 // checks if the string is purely an integer
 // we can do it with `strtol' also

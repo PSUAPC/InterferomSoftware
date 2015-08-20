@@ -1,0 +1,105 @@
+#! /bin/sh
+#
+#       /etc/init.d/aoca-commrunner
+# apca-commrunner     This shell script takes care of starting and stopping
+#                     the APCACommRunner
+#
+# Author: Josh Fixelle 
+#
+# description: apca-commrunner is a restart daemon for the APCACommService \
+# which handels communications from the wireless modem and internal ethernet \
+# network. The APCACommRunner will periodically check to see if the \
+# APCACommService is running, and if not (due to crash), will restart the process. \
+# This ensures that the system will always respond to the rf modem within the given \
+# check interval.
+
+
+check_privsep_dir() {
+    # Create the PrivSep empty dir if necessary
+    if [ ! -d /var/run/apca ]; then
+	mkdir /var/run/apca
+	chmod 0755 /var/run/apca
+    fi
+}
+
+
+case "$1" in
+  start)
+	check_privsep_dir
+	log_daemon_msg "Starting OpenBSD Secure Shell server" "sshd" || true
+	if start-stop-daemon --start --quiet --oknodo --pidfile /var/run/apca.pid --exec /usr/sbin/sshd -- $SSHD_OPTS; then
+	    log_end_msg 0 || true
+	else
+	    log_end_msg 1 || true
+	fi
+	;;
+  stop)
+	log_daemon_msg "Stopping OpenBSD Secure Shell server" "sshd" || true
+	if start-stop-daemon --stop --quiet --oknodo --pidfile /var/run/apca.pid; then
+	    log_end_msg 0 || true
+	else
+	    log_end_msg 1 || true
+	fi
+	;;
+
+  reload|force-reload)
+	log_daemon_msg "Reloading OpenBSD Secure Shell server's configuration" "sshd" || true
+	if start-stop-daemon --stop --signal 1 --quiet --oknodo --pidfile /var/run/apca.pid --exec /usr/sbin/sshd; then
+	    log_end_msg 0 || true
+	else
+	    log_end_msg 1 || true
+	fi
+	;;
+
+  restart)
+	check_privsep_dir
+	log_daemon_msg "Restarting OpenBSD Secure Shell server" "sshd" || true
+	start-stop-daemon --stop --quiet --oknodo --retry 30 --pidfile /var/run/apca.pid
+	check_for_no_start log_end_msg
+	check_dev_null log_end_msg
+	if start-stop-daemon --start --quiet --oknodo --pidfile /var/run/apca.pid --exec /usr/sbin/sshd -- $SSHD_OPTS; then
+	    log_end_msg 0 || true
+	else
+	    log_end_msg 1 || true
+	fi
+	;;
+
+  try-restart)
+	check_privsep_dir
+	log_daemon_msg "Restarting OpenBSD Secure Shell server" "sshd" || true
+	RET=0
+	start-stop-daemon --stop --quiet --retry 30 --pidfile /var/run/apca.pid || RET="$?"
+	case $RET in
+	    0)
+		# old daemon stopped
+		check_for_no_start log_end_msg
+		check_dev_null log_end_msg
+		if start-stop-daemon --start --quiet --oknodo --pidfile /var/run/apca.pid --exec /usr/sbin/sshd -- $SSHD_OPTS; then
+		    log_end_msg 0 || true
+		else
+		    log_end_msg 1 || true
+		fi
+		;;
+	    1)
+		# daemon not running
+		log_progress_msg "(not running)" || true
+		log_end_msg 0 || true
+		;;
+	    *)
+		# failed to stop
+		log_progress_msg "(failed to stop)" || true
+		log_end_msg 1 || true
+		;;
+	esac
+	;;
+
+  status)
+	status_of_proc -p /var/run/apca.pid /usr/sbin/sshd sshd && exit 0 || exit $?
+	;;
+
+  *)
+	log_action_msg "Usage: /etc/init.d/apca-commrunner {start|stop|reload|force-reload|restart|try-restart|status}" || true
+	exit 1
+esac
+
+exit 0
