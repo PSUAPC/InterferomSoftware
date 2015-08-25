@@ -42,10 +42,14 @@ public:
 	//  ----------- TypeDefs -------------
 	typedef map<unsigned int, LocalContext*> CTMap;
 	typedef pair<unsigned int, LocalContext*> CTPair;
-
+	typedef queue<unsigned int> UIDQueu;
+	
 	// ------------ Functions ----------
 	LocalContext* MakeThread(void *(*fcn)(void*));
+	void RemoveThreadTS(unsigned int uid);
 	void RemoveThread(unsigned int uid);
+	void SetThreadAsGarbage(unsigned int uid);
+	void CollectGarbage();
 	void DestroyAllThreads();
 	void Init();
 	void Shutdown();
@@ -59,6 +63,7 @@ public:
     bool    m_Running;
     CTMap 	m_Contexts;
 	UIDDict m_UIDDict;
+	UIDQueu m_Garbage;
 
     // socket variables
     struct sockaddr_in m_Sa;

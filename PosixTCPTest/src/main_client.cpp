@@ -144,11 +144,19 @@ void *ListenThread(void* t)
 					{
 						LogMsgToTerminal("LISTENER ACCEPTED CONNECTION");
 						
+						// set the timeout on the new socket
+						// this will prevent issues with grid lock and hanging
+						struct timeval timeout;      
+						timeout.tv_sec = 10;
+						timeout.tv_usec = 0;
+
+						setsockopt(clntSock, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+						setsockopt(clntSock, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
+    
 						// now lets add the new socket
 						LocalContext* newCT = ct->MakeThread(RecvThread);
 						newCT->m_Sockfd = clntSock;
-						//newCT->m_Addr = clntAddr; 
-
+						newCT->m_Addr = clntAddr; 
 
 						stringstream ss;
 						ss << "FROM: " << GetIPFromStruct(&clntAddr);
@@ -156,7 +164,10 @@ void *ListenThread(void* t)
 					}
 				}
 			}
-		}
+		}//for
+		
+		// collect the garbage on the context
+		ct->CollectGarbage();
 	}
 
 	close(lct->m_Sockfd);
@@ -170,8 +181,40 @@ void *RecvThread(void* t)
 	Context* ct = lct->m_Context;
  	while( ct->m_Running )
 	{
+		// enter the recv state
+		int len = 100;
+		char buff[100];
+		int rv = recv(lct->m_Sockfd, buff, len, 0);
+		if( rv == -1 )
+		{
+			// no data sent - timed out
+		}
+		else if( rv == 0 )
+		{
+			// connection lost
+			LogMsgToTerminal("CONNECTION LOST");
+
+			// close the socket
+			close( lct->m_Sockfd );
+
+			// set the thread as garbage
+			ct->SetThreadAsGarbage(lct->m_TID);
+
+			// break out of the loop
+			break;
+		}
+		else if( rv < -1 )
+		{
+			// error
+		}
+		else // rv > 0 
+		{
+			// msg recieved
+		}
+		
 	}
     pthread_exit(NULL);
+
 
 }
 
@@ -425,6 +468,19 @@ int main( int argc, char* argv[])
 			else
 			{
 				LogMsgToTerminal("SUCCESSFULL CONNECTION");
+				// set the socket to non-blocking
+				// and create the recv thread
+				struct timeval timeout;
+                timeout.tv_sec = 10;
+                timeout.tv_usec = 0;
+
+                setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+                setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
+
+                // now lets add the new socket
+				LocalContext* newCT = ct.MakeThread(RecvThread);
+				newCT->m_Sockfd = sockfd;
+
 			}
 		}
 	}

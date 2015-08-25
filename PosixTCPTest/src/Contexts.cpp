@@ -60,17 +60,12 @@ LocalContext* Context::MakeThread(void *(*fcn)(void*))
 
 void Context::RemoveThread(unsigned int uid)
 {
-	// lock the create mutex
-	pthread_mutex_lock(&m_CreateMutex);
-
 	// find the context
 	CTMap::iterator it = m_Contexts.find(uid);
 	
 	// check for valid result
 	if( it != m_Contexts.end() )
 	{
-	
-
 		// otherwise, lets join the thread, and delete it
 		pthread_join((it->second)->m_Thread, NULL);
 		m_UIDDict.UnRegisterUID( it->second->m_TID );
@@ -79,9 +74,50 @@ void Context::RemoveThread(unsigned int uid)
 		m_Contexts.erase(it);
 	}
 
+}
+
+void Context::RemoveThreadTS(unsigned int uid)
+{
+	// lock the create mutex
+	pthread_mutex_lock(&m_CreateMutex);
+
+	RemoveThread(uid);
+
 	// unlock the create mutex
 	pthread_mutex_unlock(&m_CreateMutex);
 
+}
+
+void Context::SetThreadAsGarbage(unsigned int uid)
+{
+    // lock the create mutex
+    pthread_mutex_lock(&m_CreateMutex);
+
+	// add the UID to the garbage
+	m_Garbage.push(uid);
+
+    // unlock the create mutex
+    pthread_mutex_unlock(&m_CreateMutex);
+
+}
+
+void Context::CollectGarbage()
+{
+	// lock the create mutex
+	pthread_mutex_lock(&m_CreateMutex);
+	
+	while( !m_Garbage.empty() )
+	{
+		// remove the top item
+		RemoveThread( m_Garbage.front() );
+
+		// pop the element
+		m_Garbage.pop();
+	}
+
+	// unlock the create mutex
+	pthread_mutex_unlock(&m_CreateMutex);
+	
 }
 
 void Context::DestroyAllThreads()
