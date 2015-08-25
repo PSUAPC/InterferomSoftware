@@ -1,5 +1,6 @@
 #pragma once
 #include "Includes.h"
+#include <netdb.h>
 
 #include <map>
 #include <queue>
@@ -84,5 +85,7 @@ struct LocalContext
 
     // socket variables
     int m_Sockfd;
+	struct sockaddr_storage m_Addr;
+
 };
 
