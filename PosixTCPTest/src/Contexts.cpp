@@ -58,6 +58,21 @@ LocalContext* Context::MakeThread(void *(*fcn)(void*))
 	return lct;
 }
 
+LocalContext* Context::FindThread(unsigned int uid)
+{
+	// find the context
+    CTMap::iterator it = m_Contexts.find(uid);
+
+    // check for valid result
+    if( it != m_Contexts.end() )
+    {
+		return (it->second);
+	}	
+
+	// not found
+	return NULL;
+}
+
 void Context::RemoveThread(unsigned int uid)
 {
 	// find the context
@@ -146,6 +161,24 @@ void Context::DestroyAllThreads()
 
 }
 
+void Context::BroadcastAll(string msg, unsigned int exception)
+{
+	for( CTMap::iterator it = m_Contexts.begin();
+		it != m_Contexts.end(); it++ )
+	{
+		// skip 1,2, exception
+		if( it->first == 1 )
+			continue;
+		if( it->first == 2 )
+			continue;
+		if( it->first == exception )
+			continue;
+
+		// otherwise send
+		LocalContext* lct = it->second;
+		send( lct->m_Sockfd, msg.c_str(), msg.length(), 0);
+	}
+}
 
 // ----------------------------------
 // ---------   U I D D I C T --------

@@ -42,6 +42,28 @@ string GetIPFromStruct(struct sockaddr_storage* addr)
 	return ss.str();
 }
 
+
+int GetPortFromStruct(struct sockaddr_storage* addr)
+{
+	//struct sockaddr_storage addr;
+	int port;
+
+
+	// deal with both IPv4 and IPv6:
+	if (addr->ss_family == AF_INET) 
+	{
+		struct sockaddr_in *s = (struct sockaddr_in *)addr;
+		port = ntohs(s->sin_port);
+	} 
+	else // AF_INET6
+	{ 	
+		struct sockaddr_in6 *s = (struct sockaddr_in6 *)addr;
+		port = ntohs(s->sin6_port);
+	}
+
+	return port;
+}
+
 void *ListenThread(void* t)
 {
 	LocalContext* lct = (LocalContext*)(t);
@@ -192,11 +214,28 @@ void *RecvThread(void* t)
 		else if( rv == 0 )
 		{
 			// connection lost
-			LogMsgToTerminal("CONNECTION LOST");
+			//LogMsgToTerminal("CONNECTION LOST");
 
+		// signal the main thread
+			// lock the mutex
+			pthread_mutex_lock(&(ct->m_PollMutex));
+			// set the caller
+			ct->m_Caller = lct->m_TID;
+
+			stringstream ss;	
+			ss << "Connection lost from: " << GetPortFromStruct( &(lct->m_Addr) );	
+			lct->m_MSG = ss.str();
+		
 			// close the socket
 			close( lct->m_Sockfd );
 
+			lct->m_Sockfd = 0;
+			
+			// send the signal
+			pthread_cond_signal(&(ct->m_PollCondition));
+			// unlock the mutex
+			pthread_mutex_unlock(&(ct->m_PollMutex));
+			
 			// set the thread as garbage
 			ct->SetThreadAsGarbage(lct->m_TID);
 
@@ -210,6 +249,27 @@ void *RecvThread(void* t)
 		else // rv > 0 
 		{
 			// msg recieved
+			
+			// signal the main thread
+			// lock the mutex
+			pthread_mutex_lock(&(ct->m_PollMutex));
+			// set the caller
+			ct->m_Caller = lct->m_TID;
+		
+			// set the msg
+			if( rv < len )
+				buff[rv] = '\0';
+			else
+				buff[len - 1] = '\0';
+
+			lct->m_MSG = string(buff);	
+
+			// send the signal
+			pthread_cond_signal(&(ct->m_PollCondition));
+			// unlock the mutex
+			pthread_mutex_unlock(&(ct->m_PollMutex));
+
+
 		}
 		
 	}
@@ -233,9 +293,7 @@ void *InputThread(void* t)
 		// set the signal to false
 		signalMain = false;
 
-		cout << "here" << endl;
         std::getline (std::cin, line);
-		cout << "--" << line << endl;
 
         if( line.find("exit") != NOT_FOUND )
         {
@@ -244,14 +302,24 @@ void *InputThread(void* t)
 			// set the signal flag
 			signalMain = true;
         }
-
-
+		else if( line.length() >= 1 )
+		{
+			signalMain = true;
+		}
+		
 		// check to see if we need to signal the main thread
 		if( signalMain )
 		{
 			// signal the main thread
 			// lock the mutex
 			pthread_mutex_lock(&(ct->m_PollMutex));
+			// set the caller
+			ct->m_Caller = lct->m_TID;
+			
+			// set the line as the msg
+			lct->m_MSG = line;
+
+			// send the signal
 			pthread_cond_signal(&(ct->m_PollCondition));
 			// unlock the mutex
 			pthread_mutex_unlock(&(ct->m_PollMutex));
@@ -494,8 +562,68 @@ int main( int argc, char* argv[])
 		// wait on the condition
 		pthread_cond_wait(&(ct.m_PollCondition), &(ct.m_PollMutex));
 
-		// do work
+		// access the thread context
+		LocalContext* tLct = ct.FindThread( ct.m_Caller );
 
+		if( tLct == NULL )
+			continue; // no thread context...
+
+		// do work
+		stringstream ss;
+		// check the caller
+		if( ct.m_Caller == 1 )
+		{
+			// the input thread
+			// switch on mode
+			switch( ct.m_Mode )
+			{
+			case 1: // server
+				
+				// broadcast to all recv threads
+				ss << ct.m_DPort << ": " << tLct->m_MSG;
+				ct.BroadcastAll( ss.str() );
+
+				break;
+			case 2: // client
+				
+				// simple: broadcast the input thread string to the server
+				// make sure we have a valid connection, and 
+				// this was not an exit command
+				if( success && ct.m_Running ) 				
+				{
+					// send the message
+					LogMsgToTerminal( tLct->m_MSG );
+					size_t sent = send( sockfd, tLct->m_MSG.c_str(), tLct->m_MSG.length(), 0 );
+										
+				}
+				break;
+			}
+
+		}
+		else
+		{
+			// the recv threads
+			
+			// switch on mode
+			switch( ct.m_Mode )
+			{
+			case 1: // server
+				
+				// log the message and transmit
+				ss << GetPortFromStruct( &(tLct->m_Addr) );
+				ss << ": " << tLct->m_MSG;
+
+				LogMsgToTerminal(ss.str());
+				ct.BroadcastAll( ss.str(), ct.m_Caller );
+				break;
+
+			case 2: // client
+				// simply log the message to the screen
+
+				LogMsgToTerminal(tLct->m_MSG);
+				break;
+			}
+		}
 
 
 	}	

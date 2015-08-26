@@ -48,6 +48,8 @@ public:
 	LocalContext* MakeThread(void *(*fcn)(void*));
 	void RemoveThreadTS(unsigned int uid);
 	void RemoveThread(unsigned int uid);
+	LocalContext* FindThread(unsigned int uid);
+	void BroadcastAll(string msg, unsigned int exception = 0);
 	void SetThreadAsGarbage(unsigned int uid);
 	void CollectGarbage();
 	void DestroyAllThreads();
@@ -64,6 +66,8 @@ public:
     CTMap 	m_Contexts;
 	UIDDict m_UIDDict;
 	UIDQueu m_Garbage;
+	int		m_Caller;
+	
 
     // socket variables
     struct sockaddr_in m_Sa;
@@ -92,5 +96,8 @@ struct LocalContext
     int m_Sockfd;
 	struct sockaddr_storage m_Addr;
 
+
+	// context variables
+	string m_MSG;
 };
 
