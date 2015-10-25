@@ -250,8 +250,6 @@ void WirelessComm::SetTxLevel(int level)
 	// send the level command
 	char lev = char(level);
 	
-	// must enter command mode to send?
-
 	// set TxLevel
 	TxSend(0x3A,&lev,1);
 }
@@ -263,8 +261,6 @@ void WirelessComm::SetSleepMode(int mode)
 
 	if( mode == 3 )
 		return; // reserved;
-
-	// must enter command mode to send?
 	
 }
 

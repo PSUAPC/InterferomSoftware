@@ -2,16 +2,14 @@ CC := g++
 
 SRCDIR := src
 BUILDDIR := build
-TARGET := ./bin/APCAcommService
+TARGET := TCPTest
  
 SRCEXT := cpp
-SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g # -Wall
-LIB := #-pthread -lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
+LIB := -pthread #-lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
 INC := #-I include
-
-
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
@@ -31,8 +29,6 @@ clean:
 #   $(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
 #
 #   # runner
-DaemonRunner:
-	$(CC) $(CFLAGS) runner/main_runner.cpp $(INC) $(LIB) -o bin/APCACommRunner
 
 .PHONY: clean 
 
