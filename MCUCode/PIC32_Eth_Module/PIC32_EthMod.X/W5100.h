@@ -17,8 +17,24 @@ extern "C" {
 //       CONSTANTS
 // -------------------------------
 // Chip Select Pin if using SPI
+#define USING_SPI       0   /* Enables SPI instead of parallel*/
+#if USING_SPI
 #define SS_PIN          PORTBbits.RB15
-#define USING_SPI       0                   /* Enables SPI instead of parallel*/
+#else             
+#define P_WrD_Reg(val) mPORTEWrite(val)
+#define P_WrA_Reg(val) mPORTBWrite(val)
+#define P_RdD_Reg mPORTEReadLatchBits(0x000000FF)
+#define P_Rd_BitH mPORTGSetBits(BIT_9)
+#define P_Rd_BitL mPORTGClearBits(BIT_9)
+#define P_Wr_BitH mPORTASetBits(BIT_7)
+#define P_Wr_BitL mPORTAClearBits(BIT_7)
+#define P_RST_Bit PORTGbits.RG8
+#define P_CS_BitH mPORTGSetBits(BIT_14);
+#define P_CS_BitL mPORTGClearBits(BIT_14);
+#define SET_OUT mPORTESetPinsDigitalOut( ~mPORTEGetDirection()|0x000000FF )
+#define SET_IN  mPORTESetPinsDigitalIn( mPORTEGetDirection()|0x000000FF )
+#endif
+    
 #define RETRY_NUM       4                   /* Number of SPI Retires */
 // Dissabling all of the below will Disable this library
 #define ENABLE_UDP      1                   /* Enables UDP Functions */
@@ -329,7 +345,7 @@ uchar W5100Connect(struct W5100Context_t *context, uchar socket, uint16 port,
 uchar W5100Disconnect(struct W5100Context_t *context, uchar socket);
 uchar W5100Listen(struct W5100Context_t *context, uchar socket);
 // RX/TX
-uint16 W5100ReadTCP(struct W5100Context_t *context, uchar socket, uchar** buff);
+uint16 W5100RecvTCP(struct W5100Context_t *context, uchar socket, uchar* buff, uint16 len);
 uint16 W5100SendTCP(struct W5100Context_t *context, uchar socket, uchar* buff, uint16 len);
 #endif
 // --------- UDP Function ------------------
@@ -338,7 +354,7 @@ uint16 W5100SendTCP(struct W5100Context_t *context, uchar socket, uchar* buff, u
 // Initialize
 uchar W5100SetUDP(struct W5100Context_t *context, uchar socket, uint16 port);
 // RX / TX
-uint16 W5100ReadUDP(struct W5100Context_t *context, uchar socket, uchar** buff);
+uint16 W5100RecvUDP(struct W5100Context_t *context, uchar socket, uchar* buff, uint16 len);
 uint16 W5100SendUDP(struct W5100Context_t *context, uchar socket, uchar port, uchar IP0,
                     uchar IP1, uchar IP2, uchar IP3, uchar* buff, uint16 len);
 // the base send UDP functionality is here
@@ -350,7 +366,7 @@ uint16 W5100SendMutli(struct W5100Context_t *context, uchar socket, uchar* buff,
 uchar W5100SetMulti(struct W5100Context_t *context, uchar socket, uint16 port,
                     uchar IP0, uchar IP1, uchar IP2, uchar IP3);
 // RX / TX
-uint16 W5100ReadMulti(struct W5100Context_t *context, uchar socket, uchar** buff);
+uint16 W5100RecvMulti(struct W5100Context_t *context, uchar socket, uchar* buff, uint16 len);
 #endif
 
 
