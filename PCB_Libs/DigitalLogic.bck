@@ -1,3 +1,7 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP +1V3
+K POWER, PWR
+$ENDCMP
+#
 #End Doc Library
