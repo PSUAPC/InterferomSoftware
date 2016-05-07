@@ -1,0 +1,39 @@
+#################################################
+# 	FILE ORGANIZATION
+#################################################
+
+	I2CEnable.sh  	 -- Script to enable read after write single-go 
+			    I2C Communication on the Raspberry Pi.
+
+	main_i2cSniffer  -- Program to 'Sniff out' I2C devices. Will Enumate
+			    over all I2C addresses looking for an ACK signal.
+			    If found, it will report a device at that address.
+
+	main_i2cKernTest -- Test program to verify that the Kernel hook to access
+			    base level I2C buffer worked correctly. This allowed
+			    for the read after write single-go communication to be
+			    accessed.
+
+	main_Orient      -- Test program to dump the Original orientation sensor 
+			    registers to verify connection and response
+	
+	main_Orient2     -- Test program to initialize and poll the original orientation
+			    sensors.
+
+	main_Orient3     -- Test program to initialize and poll the new orientation sensors.
+
+	main_i2c	 -- Test program to verify I2C communication with a PIC16 slave. 
+			    This is for use in the power-up control circuity. Each device will
+			    have a linked 14-pin PIC16 MCU, which will store the power status 
+			    of the device as well as activate / deactivate / restart the device
+			    via a constant logic signal or a pulse.
+
+
+	To compile, use: make <programName>
+
+	Programs can be executed using the standard execution method ./ 
+	If the program returns "unable to open I2C bus", you may need to give the program root
+	permissions, or simply run with a preceeding sudo.
+
+
+
