@@ -240,7 +240,8 @@ public:
 	{
 		printf("Dumping Registers for device at Address %#04x\n", m_Addr);
 
-		unsigned char regs[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,49,50};
+		unsigned char regs[] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,
+					0x0A,0x0B,0x0C,0x31,0x32};
 		int nRegs = 15;
 		unsigned char buff;
 
@@ -632,14 +633,17 @@ public:
 	// | 0x3F |  -  |		RESERVED (DO NOT MODIFY)                               |
 	// + ---- + --- + ---- + ----- + ----- + ----- + ----- + ----- + ----- + ----- + ----- +
 	
-	LSM303DLHCAccelerometer() : m_XByte(0), m_YByte(0), m_ZByte(0), I2CDevice() {}
+	LSM303DLHCAccelerometer() : m_XWord(0), m_YWord(0), m_ZWord(0), m_XFilter(0), m_YFilter(0),
+		m_ZFilter(0), I2CDevice() {}
 
 	virtual void DumpRegisters()
         {
                 printf("Dumping Registers for device at Address %#04x\n", m_Addr);
 
-                unsigned char regs[] = {0,1,2,3,4,5,6,7,8,9,10};
-                int nRegs = 11;
+                unsigned char regs[] = {0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,
+					0x2A,0x2B,0x2C,0x2D,0x2E,0x2F,0x30,0x31,0x32,0x33,
+					0x34,0x35,0x36,0x37,0x38,0x39,0x3A,0x3B,0x3C,0x3D};
+                int nRegs = 30;
                 unsigned char buff;
 
                 for( int ii = 0; ii < nRegs; ii++ )
@@ -659,120 +663,160 @@ public:
 		unsigned char cfg = 0x00;
 
 		// ######## Write configuration data to registers ##############
-		// @[0x05] (SPCNT) ----------------------------
-		cfg = 0x00; // sleep count = 0
-		WriteRegisterByte( 0x05, cfg );
+		// @[0x20] (CTRL1) ----------------------------
+		cfg = 0x00;
+		// ORD: Data Rate Selection (7 : 4)
+		//  - 0x00 for power down
+		//  - 0x01 for normal 1 Hz
+		//  - 0x02 for normal 10 Hz
+		//  - 0x03 for normal 25 Hz
+		//  - 0x04 for normal 50 Hz
+		//  - 0x05 for normal 100 Hz
+		//  - 0x06 for normal 200 Hz
+		//  - 0x07 for normal 400 Hz
+		//  - 0x08 for low 1.629 KHz
+		//  - 0x09 for normal 1.344 KHz or low 5.376 KHz
+		cfg |= ( 0x02 << 4 ); // set 10 Hz
+		// LPEN: Low power enable (1/0)
+		//cfg |= (0x00 << 3 ); // set normal power
+		// ZEN, YEN, XEN
+		cfg |= 0x07; // enable all X,Y,Z
+		WriteRegisterByte( 0x20, cfg );
 				
-		// @[0x07] (MODE) -----------------------------
-		cfg = 0x01; // turn on / make active
-		// SCPS 
-		//  - 0 for divide by  1 => clk \in [120 , 1] Hz
-		//  - 1 for divide by 16 => clk \in [0, 0.0625] Hz
-		//cfg |= 0x20; // SCPS (0 for divide by 1, 1 for divide by 16)		
-		WriteRegisterByte( 0x07, cfg );
+		// @[0x23] (CTRL4) -----------------------------
+		cfg = 0x00;
+		// BDU : Block data update
+		//  - 0 for continuous
+		//  - 1 for update after read
+		//cfg |= (0x01 << 7); // set to update after read
+		//  BLE : Big/Little Edian select
+		//  - 0 for LSB @ Lower Address
+		//  - 1 for MSB @ Lower Address
+		//cfg |= (0x00 << 6); // keep at 0 to match regs
+		//  FS : Full Scale Select
+		//  - 0x00 for +/- 2G
+		//  - 0x01 for +/- 4G
+		//  - 0x02 for +/- 8G
+		//  - 0x03 for +/- 16G
+		//cfg |= (0x00 << 4); // keep at +/- 2G for most accuracy
+		m_AccScale = 2.0f;
+		//  HR : High Resolution
+		//  - 0 for disabled
+		//  - 1 for enabled
+		//cfg |= (0x01 << 3); // enable
+		//  SIM: SPH Serial Interface Mode
+		//  - 0 for 4-wire
+		//  - 1 for 3-wire
+		//  -- don't care, just leave at 0	
+		WriteRegisterByte( 0x23, cfg );
 
-		// @[0x08] (SR) -------------------------------
-		// DONT CARE --- Only valid for sleep mode, Tilt Not Used
-		
-		// @[0x09] (PDET) -----------------------------
-		// DONT CARE --- Not caring about tap mode
-		
-		// @[0x0A] (PD) -------------------------------
-		// DONT CARE --- Not Caring about tap mode
 
 	}	
 
 	virtual void TakeSnapshot()
 	{
-		usleep(100);
-		m_XByte = GetXByte();
-		usleep(100);
-		m_YByte = GetYByte();
-		usleep(100);
-		m_ZByte = GetZByte();
-		usleep(100);
+		//usleep(100);
+		short ax = GetXWord();
+		//usleep(100);
+		short ay = GetYWord();
+		//usleep(100);
+		short az = GetZWord();
+
+		m_XFilter = ax + m_XWord;//( m_XFilter >> 6 );
+		m_YFilter = ay + m_YWord;//( m_YFilter >> 6 );
+		m_ZFilter = az + m_ZWord;//( m_ZFilter >> 6 );
+		m_XWord = ax;
+		m_YWord = ay;
+		m_ZWord = az;
+		//usleep(100);
 	}
 
-	unsigned char GetXByte()
+	short GetXWord()
 	{
-		unsigned char dat = 0;
-		ReadRegisterByte( 0x00, &dat);
+		//ReadRegisterBlock(  unsigned char reg,
+                //                size_t        len,
+                //                unsigned char *val)
+	
+		short datS = 0;
+		//ReadRegisterBlock( 0x28, 2, (unsigned char*)&datS);
+		ReadRegisterByte( 0x28, (unsigned char*)&datS);
+		//datS = dat;
+		ReadRegisterByte( 0x29, (unsigned char*)(&datS) + 1);
+		//datS |= ((short)dat << 8);
 
-		// mask the byte
-		dat = dat & 0x3F;
-
-		return dat;	
+		//printf("XW: %#04x \n", (unsigned short)datS);
+		return datS;	
 	}
 
-	unsigned char GetYByte()
+	short GetYWord()
 	{
-		unsigned char dat = 0;
-		ReadRegisterByte( 0x01, &dat);
-
-		// mask the byte
-		dat = dat & 0x3F;
-
-		return dat;	
-
+		short datS = 0;
+		ReadRegisterByte( 0x2A, (unsigned char*)&datS);
+		//datS = dat;
+		ReadRegisterByte( 0x2B, (unsigned char*)(&datS) + 1);
+		//datS |= ((short)dat << 8);
+		return datS;	
+	
 	}
 
-	unsigned char GetZByte()
+	short GetZWord()
 	{
-		unsigned char dat = 0;
-		ReadRegisterByte( 0x02, &dat);
+		short datS = 0;
+		ReadRegisterByte( 0x2C, (unsigned char*)&datS);
+		//datS = dat;
+		ReadRegisterByte( 0x2D, (unsigned char*)(&datS) + 1);
+		//datS |= ((short)dat << 8);
 
-		// mask the byte
-		dat = dat & 0x3F;
-
-		return dat;	
-
+		return datS;	
+	
 	}
 
 	float GetX()
 	{
-		float ratio = 1.5f / 32.0f;
-
-		int sValue = ConvertToSignedByte( m_XByte );
-		return sValue*ratio;		
+		float ratio = m_AccScale / float(32767);
+		//return (float)(m_XFilter >> 0);
+		//int sValue = ConvertToSignedShort( m_XWord );
+		//return sValue*ratio;		
+		return (float) m_XWord * ratio;
 	}
 	
 	float GetY()
 	{
-		float ratio = 1.5f / 32.0f;
-
-		int sValue = ConvertToSignedByte( m_YByte );
-		return sValue*ratio;		
+		float ratio = m_AccScale / float(32767);
+		//return (float)(m_YFilter >> 0);
+		//int sValue = ConvertToSignedShort( m_YWord );
+		//return sValue*ratio
+		return (float) m_YWord * ratio;		
 	}
 	
 	float GetZ()
 	{
-		float ratio = 1.5f / 32.0f;
-
-		int sValue = ConvertToSignedByte( m_ZByte );
-		return sValue*ratio;		
+		float ratio = m_AccScale / float(32767);
+		//return (float)(m_ZFilter >> 0);
+		//int sValue = ConvertToSignedShort( m_ZWord );
+		//return sValue*ratio;		
+		return (float) m_ZWord * ratio;
 	}
 
 private:
-	int ConvertToSignedByte( unsigned char input )
+	int ConvertToSignedShort( unsigned short input )
 	{
 		// need to convert the lower 6 bits in 2's complement to unsigned char
-		unsigned char msb = input & 0x20;
-		unsigned char lsb = input & 0x1F;
-		int outputI = lsb;
-
-		if( msb != 0x00 )
-		{
-			// negative number
-			// subtract 32 from it to get the negative value
-			outputI = outputI - 32;
-		}
+		int outputI = input;
+		if( (input&0x8000) != 0x0000 )
+			outputI = 0xFFFF00000 | (outputI & 0x0000FFFF);
 
 		return outputI;
 	}
 
-	unsigned char m_XByte;
-	unsigned char m_YByte;
-	unsigned char m_ZByte;
+
+	float m_AccScale;
+	short m_XWord;
+	short m_YWord;
+	short m_ZWord;
+	long m_XFilter;
+	long m_YFilter;
+	long m_ZFilter;
 };
 #include <termios.h>
 int main(void)
@@ -811,11 +855,11 @@ int main(void)
 	acc.SetAddr( ADDR_ACC );
 	// self test the mag
 	
-	mag.SelfTest();
+	//mag.SelfTest();
 
 	// init devices
-	mag.Init();
-	acc.Init();
+	acc.Init(); // must init acc first
+	//mag.Init();
 	sleep(1);
 
 	mag.DumpRegisters();
@@ -833,9 +877,10 @@ int main(void)
 	for( int i = 0; i < ITS; i++ )
 	{
 
-		mag.TakeSnapshot();
+		//mag.TakeSnapshot();
 		acc.TakeSnapshot();		
-		printf("A: %4.2f %4.2f %4.2f M: %8.6f %8.6f %8.6f T: %4.2f", acc.GetX(),  acc.GetY(), acc.GetZ(),
+#if 1
+		printf("A: %8.2f %8.2f %8.2f M: %8.6f %8.6f %8.6f T: %4.2f", acc.GetX(),  acc.GetY(), acc.GetZ(),
 										mag.GetX(), mag.GetY(), mag.GetZ(), 
 										mag.GetTemp() );	
 		
@@ -869,7 +914,7 @@ int main(void)
 		
 		magAve += heading;
 		magStd += heading*heading;
-
+#endif
 		// flush stdout to display the cr
 		fflush(stdout);	
 		
