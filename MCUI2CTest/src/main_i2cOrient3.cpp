@@ -277,16 +277,18 @@ public:
 		// @[0x01] (CRB) ---------------------------------------------
 		cfg = 0x00; // clear the bits
 		// (Note* Earth's magnetic field strength is 0.25-0.65 Gauss)
-		// GN : Gain Register [-2048 : 2047 ]
-		// - 0x01 for +/- 1.3 G [1100 div/G]
-		// - 0x02 for +/- 1.9 G [ 855 div/G]
-		// - 0x03 for +/- 2.5 G [ 670 div/G]
-		// - 0x04 for +/- 4.0 G [ 450 div/G]
-		// - 0x05 for +/- 4.7 G [ 400 div/G]
-		// - 0x06 for +/- 5.6 G [ 330 div/G]
-		// - 0x07 for +/- 8.1 G [ 230 div/G]
+		// GN : Gain Register [-2048 : 2047 ] [XY LSB/G, Z LSB/G]
+		// - 0x01 for +/- 1.3 G [1100 / 980 ]
+		// - 0x02 for +/- 1.9 G [ 855 / 760 ]
+		// - 0x03 for +/- 2.5 G [ 670 / 600 ]
+		// - 0x04 for +/- 4.0 G [ 450 / 400 ]
+		// - 0x05 for +/- 4.7 G [ 400 / 355 ]
+		// - 0x06 for +/- 5.6 G [ 330 / 295 ]
+		// - 0x07 for +/- 8.1 G [ 230 / 205 ]
 		cfg |= (0x04 << 5); // set +/- 4G
-		m_Scale = 4.0f;
+		m_XScale = 1.0f/450.0f;
+		m_YScale = 1.0f/450.0f;
+		m_ZScale = 1.0f/400.0f;
 		WriteRegisterByte( 0x01, cfg );
 	
 		// @[0x02] (MR) ---------------------------------------------
@@ -303,47 +305,9 @@ public:
 	virtual void TakeSnapshot()
 	{
 
-		// write snapshot request to register
-//		unsigned char cfgc = 0x01;
-//		WriteRegisterByte( 0x02, cfgc );
-
-//		bool ready = false;
-	#if 0	
-		// read the status register
-		// timeout after 20 ms
-		for( int ii = 0; (ii < 20) && (!ready); ii++ )
-		{
-			cfgc = 0;
-
-			// pause for 1 ms
-			usleep( 1000 );
-
-			// status register
-			ReadRegisterByte( 0x09 , &cfgc);
-			
-			// check for ready
-			if( cfgc & 0x01 != 0x00 )
-			{
-				ready = true;
-			}
-
-		}
-
-		usleep( 1000 );
-		if( !ready )
-			printf(" warning, not ready\n");
 		// read the words
-#endif
-		usleep( 1000 );
-		unsigned char tblock [6];
-		// read the memory as a block
-//		ReadRegisterBlock(0x03, 6, tblock);
-//
-//		m_X = FormWord( tblock[0], tblock[1] ); 		
-//		m_Y = FormWord( tblock[2], tblock[3] );
-//		m_Z = FormWord( tblock[4], tblock[5] );
-
-
+		// register map has them in X,Y,Y order
+		
 		m_X = GetXWord();
 		m_Z = GetZWord();
 		m_Y = GetYWord();
@@ -354,8 +318,6 @@ public:
 
 		m_T = GetTempWord();
 
-//		ReadRegisterBlock(0x31, 2, tblock);
-//		m_T = FormWord( tblock[0], tblock[1] );
 	}
 
 
@@ -363,74 +325,37 @@ public:
 	{
 		bool pass = true;
 
-		// 1) CRA - place the device into self test mode
-		WriteRegisterByte( 0x00, 0x71 );
-		// 2) CRB - set gain to 5
-		WriteRegisterByte( 0x01, 0xA0 );
-		// 3) MODE - Continuous Measurement mode
-		WriteRegisterByte( 0x02, 0x00 );
-		// 4) pause for 6 mS
-		msleep( 6 );
-		
-		unsigned char tblock [6];
-		// read the memory as a block
-		ReadRegisterBlock(0x03, 6, tblock);
+		// self testing is not defined for this device
 
-		m_X = FormWord( tblock[0], tblock[1] ); 		
-		m_Y = FormWord( tblock[2], tblock[3] );
-		m_Z = FormWord( tblock[4], tblock[5] );
-		
-		msleep(67);
-
-		// convert all to signed
-		int x = ConvertToSigned( m_X );
-		int y = ConvertToSigned( m_Y );
-		int z = ConvertToSigned( m_Z );
-
-		// check the limits
-		if( !InRange( x, 243, 575 ) )
-		{
-			printf( "X failed %i\n", x);
-			pass = false;
-		}
-		if( !InRange( y, 243, 575 ) )
-		{
-			printf( "Y failed %i\n", y);
-			pass = false;
-		}
-		if( !InRange( z, 243, 575 ) )
-		{
-			printf( "Z failed %i\n", z);
-			pass = false;
-		}
-	
-		// reset the mode
-		WriteRegisterByte( 0x00, 0x70 );
-			
-		if( pass ) printf( "All passed \n");
-		
-		msleep( 67 );
 		return pass;
 	}
 
 	float GetTemp()
 	{
-		float val = ConvertToSigned( m_T );
-		val = val / (128.0f) + 25.0f; // convert to degrees C
 		
-		return val;
+
+		// temperature conversion is not clear here...
+		// accoding to the datasheet, the real temp (degC) should 
+		// be given by the 12-bit value via:
+		// T = m_T * (125/4096) + 22.5
+		// accoding to the sample driver by ST, temp is an 8-bit value
+		// and the real temp (degC) and is given by:
+		// T = m_T + 25
+		// for safety, let's use the one ST gives us
+		
+		return (float) m_T + 25.0f; // degC
 	}
 
 	float GetX()
 	{
-		float ratio = m_Scale / float(2047.0f);
+		float ratio = m_XScale;
 
 		return (float) m_X * ratio;
 	}
 
 	float GetY()
 	{
-		float ratio = m_Scale / float(2047.0f);
+		float ratio = m_YScale;
 
 		return (float) m_Y * ratio;
 	
@@ -438,7 +363,7 @@ public:
 
 	float GetZ()
 	{
-		float ratio = m_Scale / float(2047.0f);
+		float ratio = m_ZScale;
 
 		return (float) m_Z * ratio;
 	
@@ -455,7 +380,18 @@ private:
 		ReadRegisterByte( 0x31, &msb );
 		ReadRegisterByte( 0x32, &lsb );
 		
-		output = (short)( (msb << 8) | lsb ) >> 4;
+		// temperature is contradictory on this device
+		// according to the datasheet, it should be a 12-bit
+		// value, aligned via the register table above
+		// this would be as follows:
+		// m_T = (short) ( (msb << 8) | lsb ) >> 4;
+		// however, ST's example driver only uses the MSB 
+		// effectively making it an 8-bit value.
+		// this would simply be:
+		// m_T = (short) msb;
+		// let's go with the one that ST gives us for safety
+
+		output = (short) msb;
 
 		
 		return output;
@@ -531,7 +467,9 @@ private:
 		return outputI;
 	}
 
-	float m_Scale;
+	float m_XScale;
+	float m_YScale;
+	float m_ZScale;
 	short m_X;
 	short m_Y;
 	short m_Z;
@@ -717,18 +655,10 @@ public:
 
 	short GetXWord()
 	{
-		//ReadRegisterBlock(  unsigned char reg,
-                //                size_t        len,
-                //                unsigned char *val)
-	
 		short datS = 0;
-		//ReadRegisterBlock( 0x28, 2, (unsigned char*)&datS);
 		ReadRegisterByte( 0x28, (unsigned char*)&datS);
-		//datS = dat;
 		ReadRegisterByte( 0x29, (unsigned char*)(&datS) + 1);
-		//datS |= ((short)dat << 8);
 
-		//printf("XW: %#04x \n", (unsigned short)datS);
 		return datS;	
 	}
 
@@ -736,9 +666,8 @@ public:
 	{
 		short datS = 0;
 		ReadRegisterByte( 0x2A, (unsigned char*)&datS);
-		//datS = dat;
 		ReadRegisterByte( 0x2B, (unsigned char*)(&datS) + 1);
-		//datS |= ((short)dat << 8);
+		
 		return datS;	
 	
 	}
@@ -747,9 +676,7 @@ public:
 	{
 		short datS = 0;
 		ReadRegisterByte( 0x2C, (unsigned char*)&datS);
-		//datS = dat;
 		ReadRegisterByte( 0x2D, (unsigned char*)(&datS) + 1);
-		//datS |= ((short)dat << 8);
 
 		return datS;	
 	
@@ -758,27 +685,21 @@ public:
 	float GetX()
 	{
 		float ratio = m_AccScale / float(32767);
-		//return (float)(m_XFilter >> 0);
-		//int sValue = ConvertToSignedShort( m_XWord );
-		//return sValue*ratio;		
+		
 		return (float) m_XWord * ratio;
 	}
 	
 	float GetY()
 	{
 		float ratio = m_AccScale / float(32767);
-		//return (float)(m_YFilter >> 0);
-		//int sValue = ConvertToSignedShort( m_YWord );
-		//return sValue*ratio
+		
 		return (float) m_YWord * ratio;		
 	}
 	
 	float GetZ()
 	{
 		float ratio = m_AccScale / float(32767);
-		//return (float)(m_ZFilter >> 0);
-		//int sValue = ConvertToSignedShort( m_ZWord );
-		//return sValue*ratio;		
+		
 		return (float) m_ZWord * ratio;
 	}
 
