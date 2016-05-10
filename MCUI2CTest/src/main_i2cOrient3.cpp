@@ -259,64 +259,44 @@ public:
 		unsigned char cfg = 0x00;
 
 		// ######## Write configuration data to registers ##############
-		// @[0x00] (CFGA) ---------------------------------------------
-		cfg = 0x00;
-		// MS (Measurment Mode)
-		//  - 00 Normal Measurement  (DEFAULT)
-		//  - 01 Positive Current forced
-		//  - 10 Negative Current forced
-		//  - 11 Temp Sensor Only
-		cfg |= 0x00;
+		// @[0x00] (CRA) ---------------------------------------------
+		cfg = 0x00; // clear the bits
+		// TEMP_EN : Temperature Enable (1/0)
+		cfg |= (0x01 << 7);
+		// DO : Data output
+		// - 0x00 for 0.75 Hz
+		// - 0x01 for 1.50 Hz
+		// - 0x02 for 3.00 Hz
+		// - 0x03 for 7.50 Hz
+		// - 0x04 for 15.0 Hz
+		// - 0x05 for 30.0 Hz
+		cfg |= (0x04 << 2); // set 15 Hz
+		// write to the register
+		WriteRegisterByte( 0x00, cfg );
 		
-		// DO (Data Output )
-		//  - 000 Rate   0.75 Hz
-		//  - 001 Rate   1.50 Hz
-		//  - 010 Rate   3.00 Hz
-		//  - 011 Rate   7.50 Hz
-		//  - 100 Rate  15.00 Hz  (DEFAULT)
-		//  - 101 Rate  30.00 Hz
-		//  - 110 Rate  75.00 Hz
-		//  - 111 Rate 220.00 Hz
-		unsigned char dO = 0x07;//0x04;
-		cfg |= ( dO << 2 ); // shift D0
-		
-		// MA (Measurment Samples Averaged)
-		// - 00 Samples 1 (DEFAULT)
-		// - 01 Samples 2
-		// - 10 Samples 4
-		// - 11	Samples 8
-		unsigned char ma = 0x03; // 8 measurement samples
-		cfg |= ( ma << 5 ); // shift MA
-
-		// TS (Temperature)
-		// - 0 Disable
-		// - 1 Enable
-		cfg |= ( 0x01 << 7 );
-	        WriteRegisterByte( 0x00, cfg );
-		
-		// @[0x01] (CFGB) ---------------------------------------------
-		cfg = 0x00; // clear the bit
-		// GAIN
-		//  - 000  Range 0.9 Ga  Resolution 0.73 mGa
-		//  - 001  Range 1.3 Ga  Resolution 0.92 mGa  (DEFAULT)
-		//  - 010  Range 1.9 Ga  Resolution 1.22 mGa
-		//  - 011  Range 2.5 Ga  Resolution 1.52 mGa
-		//  - 100  Range 4.0 Ga  Resolution 2.27 mGa
-		//  - 101  Range 4.7 Ga  Resolution 2.56 mGa
-		//  - 110  Range 5.6 Ga  Resolution 3.03 mGa
-		//  - 111  Range 8.1 Ga  Resolution 4.35 mGa
-		unsigned char gain = 0x01; // default gain value
-		m_Scale = 0.92E-3;
-		cfg |= ( gain << 5 ); // shift to gain location
+		// @[0x01] (CRB) ---------------------------------------------
+		cfg = 0x00; // clear the bits
+		// (Note* Earth's magnetic field strength is 0.25-0.65 Gauss)
+		// GN : Gain Register [-2048 : 2047 ]
+		// - 0x01 for +/- 1.3 G [1100 div/G]
+		// - 0x02 for +/- 1.9 G [ 855 div/G]
+		// - 0x03 for +/- 2.5 G [ 670 div/G]
+		// - 0x04 for +/- 4.0 G [ 450 div/G]
+		// - 0x05 for +/- 4.7 G [ 400 div/G]
+		// - 0x06 for +/- 5.6 G [ 330 div/G]
+		// - 0x07 for +/- 8.1 G [ 230 div/G]
+		cfg |= (0x04 << 5); // set +/- 4G
+		m_Scale = 4.0f;
 		WriteRegisterByte( 0x01, cfg );
 	
-		// @[0x02] (CFGC) ---------------------------------------------
-		// MODE
-		//  - 00  Continuous measurements at fDO
-		//  - 01  Single Shot, hold until all 6 data read (DEFAULT)
-		//  - 1x  Idle Mode
-		cfg = 0x01; // set single shot mode
-		//cfg = 0x00; // set continuous mode
+		// @[0x02] (MR) ---------------------------------------------
+		cfg = 0x00; // clear the bits
+		// MD : Mode select
+		// - 0x00 for continous mode
+		// - 0x01 for single-conversion
+		// - 0x02 for sleep-mode
+		// - 0x03 for sleep-mode
+		//cfg |= 0x00; // set continous mode
 		WriteRegisterByte( 0x02, cfg );		
 	}
 
@@ -324,10 +304,10 @@ public:
 	{
 
 		// write snapshot request to register
-		unsigned char cfgc = 0x01;
-		WriteRegisterByte( 0x02, cfgc );
+//		unsigned char cfgc = 0x01;
+//		WriteRegisterByte( 0x02, cfgc );
 
-		bool ready = false;
+//		bool ready = false;
 	#if 0	
 		// read the status register
 		// timeout after 20 ms
@@ -357,17 +337,25 @@ public:
 		usleep( 1000 );
 		unsigned char tblock [6];
 		// read the memory as a block
-		ReadRegisterBlock(0x03, 6, tblock);
+//		ReadRegisterBlock(0x03, 6, tblock);
+//
+//		m_X = FormWord( tblock[0], tblock[1] ); 		
+//		m_Y = FormWord( tblock[2], tblock[3] );
+//		m_Z = FormWord( tblock[4], tblock[5] );
 
-		m_X = FormWord( tblock[0], tblock[1] ); 		
-		m_Y = FormWord( tblock[2], tblock[3] );
-		m_Z = FormWord( tblock[4], tblock[5] );
+
+		m_X = GetXWord();
+		m_Z = GetZWord();
+		m_Y = GetYWord();
 
 		// sleep for 1 ms
 		usleep( 1000 );
 		
-		ReadRegisterBlock(0x31, 2, tblock);
-		m_T = FormWord( tblock[0], tblock[1] );
+
+		m_T = GetTempWord();
+
+//		ReadRegisterBlock(0x31, 2, tblock);
+//		m_T = FormWord( tblock[0], tblock[1] );
 	}
 
 
@@ -435,36 +423,30 @@ public:
 
 	float GetX()
 	{
-		float ratio = m_Scale;// / float(2047.0f);
-		float val = ConvertToSigned( m_X );
-		val = val*ratio;
+		float ratio = m_Scale / float(2047.0f);
 
-		return val;
+		return (float) m_X * ratio;
 	}
 
 	float GetY()
 	{
-		float ratio = m_Scale;// / float(2047.0f);
-		float val = ConvertToSigned( m_Y );
-		val = val*ratio;
+		float ratio = m_Scale / float(2047.0f);
 
-		return val;
+		return (float) m_Y * ratio;
 	
 	}
 
 	float GetZ()
 	{
-		float ratio = m_Scale;// / float(2047.0f);
-		float val = ConvertToSigned( m_Z );
-		val = val*ratio;
+		float ratio = m_Scale / float(2047.0f);
 
-		return val;
+		return (float) m_Z * ratio;
 	
 	}
 
 private:
 
-	unsigned short GetTempWord()
+	short GetTempWord()
 	{
 		unsigned char msb = 0;
 		unsigned char lsb = 0;
@@ -473,52 +455,54 @@ private:
 		ReadRegisterByte( 0x31, &msb );
 		ReadRegisterByte( 0x32, &lsb );
 		
-		output = (unsigned short)( msb ) * (unsigned short)( 256 ) + (unsigned short)( lsb );
+		output = (short)( (msb << 8) | lsb ) >> 4;
+
 		
 		return output;
 	}
 
-	unsigned short GetXWord()
+	short GetXWord()
 	{
 		unsigned char msb = 0;
 		unsigned char lsb = 0;
-		unsigned short output = 0;
+		short output = 0;
 
 		ReadRegisterByte( 0x03, &msb );
 		ReadRegisterByte( 0x04, &lsb );
 		
-		output = (unsigned short)( msb ) * (unsigned short)( 256 ) + (unsigned short)( lsb );
+		output = (short)( (msb << 8) | lsb ) / 16;
 		
 		return output;
 
 	}
 
-	unsigned short GetYWord()
+	short GetYWord()
 	{
 		unsigned char msb = 0;
 		unsigned char lsb = 0;
-		unsigned short output = 0;
+		short output = 0;
 
-		ReadRegisterByte( 0x05, &msb );
-		ReadRegisterByte( 0x06, &lsb );
+		ReadRegisterByte( 0x07, &msb );
+		ReadRegisterByte( 0x08, &lsb );
 		
-		output = (unsigned short)( msb ) * (unsigned short)( 256 ) + (unsigned short)( lsb );
+		output = (short)( (msb << 8) | lsb ) / 16;
+
 		
 		return output;
 
 	}
 	
-	unsigned short GetZWord()
+	short GetZWord()
 	{
 		unsigned char msb = 0;
 		unsigned char lsb = 0;
-		unsigned short output = 0;
+		short output = 0;
 
-		ReadRegisterByte( 0x07, &msb );
-		ReadRegisterByte( 0x08, &lsb );
+		ReadRegisterByte( 0x05, &msb );
+		ReadRegisterByte( 0x06, &lsb );
 		
-		output = (unsigned short)( msb ) * (unsigned short)( 256 ) + (unsigned short)( lsb );
-		
+		output = (short)( (msb << 8) | lsb ) / 16;
+
 		return output;
 
 	}
@@ -548,10 +532,10 @@ private:
 	}
 
 	float m_Scale;
-	unsigned short m_X;
-	unsigned short m_Y;
-	unsigned short m_Z;
-	unsigned short m_T;
+	short m_X;
+	short m_Y;
+	short m_Z;
+	short m_T;
 
 };
 
@@ -859,7 +843,7 @@ int main(void)
 
 	// init devices
 	acc.Init(); // must init acc first
-	//mag.Init();
+	mag.Init();
 	sleep(1);
 
 	mag.DumpRegisters();
@@ -877,7 +861,7 @@ int main(void)
 	for( int i = 0; i < ITS; i++ )
 	{
 
-		//mag.TakeSnapshot();
+		mag.TakeSnapshot();
 		acc.TakeSnapshot();		
 #if 1
 		printf("A: %8.2f %8.2f %8.2f M: %8.6f %8.6f %8.6f T: %4.2f", acc.GetX(),  acc.GetY(), acc.GetZ(),
@@ -910,7 +894,7 @@ int main(void)
 		if( mY < 0 ) heading = 280.0f - atan( mX / mY ) * 180.0f / 3.14159f;
 
 
-		printf("\t A:|%4.2f| M:|%8.6f| @%6.3f \r", aNorm, mNorm, heading);
+		printf("\t A:|%4.2f| M:|%8.6f| @%6.3f \n", aNorm, mNorm, heading);
 		
 		magAve += heading;
 		magStd += heading*heading;
