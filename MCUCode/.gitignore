@@ -1,0 +1,19 @@
+# ----- MPLAB files ----------
+# build files
+*.o
+*.d
+
+# dist files
+*.map
+*.hex
+*.elf
+memoryfile.xml
+*.cmf
+*.p1
+*.pre
+*.hxl
+*.lst
+*.mum
+*.rlf
+*.sdb
+*.sym

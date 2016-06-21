@@ -1,16 +1,19 @@
+# Declare the compile sources
 CC := g++
 
+
+# Declaration of variables
 SRCDIR := src
 BUILDDIR := build
-TARGET := ./bin/APCAcommService
+BINDIR := bin
+TARGET := $(BINDIR)/MCUTestCommTest
  
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g # -Wall
-LIB := #-pthread -lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
+LIB := -pthread #-lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
 INC := #-I include
-
 
 
 $(TARGET): $(OBJECTS)
@@ -32,8 +35,6 @@ clean:
 #   $(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
 #
 #   # runner
-DaemonRunner:
-	$(CC) $(CFLAGS) runner/main_runner.cpp $(INC) $(LIB) -o bin/APCACommRunner
 
 .PHONY: clean 
 

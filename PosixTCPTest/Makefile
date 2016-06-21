@@ -1,17 +1,23 @@
+# Declare the compile sources
 CC := g++
 
+
+# Declaration of variables
 SRCDIR := src
 BUILDDIR := build
-TARGET := TCPTest
+BINDIR := bin
+TARGET := $(BINDIR)/PosixTCPTest
  
 SRCEXT := cpp
-SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g # -Wall
 LIB := -pthread #-lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
 INC := #-I include
 
+
 $(TARGET): $(OBJECTS)
+	@mkdir -p $(BINDIR)
 	@echo " Linking..."
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 

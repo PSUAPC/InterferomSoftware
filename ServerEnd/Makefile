@@ -2,7 +2,7 @@ CC := g++
 
 SRCDIR := src
 BUILDDIR := build
-TARGET := bin/runner
+TARGET := ./bin/runner
  
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
@@ -11,13 +11,17 @@ CFLAGS := -g # -Wall
 LIB := #-pthread -lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
 INC := #-I include
 
+
+
 $(TARGET): $(OBJECTS)
+	@mkdir -p $(BINDIR)
 	@echo " Linking..."
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
 	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
+
 
 clean:
 	@echo " Cleaning..."; 
@@ -27,9 +31,9 @@ clean:
 # tester:
 #   $(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
 #
-#   # Spikes
-#ticket:
-#	$(CC) $(CFLAGS) spikes/ticket.cpp $(INC) $(LIB) -o bin/ticket
+#   # runner
+#DaemonRunner:
+#	$(CC) $(CFLAGS) runner/main_runner.cpp $(INC) $(LIB) -o bin/APCACommRunner
 
 .PHONY: clean 
 
