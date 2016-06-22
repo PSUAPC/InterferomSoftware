@@ -5,6 +5,7 @@
 #include <netdb.h>
 #include <fcntl.h>
 #include <sstream>
+#include <ncurses.h>
 
 using namespace std;
 
@@ -68,7 +69,6 @@ int GetPortFromStruct(struct sockaddr_storage* addr)
 
 void *RecvThread(void* t)
 {
-	
 	LocalContext* lct = (LocalContext*)(t);
 	Context* ct = lct->m_Context;
  	while( ct->m_Running )
@@ -76,7 +76,23 @@ void *RecvThread(void* t)
 		// enter the recv state
 		int len = 100;
 		char buff[100];
-		int rv = recv(lct->m_Sockfd, buff, len, 0);
+		int rv = 0;
+
+		// only attempt to recieve if the socket fd is valid
+		if( lct->m_Sockfd >= 0 )
+		{
+			rv = recv(lct->m_Sockfd, buff, len, 0);
+		}
+		else
+		{
+			rv = -1;
+			// sleep to prevent constant loop
+			// which could affect performance
+			sleep(1);
+			LogMsgToTerminal("waiting");
+			
+		}
+
 		if( rv == -1 )
 		{
 			// no data sent - timed out
@@ -86,7 +102,7 @@ void *RecvThread(void* t)
 			// connection lost
 			//LogMsgToTerminal("CONNECTION LOST");
 
-		// signal the main thread
+			// signal the main thread
 			// lock the mutex
 			pthread_mutex_lock(&(ct->m_PollMutex));
 			// set the caller
@@ -143,35 +159,38 @@ void *RecvThread(void* t)
 		}
 		
 	}
+
     pthread_exit(NULL);
 
 
 }
 
+//string line;
+
 void *InputThread(void* t)
 {
-    cout << "entry" << endl;
-    LocalContext* lct = (LocalContext*)(t);
+    	LocalContext* lct = (LocalContext*)(t);
 	Context* ct = lct->m_Context;
-    string line;
+    	string line;
 
 	// variable to signal the main thread
 	bool signalMain = false;
 
-    while( ct->m_Running )
-    {
+    	while( ct->m_Running )
+    	{
 		// set the signal to false
 		signalMain = false;
 
-        std::getline (std::cin, line);
+        	std::getline (std::cin, line);
+	
 
-        if( line.find("exit") != NOT_FOUND )
-        {
+        	if( line.find("exit") != NOT_FOUND )
+        	{
 			ct->m_Running = false;
-            cout << "exiting" << endl;
+            		cout << "exiting" << endl;
 			// set the signal flag
 			signalMain = true;
-        }
+        	}
 		else if( line.length() >= 1 )
 		{
 			signalMain = true;
@@ -204,96 +223,8 @@ void *InputThread(void* t)
 }
 
 
-bool GetInput(Context* ct, int argc, char* argv[])
-{
-    bool good = true;
-    int mode = 0;
-    char ip[100];
-	strcpy(ip, "127.0.0.1");
-    int dPort = 8000;
-    int sPort = 8001;
-    char opt;
-    while( (opt = getopt(argc, argv, "ha:p:l:m:")) != NOT_FOUND )
-    {
-		switch( opt )
-        {
-        case 'h':
-			cout << "help" << endl;
-			cout << " Options:" << endl
-				<< " -h help" << endl
-				<< " -a ip address (destination)" << endl
-				<< " -p destination port" << endl
-				<< " -l local port" << endl
-				<< " -m mode flag" << endl
-				<< "   (1) server" << endl
-				<< "   (2) client" << endl
-				<< endl;
-			// asked for help, do not gen data => no good
-			good = false;
-			break;
-        case 'a':
-			sscanf(optarg, "%s", ip);
-			break;
-        case 'p':
-			sscanf(optarg, "%i", &dPort);
-			break;
-        case 'l':
-			sscanf(optarg, "%i", &sPort);
-			break;
-        case 'm':
-			sscanf(optarg, "%i", &mode);
-			break;
-        case '?':
-			// something went wrong, no good
-			good = false;
-			switch(optopt)
-			{
-			case 'a':
-			case 'p':
-			case 'l':
-			case 'm':
-				cout << "Expected argument after -" << optopt << endl;
-				break;
-			default:
-				cout << "Unknown flag" << endl;
-			}
-		}
-    }
 
-	if( !good )
-	{
-		// input failure
-		return false;
-	}
 
-	// display the input information
-	cout 	<< "-------------------" << endl
-		<< "IP: " << ip << endl
-		<< "dPort: " << dPort << endl
-		<< "sPort: " << sPort << endl
-		<< "mode: " << mode << endl
-		<< "-------------------" << endl;
-
-	if( (mode != 1) && (mode != 2) )
-	{
-		cout << "Please select a valid mode" << endl;
-		return false; // invalid mode
-	}
-
-	// assign the basic state variables	
-    	ct->m_Mode = mode;
-    	ct->m_SPort = sPort;
-    	ct->m_DPort = dPort;
-	
-	// zero the addr mem
-	memset(&(ct->m_Sa), 0, sizeof(struct sockaddr_in));
-
-	// get the IP
-	inet_pton(AF_INET, ip, &(ct->m_Sa.sin_addr)); // IPv4
-
-	// good to go
- 	return true;
-}
 
 void LogMsgToTerminal(const string& msg)
 {
@@ -303,34 +234,128 @@ void LogMsgToTerminal(const string& msg)
     	// \r      - move cursor to the start of the line
     	// \033[K  - erase from cursor to the end of the line
     	const char preface[] = "\033[1A\r\033[K";
-    	write(STDOUT_FILENO, preface, sizeof(preface) - 1);
+    	//const char preface[] = "\r\033[K";
 
-    	fprintf(stderr, "%s\n", msg.c_str());
-    	fflush(stdout);
+	write(STDOUT_FILENO, preface, sizeof(preface) - 1);
+
+    	fprintf(stdout, "%s\n", msg.c_str());
+	fflush(stdout);
 
     	const char epilogue[] = "\033[K";
-    	write(STDOUT_FILENO, epilogue, sizeof(epilogue) - 1);
+    	write(STDOUT_FILENO, epilogue, sizeof(epilogue) - 1 );
 	
 	// prompt string
-    	fprintf(stdout, "--------------");
+    	//fprintf(stdout, " ");
     	fflush(stdout);
 
     	struct termios tc;
     	tcgetattr(STDOUT_FILENO, &tc);
     	const tcflag_t lflag = tc.c_lflag;
     	// disable echo of control characters
-    	tc.c_lflag &= ~ECHOCTL;
+    	tc.c_lflag &= ~ECHOK;
     	tcsetattr(STDOUT_FILENO, TCSANOW, &tc);
     	// reprint input buffer
     	ioctl(STDOUT_FILENO, TIOCSTI, &tc.c_cc[VREPRINT]);
+	
     	tc.c_lflag = lflag;
     	tcsetattr(STDOUT_FILENO, TCSANOW, &tc);
 
 
+
 }
+
+bool AttemptConnection(Context& ct, LocalContext* newCT)
+{
+	
+	int sockfd = newCT->m_Sockfd;
+	
+	if( sockfd < 0 )
+	{
+		LogMsgToTerminal("NO SOCKET BOUND");
+		return false; // no socket bound
+	}
+
+	// set the destination parameters - the IP is already set
+	ct.m_Sa.sin_family = AF_INET; // Internet address family
+	ct.m_Sa.sin_port = htons(ct.m_DPort); // Server port
+
+
+	LogMsgToTerminal("ATTEMPTING TO CONNECT");
+
+	if( connect(sockfd, (struct sockaddr*) &(ct.m_Sa),sizeof(ct.m_Sa)) < 0 )
+	{
+		LogMsgToTerminal("ERROR CONNECTING");
+	
+		return false;
+	}
+	else
+	{
+		LogMsgToTerminal("SUCCESSFULL CONNECTION");
+		// set the socket to non-blocking
+		// and create the recv thread
+		struct timeval timeout;
+        	timeout.tv_sec = 2;
+       		timeout.tv_usec = 0;
+
+                setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+                setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
+
+		return true;
+	}
+}
+
+
+bool ConnectToServer(Context& ct, LocalContext* newCT)
+{
+	// close the socket if it is currently open
+	if( newCT->m_Sockfd != -1 )
+	{
+		close(newCT->m_Sockfd);
+	}
+
+	// some variables for sockets
+	int sockfd;
+	struct sockaddr_in saLoc;
+
+	//Create a reliable, stream socket using TCP
+	if( (sockfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0 )
+	{
+		LogMsgToTerminal("ERROR CREATING SOCKET");
+		
+		newCT->m_Sockfd = -1;
+		return false;
+	}
+
+	// Local
+	int yes = 1;
+	memset(&saLoc, 0, sizeof(struct sockaddr_in));
+	saLoc.sin_family = AF_INET; // Internet address family
+	saLoc.sin_port = htons(ct.m_SPort); // the local port
+	saLoc.sin_addr.s_addr = inet_addr("127.0.0.1"); // the local IP Addr
+
+	// let the kernel know we are willing to reuse the socket if still around
+	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
+
+	if( bind(sockfd, (struct sockaddr *)&saLoc, sizeof(struct sockaddr)) < 0 )
+	{
+		LogMsgToTerminal("ERROR BINDING SOCKET");
+
+		newCT->m_Sockfd = -1;
+		close(sockfd);
+		return false;
+	}
+
+	newCT->m_Sockfd = sockfd;
+	
+	// return success
+	return true;
+
+}
+
 
 int main( int argc, char* argv[])
 {
+
 
 	// create the context on the stack
 	Context ct;
@@ -344,76 +369,16 @@ int main( int argc, char* argv[])
 	// create the input thread
 	ct.MakeThread(InputThread);
 
-	// some variables for sockets
-	int sockfd;
-	struct sockaddr_in saLoc;
 	bool success = true;
 
-	// lets do some socket creation (for the client)
-	if( ct.m_Mode == 2 )
-	{
-		// place this in a for loop to create a breakable scope
-		for(int dum = 0; dum < 1; dum++)
-		{
-			//Create a reliable, stream socket using TCP
-			if( (sockfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0 )
-			{
-				LogMsgToTerminal("ERROR CREATING SOCKET");
-				success = false;
-				break;
-			}
-
-			// Local
-			int yes = 1;
-			memset(&saLoc, 0, sizeof(struct sockaddr_in));
-			saLoc.sin_family = AF_INET; // Internet address family
-			saLoc.sin_port = htons(ct.m_SPort); // the local port
-			saLoc.sin_addr.s_addr = inet_addr("127.0.0.1"); // the local IP Addr
-
-			// let the kernel know we are willing to reuse the socket if still around
-			setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
-
-			if( bind(sockfd, (struct sockaddr *)&saLoc, sizeof(struct sockaddr)) < 0 )
-			{
-				LogMsgToTerminal("ERROR BINDING SOCKET");
-				success = false;
-				close(sockfd);
-				break;
-			}
-
-			// set the destination parameters - the IP is already set
-			ct.m_Sa.sin_family = AF_INET; // Internet address family
-			ct.m_Sa.sin_port = htons(ct.m_DPort); // Server port
 		
-			LogMsgToTerminal("ATTEMPTING TO CONNECT");
-			if( connect(sockfd, (struct sockaddr*) &(ct.m_Sa),sizeof(ct.m_Sa)) < 0 )
-			{
-				LogMsgToTerminal("ERROR CONNECTING");
-				success = false;
-				break;
-			}
-			else
-			{
-				LogMsgToTerminal("SUCCESSFULL CONNECTION");
-				// set the socket to non-blocking
-				// and create the recv thread
-				struct timeval timeout;
-        		        timeout.tv_sec = 10;
-       			        timeout.tv_usec = 0;
+	// create the recv thread
+	ct.m_RecvThread = ct.MakeThread(RecvThread);	
+	ct.m_RecvThread->m_Sockfd = -1;
 
-                		setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
-                		setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
-
-                		// now lets add the new socket
-				LocalContext* newCT = ct.MakeThread(RecvThread);
-				newCT->m_Sockfd = sockfd;
-
-			}
-		}
-	}
+	LogMsgToTerminal("INITIALIZATION COMPLETE");
 
 	
-
 	// start the loop
 	pthread_mutex_lock(&(ct.m_PollMutex));
 	while( ct.m_Running )
@@ -440,7 +405,7 @@ int main( int argc, char* argv[])
 			{
 				// send the message
 				LogMsgToTerminal( tLct->m_MSG );
-				size_t sent = send( sockfd, tLct->m_MSG.c_str(), tLct->m_MSG.length(), 0 );
+				//size_t sent = send( sockfd, tLct->m_MSG.c_str(), tLct->m_MSG.length(), 0 );
 										
 			}
 			
@@ -461,12 +426,12 @@ int main( int argc, char* argv[])
 	pthread_mutex_unlock(&(ct.m_PollMutex));
 
 	// clean up the socket
-	if( ct.m_Mode == 2 )
+	if( (ct.m_RecvThread)->m_Sockfd >= 0 )
 	{
-		if( success )
-		{
-			close(sockfd);
-		}
+		
+		
+		close((ct.m_RecvThread)->m_Sockfd);
+		
 	}	
 
 	// destroy and join the threads

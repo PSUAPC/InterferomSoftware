@@ -16,6 +16,8 @@ void Context::Init()
     	pthread_attr_init(&m_Attr);
     	pthread_attr_setdetachstate(&m_Attr, PTHREAD_CREATE_JOINABLE);
 
+
+	m_RecvThread = NULL;
 }
 
 void Context::Shutdown()

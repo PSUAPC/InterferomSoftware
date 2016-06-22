@@ -59,15 +59,15 @@ public:
 	// ------------ Variables ----------
 
     	// context variables
-    	int     m_Mode;
-    	int     m_SPort;
-    	int     m_DPort;
-    	bool    m_Running;
-    	CTMap 	m_Contexts;
-	UIDDict m_UIDDict;
-	UIDQueu m_Garbage;
+    	int     	m_Mode;
+    	int     	m_SPort;
+    	int     	m_DPort;
+    	bool    	m_Running;
+    	CTMap 		m_Contexts;
+	UIDDict 	m_UIDDict;
+	UIDQueu 	m_Garbage;
 	int		m_Caller;
-	
+	LocalContext* 	m_RecvThread;
 
     	// socket variables
     	struct sockaddr_in m_Sa;
@@ -75,6 +75,7 @@ public:
     	// posix variables
 	pthread_mutex_t m_CreateMutex;
     	pthread_mutex_t m_PollMutex;
+	pthread_mutex_t m_TerminalMutex;
     	pthread_cond_t  m_PollCondition;
     	pthread_attr_t  m_Attr;
 
