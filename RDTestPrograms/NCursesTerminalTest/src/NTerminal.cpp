@@ -121,7 +121,7 @@ std::string NTerminal::WaitForInput()
 		
 		m_HistoryPointer++;
 		// make sure we are not out of range
-		if( m_HistoryPointer >= m_History.size() )
+		if( m_HistoryPointer > m_History.size() )
 		{
 			m_HistoryPointer--;
 			// nothing to do
@@ -246,10 +246,14 @@ void NTerminal::CopyHistoryAtPointer()
 
 void NTerminal::PrintHistory()
 {
-	for( History::iterator it = m_History.begin();
-		it != m_History.end(); it++ )
+	int ii = 1;
+	for( History::reverse_iterator it = m_History.rbegin();
+		it != m_History.rend(); it++ )
 	{
-		PrintToStdout(">" + (*it));
+		char num[10];
+		sprintf(num, " %d ", ii);
+		PrintToStdout( num + (*it));
+		ii++;
 	}
 }
 

@@ -167,7 +167,7 @@ void *RecvThread(void* t)
 		
 	}
 
-    pthread_exit(NULL);
+	pthread_exit(NULL);
 
 
 }
@@ -182,6 +182,7 @@ void *InputThread(void* t)
 	nshell.RegisterCommand("portget", new DestPortGet());
 	nshell.RegisterCommand("ipset", new DestIPSet());
 	nshell.RegisterCommand("portset", new DestPortSet());	
+	nshell.RegisterCommand("connect", new ConnectTCP() );
 	nterminal.Init();
 	nterminal.SetHistorySize(10);
         nterminal.SetStdoutSize(100);
@@ -303,12 +304,17 @@ bool AttemptConnection(Context& ct, LocalContext* newCT)
 }
 
 
-bool ConnectToServer(Context& ct, LocalContext* newCT)
+bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop)
 {
 	// close the socket if it is currently open
 	if( newCT->m_Sockfd != -1 )
 	{
 		close(newCT->m_Sockfd);
+	}
+
+	if( stop )
+	{
+		return true;
 	}
 
 	// some variables for sockets

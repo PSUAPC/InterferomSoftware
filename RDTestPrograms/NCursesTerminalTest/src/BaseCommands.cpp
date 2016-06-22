@@ -15,6 +15,7 @@ void ClearTerminal::Exec(std::string str)
 	else
 	{
 		NTerminal::Get()->ClearStdout();
+		NTerminal::Get()->Redraw();
 	}
 }
 

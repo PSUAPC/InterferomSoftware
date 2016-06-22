@@ -15,6 +15,9 @@ std::string ClearTerminal::Help()
 }
 
 #endif
+extern bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop);
+extern bool AttemptConnection(Context& ct, LocalContext* newCT);
+
 void DestIPGet::Exec(std::string str)
 {
 	Context* ct = Context::Get();
@@ -69,7 +72,35 @@ std::string DestIPSet::Help()
 
 
 
+void ConnectTCP::Exec(std::string str)
+{
+	
+	bool success = false;
 
+	if( str.find("-s") != -1 )
+	{
+		// stop
+		success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, true);
+	}
+	else
+	{
+		// retry or connect
+		success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, false);
+		success &= AttemptConnection(*Context::Get(), Context::Get()->m_RecvThread);
+
+	}
+
+	if( success )
+		NTerminal::Get()->PrintToStdout("[Success]");
+	else
+		NTerminal::Get()->PrintToStdout("[Failure]");
+
+}
+
+std::string ConnectTCP::Help()
+{
+	return "Usage: connect [-s]; s=stop";
+}
 
 
 
