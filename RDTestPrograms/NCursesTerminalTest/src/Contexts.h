@@ -43,6 +43,11 @@ public:
 	typedef map<unsigned int, LocalContext*> CTMap;
 	typedef pair<unsigned int, LocalContext*> CTPair;
 	typedef queue<unsigned int> UIDQueu;
+
+	// ------------ Singleton ----------
+	Context();
+	~Context();
+	static Context* Get();
 	
 	// ------------ Functions ----------
 	LocalContext* MakeThread(void *(*fcn)(void*));

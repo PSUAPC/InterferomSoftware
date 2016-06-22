@@ -5,6 +5,27 @@
 // -----   C O N T E X T   --------
 // --------------------------------
 
+Context* g_Context = NULL;
+
+Context::Context()
+{
+	if( g_Context == NULL )
+	{
+		g_Context = this;
+	}
+}
+
+Context::~Context()
+{
+	g_Context = NULL;
+}
+
+Context* Context::Get()
+{
+	return g_Context;
+}
+
+
 void Context::Init()
 {
 	// create the mutexes

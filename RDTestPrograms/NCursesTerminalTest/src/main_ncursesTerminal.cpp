@@ -7,6 +7,8 @@
 #include <sstream>
 #include <ncurses.h>
 #include "NTerminal.h"
+#include "NShell.h"
+#include "CommCommands.h"
 
 using namespace std;
 
@@ -170,11 +172,16 @@ void *RecvThread(void* t)
 
 }
 
-//string line;
-
 void *InputThread(void* t)
 {
 
+
+	NShell nshell;
+
+	nshell.RegisterCommand("ipget", new DestIPGet() );
+	nshell.RegisterCommand("portget", new DestPortGet());
+	nshell.RegisterCommand("ipset", new DestIPSet());
+	nshell.RegisterCommand("portset", new DestPortSet());	
 	nterminal.Init();
 	nterminal.SetHistorySize(10);
         nterminal.SetStdoutSize(100);
@@ -214,6 +221,7 @@ void *InputThread(void* t)
 		else if( line.length() > 0 )
 		{
 			signalMain = true;
+			nshell.ParseCommand(line);
 		}
 		
 		// check to see if we need to signal the main thread
