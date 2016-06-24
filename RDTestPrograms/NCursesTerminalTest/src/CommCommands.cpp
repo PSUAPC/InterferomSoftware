@@ -2,6 +2,7 @@
 #include "NShell.h"
 #include "NTerminal.h"
 #include "Contexts.h"
+#include <glib.h>
 
 #if 0
 void ClearTerminal::Exec(std::string str)
@@ -76,8 +77,35 @@ void ConnectTCP::Exec(std::string str)
 {
 	
 	bool success = false;
+	bool stop = false;
+	int argc = 0;
+	char ** argv = NULL;
+	g_shell_parse_argv( str.c_str(), &argc, &argv, NULL ); 
 
-	if( str.find("-s") != -1 )
+	if( argc > 1 )
+	{
+		char c;
+		while ( (c = getopt(argc, argv, "sh") ) != -1) 
+		{
+    			switch (c) 
+    			{
+        		case 's':
+				stop = true;
+            			break;
+        		case '?':
+				
+				NTerminal::Get()->PrintToStdout("Unknown argument");
+				return;
+				
+            			break;
+    			}
+		}	
+	
+
+		g_strfreev(argv);
+	}
+
+	if( stop )
 	{
 		// stop
 		success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, true);

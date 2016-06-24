@@ -9,6 +9,8 @@ public:
 	virtual void Exec(std::string str) = 0;
 
 	virtual std::string Help() = 0;
+
+	virtual bool UsesOptArg(){ return false; }
 	
 };
 

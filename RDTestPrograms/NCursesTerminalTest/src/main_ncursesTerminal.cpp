@@ -9,6 +9,7 @@
 #include "NTerminal.h"
 #include "NShell.h"
 #include "CommCommands.h"
+#include <glib.h>
 
 using namespace std;
 

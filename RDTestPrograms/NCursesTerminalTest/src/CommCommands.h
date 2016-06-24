@@ -50,6 +50,7 @@ class ConnectTCP : public ICommandInterface
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
+	virtual bool UsesOptArg(){ return true; }
 };
 
 class SerialNameGet : public ICommandInterface

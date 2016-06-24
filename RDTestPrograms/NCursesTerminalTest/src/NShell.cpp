@@ -75,6 +75,7 @@ void NShell::TrimpWhiteSpace(std::string& str)
 void NShell::ParseCommand(std::string cmd)
 {
 
+	std::string basecmd = cmd;
 	std::string args;
 	// we need to find the option arguments, they begin with a -
 	int sep = 0;
@@ -106,7 +107,18 @@ void NShell::ParseCommand(std::string cmd)
 		{
 			if( it->second != NULL )
 			{
-				it->second->Exec( args );
+				// check to see if we are using optarg
+				// for this command.
+				// optarg requires the full shell command
+				if( it->second->UsesOptArg() )
+				{
+					it->second->Exec( basecmd );
+				}
+				else
+				{
+					it->second->Exec( args );
+				}
+
 				valid = true;
 			}
 		}
