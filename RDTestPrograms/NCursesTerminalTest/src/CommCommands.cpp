@@ -103,6 +103,30 @@ std::string ConnectTCP::Help()
 }
 
 
+void SerialNameSet::Exec(std::string str)
+{
+	Context* ct = Context::Get();
+	if( ct != NULL )
+	{
+		ct->m_SerialName = str;
+	}
+}
 
+std::string SerialNameSet::Help()
+{
+	return "Usage: SerialSet <Device Name>";
+}
 
+void SerialNameGet::Exec(std::string str)
+{
+	Context* ct = Context::Get();
+	if( ct != NULL )
+	{
+		NTerminal::Get()->PrintToStdout(ct->m_SerialName);
+	}
+}
 
+std::string SerialNameGet::Help()
+{
+	return "";
+}

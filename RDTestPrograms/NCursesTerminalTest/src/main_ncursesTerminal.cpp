@@ -18,8 +18,6 @@ void LogMsgToTerminal(const string& msg);
 void *RecvThread(void* t);
 
 
-NTerminal nterminal;
-Context ct;
 
 string GetIPFromStruct(struct sockaddr_storage* addr)
 {
@@ -50,6 +48,62 @@ string GetIPFromStruct(struct sockaddr_storage* addr)
 	return ss.str();
 }
 
+int set_interface_attribs (int fd, int speed, int parity)
+{
+        struct termios tty;
+        memset (&tty, 0, sizeof tty);
+        if (tcgetattr (fd, &tty) != 0)
+        {
+                //error_message ("error %d from tcgetattr", errno);
+                return -1;
+        }
+
+        cfsetospeed (&tty, speed);
+        cfsetispeed (&tty, speed);
+
+        tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8;     // 8-bit chars
+        // disable IGNBRK for mismatched speed tests; otherwise receive break
+        // as \000 chars
+        tty.c_iflag &= ~IGNBRK;         // disable break processing
+        tty.c_lflag = 0;                // no signaling chars, no echo,
+                                        // no canonical processing
+        tty.c_oflag = 0;                // no remapping, no delays
+        tty.c_cc[VMIN]  = 0;            // read doesn't block
+        tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
+
+        tty.c_iflag &= ~(IXON | IXOFF | IXANY); // shut off xon/xoff ctrl
+
+        tty.c_cflag |= (CLOCAL | CREAD);// ignore modem controls,
+                                        // enable reading
+        tty.c_cflag &= ~(PARENB | PARODD);      // shut off parity
+        tty.c_cflag |= parity;
+        tty.c_cflag &= ~CSTOPB;
+        tty.c_cflag &= ~CRTSCTS;
+
+        if (tcsetattr (fd, TCSANOW, &tty) != 0)
+        {
+                //error_message ("error %d from tcsetattr", errno);
+                return -1;
+        }
+        return 0;
+}
+
+void set_blocking (int fd, int should_block)
+{
+        struct termios tty;
+        memset (&tty, 0, sizeof tty);
+        if (tcgetattr (fd, &tty) != 0)
+        {
+                //error_message ("error %d from tggetattr", errno);
+                return;
+        }
+
+        tty.c_cc[VMIN]  = should_block ? 1 : 0;
+        tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
+
+        //if (tcsetattr (fd, TCSANOW, &tty) != 0)
+               // error_message ("error %d setting term attributes", errno);
+}
 
 int GetPortFromStruct(struct sockaddr_storage* addr)
 {
@@ -86,7 +140,7 @@ void *RecvThread(void* t)
 		int rv = 0;
 
 		// only attempt to recieve if the socket fd is valid
-		if( lct->m_Sockfd >= 0 )
+		if( lct->m_Connected && ( lct->m_Sockfd >= 0 )  )
 		{
 			rv = recv(lct->m_Sockfd, buff, len, 0);
 		}
@@ -176,6 +230,7 @@ void *InputThread(void* t)
 {
 
 
+	NTerminal nterminal;
 	NShell nshell;
 
 	nshell.RegisterCommand("ipget", new DestIPGet() );
@@ -183,6 +238,8 @@ void *InputThread(void* t)
 	nshell.RegisterCommand("ipset", new DestIPSet());
 	nshell.RegisterCommand("portset", new DestPortSet());	
 	nshell.RegisterCommand("connect", new ConnectTCP() );
+	nshell.RegisterCommand("serialget", new SerialNameGet() );
+	nshell.RegisterCommand("serialset", new SerialNameSet() );
 	nterminal.Init();
 	nterminal.SetHistorySize(10);
         nterminal.SetStdoutSize(100);
@@ -259,7 +316,8 @@ void *InputThread(void* t)
 void LogMsgToTerminal(const string& msg)
 {
 	// lock the terminal mutex
-	nterminal.PrintToStdout(msg);
+	if( NTerminal::Get() != NULL )
+		NTerminal::Get()->PrintToStdout(msg);
 
 }
 
@@ -281,24 +339,39 @@ bool AttemptConnection(Context& ct, LocalContext* newCT)
 
 	LogMsgToTerminal("ATTEMPTING TO CONNECT");
 
-	if( connect(sockfd, (struct sockaddr*) &(ct.m_Sa),sizeof(ct.m_Sa)) < 0 )
+	
+	if(  connect(sockfd, (struct sockaddr*) &(ct.m_Sa),sizeof(ct.m_Sa)) < 0 )
 	{
-		LogMsgToTerminal("ERROR CONNECTING");
+	
+		switch( errno )
+		{
+		case ETIMEDOUT:
+			LogMsgToTerminal("CONNECTION TIMED OUT");
+			break;
+		case ENETUNREACH:
+			LogMsgToTerminal("NETWORK UNREACHABLE");
+			break;
+		case EISCONN:
+			LogMsgToTerminal("SOCKET ALREADY CONNECTED");
+			break;
+		case ECONNREFUSED:
+			LogMsgToTerminal("CONNECTION REFUSED");
+			break;
+		case EADDRINUSE:
+			LogMsgToTerminal("ADDRESS IN USE");
+			break;
+		default:
+			LogMsgToTerminal("ERROR CONNECTING");
+			break;
+		}
+		
 	
 		return false;
 	}
 	else
 	{
 		LogMsgToTerminal("SUCCESSFULL CONNECTION");
-		// set the socket to non-blocking
-		// and create the recv thread
-		struct timeval timeout;
-        	timeout.tv_sec = 2;
-       		timeout.tv_usec = 0;
-
-                setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
-                setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
-
+		newCT->m_Connected = true;
 		return true;
 	}
 }
@@ -306,6 +379,8 @@ bool AttemptConnection(Context& ct, LocalContext* newCT)
 
 bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop)
 {
+	newCT->m_Connected = false;
+
 	// close the socket if it is currently open
 	if( newCT->m_Sockfd != -1 )
 	{
@@ -339,7 +414,16 @@ bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop)
 
 	// let the kernel know we are willing to reuse the socket if still around
 	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
+	// set the socket to non-blocking
+	struct timeval timeout;
+        timeout.tv_sec = 2;
+       	timeout.tv_usec = 0;
 
+        setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+        setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
+
+
+/*
 	if( bind(sockfd, (struct sockaddr *)&saLoc, sizeof(struct sockaddr)) < 0 )
 	{
 		LogMsgToTerminal("ERROR BINDING SOCKET");
@@ -348,9 +432,9 @@ bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop)
 		close(sockfd);
 		return false;
 	}
-
+*/
 	newCT->m_Sockfd = sockfd;
-	
+		
 	// return success
 	return true;
 
@@ -360,16 +444,9 @@ bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop)
 int main( int argc, char* argv[])
 {
 
-	//nterminal.Init();
-	//getch();
-	//return 0;
-	//getch();
-	//nterminal.Shutdown();
-	//return 0;
-
 
 	// create the context on the stack
-	//Context ct;
+	Context ct;
 
 	// init the context
 	ct.Init();

@@ -6,8 +6,9 @@
 #include <ncurses.h>
 #include <string>
 #include <list>
+#include "WidgetInterface.h"
 
-class NTerminal
+class NTerminal : public IWidget
 {
 	typedef std::list<std::string> History;
 public:

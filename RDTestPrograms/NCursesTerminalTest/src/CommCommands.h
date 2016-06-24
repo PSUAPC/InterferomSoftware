@@ -52,4 +52,19 @@ public:
 	virtual std::string Help();
 };
 
+class SerialNameGet : public ICommandInterface
+{
+public:
+	virtual void Exec(std::string str);
+	virtual std::string Help();
+};
+
+class SerialNameSet : public ICommandInterface
+{
+public:
+	virtual void Exec(std::string str);
+	virtual std::string Help();
+};
+
+
 #endif //__COMMCOMMANDS_H__

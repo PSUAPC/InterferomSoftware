@@ -73,6 +73,7 @@ public:
 	UIDQueu 	m_Garbage;
 	int		m_Caller;
 	LocalContext* 	m_RecvThread;
+	string		m_SerialName;
 
     	// socket variables
     	struct sockaddr_in m_Sa;
@@ -101,7 +102,7 @@ struct LocalContext
     	// socket variables
     	int m_Sockfd;
 	struct sockaddr_storage m_Addr;
-
+	bool m_Connected;
 
 	// context variables
 	string m_MSG;

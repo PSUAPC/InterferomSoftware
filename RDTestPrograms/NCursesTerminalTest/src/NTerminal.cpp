@@ -4,7 +4,7 @@
 NTerminal* g_Terminal = NULL;
 
 NTerminal::NTerminal()
-	: m_Win(NULL), m_HistorySize(0), m_StdoutSize(0), 
+	: IWidget(NULL), m_Win(NULL), m_HistorySize(0), m_StdoutSize(0), 
 	m_StdoutDispSize(0), m_Inhibit(true), m_HistoryPointer(0)
 {
 	if( g_Terminal == NULL )
