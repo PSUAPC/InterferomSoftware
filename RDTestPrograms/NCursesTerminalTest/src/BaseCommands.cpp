@@ -6,6 +6,11 @@
 
 // declare some base commands
 
+
+// ---------------------------------
+//     C L E A R   C O M M A N D   
+// ---------------------------------
+
 void ClearTerminal::Exec(std::string str)
 {
 
@@ -17,6 +22,7 @@ void ClearTerminal::Exec(std::string str)
 	else
 	{
 		NTerminal::Get()->ClearStdout();
+		// force a redraw to remove the output on screen
 		NTerminal::Get()->Redraw();
 	}
 }
@@ -34,6 +40,9 @@ std::string ClearTerminal::Man()
 	return "Usage: clear [-h]; h=history";
 }
 
+// ---------------------------------------
+//     H I S T O R Y   C O M M A N D   
+// ---------------------------------------
 
 void ShowHistory::Exec(std::string str)
 {
@@ -52,6 +61,10 @@ std::string ShowHistory::Man()
 	return "";
 }
 
+// ---------------------------------
+//     E C H O   C O M M A N D   
+// ---------------------------------
+
 void EchoCmd::Exec(std::string str)
 {
 	NTerminal::Get()->PrintToStdout(str);
@@ -69,10 +82,18 @@ std::string EchoCmd::Man()
 	return "";
 }
 
+// ---------------------------------
+//     L I S T   C O M M A N D   
+// ---------------------------------
+
 void ListCmds::Exec(std::string str)
 {
+	// obtain a list of all commands registered to the shell
 	std::list<std::string> clist = NShell::Get()->GetCommandList();	
+	
 	NTerminal::Get()->PrintToStdout("---------------");
+	
+	// iterate over all items in the list, printing them to the screen
 	for( std::list<std::string>::iterator it = clist.begin();
 		it != clist.end(); it++ )
 	{
@@ -93,9 +114,15 @@ std::string ListCmds::Man()
 	return "";
 }
 
+// ---------------------------------
+//     R U N   C O M M A N D   
+// ---------------------------------
+
 void RunCmd::Exec(std::string str)
 {
-	// attempt to open the file
+	std::string line;
+	
+	// attempt to open the filename passed in the argument
     	std::ifstream infile(str.c_str());	
 	if( !infile )
 	{
@@ -103,16 +130,18 @@ void RunCmd::Exec(std::string str)
 		return;
 	}
 
+	// get each line until none are left
 	while( !infile.eof() )
-	{
-		std::string line;
+	{	
 		getline(infile, line, '\n');
+		
 		// skip this line if it does not contain at least 2 characters
 		if( line.length() > 1 )
 		{
 			NShell::Get()->ParseCommand(line);
 		}
 	}
+
 	// make sure to close the file
 	infile.close();
 }
@@ -128,9 +157,17 @@ std::string RunCmd::Man()
 	return "Usage: run <filename>";
 }
 
+
+// ---------------------------------
+//     H E L P   C O M M A N D   
+// ---------------------------------
+
 void HelpCmd::Exec(std::string str)
 {
+	// look up the command from the argument
 	ICommandInterface* cmd = NShell::Get()->GetCommandByName(str);
+	
+	// if valid, print the help string for that command
 	if( cmd != NULL )
 	{
 		NTerminal::Get()->PrintToStdout(cmd->Help());
@@ -148,9 +185,17 @@ std::string HelpCmd::Man()
 	return "Usage: help <cmdName>";
 }
 
+// ---------------------------------
+//     M A N   C O M M A N D   
+// ---------------------------------
+
 void ManCmd::Exec(std::string str)
 {
+	// look up the command for the argument
 	ICommandInterface* cmd = NShell::Get()->GetCommandByName(str);
+	
+	// if valid, print the man string for the command
+	// @@TODO We should implement a man widget to deal with this
 	if( cmd != NULL )
 	{
 		NTerminal::Get()->PrintToStdout(cmd->Man());

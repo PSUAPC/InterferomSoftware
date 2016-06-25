@@ -4,18 +4,6 @@
 #include "Contexts.h"
 #include <glib.h>
 
-#if 0
-void ClearTerminal::Exec(std::string str)
-{
-	NTerminal::Get()->ClearStdout();
-}
-
-std::string ClearTerminal::Help()
-{
-	return "";
-}
-
-#endif
 extern bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop);
 extern bool AttemptConnection(Context& ct, LocalContext* newCT);
 
@@ -98,12 +86,21 @@ void ConnectTCP::Exec(std::string str)
 	bool stop = false;
 	int argc = 0;
 	char ** argv = NULL;
-	g_shell_parse_argv( str.c_str(), &argc, &argv, NULL ); 
+	
+	if( !g_shell_parse_argv( str.c_str(), &argc, &argv, NULL ) )
+	{
+		NTerminal::Get()->PrintToStdout("Unable to parse: " + str);
+		return;
+	} 	
 
+	// must reset optind to 0 in case of previous call
+	// this resets the arg list and the argv index
+	optind = 0;
+	
 	if( argc > 1 )
 	{
 		char c;
-		while ( (c = getopt(argc, argv, "sh") ) != -1) 
+		while ( (c = getopt(argc, argv, "s") ) != -1) 
 		{
     			switch (c) 
     			{
@@ -111,17 +108,19 @@ void ConnectTCP::Exec(std::string str)
 				stop = true;
             			break;
         		case '?':
+			default :
 				
-				NTerminal::Get()->PrintToStdout("Unknown argument");
-				return;
-				
+				NTerminal::Get()->PrintToStdout("Unknown argument ");	
             			break;
     			}
 		}	
 	
 
-		g_strfreev(argv);
+		
 	}
+	
+	g_strfreev(argv);
+
 
 	if( stop )
 	{

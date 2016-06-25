@@ -2,43 +2,53 @@
 #include <signal.h>
 #include <vector>
 
+// singleton global variable for the terminal
 NTerminal* g_Terminal = NULL;
+
 
 NTerminal::NTerminal()
 	: IWidget(NULL), m_Win(NULL), m_HistorySize(0), m_StdoutSize(0), 
 	m_StdoutDispSize(0), m_Inhibit(true), m_HistoryPointer(0)
 {
+	// singleton assignment
 	if( g_Terminal == NULL )
 	{
 		g_Terminal = this;
+	}
+	else
+	{
+		throw "Atempting to create a second Terminal, which is of type singleton";
 	}
 }
 
 NTerminal::~NTerminal()
 {
+	// set the singleton global to null
 	g_Terminal = NULL;
 }
 
-NTerminal* NTerminal::Get(){ return g_Terminal; }
+NTerminal* NTerminal::Get()
+{ 
+	// static function get the singleton instance
+	return g_Terminal; 
+}
 
 void NTerminal::Init()
 {
 	if( !m_Inhibit )
 		return; // something is wrong
 
-	//printf("init");
-	m_Win = initscr();
-	//raw();		// Line buffering disabled	
-	noecho();	// don't echo to the screen
-	keypad(m_Win, TRUE); // enable keypad
-	cbreak();
-	getmaxyx(m_Win, m_Rows, m_Cols );
-	clear();
+	m_Win = initscr();			// create the screen
+	noecho();				// don't echo to the screen
+	keypad(m_Win, TRUE);	 		// enable keypad
+	cbreak();				// disable break commands
+	getmaxyx(m_Win, m_Rows, m_Cols );	// get the screen size
+	clear();				// clear the screen
+	refresh();	
+	mvprintw(m_Rows-1, 0, ">");		// print the command prompt
 	refresh();
-	mvprintw(m_Rows-1, 0, ">");
-	refresh();
-	signal(SIGWINCH, &NTerminal::OnResize);
-	m_Inhibit = false;
+	signal(SIGWINCH, &NTerminal::OnResize); // register the resize function
+	m_Inhibit = false;			// allow the terminal to function
 }
 
 void NTerminal::Shutdown()
@@ -77,6 +87,8 @@ void NTerminal::Redraw()
 		}
 		else
 		{
+			// search for the number of \n characters
+			// to figure out how many lines we need to displace this string by
 			int nlocs = 1;
 			tloc = (*it).find("\n", tloc+1);
 			while( tloc != -1 )
