@@ -1,5 +1,6 @@
 #include "NTerminal.h"
 #include <signal.h>
+#include <vector>
 
 NTerminal* g_Terminal = NULL;
 
@@ -66,8 +67,28 @@ void NTerminal::Redraw()
 	for( History::iterator it = m_Stdout.begin();  
 		(it != m_Stdout.end()) && (ii != maxLines); it++ )
 	{
-		mvprintw(m_Rows-2-ii, 0, "%s", (*it).c_str());
-		ii++;
+		int tloc = -1;
+		// find the number of \n in the string
+		tloc = (*it).find("\n", 0 ); 
+		if( tloc == -1 )
+		{
+			mvprintw(m_Rows-2-ii, 0, "%s", (*it).c_str());
+			ii++;
+		}
+		else
+		{
+			int nlocs = 1;
+			tloc = (*it).find("\n", tloc+1);
+			while( tloc != -1 )
+			{
+				nlocs++;
+				tloc = (*it).find("\n", tloc+1);
+ 
+			}
+
+			mvprintw(m_Rows-2-ii-nlocs, 0, "%s",(*it).c_str());
+			ii = ii + nlocs + 1;
+		}
 	}
 	// print the line
 	mvprintw(m_Rows-1, 0, ">%s", m_Line.c_str() );

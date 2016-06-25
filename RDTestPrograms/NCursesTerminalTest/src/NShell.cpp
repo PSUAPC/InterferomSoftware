@@ -18,6 +18,7 @@ NShell::NShell()
 	RegisterCommand("history", new ShowHistory() );
 	RegisterCommand("list", new ListCmds() );
 	RegisterCommand("help", new HelpCmd() );
+	RegisterCommand("man", new ManCmd() );
 	RegisterCommand("exit", NULL );
 }
 

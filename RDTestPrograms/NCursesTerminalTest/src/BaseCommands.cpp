@@ -21,6 +21,11 @@ void ClearTerminal::Exec(std::string str)
 
 std::string ClearTerminal::Help()
 {
+	return "Usage: clear [-h]";
+}
+
+std::string ClearTerminal::Man()
+{
 	return "Usage: clear [-h]; h=history";
 }
 
@@ -35,7 +40,10 @@ std::string ClearHistory::Help()
 	return "";
 }
 
-
+std::string ClearHistory::Man()
+{
+	return "";
+}
 
 void ShowHistory::Exec(std::string str)
 {
@@ -47,6 +55,11 @@ std::string ShowHistory::Help()
 	return "";
 }
 
+
+std::string ShowHistory::Man()
+{
+	return "";
+}
 
 
 void ListCmds::Exec(std::string str)
@@ -67,6 +80,11 @@ std::string ListCmds::Help()
 	return "";
 }
 
+std::string ListCmds::Man()
+{
+	return "";
+}
+
 void HelpCmd::Exec(std::string str)
 {
 	ICommandInterface* cmd = NShell::Get()->GetCommandByName(str);
@@ -79,4 +97,28 @@ void HelpCmd::Exec(std::string str)
 std::string HelpCmd::Help()
 {
 	return "Usage: help <cmdName>";
+}
+
+std::string HelpCmd::Man()
+{
+	return "Usage: help <cmdName>";
+}
+
+void ManCmd::Exec(std::string str)
+{
+	ICommandInterface* cmd = NShell::Get()->GetCommandByName(str);
+	if( cmd != NULL )
+	{
+		NTerminal::Get()->PrintToStdout(cmd->Man());
+	}
+}
+
+std::string ManCmd::Help()
+{
+	return "Usage: man <cmdName>";
+}
+
+std::string ManCmd::Man()
+{
+	return "Usage: man <cmdName>\n blah blah blah \n yada yada yada";
 }

@@ -31,6 +31,11 @@ std::string DestIPGet::Help()
 	return "";
 }
 
+std::string DestIPGet::Man()
+{
+	return "";
+}
+
 void DestPortGet::Exec(std::string str)
 {
 	Context* ct = Context::Get();
@@ -47,6 +52,11 @@ std::string DestPortGet::Help()
 	return "";
 }
 
+std::string DestPortGet::Man()
+{
+	return "";
+}
+
 void DestPortSet::Exec(std::string str)
 {
 	Context* ct = Context::Get();
@@ -55,6 +65,11 @@ void DestPortSet::Exec(std::string str)
 }
 
 std::string DestPortSet::Help()
+{
+	return "Usage: PortSet <port>";
+}
+
+std::string DestPortSet::Man()
 {
 	return "Usage: PortSet <port>";
 }
@@ -71,7 +86,10 @@ std::string DestIPSet::Help()
 	return "Usage: IPSet <IP Address>";
 }
 
-
+std::string DestIPSet::Man()
+{
+	return "Usage: IPSet <IP Address>";
+}
 
 void ConnectTCP::Exec(std::string str)
 {
@@ -127,9 +145,13 @@ void ConnectTCP::Exec(std::string str)
 
 std::string ConnectTCP::Help()
 {
-	return "Usage: connect [-s]; s=stop";
+	return "Usage: connect [-s]";
 }
 
+std::string ConnectTCP::Man()
+{
+	return "Usage: connect [-s]; s=stop";
+}
 
 void SerialNameSet::Exec(std::string str)
 {
@@ -145,6 +167,11 @@ std::string SerialNameSet::Help()
 	return "Usage: SerialSet <Device Name>";
 }
 
+std::string SerialNameSet::Man()
+{
+	return "Usage: SerialSet <Device Name>";
+}
+
 void SerialNameGet::Exec(std::string str)
 {
 	Context* ct = Context::Get();
@@ -155,6 +182,11 @@ void SerialNameGet::Exec(std::string str)
 }
 
 std::string SerialNameGet::Help()
+{
+	return "";
+}
+
+std::string SerialNameGet::Man()
 {
 	return "";
 }

@@ -11,7 +11,8 @@ public:
 	virtual std::string Help() = 0;
 
 	virtual bool UsesOptArg(){ return false; }
-	
+
+	virtual std::string Man() = 0;	
 };
 
 

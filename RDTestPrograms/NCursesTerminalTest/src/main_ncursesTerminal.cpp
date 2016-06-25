@@ -151,7 +151,7 @@ void *RecvThread(void* t)
 			// sleep to prevent constant loop
 			// which could affect performance
 			sleep(1);
-			LogMsgToTerminal("waiting");
+			//LogMsgToTerminal("waiting");
 			
 		}
 

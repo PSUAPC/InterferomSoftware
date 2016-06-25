@@ -22,6 +22,7 @@ class DestIPSet : public ICommandInterface
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
+	virtual std::string Man();
 };
 
 class DestIPGet : public ICommandInterface
@@ -29,6 +30,7 @@ class DestIPGet : public ICommandInterface
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
+	virtual std::string Man();
 };
 
 class DestPortSet : public ICommandInterface
@@ -36,6 +38,7 @@ class DestPortSet : public ICommandInterface
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
+	virtual std::string Man();
 };
 
 class DestPortGet : public ICommandInterface
@@ -43,6 +46,7 @@ class DestPortGet : public ICommandInterface
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
+	virtual std::string Man();
 };
 
 class ConnectTCP : public ICommandInterface
@@ -50,6 +54,7 @@ class ConnectTCP : public ICommandInterface
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
+	virtual std::string Man();
 	virtual bool UsesOptArg(){ return true; }
 };
 
@@ -58,6 +63,7 @@ class SerialNameGet : public ICommandInterface
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
+	virtual std::string Man();
 };
 
 class SerialNameSet : public ICommandInterface
@@ -65,6 +71,7 @@ class SerialNameSet : public ICommandInterface
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
+	virtual std::string Man();
 };
 
 
