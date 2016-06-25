@@ -234,13 +234,14 @@ void *InputThread(void* t)
 	NTerminal nterminal;
 	NShell nshell;
 
-	nshell.RegisterCommand("ipget", new DestIPGet() );
-	nshell.RegisterCommand("portget", new DestPortGet());
-	nshell.RegisterCommand("ipset", new DestIPSet());
-	nshell.RegisterCommand("portset", new DestPortSet());	
-	nshell.RegisterCommand("connect", new ConnectTCP() );
-	nshell.RegisterCommand("serialget", new SerialNameGet() );
-	nshell.RegisterCommand("serialset", new SerialNameSet() );
+	nshell.RegisterCommand("tcp", new TCPCmd() );
+	//nshell.RegisterCommand("ipget", new DestIPGet() );
+	//nshell.RegisterCommand("portget", new DestPortGet());
+	//nshell.RegisterCommand("ipset", new DestIPSet());
+	//nshell.RegisterCommand("portset", new DestPortSet());	
+	//nshell.RegisterCommand("connect", new ConnectTCP() );
+	//nshell.RegisterCommand("serialget", new SerialNameGet() );
+	//nshell.RegisterCommand("serialset", new SerialNameSet() );
 	nterminal.Init();
 	nterminal.SetHistorySize(10);
         nterminal.SetStdoutSize(100);

@@ -3,76 +3,42 @@
 
 #include "CommandInterface.h"
 
-#if 0
-class ClearTerminal : public ICommandInterface
-{
-public:
-	virtual void Exec(std::string str);
-	virtual std::string Help();
-};
 
+// commands:
+// tcp config -p <port> -a <address>
+// tcp connect -s
+// tcp stop
 
+// udp config -p <port> -a <address>
+// udp connect -s
+// udp stop
 
+// tty config -b <baud> -d <device>
+// tty connect -s
+// tty stop
 
-#endif
-
-
-class DestIPSet : public ICommandInterface
-{
-public:
-	virtual void Exec(std::string str);
-	virtual std::string Help();
-	virtual std::string Man();
-};
-
-class DestIPGet : public ICommandInterface
+class TCPCmd : public ICommandInterface
 {
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
 	virtual std::string Man();
 };
-
-class DestPortSet : public ICommandInterface
+/*
+class UDPcmd : public ICommandInterface
 {
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
 	virtual std::string Man();
 };
-
-class DestPortGet : public ICommandInterface
+*/
+class TTYCmd : public ICommandInterface
 {
 public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
 	virtual std::string Man();
 };
-
-class ConnectTCP : public ICommandInterface
-{
-public:
-	virtual void Exec(std::string str);
-	virtual std::string Help();
-	virtual std::string Man();
-	virtual bool UsesOptArg(){ return true; }
-};
-
-class SerialNameGet : public ICommandInterface
-{
-public:
-	virtual void Exec(std::string str);
-	virtual std::string Help();
-	virtual std::string Man();
-};
-
-class SerialNameSet : public ICommandInterface
-{
-public:
-	virtual void Exec(std::string str);
-	virtual std::string Help();
-	virtual std::string Man();
-};
-
 
 #endif //__COMMCOMMANDS_H__
