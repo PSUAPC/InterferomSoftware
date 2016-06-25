@@ -16,9 +16,11 @@ NShell::NShell()
 	// register the base commands
 	RegisterCommand("clear", new ClearTerminal() );
 	RegisterCommand("history", new ShowHistory() );
+	RegisterCommand("echo", new EchoCmd() );
 	RegisterCommand("list", new ListCmds() );
+	RegisterCommand("run", new RunCmd() );
 	RegisterCommand("help", new HelpCmd() );
-	RegisterCommand("man", new ManCmd() );
+	//RegisterCommand("man", new ManCmd() );
 	RegisterCommand("exit", NULL );
 }
 

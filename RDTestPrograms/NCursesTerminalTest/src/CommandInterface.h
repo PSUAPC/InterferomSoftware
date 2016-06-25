@@ -3,6 +3,8 @@
 
 #include <string>
 
+#define _S(c) std::string(c)
+
 class ICommandInterface
 {
 public:	

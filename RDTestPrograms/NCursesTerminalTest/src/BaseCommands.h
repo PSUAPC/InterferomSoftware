@@ -13,14 +13,6 @@ public:
 };
 
 
-class ClearHistory : public ICommandInterface
-{
-public:
-	virtual void Exec(std::string str);
-	virtual std::string Help();
-	virtual std::string Man();
-};
-
 class ShowHistory : public ICommandInterface
 {
 public:
@@ -37,6 +29,24 @@ public:
 	virtual std::string Help();
 	virtual std::string Man();
 };
+
+class EchoCmd : public ICommandInterface
+{
+public:
+	virtual void Exec(std::string str);
+	virtual std::string Help();
+	virtual std::string Man();
+};
+
+
+class RunCmd : public ICommandInterface
+{
+public:
+	virtual void Exec(std::string str);
+	virtual std::string Help();
+	virtual std::string Man();
+};
+
 
 class HelpCmd : public ICommandInterface
 {
