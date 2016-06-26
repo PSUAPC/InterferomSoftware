@@ -23,6 +23,47 @@ IWidget::~IWidget()
 	}	
 }
 
+void IWidget::Draw()
+{
+	// draw the children
+	for( ChildList::iterator it = m_Children.begin();
+		it != m_Children.end(); it++ )
+	{
+		if( (*it) != NULL )
+		{
+			(*it)->Draw();
+		}
+	}
+}
+
+bool IWidget::OnInput(int in)
+{
+	return true;
+}
+
+void IWidget::OnResize(int x0, int y0, int w, int h)
+{
+	// resize the children
+	for( ChildList::iterator it = m_Children.begin();
+		it != m_Children.end(); it++ )
+	{
+		if( (*it) != NULL )
+		{
+			(*it)->OnResize(x0, y0, w, h);
+		}
+	}
+}
+
+
+void IWidget::Redraw()
+{
+	// call redraw on the parent
+	if( m_Parent != NULL )
+	{
+		m_Parent->Redraw();
+	}
+}
+
 void IWidget::RegisterChild(IWidget* child)
 {
 	// add the child

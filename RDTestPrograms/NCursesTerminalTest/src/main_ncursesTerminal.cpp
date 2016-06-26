@@ -7,6 +7,7 @@
 #include <sstream>
 #include <ncurses.h>
 #include "NTerminal.h"
+#include "NWindow.h"
 #include "NShell.h"
 #include "CommCommands.h"
 #include <glib.h>
@@ -151,7 +152,7 @@ void *RecvThread(void* t)
 			// sleep to prevent constant loop
 			// which could affect performance
 			sleep(1);
-			//LogMsgToTerminal("waiting");
+			LogMsgToTerminal("waiting");
 			
 		}
 
@@ -231,7 +232,8 @@ void *InputThread(void* t)
 {
 
 
-	NTerminal nterminal;
+	NWindow nwindow;
+	NTerminal* nterminal = new NTerminal(&nwindow);
 	NShell nshell;
 
 	nshell.RegisterCommand("tcp", new TCPCmd() );
@@ -243,17 +245,17 @@ void *InputThread(void* t)
 	//nshell.RegisterCommand("connect", new ConnectTCP() );
 	//nshell.RegisterCommand("serialget", new SerialNameGet() );
 	//nshell.RegisterCommand("serialset", new SerialNameSet() );
-	nterminal.Init();
-	nterminal.SetHistorySize(10);
-        nterminal.SetStdoutSize(100);
-        nterminal.SetStdoutDispSize(-1);
+	nwindow.Init();
+	nterminal->SetHistorySize(10);
+        nterminal->SetStdoutSize(100);
+        nterminal->SetStdoutDispSize(-1);
 
     	LocalContext* lct = (LocalContext*)(t);
 	Context* ct = lct->m_Context;
     	string line;
 
-
-	nterminal.SetMutex(ct->m_TerminalMutex);
+	nwindow.SetMutex(ct->m_TerminalMutex);
+	nterminal->SetMutex(ct->m_TerminalMutex);
 
 	// variable to signal the main thread
 	bool signalMain = false;
@@ -265,25 +267,22 @@ void *InputThread(void* t)
 		// set the signal to false
 		signalMain = false;
 
+		bool isExit = false;
         	//std::getline (std::cin, line);
 		//getch();
-		line = nterminal.WaitForInput();
+		isExit = !nwindow.WaitForInput();
 
 
-        	if( line.find("exit") != NOT_FOUND )
+        	if( isExit )
         	{
 			ct->m_Running = false;
             		//cout << "exiting" << endl;
 			LogMsgToTerminal("EXITING");
-			nterminal.Inhibit();		
+			nwindow.Inhibit();		
 			// set the signal flag
 			signalMain = true;
         	}
-		else if( line.length() > 0 )
-		{
-			signalMain = true;
-			nshell.ParseCommand(line);
-		}
+		
 		
 		// check to see if we need to signal the main thread
 		if( signalMain )
@@ -306,7 +305,7 @@ void *InputThread(void* t)
 		}
     }
 
-    nterminal.Shutdown();
+    nwindow.Shutdown();
 
     pthread_exit(NULL);
 

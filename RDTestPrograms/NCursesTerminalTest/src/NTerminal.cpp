@@ -6,9 +6,9 @@
 NTerminal* g_Terminal = NULL;
 
 
-NTerminal::NTerminal()
-	: IWidget(NULL), m_Win(NULL), m_HistorySize(0), m_StdoutSize(0), 
-	m_StdoutDispSize(0), m_Inhibit(true), m_HistoryPointer(0)
+NTerminal::NTerminal(IWidget* parent)
+	: IWidget(parent),  m_HistorySize(0), m_StdoutSize(0), 
+	m_StdoutDispSize(0), m_HistoryPointer(0)
 {
 	// singleton assignment
 	if( g_Terminal == NULL )
@@ -33,39 +33,26 @@ NTerminal* NTerminal::Get()
 	return g_Terminal; 
 }
 
-void NTerminal::Init()
+void NTerminal::RegisterChild(IWidget* child)
 {
-	if( !m_Inhibit )
-		return; // something is wrong
-
-	m_Win = initscr();			// create the screen
-	noecho();				// don't echo to the screen
-	keypad(m_Win, TRUE);	 		// enable keypad
-	cbreak();				// disable break commands
-	getmaxyx(m_Win, m_Rows, m_Cols );	// get the screen size
-	clear();				// clear the screen
-	refresh();	
-	mvprintw(m_Rows-1, 0, ">");		// print the command prompt
-	refresh();
-	signal(SIGWINCH, &NTerminal::OnResize); // register the resize function
-	m_Inhibit = false;			// allow the terminal to function
+	throw "Adding a Child to a terminal widget is not allowed";
 }
 
-void NTerminal::Shutdown()
+void NTerminal::UnRegisterChild(IWidget* child)
 {
-	m_Inhibit = true;
-	endwin();
+	// do nothing
 }
 
-void NTerminal::Redraw()
+void NTerminal::Draw()
 {
-	if( m_Inhibit ) return;
 
-	pthread_mutex_lock(&m_Mutex);
+	FILE* pfile = fopen("log.log","a+");
+	if( pfile )
+	{
+		fprintf(pfile, "here\n");
+		fclose(pfile);
+	}
 	
-	// clear the window
-	clear();
-
 	int maxLines = m_StdoutDispSize;
 	// print the stdout
 	if( m_StdoutDispSize == -1 )
@@ -105,40 +92,21 @@ void NTerminal::Redraw()
 	// print the line
 	mvprintw(m_Rows-1, 0, ">%s", m_Line.c_str() );
 	// refresh
-	refresh();
-
-	pthread_mutex_unlock(&m_Mutex);
 
 }
 
-void NTerminal::OnResize(int param)
+void NTerminal::OnResize(int x0, int y0, int w, int h)
 {
 
-	if( g_Terminal != NULL )
-	{
-		if( g_Terminal->m_Inhibit ) return;
-
+	m_Rows = h;
+	m_Cols = w;	
 		// get the new size
-		getmaxyx(stdscr, g_Terminal->m_Rows, g_Terminal->m_Cols);
+		//getmaxyx(stdscr, g_Terminal->m_Rows, g_Terminal->m_Cols);
 		
-		// force a redraw
-		g_Terminal->Redraw();
-	}
 }
 
-std::string NTerminal::WaitForInput()
+bool NTerminal::OnInput(int c)
 {
-
-	std::string temp = "";
-
-	if( m_Inhibit ) return temp;
-	
-	// set timeout
-	//timeout(10);
-
-	int c = wgetch(m_Win);
-	
-	pthread_mutex_lock(&m_Mutex);
 
 	switch( c )
 	{
@@ -182,15 +150,17 @@ std::string NTerminal::WaitForInput()
 		if( m_Line.length() > 0 )
 		{
 			// save the line
-			temp = m_Line;
+			//temp = m_Line;
 		
-			pthread_mutex_unlock(&m_Mutex);
-
 			// push it to the queue
 			AddToHistory(m_Line);
 			PrintToStdout(">" + m_Line);
 
-			pthread_mutex_lock(&m_Mutex);
+			// check for the exit condition
+			if( m_Line.find("exit") != -1 )
+			{
+				return false;
+			}
 
 			// clear our copy
 			m_Line.clear();
@@ -216,16 +186,13 @@ std::string NTerminal::WaitForInput()
 		break;
 	}
 
-	pthread_mutex_unlock(&m_Mutex);
 
-	Redraw();
-	return temp;
+	return true;
 }
 
 
 void NTerminal::PrintToStdout(std::string str)
 {
-	if( m_Inhibit ) return;
 
 	// lock the mutex
 	pthread_mutex_lock(&m_Mutex);
@@ -239,21 +206,18 @@ void NTerminal::PrintToStdout(std::string str)
 	pthread_mutex_unlock(&m_Mutex);
 
 	// force redraw
-	Redraw();
+	//IWidget::Redraw();
 }
 
 void NTerminal::AddToHistory(std::string str)
 {
-	if( m_Inhibit ) return;
 
-	pthread_mutex_lock(&m_Mutex);
 
 	m_History.push_front(str);
 	if( m_History.size() > m_HistorySize )
 	{
 		m_History.pop_back();
 	}
-	pthread_mutex_unlock(&m_Mutex);
 
 }
 

@@ -12,16 +12,12 @@ class NTerminal : public IWidget
 {
 	typedef std::list<std::string> History;
 public:
-	NTerminal();
+	NTerminal(IWidget* parent);
 	~NTerminal();
 
 	static NTerminal* Get();
-	void Init();
-	void Shutdown();
-	void Redraw();
-	void Inhibit(){ m_Inhibit = true; }
+	
 	void PrintToStdout(std::string str);
-	std::string WaitForInput();
 	void SetHistorySize(int size) { m_HistorySize = size; }
 	void SetStdoutSize(int size) { m_StdoutSize = size; }
 	void SetStdoutDispSize(int size) { m_StdoutDispSize = size; }
@@ -33,9 +29,7 @@ private:
 	pthread_mutex_t m_Mutex;
 	int m_Rows;
 	int m_Cols;
-	bool m_Inhibit;
 	std::string m_Line;
-	WINDOW* m_Win;
 	History m_Stdout;
 	History m_History;
 	int m_HistorySize;
@@ -43,8 +37,12 @@ private:
 	int m_StdoutDispSize;
 	int m_HistoryPointer;
 	void AddToHistory(std::string str);
-	static void OnResize(int param);
 	void CopyHistoryAtPointer();
+	virtual void Draw();
+	virtual void OnResize(int x0, int y0, int w, int h);
+	virtual void RegisterChild(IWidget* child);
+	virtual void UnRegisterChild(IWidget* child); 
+	virtual bool OnInput(int in);  
 };
 
 

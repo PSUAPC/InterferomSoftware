@@ -1,6 +1,7 @@
 #include "BaseCommands.h"
 #include "NShell.h"
 #include "NTerminal.h"
+#include "NWindow.h"
 #include <iostream>
 #include <fstream>
 
@@ -23,7 +24,7 @@ void ClearTerminal::Exec(std::string str)
 	{
 		NTerminal::Get()->ClearStdout();
 		// force a redraw to remove the output on screen
-		NTerminal::Get()->Redraw();
+		NWindow::Get()->ForceRedraw();
 	}
 }
 
