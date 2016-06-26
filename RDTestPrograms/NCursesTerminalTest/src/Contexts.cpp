@@ -13,6 +13,13 @@ Context::Context()
 	{
 		g_Context = this;
 	}
+	m_DPort = 0;
+	m_SerialBaud = 0;
+	m_TCPThread = NULL;
+	m_InputThread = NULL;
+	m_TtyThread = NULL;
+
+
 }
 
 Context::~Context()
@@ -38,8 +45,11 @@ void Context::Init()
     	pthread_attr_init(&m_Attr);
     	pthread_attr_setdetachstate(&m_Attr, PTHREAD_CREATE_JOINABLE);
 
+	m_TCPThread = NULL;
+	m_InputThread = NULL;
+	m_TtyThread = NULL;
 
-	m_RecvThread = NULL;
+
 }
 
 void Context::Shutdown()

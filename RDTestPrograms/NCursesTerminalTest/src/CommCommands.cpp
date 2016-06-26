@@ -135,14 +135,14 @@ void TCPCmd::Exec(std::string str)
 		{
 			NTerminal::Get()->PrintToStdout("Stopping TCP Connection");
 			// stop
-			success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, true);
+			success = ConnectToServer(*Context::Get(), Context::Get()->m_TCPThread, true);
 		}
 		else
 		{
 			NTerminal::Get()->PrintToStdout("Starting TCP Connection");
 			// retry or connect
-			success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, false);
-			success &= AttemptConnection(*Context::Get(), Context::Get()->m_RecvThread);
+			success = ConnectToServer(*Context::Get(), Context::Get()->m_TCPThread, false);
+			success &= AttemptConnection(*Context::Get(), Context::Get()->m_TCPThread);
 
 		}
 
@@ -157,7 +157,7 @@ void TCPCmd::Exec(std::string str)
 		break;
 	case 0: // default
 	default:
-		if( ct->m_RecvThread->m_Connected )
+		if( ct->m_TCPThread->m_Connected )
 		{
 			NTerminal::Get()->PrintToStdout("TCP Status = Connected");
 		}
@@ -252,15 +252,15 @@ void TTYCmd::Exec(std::string str)
 		{
 		case 1: // config
 
-			while ( (c = getopt(argc, argv, "p:a:") ) != -1) 
+			while ( (c = getopt(argc, argv, "b:d:") ) != -1) 
 			{
     				switch (c) 
     				{
-        			case 'p':
-					sscanf(optarg, "%d", &ct->m_DPort); 
+        			case 'b':
+					sscanf(optarg, "%d", &ct->m_SerialBaud); 
             				break;
-				case 'a':
-					inet_aton(optarg, &ct->m_Sa.sin_addr);
+				case 'd':
+					ct->m_SerialName = _S(optarg);
 					break;
         			case '?':
 				default :
@@ -309,13 +309,13 @@ void TTYCmd::Exec(std::string str)
 	{
 	case 1: // config
 		{
-			char portBuff[10];
-			sprintf(portBuff, "%d", ct->m_DPort);
+			char baudBuff[10];
+			sprintf(baudBuff, "%d", ct->m_SerialBaud);
 			
 			// print the configuration
-			std::string ret = _S("---- TCP CONFIGURATION ------\n") +
-			  		  _S(" Port: ") + _S(portBuff) + _S("\n") +
-					  _S(" IP  : ") + inet_ntoa(ct->m_Sa.sin_addr) + _S("\n") +
+			std::string ret = _S("---- TTY CONFIGURATION ------\n") +
+			  		  _S(" Baud  : ") + _S(baudBuff) + _S("\n") +
+					  _S(" Device: ") + _S(ct->m_SerialName) + _S("\n") +
 					  _S("-----------------------------\n");
 
 			NTerminal::Get()->PrintToStdout(ret);
@@ -327,16 +327,16 @@ void TTYCmd::Exec(std::string str)
 
 		if( stop )
 		{
-			NTerminal::Get()->PrintToStdout("Stopping TCP Connection");
+			NTerminal::Get()->PrintToStdout("Stopping TTY Connection");
 			// stop
-			success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, true);
+			//success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, true);
 		}
 		else
 		{
-			NTerminal::Get()->PrintToStdout("Starting TCP Connection");
+			NTerminal::Get()->PrintToStdout("Starting TTY Connection");
 			// retry or connect
-			success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, false);
-			success &= AttemptConnection(*Context::Get(), Context::Get()->m_RecvThread);
+			//success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, false);
+			//success &= AttemptConnection(*Context::Get(), Context::Get()->m_RecvThread);
 
 		}
 
@@ -351,13 +351,13 @@ void TTYCmd::Exec(std::string str)
 		break;
 	case 0: // default
 	default:
-		if( ct->m_RecvThread->m_Connected )
+		if( /*ct->m_RecvThread->m_Connected*/ false )
 		{
-			NTerminal::Get()->PrintToStdout("TCP Status = Connected");
+			NTerminal::Get()->PrintToStdout("TTY Status = Connected");
 		}
 		else
 		{
-			NTerminal::Get()->PrintToStdout("TCP Status = Disconnected");
+			NTerminal::Get()->PrintToStdout("TTY Status = Disconnected");
 		}
 		break;
 
@@ -516,13 +516,13 @@ void ConnectTCP::Exec(std::string str)
 	if( stop )
 	{
 		// stop
-		success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, true);
+		success = ConnectToServer(*Context::Get(), Context::Get()->m_TCPThread, true);
 	}
 	else
 	{
 		// retry or connect
-		success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, false);
-		success &= AttemptConnection(*Context::Get(), Context::Get()->m_RecvThread);
+		success = ConnectToServer(*Context::Get(), Context::Get()->m_TCPThread, false);
+		success &= AttemptConnection(*Context::Get(), Context::Get()->m_TCPThread);
 
 	}
 

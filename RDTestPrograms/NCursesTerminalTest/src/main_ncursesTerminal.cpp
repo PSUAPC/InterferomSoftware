@@ -235,6 +235,7 @@ void *InputThread(void* t)
 	NShell nshell;
 
 	nshell.RegisterCommand("tcp", new TCPCmd() );
+	nshell.RegisterCommand("tty", new TTYCmd() );
 	//nshell.RegisterCommand("ipget", new DestIPGet() );
 	//nshell.RegisterCommand("portget", new DestPortGet());
 	//nshell.RegisterCommand("ipset", new DestIPSet());
@@ -457,15 +458,28 @@ int main( int argc, char* argv[])
 	ct.m_Running = true;
 
 	// create the input thread
-	ct.MakeThread(InputThread);
+	ct.m_InputThread = ct.MakeThread(InputThread);
+	ct.m_InputThread->m_Type = LocalContext::T_INPUT;
 
 	bool success = true;
 
 		
-	// create the recv thread
-	ct.m_RecvThread = ct.MakeThread(RecvThread);	
-	ct.m_RecvThread->m_Sockfd = -1;
+	// create the TCP thread
+	ct.m_TCPThread = ct.MakeThread(RecvThread);	
+	ct.m_TCPThread->m_Sockfd = -1;
+	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
+/*
+	// create the UDP thread
+	ct.m_TCPThread = ct.MakeThread(RecvThread);	
+	ct.m_TCPThread->m_Sockfd = -1;
+	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
 
+
+	// create the TTY thread
+	ct.m_TCPThread = ct.MakeThread(RecvThread);	
+	ct.m_TCPThread->m_Sockfd = -1;
+	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
+*/
 
 	LogMsgToTerminal("INITIALIZATION COMPLETE");
 
@@ -518,11 +532,11 @@ int main( int argc, char* argv[])
 	pthread_mutex_unlock(&(ct.m_PollMutex));
 
 	// clean up the socket
-	if( (ct.m_RecvThread)->m_Sockfd >= 0 )
+	if( (ct.m_TCPThread)->m_Sockfd >= 0 )
 	{
 		
 		
-		close((ct.m_RecvThread)->m_Sockfd);
+		close((ct.m_TCPThread)->m_Sockfd);
 		
 	}	
 

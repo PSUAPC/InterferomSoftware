@@ -72,8 +72,13 @@ public:
 	UIDDict 	m_UIDDict;
 	UIDQueu 	m_Garbage;
 	int		m_Caller;
-	LocalContext* 	m_RecvThread;
 	string		m_SerialName;
+	int		m_SerialBaud;
+
+	// specific threads
+	LocalContext* 	m_TCPThread;
+	LocalContext* 	m_InputThread;
+	LocalContext*	m_TtyThread;
 
     	// socket variables
     	struct sockaddr_in m_Sa;
@@ -94,6 +99,16 @@ public:
 
 struct LocalContext
 {
+	enum ContextType 
+	{
+		T_UNKNOWN = 0,
+		T_INPUT = 1,
+		T_TCP,
+		T_UDP,
+		T_TTY,
+		T_MAX
+	};
+
     	// posix variables
     	pthread_t m_Thread;
     	Context* m_Context;
@@ -104,7 +119,12 @@ struct LocalContext
 	struct sockaddr_storage m_Addr;
 	bool m_Connected;
 
+	// tty variables
+	int m_Ttyfd;	
+
 	// context variables
 	string m_MSG;
+	ContextType m_Type; 
+
 };
 

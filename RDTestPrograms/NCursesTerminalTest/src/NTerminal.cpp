@@ -104,7 +104,6 @@ void NTerminal::Redraw()
 	}
 	// print the line
 	mvprintw(m_Rows-1, 0, ">%s", m_Line.c_str() );
-
 	// refresh
 	refresh();
 
