@@ -21,7 +21,11 @@ protected:
 	virtual void RegisterChild(IWidget* child);
 	virtual void UnRegisterChild(IWidget* child);
 	virtual void Redraw();
-		
+	
+	int m_X0;
+	int m_Y0;
+	int m_H;
+	int m_W;	
 	IWidget* m_Parent;
 	ChildList m_Children;
 };

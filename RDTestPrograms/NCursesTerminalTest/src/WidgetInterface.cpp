@@ -8,6 +8,11 @@ IWidget::IWidget(IWidget* parent)
 	{
 		m_Parent->RegisterChild(this);
 	}
+
+	m_X0 = 0;
+	m_Y0 = 0;
+	m_H = 0;
+	m_W = 0;
 }
 
 IWidget::~IWidget()

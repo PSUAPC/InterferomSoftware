@@ -27,8 +27,6 @@ public:
 	void PrintHistory();
 private:
 	pthread_mutex_t m_Mutex;
-	int m_Rows;
-	int m_Cols;
 	std::string m_Line;
 	History m_Stdout;
 	History m_History;
@@ -38,6 +36,7 @@ private:
 	int m_HistoryPointer;
 	void AddToHistory(std::string str);
 	void CopyHistoryAtPointer();
+	void InternalPrint(std::string str);
 	virtual void Draw();
 	virtual void OnResize(int x0, int y0, int w, int h);
 	virtual void RegisterChild(IWidget* child);

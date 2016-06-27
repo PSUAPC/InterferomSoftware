@@ -8,6 +8,7 @@
 #include <ncurses.h>
 #include "NTerminal.h"
 #include "NWindow.h"
+#include "SizerWidget.h"
 #include "NShell.h"
 #include "CommCommands.h"
 #include <glib.h>
@@ -234,6 +235,8 @@ void *InputThread(void* t)
 
 	NWindow nwindow;
 	NTerminal* nterminal = new NTerminal(&nwindow);
+	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_HORZ);
+	IWidget* testW = new IWidget(&nwindow);
 	NShell nshell;
 
 	nshell.RegisterCommand("tcp", new TCPCmd() );
@@ -246,6 +249,12 @@ void *InputThread(void* t)
 	//nshell.RegisterCommand("serialget", new SerialNameGet() );
 	//nshell.RegisterCommand("serialset", new SerialNameSet() );
 	nwindow.Init();
+	sizer->Add(testW);
+	sizer->Add(nterminal);
+	
+	nwindow.SetSizer(sizer);
+	nwindow.ForceResize();
+
 	nterminal->SetHistorySize(10);
         nterminal->SetStdoutSize(100);
         nterminal->SetStdoutDispSize(-1);

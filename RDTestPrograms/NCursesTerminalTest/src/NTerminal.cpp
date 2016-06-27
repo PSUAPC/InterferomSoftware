@@ -49,15 +49,16 @@ void NTerminal::Draw()
 	FILE* pfile = fopen("log.log","a+");
 	if( pfile )
 	{
-		fprintf(pfile, "here\n");
+		fprintf(pfile, "[%d %d %d %d]\n", m_X0, m_Y0, m_W, m_H);
 		fclose(pfile);
 	}
 	
+	int bot = m_H + m_Y0;
 	int maxLines = m_StdoutDispSize;
 	// print the stdout
 	if( m_StdoutDispSize == -1 )
 	{
-		maxLines = m_Rows-1;
+		maxLines = m_H-1;
 	}
 
 	int ii = 0;
@@ -69,7 +70,7 @@ void NTerminal::Draw()
 		tloc = (*it).find("\n", 0 ); 
 		if( tloc == -1 )
 		{
-			mvprintw(m_Rows-2-ii, 0, "%s", (*it).c_str());
+			mvprintw(bot-2-ii, m_X0, "%s", (*it).c_str());
 			ii++;
 		}
 		else
@@ -85,12 +86,12 @@ void NTerminal::Draw()
  
 			}
 
-			mvprintw(m_Rows-2-ii-nlocs, 0, "%s",(*it).c_str());
+			mvprintw(bot-2-ii-nlocs, m_X0, "%s",(*it).c_str());
 			ii = ii + nlocs + 1;
 		}
 	}
 	// print the line
-	mvprintw(m_Rows-1, 0, ">%s", m_Line.c_str() );
+	mvprintw(bot-1, m_X0, ">%s", m_Line.c_str() );
 	// refresh
 
 }
@@ -98,8 +99,10 @@ void NTerminal::Draw()
 void NTerminal::OnResize(int x0, int y0, int w, int h)
 {
 
-	m_Rows = h;
-	m_Cols = w;	
+	m_X0 = x0;
+	m_Y0 = y0;
+	m_W = w;
+	m_H = h;
 		// get the new size
 		//getmaxyx(stdscr, g_Terminal->m_Rows, g_Terminal->m_Cols);
 		
@@ -154,7 +157,7 @@ bool NTerminal::OnInput(int c)
 		
 			// push it to the queue
 			AddToHistory(m_Line);
-			PrintToStdout(">" + m_Line);
+			InternalPrint(">" + m_Line);
 
 			// check for the exit condition
 			if( m_Line.find("exit") != -1 )
@@ -190,10 +193,8 @@ bool NTerminal::OnInput(int c)
 	return true;
 }
 
-
 void NTerminal::PrintToStdout(std::string str)
 {
-
 	// lock the mutex
 	pthread_mutex_lock(&m_Mutex);
 
@@ -206,7 +207,19 @@ void NTerminal::PrintToStdout(std::string str)
 	pthread_mutex_unlock(&m_Mutex);
 
 	// force redraw
-	//IWidget::Redraw();
+	IWidget::Redraw();
+
+}
+void NTerminal::InternalPrint(std::string str)
+{
+
+
+	m_Stdout.push_front(str);
+	if( m_Stdout.size() > m_StdoutSize )
+	{
+		m_Stdout.pop_back(); 
+	}
+	
 }
 
 void NTerminal::AddToHistory(std::string str)

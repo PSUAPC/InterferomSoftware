@@ -1,4 +1,5 @@
 #include "NWindow.h"
+#include "SizerWidget.h"
 #include <signal.h>
 
 // singleton global variable for the window
@@ -6,7 +7,8 @@ NWindow* g_Window = NULL;
 
 
 NWindow::NWindow()
-	: IWidget(NULL), m_Win(NULL), m_Inhibit(true)
+	: IWidget(NULL), m_Win(NULL), m_Inhibit(true),
+	m_Sizer(NULL)
 {
 	// singleton assignment
 	if( g_Window == NULL )
@@ -40,9 +42,9 @@ void NWindow::Init()
 	noecho();				// don't echo to the screen
 	keypad(m_Win, TRUE);	 		// enable keypad
 	cbreak();				// disable break commands
-	getmaxyx(m_Win, m_Rows, m_Cols );	// get the screen size
 	clear();				// clear the screen
 	refresh();	
+	getmaxyx(m_Win, m_Rows, m_Cols );	// get the screen size
 	//mvprintw(m_Rows-1, 0, ">");		// print the command prompt
 	//refresh();
 	signal(SIGWINCH, &NWindow::SResize); // register the resize function
@@ -59,7 +61,11 @@ void NWindow::ForceRedraw()
 {
 	Draw();
 }
-
+void NWindow::ForceResize()
+{
+	
+	OnResize(0,0, m_Cols, m_Rows);
+}
 void NWindow::Draw()
 {
 	if( m_Inhibit ) return;
@@ -79,9 +85,11 @@ void NWindow::Draw()
 
 }
 
-void NWindow::SetChildDock(IWidget* child, DockOption opt)
+void NWindow::SetSizer(SizerWidget* sizer)
 {
+	m_Sizer = sizer;
 }
+
 
 void NWindow::SResize(int param)
 {
@@ -92,8 +100,9 @@ void NWindow::SResize(int param)
 		if( g_Window->m_Inhibit ) return;
 
 		// get the new size
-		getmaxyx(stdscr, g_Window->m_Rows, g_Window->m_Cols);
-		
+		getmaxyx(g_Window->m_Win, g_Window->m_Rows, g_Window->m_Cols);
+		g_Window->ForceResize();
+	
 		// force a redraw
 		g_Window->Redraw();
 	}
@@ -148,14 +157,23 @@ void NWindow::Redraw()
 
 void NWindow::OnResize(int x0, int y0, int w, int h)
 {
-	for(ChildList::iterator it = m_Children.begin(); 
-		it != m_Children.end(); it++ )
+	if( m_Sizer != NULL )
 	{
-		if( (*it) != NULL )
+		m_Sizer->OnResize(x0, y0, w, h);
+	}
+	else
+	{
+		for(ChildList::iterator it = m_Children.begin(); 
+			it != m_Children.end(); it++ )
 		{
-			(*it)->OnResize(0,0,m_Cols, m_Rows);
+			if( (*it) != NULL )
+			{
+				(*it)->OnResize(0,0,m_Cols, m_Rows);
+			}
 		}
 	}
+
+	Redraw();
 }
 	
 

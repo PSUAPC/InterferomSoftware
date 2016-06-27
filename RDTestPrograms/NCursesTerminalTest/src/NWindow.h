@@ -7,18 +7,10 @@
 #include <list>
 #include "WidgetInterface.h"
 
+class SizerWidget;
+
 class NWindow : public IWidget
 {
-public:
-	enum DockOption
-	{
-		DOCK_NONE = 0,
-		DOCK_BOT,
-		DOCK_TOP,
-		DOCK_LEFT,
-		DOCK_RIGHT,
-		DOCK_MAX
-	};
 public:
 	NWindow();
 	~NWindow();
@@ -32,7 +24,8 @@ public:
 	void Inhibit(){ m_Inhibit = true; }
 	bool WaitForInput();
 	void SetMutex(pthread_mutex_t mutex){ m_Mutex = mutex; }
-	void SetChildDock(IWidget* child, DockOption opt);
+	void SetSizer(SizerWidget* sizer);
+	void ForceResize();
 private:
 	pthread_mutex_t m_Mutex;
 	int m_Rows;
@@ -43,7 +36,7 @@ private:
 	virtual void Draw();
 	virtual void Redraw();
 	virtual void OnResize(int x0, int y0, int w, int h);
-	
+	SizerWidget* m_Sizer;	
 
 };
 
