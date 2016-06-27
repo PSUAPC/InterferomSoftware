@@ -7,8 +7,9 @@
 #include <string>
 #include <list>
 #include "WidgetInterface.h"
+#include "PanelWidget.h"
 
-class NTerminal : public IWidget
+class NTerminal : public PanelWidget
 {
 	typedef std::list<std::string> History;
 public:

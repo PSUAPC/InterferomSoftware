@@ -7,8 +7,7 @@ NWindow* g_Window = NULL;
 
 
 NWindow::NWindow()
-	: IWidget(NULL), m_Win(NULL), m_Inhibit(true),
-	m_Sizer(NULL)
+	: PanelWidget(NULL), m_Win(NULL), m_Inhibit(true)
 {
 	// singleton assignment
 	if( g_Window == NULL )
@@ -83,11 +82,6 @@ void NWindow::Draw()
 
 	pthread_mutex_unlock(&m_Mutex);
 
-}
-
-void NWindow::SetSizer(SizerWidget* sizer)
-{
-	m_Sizer = sizer;
 }
 
 

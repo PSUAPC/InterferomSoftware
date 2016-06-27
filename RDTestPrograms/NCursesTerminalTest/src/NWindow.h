@@ -6,10 +6,11 @@
 #include <string>
 #include <list>
 #include "WidgetInterface.h"
+#include "PanelWidget.h"
 
 class SizerWidget;
 
-class NWindow : public IWidget
+class NWindow : public PanelWidget
 {
 public:
 	NWindow();
@@ -24,7 +25,6 @@ public:
 	void Inhibit(){ m_Inhibit = true; }
 	bool WaitForInput();
 	void SetMutex(pthread_mutex_t mutex){ m_Mutex = mutex; }
-	void SetSizer(SizerWidget* sizer);
 	void ForceResize();
 private:
 	pthread_mutex_t m_Mutex;
@@ -36,7 +36,6 @@ private:
 	virtual void Draw();
 	virtual void Redraw();
 	virtual void OnResize(int x0, int y0, int w, int h);
-	SizerWidget* m_Sizer;	
 
 };
 

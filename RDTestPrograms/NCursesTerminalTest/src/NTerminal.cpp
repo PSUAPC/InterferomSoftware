@@ -7,7 +7,7 @@ NTerminal* g_Terminal = NULL;
 
 
 NTerminal::NTerminal(IWidget* parent)
-	: IWidget(parent),  m_HistorySize(0), m_StdoutSize(0), 
+	: PanelWidget(parent),  m_HistorySize(0), m_StdoutSize(0), 
 	m_StdoutDispSize(0), m_HistoryPointer(0)
 {
 	// singleton assignment
