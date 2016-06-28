@@ -33,7 +33,7 @@ private:
 	bool m_Inhibit;
 	WINDOW* m_Win;
 	static void SResize(int param);	
-	virtual void Draw();
+	virtual void Draw(CursorReturn& cret);
 	virtual void Redraw();
 	virtual void OnResize(int x0, int y0, int w, int h);
 

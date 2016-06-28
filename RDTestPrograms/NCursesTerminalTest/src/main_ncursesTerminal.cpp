@@ -236,7 +236,7 @@ void *InputThread(void* t)
 	NWindow nwindow;
 	NTerminal* nterminal = new NTerminal(&nwindow);
 	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_HORZ);
-	IWidget* testW = new IWidget(&nwindow);
+	IWidget* testW = new PanelWidget(&nwindow, STYLE_BOARDER);
 	NShell nshell;
 
 	nshell.RegisterCommand("tcp", new TCPCmd() );
@@ -251,14 +251,15 @@ void *InputThread(void* t)
 	nwindow.Init();
 	sizer->Add(testW);
 	sizer->Add(nterminal);
-	
+	nterminal->SetStyle(STYLE_BOARDER);
 	nwindow.SetSizer(sizer);
 	nwindow.ForceResize();
 
 	nterminal->SetHistorySize(10);
         nterminal->SetStdoutSize(100);
         nterminal->SetStdoutDispSize(-1);
-
+	nterminal->SetFocus(true);
+	
     	LocalContext* lct = (LocalContext*)(t);
 	Context* ct = lct->m_Context;
     	string line;

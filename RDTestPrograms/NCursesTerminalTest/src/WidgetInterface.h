@@ -9,15 +9,25 @@ class IWidget
 	IWidget(){}
 protected:
 	typedef std::list<IWidget*> ChildList;
+	
+	struct CursorReturn
+	{
+		int m_X;
+		int m_Y;
+	};
 public:
 	IWidget(IWidget* parent);
 	~IWidget();	
 
 	virtual void OnResize(int x0, int y0, int w, int h);
 	virtual bool OnInput(int in);
+	void Hide(bool hide){ m_Hidden = hide; }
+	bool IsHidden(){ return m_Hidden; }
+	virtual void RemoveChild(IWidget* widget);
+	virtual void Reparent(IWidget* widget);
 
 protected:
-	virtual void Draw();	
+	virtual void Draw(CursorReturn& cret);
 	virtual void RegisterChild(IWidget* child);
 	virtual void UnRegisterChild(IWidget* child);
 	virtual void Redraw();
@@ -26,6 +36,7 @@ protected:
 	int m_Y0;
 	int m_H;
 	int m_W;	
+	bool m_Hidden;
 	IWidget* m_Parent;
 	ChildList m_Children;
 };

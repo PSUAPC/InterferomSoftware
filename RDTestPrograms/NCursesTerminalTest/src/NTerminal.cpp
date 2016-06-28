@@ -43,15 +43,16 @@ void NTerminal::UnRegisterChild(IWidget* child)
 	// do nothing
 }
 
-void NTerminal::Draw()
+void NTerminal::Draw(CursorReturn& cret)
 {
-
-	FILE* pfile = fopen("log.log","a+");
-	if( pfile )
-	{
-		fprintf(pfile, "[%d %d %d %d]\n", m_X0, m_Y0, m_W, m_H);
-		fclose(pfile);
-	}
+	// draw the parent first
+	PanelWidget::Draw(cret);
+	//FILE* pfile = fopen("log.log","a+");
+	//if( pfile )
+	//{
+	//	fprintf(pfile, "[%d %d %d %d]\n", m_X0, m_Y0, m_W, m_H);
+	//	fclose(pfile);
+	//}
 	
 	int bot = m_H + m_Y0;
 	int maxLines = m_StdoutDispSize;
@@ -90,8 +91,11 @@ void NTerminal::Draw()
 			ii = ii + nlocs + 1;
 		}
 	}
+	
 	// print the line
 	mvprintw(bot-1, m_X0, ">%s", m_Line.c_str() );
+	cret.m_X = m_X0 + 1 + m_Line.length();
+	cret.m_Y = bot - 1;
 	// refresh
 
 }
@@ -99,10 +103,11 @@ void NTerminal::Draw()
 void NTerminal::OnResize(int x0, int y0, int w, int h)
 {
 
-	m_X0 = x0;
-	m_Y0 = y0;
-	m_W = w;
-	m_H = h;
+	PanelWidget::OnResize(x0,y0,w,h);
+	//m_X0 = x0;
+	//m_Y0 = y0;
+	//m_W = w;
+	//m_H = h;
 		// get the new size
 		//getmaxyx(stdscr, g_Terminal->m_Rows, g_Terminal->m_Cols);
 		
@@ -198,6 +203,7 @@ void NTerminal::PrintToStdout(std::string str)
 	// lock the mutex
 	pthread_mutex_lock(&m_Mutex);
 
+	
 	m_Stdout.push_front(str);
 	if( m_Stdout.size() > m_StdoutSize )
 	{

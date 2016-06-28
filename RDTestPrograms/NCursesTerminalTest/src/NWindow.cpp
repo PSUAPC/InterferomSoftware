@@ -1,6 +1,7 @@
 #include "NWindow.h"
 #include "SizerWidget.h"
 #include <signal.h>
+#include "NTerminal.h"
 
 // singleton global variable for the window
 NWindow* g_Window = NULL;
@@ -58,30 +59,56 @@ void NWindow::Shutdown()
 
 void NWindow::ForceRedraw()
 {
-	Draw();
+	Redraw();
 }
 void NWindow::ForceResize()
 {
 	
 	OnResize(0,0, m_Cols, m_Rows);
 }
-void NWindow::Draw()
+void NWindow::Draw(CursorReturn& cret)
 {
 	if( m_Inhibit ) return;
 
-	pthread_mutex_lock(&m_Mutex);
+	// the resize callback doesnt seem to work
+	// so we will have to manually do it
+	int w, h;
+	// need to use this struct to get the
+	// current size
+    	struct winsize ws;
+    	ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
+	
+	// pull out the variables
+	w = ws.ws_col;
+	h = ws.ws_row;
 
-	//OnResize(0,0, m_Cols, m_Rows);	
-	// clear the window
-	clear();
+	// check for a change in size
+	// if there is no size change, no need
+	// to update children
+	if( (h != m_Rows) || (w != m_Cols) )
+	{
+		m_Rows = h;
+		m_Cols = w;
+		// force a resize
+		// this will also call the draw function again	
+		ForceResize();
+	}	
+	else
+	{
+		pthread_mutex_lock(&m_Mutex);
+	
+		//OnResize(0,0, m_Cols, m_Rows);	
+		// clear the window
+		clear();
 
-	IWidget::Draw();
-	//mvprintw(m_Rows-1, 0, ">%s", "" );
-	// refresh
-	refresh();
+		IWidget::Draw(cret);
+		move(cret.m_Y, cret.m_X);
+		//mvprintw(m_Rows-2, 0, ">%s", "" );
+		// refresh
+		refresh();
 
-	pthread_mutex_unlock(&m_Mutex);
-
+		pthread_mutex_unlock(&m_Mutex);
+	}
 }
 
 
@@ -93,6 +120,7 @@ void NWindow::SResize(int param)
 		return;
 		if( g_Window->m_Inhibit ) return;
 
+		NTerminal::Get()->PrintToStdout("resizing");
 		// get the new size
 		getmaxyx(g_Window->m_Win, g_Window->m_Rows, g_Window->m_Cols);
 		g_Window->ForceResize();
@@ -146,27 +174,16 @@ bool NWindow::WaitForInput()
 
 void NWindow::Redraw()
 {
-	Draw();
+	CursorReturn cret;
+	cret.m_X = m_W + 1;
+	cret.m_Y = m_H + 1;
+	Draw(cret);
 }
 
 void NWindow::OnResize(int x0, int y0, int w, int h)
 {
-	if( m_Sizer != NULL )
-	{
-		m_Sizer->OnResize(x0, y0, w, h);
-	}
-	else
-	{
-		for(ChildList::iterator it = m_Children.begin(); 
-			it != m_Children.end(); it++ )
-		{
-			if( (*it) != NULL )
-			{
-				(*it)->OnResize(0,0,m_Cols, m_Rows);
-			}
-		}
-	}
-
+	
+	PanelWidget::OnResize(x0,y0,w,h);
 	Redraw();
 }
 	

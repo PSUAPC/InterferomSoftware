@@ -9,6 +9,7 @@ IWidget::IWidget(IWidget* parent)
 		m_Parent->RegisterChild(this);
 	}
 
+	m_Hidden = false;
 	m_X0 = 0;
 	m_Y0 = 0;
 	m_H = 0;
@@ -28,15 +29,15 @@ IWidget::~IWidget()
 	}	
 }
 
-void IWidget::Draw()
+void IWidget::Draw(CursorReturn& cret)
 {
 	// draw the children
 	for( ChildList::iterator it = m_Children.begin();
 		it != m_Children.end(); it++ )
 	{
-		if( (*it) != NULL )
+		if( ((*it) != NULL) && !(*it)->IsHidden() )
 		{
-			(*it)->Draw();
+			(*it)->Draw(cret);
 		}
 	}
 }
@@ -48,6 +49,10 @@ bool IWidget::OnInput(int in)
 
 void IWidget::OnResize(int x0, int y0, int w, int h)
 {
+	m_X0 = x0;
+	m_Y0 = y0;
+	m_W = w;
+	m_H = h;
 	// resize the children
 	for( ChildList::iterator it = m_Children.begin();
 		it != m_Children.end(); it++ )
@@ -80,4 +85,28 @@ void IWidget::UnRegisterChild(IWidget* child)
 	// remove the child 
 	// this function will remove if found
 	m_Children.remove(child);
+	
 }
+
+void IWidget::RemoveChild(IWidget* child)
+{
+	// simply unregister the child
+	UnRegisterChild( child );
+}
+
+void IWidget::Reparent(IWidget* child)
+{
+	// find the parent of the child
+	if( child == NULL )
+		return;
+
+	if( child->m_Parent != NULL )
+	{
+		child->m_Parent->RemoveChild(child);
+	}
+	
+	// add the child
+	RegisterChild(child);
+}
+
+

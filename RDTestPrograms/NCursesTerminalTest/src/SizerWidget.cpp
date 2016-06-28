@@ -27,24 +27,25 @@ void SizerWidget::OnResize(int x0, int y0, int w, int h)
 	for( WidgetList::iterator it = m_Widgets.begin();
 		it != m_Widgets.end(); it++ )
 	{
-		sum += (*it).m_Ratio;
+		if( ((*it).m_Widget != NULL) && ! (*it).m_Widget->IsHidden() )
+			sum += (*it).m_Ratio;
 	}
 
 	if( sum <= 0 )
 	{
 		sum = 1;
 	}
-	FILE* pfile = fopen("log.log","a+"); 
-	if( pfile )
-	{
-		fprintf(pfile, "%d widgets, [%d,%d,%d,%d]\n", m_Widgets.size(), x0, y0, w, h);
-		fclose(pfile);
-	}
+	//FILE* pfile = fopen("log.log","a+"); 
+	//if( pfile )
+	//{
+	//	fprintf(pfile, "%d widgets, [%d,%d,%d,%d]\n", m_Widgets.size(), x0, y0, w, h);
+	//	fclose(pfile);
+	//}
 
 
-	char buff[100];
-	sprintf(buff, "%d widgets, %f sum", m_Widgets.size(), sum);
-	NTerminal::Get()->PrintToStdout(buff);
+	//char buff[100];
+	//sprintf(buff, "%d widgets, %f sum", m_Widgets.size(), sum);
+	//NTerminal::Get()->PrintToStdout(buff);
 
 	int index = 0;
 	int start = (m_Dir == SizerWidget::DIR_HORZ)? x0 : y0;
@@ -54,7 +55,7 @@ void SizerWidget::OnResize(int x0, int y0, int w, int h)
 	for( WidgetList::iterator it = m_Widgets.begin();
 		it != m_Widgets.end(); it++ )
 	{
-		if( (*it).m_Widget != NULL )	
+		if( ((*it).m_Widget != NULL) && !(*it).m_Widget->IsHidden() )	
 		{
 			// go based on the direction
 			if( m_Dir == SizerWidget::DIR_HORZ )
@@ -85,5 +86,25 @@ void SizerWidget::Add(IWidget* widget, float ratio)
 	m_Widgets.push_back( WidgetContainer() );
 	m_Widgets.back().m_Widget = widget;
 	m_Widgets.back().m_Ratio = ratio;
+}
+
+void SizerWidget::Remove(IWidget* widget)
+{
+	if( widget == NULL )
+	{
+		m_Widgets.clear();
+	}
+
+	for( WidgetList::iterator it = m_Widgets.begin();
+		it != m_Widgets.end(); it++ )
+	{
+		if( (*it).m_Widget == widget )
+		{
+			m_Widgets.erase(it);
+			return;
+		}
+	}
+
+	// not found, oh well
 }
 

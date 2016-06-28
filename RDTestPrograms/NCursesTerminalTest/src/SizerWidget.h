@@ -23,6 +23,7 @@ public:
 	SizerWidget(IWidget* parent, SizerDirection dir);
 	~SizerWidget();
 	void Add(IWidget* widget, float ratio = 1.0);	
+	void Remove(IWidget* widget);
 	virtual void OnResize(int x0, int y0, int w, int h);
 	void SetDirection(SizerDirection dir);
 private:

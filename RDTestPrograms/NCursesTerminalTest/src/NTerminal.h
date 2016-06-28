@@ -38,7 +38,7 @@ private:
 	void AddToHistory(std::string str);
 	void CopyHistoryAtPointer();
 	void InternalPrint(std::string str);
-	virtual void Draw();
+	virtual void Draw(CursorReturn& cret);
 	virtual void OnResize(int x0, int y0, int w, int h);
 	virtual void RegisterChild(IWidget* child);
 	virtual void UnRegisterChild(IWidget* child); 
