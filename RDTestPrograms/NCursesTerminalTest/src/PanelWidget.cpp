@@ -62,14 +62,44 @@ bool PanelWidget::OnFocus(FocusDir focusDir)
 
 	// otherwise set the focus, and return true
 			
-	bool tfocus = FocusChildren(focusDir);
+	//bool tfocus = FocusChildren(focusDir);
 	
+	bool tfocus = false;
 	switch( focusDir )
 	{
 	case IWidget::FOCUS_FWD:
+		if( m_Children.size() == 0 )
+		{
+			tfocus = !m_Focused;
+		}
+		else 
+		{
+			tfocus = FocusChildren(focusDir);
+		}
+		if( m_Focused && !tfocus )
+		{
+			// do it again
+			tfocus = FocusChildren(focusDir);
+		}
+		
 		m_Focused = tfocus;
+
 		break;
 	case IWidget::FOCUS_BACK:
+		if( m_Children.size() == 0 )
+		{
+			tfocus = !m_Focused;
+		}
+		else 
+		{
+			tfocus = FocusChildren(focusDir);
+		}
+		if( m_Focused && !tfocus )
+		{
+			// do it again
+			tfocus = FocusChildren(focusDir);
+		}
+		
 		m_Focused = tfocus;
 		break;
 	case IWidget::FOCUS_UP:
@@ -88,9 +118,11 @@ bool PanelWidget::OnFocus(FocusDir focusDir)
 bool PanelWidget::FocusChildren(FocusDir dir)
 {
 	bool cfocused = false;
+	bool anyFocused = false;
+	// check to see if any are focused
 	switch( dir )
 	{
-	case IWidget::FOCUS_FWD:
+	case IWidget::FOCUS_BACK:
 
 		for( ChildList::iterator it = m_Children.begin(); 
 			it != m_Children.end(); it++ )
@@ -105,7 +137,7 @@ bool PanelWidget::FocusChildren(FocusDir dir)
 		}
 		break;
 	case IWidget::FOCUS_UP:
-	case IWidget::FOCUS_BACK:
+	case IWidget::FOCUS_FWD:
 		for( ChildList::reverse_iterator rit = m_Children.rbegin();
 			rit != m_Children.rend(); rit++ )
 		{

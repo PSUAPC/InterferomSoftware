@@ -236,11 +236,11 @@ void *InputThread(void* t)
 
 	NWindow nwindow;
 	TabbedPanel* tabs = new TabbedPanel(&nwindow, STYLE_BORDER, TSTYLE_SHOW);
-	NTerminal* nterminal = new NTerminal(tabs);
+	NTerminal* nterminal = new NTerminal(&nwindow);//tabs);
 	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_HORZ);
 	IWidget* testW = new PanelWidget(&nwindow, STYLE_BORDER);
-	IWidget* testT = new PanelWidget(tabs);
-	testT->SetName("TestT");
+	//IWidget* testT = new PanelWidget(tabs);
+	//testT->SetName("TestT");
 	NShell nshell;
 
 	nshell.RegisterCommand("tcp", new TCPCmd() );
@@ -254,15 +254,16 @@ void *InputThread(void* t)
 	//nshell.RegisterCommand("serialset", new SerialNameSet() );
 	nwindow.Init();
 	sizer->Add(testW);
+	sizer->Add(nterminal);
 	sizer->Add(tabs);
-	//nterminal->SetStyle(STYLE_BORDER);
+	nterminal->SetStyle(STYLE_BORDER);
 	nwindow.SetSizer(sizer);
 	nwindow.ForceResize();
 
 	nterminal->SetHistorySize(10);
         nterminal->SetStdoutSize(100);
         nterminal->SetStdoutDispSize(-1);
-	tabs->OnFocus(IWidget::FOCUS_FWD);
+	//tabs->OnFocus(IWidget::FOCUS_FWD);
 	nterminal->SetName("Terminal");
 	nwindow.ForceRedraw();
 	

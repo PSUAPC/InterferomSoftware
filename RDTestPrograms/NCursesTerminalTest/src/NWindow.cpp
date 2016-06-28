@@ -196,15 +196,59 @@ bool NWindow::WaitForInput()
 
 bool NWindow::OnFocus(FocusDir focusdir)
 {
-	// go based on direction
+	bool anyFocused = false;
+	// check to see if any are focused
 	for(ChildList::iterator it = m_Children.begin();
-		it != m_Children.end(); it++ )
+		it != m_Children.end(); it++)
 	{
 		if( (*it) != NULL )
+			anyFocused = anyFocused || (*it)->IsFocused();
+	}
+
+	bool found = false;	
+	switch(focusdir)
+	{
+	case IWidget::FOCUS_BACK:
+	case IWidget::FOCUS_UP:
+		// go based on direction
+		for(ChildList::iterator it = m_Children.begin();
+			it != m_Children.end(); it++ )
 		{
-			if( (*it)->OnFocus( focusdir ) )
-				return true;	
+			if( (*it) != NULL )
+			{
+				found = found || (*it)->IsFocused();
+
+				
+				if( found || !anyFocused )
+				{
+					if( (*it)->OnFocus( focusdir ) )
+					{
+						return true;
+					}	
+				}
+			}
 		}
+		break;
+	case IWidget::FOCUS_FWD:
+		// go based on direction
+		for(ChildList::reverse_iterator rit = m_Children.rbegin();
+			rit != m_Children.rend(); rit++ )
+		{
+			if( (*rit) != NULL )
+			{
+				found = found || (*rit)->IsFocused();
+
+				if( found || !anyFocused )
+				{
+					if( (*rit)->OnFocus( focusdir ) )
+					{
+						return true;
+					}	
+				}
+			}
+		}
+		break;
+
 	}
 	return false;
 }

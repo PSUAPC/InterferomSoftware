@@ -37,7 +37,7 @@ public:
 	std::string GetName();
 	virtual void Draw(CursorReturn& cret);
 	virtual bool OnFocus(FocusDir focusDir);
-
+	bool IsFocused(){return m_Focused;}
 protected:
 	virtual void RegisterChild(IWidget* child);
 	virtual void UnRegisterChild(IWidget* child);

@@ -118,6 +118,7 @@ void TabbedPanel::DrawTabs()
 	// now for the tabs
 	int w = m_W;
 	int n = m_Tabs.size();
+	if( n == 0 ) n = 1;
 	int maxS = w/n;
 	if( maxS < 2 )
 		maxS = 2;
