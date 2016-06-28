@@ -208,8 +208,11 @@ bool NWindow::OnFocus(FocusDir focusdir)
 	bool found = false;	
 	switch(focusdir)
 	{
-	case IWidget::FOCUS_BACK:
 	case IWidget::FOCUS_UP:
+		// do nothing, this is the top level
+		return true;
+		break;
+	case IWidget::FOCUS_BACK:
 		// go based on direction
 		for(ChildList::iterator it = m_Children.begin();
 			it != m_Children.end(); it++ )
