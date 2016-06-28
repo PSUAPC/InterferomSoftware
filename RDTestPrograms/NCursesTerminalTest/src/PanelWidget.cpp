@@ -16,7 +16,7 @@ PanelWidget::~PanelWidget()
 
 void PanelWidget::Draw(CursorReturn& cret)
 {
-	DrawBoarder();
+	DrawBorder();
 }
 
 
@@ -26,7 +26,7 @@ void PanelWidget::OnResize(int x0, int y0, int w, int h)
 	IWidget::OnResize(x0, y0, w, h);
 
 	// check to see if we have a boarder
-	if( (m_Style & STYLE_BOARDER) != 0 )
+	if( (m_Style & STYLE_BORDER) != 0 )
 	{
 		m_X0 = x0 + 1;
 		m_Y0 = y0 + 1;
@@ -69,9 +69,9 @@ void PanelWidget::RemoveChild(IWidget* child)
 	IWidget::RemoveChild(child);
 }
 
-void PanelWidget::DrawBoarder()
+void PanelWidget::DrawBorder()
 {
-	if( (m_Style & STYLE_BOARDER) == 0)
+	if( (m_Style & STYLE_BORDER) == 0)
 		return; // no boarder to draw
 
 	if( m_Focused )

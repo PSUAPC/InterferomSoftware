@@ -4,7 +4,7 @@
 #include "WidgetInterface.h"
 
 #define STYLE_NONE    0x00
-#define STYLE_BOARDER 0x01
+#define STYLE_BORDER  0x01
 #define STYLE_NOINPUT 0x02
 
 
@@ -29,7 +29,7 @@ protected:
 	bool	     m_Focused;
 	
 private:
-	void DrawBoarder();
+	void DrawBorder();
 };
 
 
