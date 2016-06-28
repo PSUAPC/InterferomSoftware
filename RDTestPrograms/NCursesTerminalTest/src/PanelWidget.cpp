@@ -53,9 +53,14 @@ void PanelWidget::SetStyle(int style)
 	OnResize(m_X0, m_Y0, m_W, m_H);
 }
 
-void PanelWidget::SetFocus(bool focus)
+bool PanelWidget::SetFocus(bool focus)
 {
+	if( (m_Style & STYLE_NOINPUT) != 0)
+		return false; // unable to give focus
+
+	// otherwise set the focus, and return true
 	m_Focused = focus;
+	return true;
 }
 
 void PanelWidget::RemoveChild(IWidget* child)

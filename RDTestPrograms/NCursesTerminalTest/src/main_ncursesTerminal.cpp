@@ -11,6 +11,7 @@
 #include "SizerWidget.h"
 #include "NShell.h"
 #include "CommCommands.h"
+#include "TabbedPanel.h"
 #include <glib.h>
 
 using namespace std;
@@ -234,9 +235,12 @@ void *InputThread(void* t)
 
 
 	NWindow nwindow;
-	NTerminal* nterminal = new NTerminal(&nwindow);
+	TabbedPanel* tabs = new TabbedPanel(&nwindow, STYLE_BORDER, TSTYLE_SHOW);
+	NTerminal* nterminal = new NTerminal(tabs);
 	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_HORZ);
 	IWidget* testW = new PanelWidget(&nwindow, STYLE_BORDER);
+	IWidget* testT = new PanelWidget(tabs);
+	testT->SetName("TestT");
 	NShell nshell;
 
 	nshell.RegisterCommand("tcp", new TCPCmd() );
@@ -250,15 +254,17 @@ void *InputThread(void* t)
 	//nshell.RegisterCommand("serialset", new SerialNameSet() );
 	nwindow.Init();
 	sizer->Add(testW);
-	sizer->Add(nterminal);
-	nterminal->SetStyle(STYLE_BORDER);
+	sizer->Add(tabs);
+	//nterminal->SetStyle(STYLE_BORDER);
 	nwindow.SetSizer(sizer);
 	nwindow.ForceResize();
 
 	nterminal->SetHistorySize(10);
         nterminal->SetStdoutSize(100);
         nterminal->SetStdoutDispSize(-1);
-	nterminal->SetFocus(true);
+	tabs->SetFocus(true);
+	nterminal->SetName("Terminal");
+	nwindow.ForceRedraw();
 	
     	LocalContext* lct = (LocalContext*)(t);
 	Context* ct = lct->m_Context;

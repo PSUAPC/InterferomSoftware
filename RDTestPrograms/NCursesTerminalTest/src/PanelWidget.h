@@ -18,7 +18,7 @@ public:
 
 	void SetStyle(int style);	
 	void SetSizer(SizerWidget* sizer);
-	void SetFocus(bool focus);
+	bool SetFocus(bool focus);
 	virtual void OnResize(int x0, int y0, int w, int h);
 	virtual void RemoveChild(IWidget* child);
 	virtual void Draw(CursorReturn& cret);

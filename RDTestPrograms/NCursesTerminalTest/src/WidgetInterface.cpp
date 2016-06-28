@@ -16,6 +16,7 @@ IWidget::IWidget(IWidget* parent)
 	m_W = 0;
 }
 
+
 IWidget::~IWidget()
 {
 	//delete the children
@@ -24,6 +25,7 @@ IWidget::~IWidget()
 	{
 		if( (*it) != NULL )
 		{
+			(*it)->m_Parent = NULL;
 			delete (*it);
 		}
 	}	
@@ -45,6 +47,16 @@ void IWidget::Draw(CursorReturn& cret)
 bool IWidget::OnInput(int in)
 {
 	return true;
+}
+
+void IWidget::SetName(std::string name)
+{
+	m_Name = name;
+}
+
+std::string IWidget::GetName()
+{
+	return m_Name;
 }
 
 void IWidget::OnResize(int x0, int y0, int w, int h)

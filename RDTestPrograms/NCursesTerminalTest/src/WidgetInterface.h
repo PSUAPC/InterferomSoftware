@@ -2,6 +2,7 @@
 #define __WIDGETINTERFACE_H__
 
 #include <list>
+#include <string>
 
 class IWidget
 {
@@ -25,9 +26,11 @@ public:
 	bool IsHidden(){ return m_Hidden; }
 	virtual void RemoveChild(IWidget* widget);
 	virtual void Reparent(IWidget* widget);
+	void SetName(std::string name);
+	std::string GetName();
+	virtual void Draw(CursorReturn& cret);
 
 protected:
-	virtual void Draw(CursorReturn& cret);
 	virtual void RegisterChild(IWidget* child);
 	virtual void UnRegisterChild(IWidget* child);
 	virtual void Redraw();
@@ -37,6 +40,7 @@ protected:
 	int m_H;
 	int m_W;	
 	bool m_Hidden;
+	std::string m_Name;
 	IWidget* m_Parent;
 	ChildList m_Children;
 };
