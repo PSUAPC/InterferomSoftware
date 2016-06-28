@@ -4,8 +4,7 @@
 #include <ncurses.h>
 
 PanelWidget::PanelWidget(IWidget* parent, int style)
-	: IWidget(parent), m_Sizer(NULL), m_Style(style),
-	m_Focused(false)
+	: IWidget(parent), m_Sizer(NULL), m_Style(style)
 {
 }
 
@@ -53,16 +52,77 @@ void PanelWidget::SetStyle(int style)
 	OnResize(m_X0, m_Y0, m_W, m_H);
 }
 
-bool PanelWidget::SetFocus(bool focus)
+bool PanelWidget::OnFocus(FocusDir focusDir)
 {
 	if( (m_Style & STYLE_NOINPUT) != 0)
 		return false; // unable to give focus
 
-	// otherwise set the focus, and return true
-	m_Focused = focus;
-	return true;
-}
+	if( m_Hidden )
+		return false; // can't take focus while hidden
 
+	// otherwise set the focus, and return true
+			
+	bool tfocus = FocusChildren(focusDir);
+	
+	switch( focusDir )
+	{
+	case IWidget::FOCUS_FWD:
+		m_Focused = tfocus;
+		break;
+	case IWidget::FOCUS_BACK:
+		m_Focused = tfocus;
+		break;
+	case IWidget::FOCUS_UP:
+		if( m_Focused && !tfocus )
+		{
+			// unfocus
+			m_Focused = false;
+		}
+		
+		break;
+	}
+		
+	return m_Focused;
+	
+}
+bool PanelWidget::FocusChildren(FocusDir dir)
+{
+	bool cfocused = false;
+	switch( dir )
+	{
+	case IWidget::FOCUS_FWD:
+
+		for( ChildList::iterator it = m_Children.begin(); 
+			it != m_Children.end(); it++ )
+		{
+			if( (*it) != NULL )
+			{
+				cfocused |= (*it)->OnFocus(dir);
+				
+				// we have a focus
+				if( cfocused ) break;
+			}	
+		}
+		break;
+	case IWidget::FOCUS_UP:
+	case IWidget::FOCUS_BACK:
+		for( ChildList::reverse_iterator rit = m_Children.rbegin();
+			rit != m_Children.rend(); rit++ )
+		{
+			if( (*rit) != NULL )
+			{
+				cfocused != (*rit)->OnFocus(dir);
+
+				// we have focus 
+				if( cfocused ) break;
+			}
+		}
+		
+		break;
+	}
+
+	return cfocused;
+}
 void PanelWidget::RemoveChild(IWidget* child)
 {
 	if( m_Sizer != NULL )

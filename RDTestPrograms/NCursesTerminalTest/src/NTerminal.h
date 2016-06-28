@@ -26,6 +26,8 @@ public:
 	void ClearHistory();
 	void ClearStdout();
 	void PrintHistory();
+	virtual bool OnFocus(FocusDir focusdir);
+	
 private:
 	pthread_mutex_t m_Mutex;
 	std::string m_Line;

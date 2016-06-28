@@ -143,6 +143,7 @@ bool NWindow::WaitForInput()
 	//timeout(10);
 
 	int c = wgetch(m_Win);
+	const char* key = keyname(c);
 	
 	pthread_mutex_lock(&m_Mutex);
 
@@ -152,15 +153,36 @@ bool NWindow::WaitForInput()
 	case ERR:
 		break;
 	case KEY_STAB:
+	case '\t':
+		/*if( (key != NULL) && (key[0] == '^') )
+		{
+			
+			//for(int i = 0; (i < 10) && !onfocus(iwidget::focus_up); i++);
+		}
+		else*/
+		{
+			for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_FWD); i++);
+;
+		}
+		break;
+	case KEY_PPAGE: // page_up / home
+		for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_UP); i++);
+
+		break;
+	case KEY_CTAB:
+	case KEY_BTAB:
+		for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_BACK); i++);
 		break;
 	default:
 		
-		for( ChildList::iterator it = m_Children.begin();
-			it != m_Children.end(); it++ )
 		{
-			if( (*it) != NULL )
+			for( ChildList::iterator it = m_Children.begin();
+				it != m_Children.end(); it++ )
 			{
-				out &= (*it)->OnInput( c );
+				if( (*it) != NULL )
+				{
+					out &= (*it)->OnInput( c );
+				}
 			}
 		}
 		break;
@@ -170,6 +192,21 @@ bool NWindow::WaitForInput()
 
 	Redraw();
 	return out;
+}
+
+bool NWindow::OnFocus(FocusDir focusdir)
+{
+	// go based on direction
+	for(ChildList::iterator it = m_Children.begin();
+		it != m_Children.end(); it++ )
+	{
+		if( (*it) != NULL )
+		{
+			if( (*it)->OnFocus( focusdir ) )
+				return true;	
+		}
+	}
+	return false;
 }
 
 void NWindow::Redraw()

@@ -262,7 +262,7 @@ void *InputThread(void* t)
 	nterminal->SetHistorySize(10);
         nterminal->SetStdoutSize(100);
         nterminal->SetStdoutDispSize(-1);
-	tabs->SetFocus(true);
+	tabs->OnFocus(IWidget::FOCUS_FWD);
 	nterminal->SetName("Terminal");
 	nwindow.ForceRedraw();
 	

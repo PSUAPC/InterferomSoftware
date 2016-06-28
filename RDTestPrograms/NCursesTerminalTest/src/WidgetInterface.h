@@ -17,6 +17,13 @@ protected:
 		int m_Y;
 	};
 public:
+	enum FocusDir
+	{
+		FOCUS_BACK = -1,
+		FOCUS_UP = 0,
+		FOCUS_FWD = 1
+	};
+public:
 	IWidget(IWidget* parent);
 	~IWidget();	
 
@@ -29,6 +36,7 @@ public:
 	void SetName(std::string name);
 	std::string GetName();
 	virtual void Draw(CursorReturn& cret);
+	virtual bool OnFocus(FocusDir focusDir);
 
 protected:
 	virtual void RegisterChild(IWidget* child);
@@ -40,6 +48,7 @@ protected:
 	int m_H;
 	int m_W;	
 	bool m_Hidden;
+	bool m_Focused;
 	std::string m_Name;
 	IWidget* m_Parent;
 	ChildList m_Children;

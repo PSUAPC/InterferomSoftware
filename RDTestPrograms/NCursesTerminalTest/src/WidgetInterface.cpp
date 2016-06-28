@@ -8,7 +8,7 @@ IWidget::IWidget(IWidget* parent)
 	{
 		m_Parent->RegisterChild(this);
 	}
-
+	m_Focused = false;
 	m_Hidden = false;
 	m_X0 = 0;
 	m_Y0 = 0;
@@ -42,6 +42,10 @@ void IWidget::Draw(CursorReturn& cret)
 			(*it)->Draw(cret);
 		}
 	}
+}
+bool IWidget::OnFocus(FocusDir focusDir)
+{
+	return false;
 }
 
 bool IWidget::OnInput(int in)

@@ -26,6 +26,7 @@ public:
 	bool WaitForInput();
 	void SetMutex(pthread_mutex_t mutex){ m_Mutex = mutex; }
 	void ForceResize();
+	virtual bool OnFocus(FocusDir focusdir);
 private:
 	pthread_mutex_t m_Mutex;
 	int m_Rows;

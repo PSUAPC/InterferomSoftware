@@ -18,16 +18,14 @@ public:
 
 	void SetStyle(int style);	
 	void SetSizer(SizerWidget* sizer);
-	bool SetFocus(bool focus);
 	virtual void OnResize(int x0, int y0, int w, int h);
 	virtual void RemoveChild(IWidget* child);
 	virtual void Draw(CursorReturn& cret);
-
+	virtual bool OnFocus(FocusDir focusDir);
 protected:
 	SizerWidget* m_Sizer;
 	int	     m_Style;
-	bool	     m_Focused;
-	
+	bool FocusChildren(FocusDir dir);	
 private:
 	void DrawBorder();
 };

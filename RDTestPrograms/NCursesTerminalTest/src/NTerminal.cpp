@@ -99,6 +99,20 @@ void NTerminal::Draw(CursorReturn& cret)
 	// refresh
 
 }
+bool NTerminal::OnFocus(FocusDir focusdir)
+{
+	switch(focusdir)
+	{
+	case IWidget::FOCUS_FWD:
+	case IWidget::FOCUS_BACK:
+		m_Focused = !m_Focused;
+		break;
+	case IWidget::FOCUS_UP:
+		m_Focused = false;
+	}
+
+	return m_Focused;
+}
 
 void NTerminal::OnResize(int x0, int y0, int w, int h)
 {
