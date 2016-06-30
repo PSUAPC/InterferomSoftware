@@ -141,12 +141,11 @@ bool NWindow::WaitForInput()
 	
 	// set timeout
 	//timeout(10);
+	pthread_mutex_lock(&m_Mutex);
 
 	int c = wgetch(m_Win);
 	const char* key = keyname(c);
 	
-	pthread_mutex_lock(&m_Mutex);
-
 	switch( c )
 	{
 	// error character
@@ -161,8 +160,7 @@ bool NWindow::WaitForInput()
 		}
 		else*/
 		{
-			for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_FWD); i++);
-;
+			for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_BACK); i++);
 		}
 		break;
 	case KEY_PPAGE: // page_up / home
@@ -171,7 +169,7 @@ bool NWindow::WaitForInput()
 		break;
 	case KEY_CTAB:
 	case KEY_BTAB:
-		for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_BACK); i++);
+		for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_FWD); i++);
 		break;
 	default:
 		
@@ -209,10 +207,9 @@ bool NWindow::OnFocus(FocusDir focusdir)
 	switch(focusdir)
 	{
 	case IWidget::FOCUS_UP:
-		// do nothing, this is the top level
-		return true;
-		break;
-	case IWidget::FOCUS_BACK:
+		// propgate to children
+		
+	case IWidget::FOCUS_FWD:
 		// go based on direction
 		for(ChildList::iterator it = m_Children.begin();
 			it != m_Children.end(); it++ )
@@ -232,7 +229,7 @@ bool NWindow::OnFocus(FocusDir focusdir)
 			}
 		}
 		break;
-	case IWidget::FOCUS_FWD:
+	case IWidget::FOCUS_BACK:
 		// go based on direction
 		for(ChildList::reverse_iterator rit = m_Children.rbegin();
 			rit != m_Children.rend(); rit++ )

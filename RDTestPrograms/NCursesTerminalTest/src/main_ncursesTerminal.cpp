@@ -233,14 +233,21 @@ void *RecvThread(void* t)
 void *InputThread(void* t)
 {
 
+	LocalContext* lct = (LocalContext*)(t);
+	Context* ct = lct->m_Context;
+    	
 
 	NWindow nwindow;
 	TabbedPanel* tabs = new TabbedPanel(&nwindow, STYLE_BORDER, TSTYLE_SHOW);
 	NTerminal* nterminal = new NTerminal(&nwindow);//tabs);
+	nwindow.SetMutex(ct->m_TerminalMutex);
+	nterminal->SetMutex(ct->m_TerminalMutex);
 	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_HORZ);
 	IWidget* testW = new PanelWidget(&nwindow, STYLE_BORDER);
-	//IWidget* testT = new PanelWidget(tabs);
-	//testT->SetName("TestT");
+	IWidget* testT = new PanelWidget(tabs);
+	IWidget* testT2 = new PanelWidget(tabs);
+	testT->SetName("TestT");
+	testT2->SetName("TestT2");
 	NShell nshell;
 
 	nshell.RegisterCommand("tcp", new TCPCmd() );
@@ -252,13 +259,18 @@ void *InputThread(void* t)
 	//nshell.RegisterCommand("connect", new ConnectTCP() );
 	//nshell.RegisterCommand("serialget", new SerialNameGet() );
 	//nshell.RegisterCommand("serialset", new SerialNameSet() );
+	//LOG("windowInit\n");
 	nwindow.Init();
 	sizer->Add(testW);
 	sizer->Add(nterminal);
 	sizer->Add(tabs);
+	
 	nterminal->SetStyle(STYLE_BORDER);
+	//LOG("styleset\n");
 	nwindow.SetSizer(sizer);
 	nwindow.ForceResize();
+
+	//LOG("resized\n");
 
 	nterminal->SetHistorySize(10);
         nterminal->SetStdoutSize(100);
@@ -267,14 +279,9 @@ void *InputThread(void* t)
 	nterminal->SetName("Terminal");
 	nwindow.ForceRedraw();
 	
-    	LocalContext* lct = (LocalContext*)(t);
-	Context* ct = lct->m_Context;
     	string line;
 
-	nwindow.SetMutex(ct->m_TerminalMutex);
-	nterminal->SetMutex(ct->m_TerminalMutex);
-
-	// variable to signal the main thread
+		// variable to signal the main thread
 	bool signalMain = false;
 
 	//getch();
@@ -284,21 +291,52 @@ void *InputThread(void* t)
 		// set the signal to false
 		signalMain = false;
 
+		//LOG("loop\n");		
+
 		bool isExit = false;
         	//std::getline (std::cin, line);
 		//getch();
 		isExit = !nwindow.WaitForInput();
 
+		string msg = "[";
+		if( testW->IsFocused() )
+			msg += "x][";
+		else
+			msg += " ][";
+
+		if( nterminal->IsFocused() )
+			msg += "x][";
+		else
+			msg += " ][";
+
+		if( tabs->IsFocused() )
+			msg += "x[";
+		else
+			msg += " [";
+
+		if( testT->IsFocused() )
+			msg += "x][";
+		else
+			msg += " ][";
+	
+		if( testT2->IsFocused() )
+			msg += "x]]";
+		else	
+			msg += " ]]";
+		
+		NTerminal::Get()->PrintToStdout(msg);
 
         	if( isExit )
         	{
+			sleep(1);
 			ct->m_Running = false;
-            		//cout << "exiting" << endl;
+	     		//cout << "exiting" << endl;
 			LogMsgToTerminal("EXITING");
 			nwindow.Inhibit();		
 			// set the signal flag
 			signalMain = true;
         	}
+
 		
 		
 		// check to see if we need to signal the main thread

@@ -64,6 +64,7 @@ void TabbedPanel::Draw(CursorReturn& cret)
 
 bool TabbedPanel::OnInput(int in)
 {
+
 	int index = 0;
 	for( WidgetList::iterator it = m_Tabs.begin();
 		it != m_Tabs.end(); it++ )

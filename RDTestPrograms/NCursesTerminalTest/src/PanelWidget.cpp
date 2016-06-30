@@ -16,6 +16,8 @@ PanelWidget::~PanelWidget()
 void PanelWidget::Draw(CursorReturn& cret)
 {
 	DrawBorder();
+
+	
 }
 
 
@@ -63,7 +65,7 @@ bool PanelWidget::OnFocus(FocusDir focusDir)
 	// otherwise set the focus, and return true
 			
 	//bool tfocus = FocusChildren(focusDir);
-	
+
 	bool tfocus = false;
 	switch( focusDir )
 	{
@@ -122,7 +124,7 @@ bool PanelWidget::FocusChildren(FocusDir dir)
 	// check to see if any are focused
 	switch( dir )
 	{
-	case IWidget::FOCUS_BACK:
+	case IWidget::FOCUS_FWD:
 
 		for( ChildList::iterator it = m_Children.begin(); 
 			it != m_Children.end(); it++ )
@@ -137,13 +139,13 @@ bool PanelWidget::FocusChildren(FocusDir dir)
 		}
 		break;
 	case IWidget::FOCUS_UP:
-	case IWidget::FOCUS_FWD:
+	case IWidget::FOCUS_BACK:
 		for( ChildList::reverse_iterator rit = m_Children.rbegin();
 			rit != m_Children.rend(); rit++ )
 		{
 			if( (*rit) != NULL )
 			{
-				cfocused != (*rit)->OnFocus(dir);
+				cfocused |= (*rit)->OnFocus(dir);
 
 				// we have focus 
 				if( cfocused ) break;

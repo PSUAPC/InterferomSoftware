@@ -4,6 +4,16 @@
 #include <list>
 #include <string>
 
+#define LOG(m) { \
+	FILE* pfile = fopen("log.log", "a+"); \
+	if( pfile ) \
+	{ \
+		fprintf(pfile, (m) ); \
+		fclose(pfile); \
+	} \
+}
+
+
 class IWidget
 {
 	// preven construction without paren
