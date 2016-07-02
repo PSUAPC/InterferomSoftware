@@ -257,7 +257,7 @@ void *InputThread(void* t)
 	nwindow.ForceResize();
 	nterminal->OnFocus(IWidget::FOCUS_FWD);
 
-	string testS = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu purus commodo, tincidunt leo ac, volutpat turpis. Nullam risus nunc, elementum et ultricies in, efficitur ac magna. Etiam maximus mi non ante tempus, sit amet porttitor massa rutrum. Aenean congue scelerisque odio sed rhoncus posuere.";
+	string testS = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu purus commodo, tincidunt leo ac, volutpat turpis. Nullam risus nunc, elementum et ultricies in, efficitur ac magna. Etiam maximus mi non ante tempus, sit amet porttitor massa rutrum. Aenean congue scelerisque odio sed rhoncus posueree scelerisque odio sed rhoncus posuere  .";
 	//hexView->SetStream("testing one, two, three", 24);
 	hexView->SetStream((char*)testS.c_str(), testS.length());
 	hexView->SetLabel("Hex Viewer");

@@ -34,9 +34,9 @@ void HexViewer::Draw(CursorReturn& cret)
 	// now we need to go down the list
 	int nlines = m_Len/16 + 1;
 	int s0 = m_StartLine;
-	if( nlines > (m_H-8) )
+	if( nlines > (m_H-5) )
 	{
-		nlines = m_H-8;
+		nlines = m_H-5;
 		
 	}
 	else
@@ -47,7 +47,7 @@ void HexViewer::Draw(CursorReturn& cret)
 	for( int ii = 0; ii < nlines; ii ++ )
 	{
 
-		if( (ii + m_StartLine) >= (m_Len/16 + 1) )
+		if( (ii + s0) >= (m_Len/16 + 1) )
 			break;
 
 		mvprintw(m_Y0+4+ii, m_X0+2, "%010X", ((ii + s0)*16));
