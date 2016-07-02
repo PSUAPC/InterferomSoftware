@@ -78,7 +78,7 @@ public:
 	// specific threads
 	LocalContext* 	m_TCPThread;
 	LocalContext* 	m_InputThread;
-	LocalContext*	m_TtyThread;
+	LocalContext*	m_TTYThread;
 
     	// socket variables
     	struct sockaddr_in m_Sa;
@@ -120,7 +120,6 @@ struct LocalContext
 	bool m_Connected;
 
 	// tty variables
-	int m_Ttyfd;	
 
 	// context variables
 	string m_MSG;

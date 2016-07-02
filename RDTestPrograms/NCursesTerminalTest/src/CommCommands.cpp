@@ -3,9 +3,17 @@
 #include "NTerminal.h"
 #include "Contexts.h"
 #include <glib.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <termio.h>
 
 extern bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop);
 extern bool AttemptConnection(Context& ct, LocalContext* newCT);
+extern int TTYSetInterfaceAttribs (int fd, int speed, int parity);
+extern void TTYSetBlocking (int fd, int should_block);
 
 void TCPCmd::Exec(std::string str)
 {
@@ -258,6 +266,11 @@ void TTYCmd::Exec(std::string str)
     				{
         			case 'b':
 					sscanf(optarg, "%d", &ct->m_SerialBaud); 
+					if( GetBaudFromInt(ct->m_SerialBaud) == 0 )
+					{
+						NTerminal::Get()->PrintToStdout("Invalid Baud");
+						ct->m_SerialBaud = 0;
+					}
             				break;
 				case 'd':
 					ct->m_SerialName = _S(optarg);
@@ -325,19 +338,61 @@ void TTYCmd::Exec(std::string str)
 	case 2: // connect
 	case 3: // stop
 
+
+		success = true;
+
 		if( stop )
 		{
 			NTerminal::Get()->PrintToStdout("Stopping TTY Connection");
 			// stop
-			//success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, true);
+			if( ct->m_TTYThread->m_Sockfd != -1 )
+			{
+				// attempt to close
+				if( close(ct->m_TTYThread->m_Sockfd) != 0 )
+					success = false;
+				else
+					success = true;
+
+				// clear the fd anyways
+				ct->m_TTYThread->m_Sockfd = -1;
+			}
 		}
 		else
 		{
 			NTerminal::Get()->PrintToStdout("Starting TTY Connection");
+			
 			// retry or connect
-			//success = ConnectToServer(*Context::Get(), Context::Get()->m_RecvThread, false);
-			//success &= AttemptConnection(*Context::Get(), Context::Get()->m_RecvThread);
+			int fd = ct->m_TTYThread->m_Sockfd;
+			if( fd != -1 )
+			{
+				// attempt to close
+				if( close(fd) != 0 )
+				{
+					success = false;
+					NTerminal::Get()->PrintToStdout(_S("ERROR: ") +
+									_S(strerror (errno)));
+				}
+				else
+				{
+					success = true;
+				}
+			}	
 
+			// now try opening
+			fd = open (ct->m_SerialName.c_str(), O_RDWR | O_NOCTTY | O_SYNC);
+			if (fd < 0)
+			{
+				success = false;
+				NTerminal::Get()->PrintToStdout(_S("ERROR: ") + _S(strerror (errno)));
+				
+			}
+			else
+			{
+				// set the stats
+				TTYSetInterfaceAttribs (fd, GetBaudFromInt(ct->m_SerialBaud), 0);
+				TTYSetBlocking (fd, 0); 
+				success = success & true;
+			}
 		}
 
 		if( success )
@@ -351,7 +406,7 @@ void TTYCmd::Exec(std::string str)
 		break;
 	case 0: // default
 	default:
-		if( /*ct->m_RecvThread->m_Connected*/ false )
+		if( ct->m_TTYThread->m_Connected )
 		{
 			NTerminal::Get()->PrintToStdout("TTY Status = Connected");
 		}
@@ -395,5 +450,19 @@ std::string TTYCmd::Man()
 	return "";
 }
 
+int TTYCmd::GetBaudFromInt(int baud)
+{
 
+	// possible baud values	
+#define B(x) case x: return B##x
+        switch(baud) {
+        B(50);     B(75);     B(110);    B(134);    B(150);
+        B(200);    B(300);    B(600);    B(1200);   B(1800);
+        B(2400);   B(4800);   B(9600);   B(19200);  B(38400);
+        B(57600);  B(115200); B(230400); B(460800); B(500000);
+        B(576000); B(921600); B(1000000);B(1152000);B(1500000);
+    default: return 0;
+    }
+#undef B
+}
 

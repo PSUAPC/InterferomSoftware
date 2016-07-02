@@ -132,8 +132,106 @@ int GetPortFromStruct(struct sockaddr_storage* addr)
 }
 
 
+void *TTYRecvThread(void* t)
+{
+	LocalContext* lct = (LocalContext*)(t);
+	Context* ct = lct->m_Context;
+ 	while( ct->m_Running )
+	{
 
-void *RecvThread(void* t)
+#if 0		// enter the recv state
+		int len = 100;
+		char buff[100];
+		int rv = 0;
+
+		// only attempt to recieve if the socket fd is valid
+		if( lct->m_Connected && ( lct->m_Sockfd >= 0 )  )
+		{
+			rv = recv(lct->m_Sockfd, buff, len, 0);
+		}
+		else
+		{
+			rv = -1;
+			// sleep to prevent constant loop
+			// which could affect performance
+			sleep(1);
+			LogMsgToTerminal("waiting");
+			
+		}
+
+		if( rv == -1 )
+		{
+			// no data sent - timed out
+		}
+		else if( rv == 0 )
+		{
+			// connection lost
+			//LogMsgToTerminal("CONNECTION LOST");
+
+			// signal the main thread
+			// lock the mutex
+			pthread_mutex_lock(&(ct->m_PollMutex));
+			// set the caller
+			ct->m_Caller = lct->m_TID;
+
+			stringstream ss;	
+			ss << "Connection lost from: " << GetPortFromStruct( &(lct->m_Addr) );	
+			lct->m_MSG = ss.str();
+		
+			// close the socket
+			close( lct->m_Sockfd );
+
+			lct->m_Sockfd = 0;
+			
+			// send the signal
+			pthread_cond_signal(&(ct->m_PollCondition));
+			// unlock the mutex
+			pthread_mutex_unlock(&(ct->m_PollMutex));
+			
+			// set the thread as garbage
+			ct->SetThreadAsGarbage(lct->m_TID);
+
+			// break out of the loop
+			break;
+		}
+		else if( rv < -1 )
+		{
+			// error
+		}
+		else // rv > 0 
+		{
+			// msg recieved
+			
+			// signal the main thread
+			// lock the mutex
+			pthread_mutex_lock(&(ct->m_PollMutex));
+			// set the caller
+			ct->m_Caller = lct->m_TID;
+		
+			// set the msg
+			if( rv < len )
+				buff[rv] = '\0';
+			else
+				buff[len - 1] = '\0';
+
+			lct->m_MSG = string(buff);	
+
+			// send the signal
+			pthread_cond_signal(&(ct->m_PollCondition));
+			// unlock the mutex
+			pthread_mutex_unlock(&(ct->m_PollMutex));
+
+
+		}
+		
+#endif
+	}
+
+	pthread_exit(NULL);
+
+
+}
+void *TCPRecvThread(void* t)
 {
 	LocalContext* lct = (LocalContext*)(t);
 	Context* ct = lct->m_Context;
@@ -476,7 +574,7 @@ int main( int argc, char* argv[])
 
 		
 	// create the TCP thread
-	ct.m_TCPThread = ct.MakeThread(RecvThread);	
+	ct.m_TCPThread = ct.MakeThread(TCPRecvThread);	
 	ct.m_TCPThread->m_Sockfd = -1;
 	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
 /*
@@ -485,12 +583,12 @@ int main( int argc, char* argv[])
 	ct.m_TCPThread->m_Sockfd = -1;
 	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
 
-
-	// create the TTY thread
-	ct.m_TCPThread = ct.MakeThread(RecvThread);	
-	ct.m_TCPThread->m_Sockfd = -1;
-	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
 */
+	// create the TTY thread
+	ct.m_TTYThread = ct.MakeThread(TTYRecvThread);	
+	ct.m_TTYThread->m_Sockfd = -1;
+	ct.m_TTYThread->m_Type = LocalContext::T_TTY;
+
 
 	LogMsgToTerminal("INITIALIZATION COMPLETE");
 

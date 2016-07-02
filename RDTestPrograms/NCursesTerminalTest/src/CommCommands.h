@@ -39,6 +39,9 @@ public:
 	virtual void Exec(std::string str);
 	virtual std::string Help();
 	virtual std::string Man();
+
+private:
+	static int GetBaudFromInt(int baud);
 };
 
 #endif //__COMMCOMMANDS_H__

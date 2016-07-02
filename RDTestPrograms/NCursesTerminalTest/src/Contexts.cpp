@@ -17,7 +17,7 @@ Context::Context()
 	m_SerialBaud = 0;
 	m_TCPThread = NULL;
 	m_InputThread = NULL;
-	m_TtyThread = NULL;
+	m_TTYThread = NULL;
 
 
 }
@@ -47,7 +47,7 @@ void Context::Init()
 
 	m_TCPThread = NULL;
 	m_InputThread = NULL;
-	m_TtyThread = NULL;
+	m_TTYThread = NULL;
 
 
 }
