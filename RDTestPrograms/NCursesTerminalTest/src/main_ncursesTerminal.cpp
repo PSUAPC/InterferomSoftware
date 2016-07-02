@@ -12,6 +12,7 @@
 #include "NShell.h"
 #include "CommCommands.h"
 #include "TabbedPanel.h"
+#include "HexViewer.h"
 #include <glib.h>
 
 using namespace std;
@@ -238,36 +239,31 @@ void *InputThread(void* t)
     	
 
 	NWindow nwindow;
-	TabbedPanel* tabs = new TabbedPanel(&nwindow, STYLE_BORDER, TSTYLE_SHOW);
 	NTerminal* nterminal = new NTerminal(&nwindow);
 	nwindow.SetMutex(ct->m_TerminalMutex);
 	nterminal->SetMutex(ct->m_TerminalMutex);
 	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_VERT);
-	IWidget* testW = new PanelWidget(&nwindow, STYLE_BORDER);
+	HexViewer* hexView = new HexViewer(&nwindow, STYLE_BORDER);
 
 	NShell::Get()->RegisterCommand("tcp", new TCPCmd() );
 	NShell::Get()->RegisterCommand("tty", new TTYCmd() );
-	//nshell.RegisterCommand("ipget", new DestIPGet() );
-	//nshell.RegisterCommand("portget", new DestPortGet());
-	//nshell.RegisterCommand("ipset", new DestIPSet());
-	//nshell.RegisterCommand("portset", new DestPortSet());	
-	//nshell.RegisterCommand("connect", new ConnectTCP() );
-	//nshell.RegisterCommand("serialget", new SerialNameGet() );
-	//nshell.RegisterCommand("serialset", new SerialNameSet() );
-	//LOG("windowInit\n");
+
 	nwindow.Init();
-	sizer->Add(testW);
+	sizer->Add(hexView);
 	sizer->Add(nterminal);
 	
 	nterminal->SetStyle(STYLE_BORDER);
 	nwindow.SetSizer(sizer);
 	nwindow.ForceResize();
+	nterminal->OnFocus(IWidget::FOCUS_FWD);
 
-
+	string testS = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu purus commodo, tincidunt leo ac, volutpat turpis. Nullam risus nunc, elementum et ultricies in, efficitur ac magna. Etiam maximus mi non ante tempus, sit amet porttitor massa rutrum. Aenean congue scelerisque odio sed rhoncus posuere.";
+	//hexView->SetStream("testing one, two, three", 24);
+	hexView->SetStream((char*)testS.c_str(), testS.length());
+	hexView->SetLabel("Hex Viewer");
 	nterminal->SetHistorySize(10);
         nterminal->SetStdoutSize(100);
         nterminal->SetStdoutDispSize(-1);
-	//tabs->OnFocus(IWidget::FOCUS_FWD);
 	nterminal->SetName("Terminal");
 	nwindow.ForceRedraw();
 	

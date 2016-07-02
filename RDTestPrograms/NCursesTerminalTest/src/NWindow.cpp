@@ -97,13 +97,23 @@ void NWindow::Draw(CursorReturn& cret)
 	{
 		pthread_mutex_lock(&m_Mutex);
 	
-		//OnResize(0,0, m_Cols, m_Rows);	
 		// clear the window
 		clear();
 
+		// draw the children
 		IWidget::Draw(cret);
-		move(cret.m_Y, cret.m_X);
-		//mvprintw(m_Rows-2, 0, ">%s", "" );
+		
+		// move the cursor
+		if( cret.m_Y < 0 || cret.m_X < 0 )
+		{
+			move(m_Cols+1, m_Rows+1);
+			curs_set(0);
+		}
+		else
+		{
+			move(cret.m_Y, cret.m_X);
+			curs_set(1);
+		}
 		// refresh
 		refresh();
 

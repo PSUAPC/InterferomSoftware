@@ -136,9 +136,11 @@ void NTerminal::Draw(CursorReturn& cret)
 	
 	// print the line
 	mvprintw(bot-1, m_X0, ">%s", m_Line.c_str() );
-	cret.m_X = m_X0 + 1 + m_Line.length();
-	cret.m_Y = bot - 1;
-	// refresh
+	if( m_Focused )
+	{
+		cret.m_X = m_X0 + 1 + m_Line.length();
+		cret.m_Y = bot - 1;
+	}
 
 }
 bool NTerminal::OnFocus(FocusDir focusdir)
@@ -171,6 +173,9 @@ void NTerminal::OnResize(int x0, int y0, int w, int h)
 
 bool NTerminal::OnInput(int c)
 {
+
+	if( !m_Focused )
+		return true;
 
 	switch( c )
 	{
