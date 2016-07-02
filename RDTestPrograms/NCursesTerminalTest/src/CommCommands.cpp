@@ -249,6 +249,10 @@ void TTYCmd::Exec(std::string str)
 			mode = 3; // stop
 			stop = true;
 		}
+		else if( strcmp(argv[0], "send") == 0 )
+		{
+			mode = 4; // send	
+		}
 		else
 		{
 			mode = 0; // default
@@ -300,6 +304,54 @@ void TTYCmd::Exec(std::string str)
     				}
 			}
 			break;	
+		case 4:
+
+			if( !ct->m_TTYThread->m_Connected )
+			{
+				success = false;
+			}
+			else
+			{
+				success = true;	
+				// we will expect the string to be in the form
+				// XX XX XX XX, where XX is an 8 byte hex number
+				// they will be separated by spaces
+				std::list<char> data;
+				int tdata;
+				for( int i = 1; i < argc; i++ )
+				{
+					tdata = strtoul(argv[i], NULL, 16);
+					data.push_back((char)(tdata&0x000000FF));
+				}
+
+				// lets provide feedback
+				char* sdata = new char[data.size()*3 +1];
+				sdata[data.size()*3] = 0; // null terminate it
+				char tsdat[3];
+
+				int k = 0;
+				for( std::list<char>::iterator it = data.begin();
+					it != data.end(); it++ )
+				{
+					int a = (*it);
+					a = a&0x000000FF;
+					sprintf(tsdat, "%02X", a);
+
+					sdata[k*3] = tsdat[0];
+					sdata[k*3+1] = tsdat[1];
+					sdata[k*3+2] = ' ';
+					k++;
+					
+				}
+				NTerminal::Get()->PrintToStdout("Sending: ");
+				NTerminal::Get()->PrintToStdout(sdata);
+
+				delete [] sdata;
+				// now we allocate the stream to send
+
+				
+			}
+			break;
 		case 0:
 		case 3:
 		default:
@@ -376,6 +428,7 @@ void TTYCmd::Exec(std::string str)
 				{
 					success = true;
 				}
+				ct->m_TTYThread->m_Sockfd = -1;
 			}	
 
 			// now try opening
@@ -393,7 +446,21 @@ void TTYCmd::Exec(std::string str)
 				TTYSetBlocking (fd, 0); 
 				success = success & true;
 			}
+			if( success )
+			{
+				ct->m_TTYThread->m_Sockfd = fd;
+			}
 		}
+
+		if( success && !stop )
+		{
+			ct->m_TTYThread->m_Connected = true;
+		}
+		else
+		{
+			ct->m_TTYThread->m_Connected = false;
+		}
+	case 4: // print success response
 
 		if( success )
 		{
