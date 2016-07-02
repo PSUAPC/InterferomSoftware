@@ -141,7 +141,7 @@ bool NWindow::WaitForInput()
 	
 	// set timeout
 	//timeout(10);
-	pthread_mutex_lock(&m_Mutex);
+	//pthread_mutex_lock(&m_Mutex);
 
 	int c = wgetch(m_Win);
 	const char* key = keyname(c);
@@ -164,8 +164,12 @@ bool NWindow::WaitForInput()
 		}
 		break;
 	case KEY_PPAGE: // page_up / home
-		for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_UP); i++);
-
+		{
+			bool res;
+			res = OnFocus(IWidget::FOCUS_UP);
+			if( !res )
+				OnFocus(IWidget::FOCUS_FWD);
+		}
 		break;
 	case KEY_CTAB:
 	case KEY_BTAB:
@@ -186,7 +190,7 @@ bool NWindow::WaitForInput()
 		break;
 	}
 
-	pthread_mutex_unlock(&m_Mutex);
+	//pthread_mutex_unlock(&m_Mutex);
 
 	Redraw();
 	return out;

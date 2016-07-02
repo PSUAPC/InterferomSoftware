@@ -49,7 +49,7 @@ void TabbedPanel::Draw(CursorReturn& cret)
 	{
 		if( index == m_ActiveTab )
 		{
-			if( (*it)  != NULL )
+			if( ((*it)  != NULL) && !(*it)->IsHidden() )
 			{
 				(*it)->Draw( cret );
 			}
@@ -71,7 +71,7 @@ bool TabbedPanel::OnInput(int in)
 	{
 		if( index == m_ActiveTab )
 		{
-			if( (*it)  != NULL )
+			if( ((*it)  != NULL) && !(*it)->IsHidden() )
 			{
 				return (*it)->OnInput(in);
 			}
@@ -97,7 +97,7 @@ void TabbedPanel::OnResize(int x0, int y0, int w, int h)
 		for(ChildList::iterator it = m_Children.begin(); 
 			it != m_Children.end(); it++ )
 		{
-			if( (*it) != NULL )
+			if( (*it) != NULL)
 				(*it)->OnResize(m_X0, m_Y0+2, m_W, m_H-2);	
 		}
 	}

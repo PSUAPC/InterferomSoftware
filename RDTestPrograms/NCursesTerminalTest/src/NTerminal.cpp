@@ -1,4 +1,5 @@
 #include "NTerminal.h"
+#include "NShell.h"
 #include <signal.h>
 #include <vector>
 
@@ -8,12 +9,14 @@ NTerminal* g_Terminal = NULL;
 
 NTerminal::NTerminal(IWidget* parent)
 	: PanelWidget(parent),  m_HistorySize(0), m_StdoutSize(0), 
-	m_StdoutDispSize(0), m_HistoryPointer(0)
+	m_StdoutDispSize(0), m_HistoryPointer(0), m_Shell(0)
 {
 	// singleton assignment
 	if( g_Terminal == NULL )
 	{
 		g_Terminal = this;
+		// also initialize the shell
+		m_Shell = new NShell();
 	}
 	else
 	{
@@ -23,6 +26,9 @@ NTerminal::NTerminal(IWidget* parent)
 
 NTerminal::~NTerminal()
 {
+	if( m_Shell != 0 )
+		delete m_Shell;
+
 	// set the singleton global to null
 	g_Terminal = NULL;
 }
@@ -47,12 +53,6 @@ void NTerminal::Draw(CursorReturn& cret)
 {
 	// draw the parent first
 	PanelWidget::Draw(cret);
-	//FILE* pfile = fopen("log.log","a+");
-	//if( pfile )
-	//{
-	//	fprintf(pfile, "[%d %d %d %d]\n", m_X0, m_Y0, m_W, m_H);
-	//	fclose(pfile);
-	//}
 	
 	int bot = m_H + m_Y0;
 	int maxLines = m_StdoutDispSize;
@@ -86,9 +86,51 @@ void NTerminal::Draw(CursorReturn& cret)
 				tloc = (*it).find("\n", tloc+1);
  
 			}
+			
+			std::string temp = (*it);
+			
+			int nlines = 0;
+			if( (ii + nlocs + 1) > maxLines )
+			{
+				// calculate the number of lines that we can draw
+				nlines = maxLines - (ii + 1);
+				
+				// find where to break the string to draw those lines
+				tloc = 0;
+				for(int jj = 0; jj < (nlocs - nlines); jj++ )
+				{
+					tloc = (*it).find("\n", tloc+1);
+				}
 
-			mvprintw(bot-2-ii-nlocs, m_X0, "%s",(*it).c_str());
-			ii = ii + nlocs + 1;
+			
+				// remove the part that will not be printed (is cutoff)
+				// from the string
+				if( tloc < (*it).length() )
+				{
+					temp = temp.substr(tloc+1, temp.length()-tloc-1);
+				}
+			}
+			else
+			{
+				nlines = nlocs;
+			}
+
+			tloc = 0;
+			for(int jj = 0; jj < nlocs; jj++ )
+			{
+				
+				// find the \n location, and strip the forward
+				tloc = temp.find("\n", 0);
+				std::string ttemp = temp.substr(0, tloc);
+				
+				// print the line in reverse order
+				mvprintw(bot-2-ii-nlines+jj, m_X0, "%s",ttemp.c_str()); 
+				
+				// strip off the part we just printed
+				temp = temp.substr(tloc+1, temp.length()-tloc-1);
+			}
+
+			ii = ii + nlines + 1;
 		}
 	}
 	
@@ -183,6 +225,9 @@ bool NTerminal::OnInput(int c)
 			{
 				return false;
 			}
+
+			// lets try to execute the shell command
+			m_Shell->ParseCommand(m_Line);
 
 			// clear our copy
 			m_Line.clear();

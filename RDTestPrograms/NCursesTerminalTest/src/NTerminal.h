@@ -9,6 +9,9 @@
 #include "WidgetInterface.h"
 #include "PanelWidget.h"
 
+class NShell;
+
+
 class NTerminal : public PanelWidget
 {
 	typedef std::list<std::string> History;
@@ -33,6 +36,7 @@ private:
 	std::string m_Line;
 	History m_Stdout;
 	History m_History;
+	NShell* m_Shell;
 	int m_HistorySize;
 	int m_StdoutSize;
 	int m_StdoutDispSize;

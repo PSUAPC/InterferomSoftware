@@ -52,7 +52,7 @@ string GetIPFromStruct(struct sockaddr_storage* addr)
 	return ss.str();
 }
 
-int set_interface_attribs (int fd, int speed, int parity)
+int TTYSetInterfaceAttribs (int fd, int speed, int parity)
 {
         struct termios tty;
         memset (&tty, 0, sizeof tty);
@@ -92,7 +92,7 @@ int set_interface_attribs (int fd, int speed, int parity)
         return 0;
 }
 
-void set_blocking (int fd, int should_block)
+void TTYSetBlocking (int fd, int should_block)
 {
         struct termios tty;
         memset (&tty, 0, sizeof tty);
@@ -242,16 +242,16 @@ void *InputThread(void* t)
 	NTerminal* nterminal = new NTerminal(&nwindow);//tabs);
 	nwindow.SetMutex(ct->m_TerminalMutex);
 	nterminal->SetMutex(ct->m_TerminalMutex);
-	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_HORZ);
+	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_VERT);
 	IWidget* testW = new PanelWidget(&nwindow, STYLE_BORDER);
-	IWidget* testT = new PanelWidget(tabs);
-	IWidget* testT2 = new PanelWidget(tabs);
-	testT->SetName("TestT");
-	testT2->SetName("TestT2");
-	NShell nshell;
+	//IWidget* testT = new PanelWidget(tabs);
+	//IWidget* testT2 = new PanelWidget(tabs);
+	//testT->SetName("TestT");
+	//testT2->SetName("TestT2");
+	//NShell nshell;
 
-	nshell.RegisterCommand("tcp", new TCPCmd() );
-	nshell.RegisterCommand("tty", new TTYCmd() );
+	NShell::Get()->RegisterCommand("tcp", new TCPCmd() );
+	NShell::Get()->RegisterCommand("tty", new TTYCmd() );
 	//nshell.RegisterCommand("ipget", new DestIPGet() );
 	//nshell.RegisterCommand("portget", new DestPortGet());
 	//nshell.RegisterCommand("ipset", new DestIPSet());
@@ -263,7 +263,7 @@ void *InputThread(void* t)
 	nwindow.Init();
 	sizer->Add(testW);
 	sizer->Add(nterminal);
-	sizer->Add(tabs);
+	//sizer->Add(tabs);
 	
 	nterminal->SetStyle(STYLE_BORDER);
 	//LOG("styleset\n");
@@ -297,7 +297,7 @@ void *InputThread(void* t)
         	//std::getline (std::cin, line);
 		//getch();
 		isExit = !nwindow.WaitForInput();
-
+/*
 		string msg = "[";
 		if( testW->IsFocused() )
 			msg += "x][";
@@ -325,7 +325,7 @@ void *InputThread(void* t)
 			msg += " ]]";
 		
 		NTerminal::Get()->PrintToStdout(msg);
-
+*/
         	if( isExit )
         	{
 			sleep(1);

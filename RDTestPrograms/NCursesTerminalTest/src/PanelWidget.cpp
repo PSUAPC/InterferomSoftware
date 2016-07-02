@@ -110,6 +110,10 @@ bool PanelWidget::OnFocus(FocusDir focusDir)
 			// unfocus
 			m_Focused = false;
 		}
+		else if( (m_Children.size() == 0) && m_Focused)
+		{
+			m_Focused = false;
+		}
 		
 		break;
 	}
@@ -121,7 +125,16 @@ bool PanelWidget::FocusChildren(FocusDir dir)
 {
 	bool cfocused = false;
 	bool anyFocused = false;
-	// check to see if any are focused
+        // check to see if any are focused
+        for(ChildList::iterator it = m_Children.begin();
+                it != m_Children.end(); it++)
+        {
+                if( (*it) != NULL )
+                        anyFocused = anyFocused || (*it)->IsFocused();
+        }
+
+        bool found = false;
+	
 	switch( dir )
 	{
 	case IWidget::FOCUS_FWD:
@@ -131,24 +144,48 @@ bool PanelWidget::FocusChildren(FocusDir dir)
 		{
 			if( (*it) != NULL )
 			{
-				cfocused |= (*it)->OnFocus(dir);
+			
+				found = found || (*it)->IsFocused();
+
+				if( found || !anyFocused )
+                                {
+                                        if( (*it)->OnFocus( dir ) )
+                                        {
+                                                return true;
+                                        }
+                                }
+
+	
+				//cfocused |= (*it)->OnFocus(dir);
 				
 				// we have a focus
-				if( cfocused ) break;
+				//if( cfocused ) break;
 			}	
 		}
 		break;
 	case IWidget::FOCUS_UP:
+		
 	case IWidget::FOCUS_BACK:
 		for( ChildList::reverse_iterator rit = m_Children.rbegin();
 			rit != m_Children.rend(); rit++ )
 		{
 			if( (*rit) != NULL )
 			{
-				cfocused |= (*rit)->OnFocus(dir);
+				found = found || (*rit)->IsFocused();
+
+				if( found || !anyFocused )
+                                {
+                                        if( (*rit)->OnFocus( dir ) )
+                                        {
+                                                return true;
+                                        }
+                                }
+
+				
+				//cfocused |= (*rit)->OnFocus(dir);
 
 				// we have focus 
-				if( cfocused ) break;
+				//if( cfocused ) break;
 			}
 		}
 		
