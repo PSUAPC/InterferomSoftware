@@ -239,16 +239,11 @@ void *InputThread(void* t)
 
 	NWindow nwindow;
 	TabbedPanel* tabs = new TabbedPanel(&nwindow, STYLE_BORDER, TSTYLE_SHOW);
-	NTerminal* nterminal = new NTerminal(&nwindow);//tabs);
+	NTerminal* nterminal = new NTerminal(&nwindow);
 	nwindow.SetMutex(ct->m_TerminalMutex);
 	nterminal->SetMutex(ct->m_TerminalMutex);
 	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_VERT);
 	IWidget* testW = new PanelWidget(&nwindow, STYLE_BORDER);
-	//IWidget* testT = new PanelWidget(tabs);
-	//IWidget* testT2 = new PanelWidget(tabs);
-	//testT->SetName("TestT");
-	//testT2->SetName("TestT2");
-	//NShell nshell;
 
 	NShell::Get()->RegisterCommand("tcp", new TCPCmd() );
 	NShell::Get()->RegisterCommand("tty", new TTYCmd() );
@@ -263,14 +258,11 @@ void *InputThread(void* t)
 	nwindow.Init();
 	sizer->Add(testW);
 	sizer->Add(nterminal);
-	//sizer->Add(tabs);
 	
 	nterminal->SetStyle(STYLE_BORDER);
-	//LOG("styleset\n");
 	nwindow.SetSizer(sizer);
 	nwindow.ForceResize();
 
-	//LOG("resized\n");
 
 	nterminal->SetHistorySize(10);
         nterminal->SetStdoutSize(100);
@@ -281,52 +273,21 @@ void *InputThread(void* t)
 	
     	string line;
 
-		// variable to signal the main thread
+	// variable to signal the main thread
 	bool signalMain = false;
 
-	//getch();
 
     	while( ct->m_Running )
     	{
 		// set the signal to false
 		signalMain = false;
 
-		//LOG("loop\n");		
 
 		bool isExit = false;
-        	//std::getline (std::cin, line);
-		//getch();
-		isExit = !nwindow.WaitForInput();
-/*
-		string msg = "[";
-		if( testW->IsFocused() )
-			msg += "x][";
-		else
-			msg += " ][";
-
-		if( nterminal->IsFocused() )
-			msg += "x][";
-		else
-			msg += " ][";
-
-		if( tabs->IsFocused() )
-			msg += "x[";
-		else
-			msg += " [";
-
-		if( testT->IsFocused() )
-			msg += "x][";
-		else
-			msg += " ][";
-	
-		if( testT2->IsFocused() )
-			msg += "x]]";
-		else	
-			msg += " ]]";
 		
-		NTerminal::Get()->PrintToStdout(msg);
-*/
-        	if( isExit )
+		isExit = !nwindow.WaitForInput();
+        	
+		if( isExit )
         	{
 			sleep(1);
 			ct->m_Running = false;

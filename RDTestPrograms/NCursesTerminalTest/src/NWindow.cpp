@@ -153,15 +153,8 @@ bool NWindow::WaitForInput()
 		break;
 	case KEY_STAB:
 	case '\t':
-		/*if( (key != NULL) && (key[0] == '^') )
-		{
-			
-			//for(int i = 0; (i < 10) && !onfocus(iwidget::focus_up); i++);
-		}
-		else*/
-		{
-			for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_BACK); i++);
-		}
+		for(int i = 0; (i < 10) && !OnFocus(IWidget::FOCUS_BACK); i++);
+		
 		break;
 	case KEY_PPAGE: // page_up / home
 		{
