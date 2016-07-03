@@ -55,6 +55,10 @@ void TCPCmd::Exec(std::string str)
 			mode = 3; // stop
 			stop = true;
 		}
+		else if( strcmp(argv[0], "send") == 0 )
+		{
+			mode = 4; // send
+		}
 		else
 		{
 			mode = 0; // default
@@ -101,6 +105,72 @@ void TCPCmd::Exec(std::string str)
     				}
 			}
 			break;	
+		case 4:	
+			if( !ct->m_TCPThread->m_Connected )
+			{
+				success = false;
+			}
+			else
+			{
+				success = true;	
+				// we will expect the string to be in the form
+				// XX XX XX XX, where XX is an 8 byte hex number
+				// they will be separated by spaces
+				std::list<char> data;
+				int tdata;
+				for( int i = 1; i < argc; i++ )
+				{
+					tdata = strtoul(argv[i], NULL, 16);
+					data.push_back((char)(tdata&0x000000FF));
+				}
+
+				// lets provide feedback
+				char* sdata = new char[data.size()*3 +1];
+				sdata[data.size()*3] = 0; // null terminate it
+				char tsdat[3];
+
+				int k = 0;
+				for( std::list<char>::iterator it = data.begin();
+					it != data.end(); it++ )
+				{
+					int a = (*it);
+					a = a&0x000000FF;
+					sprintf(tsdat, "%02X", a);
+
+					sdata[k*3] = tsdat[0];
+					sdata[k*3+1] = tsdat[1];
+					sdata[k*3+2] = ' ';
+					k++;
+					
+				}
+				NTerminal::Get()->PrintToStdout("Sending: ");
+				NTerminal::Get()->PrintToStdout(sdata);
+
+				delete [] sdata;
+
+				// now we allocate the stream to send
+				// allocate the data stream
+				char * stream = new char[data.size()];
+				k = 0;
+				for( std::list<char>::iterator it = data.begin(); 
+					it != data.end(); it++ )
+				{
+					stream[k] = (*it);
+					k++;
+				}
+
+				int fd = ct->m_TCPThread->m_Sockfd;
+				size_t sent = send( fd, stream, data.size(), 0 );
+				if( sent != data.size() )
+				{
+					NTerminal::Get()->PrintToStdout("Error sending");
+				}
+
+				// clean up the stream 
+				delete [] stream;
+
+			}
+			break;
 		case 0:
 		case 3:
 		default:
@@ -154,6 +224,8 @@ void TCPCmd::Exec(std::string str)
 
 		}
 
+	case 4: // send
+
 		if( success )
 		{
 			NTerminal::Get()->PrintToStdout("[Success]");
@@ -187,6 +259,7 @@ std::string TCPCmd::Help()
 		_S(" tcp config [-p <port>] [-a <address>]\n") +
 		_S(" tcp connect [-s] \n") +
 		_S(" tcp stop \n") +
+		_S(" tcp send <byte string>\n") +
 		_S(" tcp \n") +
 		_S("Description: Inteface for setting up and connecting TCP\n") +
 		_S("             [Returns connection status by default]\n") +
@@ -198,6 +271,11 @@ std::string TCPCmd::Help()
 		_S("           [Returns success]\n") +
 		_S(" stop    : command used to diconnect the TCP connection\n") +
 		_S("           [Returns success]\n") +
+		_S(" send    : command used to send a specific byte string\n") +
+		_S("           byte string should be in the form XX XX XX, where\n") + 
+		_S("           XX is a 8 bit hex number, and each pair is seperated\n") +
+		_S("           by a space\n") +
+		_S("           [Returns success]\n") +  
 		_S(" -p port : the TCP Port Number to connect to\n") + 
 		_S(" -a address : the TCP Address to connect to\n") +
 		_S(" -s stop : will disconnect the TCP if connected\n");
@@ -348,7 +426,25 @@ void TTYCmd::Exec(std::string str)
 
 				delete [] sdata;
 				// now we allocate the stream to send
+				// allocate the data stream
+				char * stream = new char[data.size()];
+				k = 0;
+				for( std::list<char>::iterator it = data.begin(); 
+					it != data.end(); it++ )
+				{
+					stream[k] = (*it);
+					k++;
+				}
 
+				int fd = ct->m_TTYThread->m_Sockfd;
+				size_t sent = write( fd, stream, data.size() );
+				if( sent != data.size() )
+				{
+					NTerminal::Get()->PrintToStdout("Error sending");
+				}
+
+				// clean up the stream 
+				delete [] stream;
 				
 			}
 			break;
@@ -495,6 +591,7 @@ std::string TTYCmd::Help()
 		_S(" tty config [-b <baud>] [-d <device>]\n") +
 		_S(" tty connect [-s] \n") +
 		_S(" tty stop \n") +
+		_S(" tty send <byte string>\n") +
 		_S(" tty \n") +
 		_S("Description: Inteface for setting up and connecting TTY\n") +
 		_S("             [Returns connection status by default]\n") +
@@ -506,6 +603,11 @@ std::string TTYCmd::Help()
 		_S("           [Returns success]\n") +
 		_S(" stop    : command used to diconnect the TTY connection\n") +
 		_S("           [Returns success]\n") +
+		_S(" send    : command used to send a specific byte string\n") +
+		_S("           byte string should be in the form XX XX XX, where\n") + 
+		_S("           XX is a 8 bit hex number, and each pair is seperated\n") +
+		_S("           by a space\n") +
+		_S("           [Returns success]\n") +  
 		_S(" -b baud : baud rate for the TTY connection\n") + 
 		_S(" -d device : the TTY device to connect to e.g. /dev/ttyUSB0\n") +
 		_S(" -s stop : will disconnect the TTY if connected\n");
