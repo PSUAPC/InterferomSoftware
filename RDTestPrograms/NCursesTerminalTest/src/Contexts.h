@@ -27,9 +27,21 @@ private:
 
 };
 
+// ---------------------------------
+// --------   M E S S A G E  -------
+// ---------------------------------
 
+struct Message
+{
+	Message() : m_Data(NULL), m_Len(0),
+		m_Ptr(0){}
+	
+	char* 	m_Data;
+	int   	m_Len;
+	int 	m_Ptr;
+};
 
-struct LocalContext;
+class LocalContext;
 
 // --------------------------------
 // -----   C O N T E X T   --------
@@ -87,6 +99,8 @@ public:
 	pthread_mutex_t m_CreateMutex;
     	pthread_mutex_t m_PollMutex;
 	pthread_mutex_t m_TerminalMutex;
+	pthread_mutex_t m_TCPMutex;
+	pthread_mutex_t m_TTYMutex;
     	pthread_cond_t  m_PollCondition;
     	pthread_attr_t  m_Attr;
 
@@ -97,8 +111,10 @@ public:
 // --------------------------------------------
 
 
-struct LocalContext
+class LocalContext
 {
+public:
+	typedef std::list<Message> MQueue;
 	enum ContextType 
 	{
 		T_UNKNOWN = 0,
@@ -109,10 +125,24 @@ struct LocalContext
 		T_MAX
 	};
 
+	LocalContext();
+	~LocalContext();
+
+	// interfacing functions
+	bool AddToOutbox(Message msg);
+	Message GetInboxEntry(int index);
+	int GetInboxSize();
+
+	// communication functions for the active thread
+	void AddToInbox(Message msg);
+	Message& GetNextMessage(bool pop = false);
+	bool HasMessagePending();
+
     	// posix variables
     	pthread_t m_Thread;
     	Context* m_Context;
     	int  m_TID;
+	
 
     	// socket variables
     	int m_Sockfd;
@@ -122,6 +152,9 @@ struct LocalContext
 	// tty variables
 
 	// context variables
+	pthread_mutex_t m_Mutex;
+	MQueue m_Inbox;
+	MQueue m_Outbox;
 	string m_MSG;
 	ContextType m_Type; 
 

@@ -242,9 +242,50 @@ void *TCPRecvThread(void* t)
 		char buff[100];
 		int rv = 0;
 
+		
+
 		// only attempt to recieve if the socket fd is valid
 		if( lct->m_Connected && ( lct->m_Sockfd >= 0 )  )
 		{
+	
+			// check to see if there is a message pending to be sent
+			if( lct->HasMessagePending() )
+			{
+				// get the top message and try to send it
+				Message& msg = lct->GetNextMessage(false);
+
+				// check to see if the msg is null
+				if( msg.m_Len != 0 )
+				{				
+					size_t sent = send( lct->m_Sockfd, msg.m_Data + msg.m_Ptr, // the start pointer
+									msg.m_Len - msg.m_Ptr, // the length if start pointer != 0
+									0 ); 
+
+					if( sent <= 0 )
+					{
+						// there was an error sending
+						LogMsgToTerminal( _S("TCP SEND ERROR: ") + _S(strerror (errno)) );
+
+						
+					}
+					else if( sent != msg.m_Len )
+					{
+						// update the pointer
+						// since the entire thing wasnt sent
+						msg.m_Ptr += sent;	
+						LogMsgToTerminal("TCP PARTIAL PACKET SENT");
+					}
+					else
+					{
+						// fully sent, so lets pop it
+						lct->GetNextMessage(true);
+						LogMsgToTerminal("TCP PACKET SENT");
+					}
+				} 	
+				
+			}
+
+			// always try to recv
 			rv = recv(lct->m_Sockfd, buff, len, 0);
 		}
 		else
@@ -253,7 +294,7 @@ void *TCPRecvThread(void* t)
 			// sleep to prevent constant loop
 			// which could affect performance
 			sleep(1);
-			LogMsgToTerminal("waiting");
+			//LogMsgToTerminal("waiting");
 			
 		}
 
@@ -263,62 +304,46 @@ void *TCPRecvThread(void* t)
 		}
 		else if( rv == 0 )
 		{
-			// connection lost
-			//LogMsgToTerminal("CONNECTION LOST");
-
-			// signal the main thread
-			// lock the mutex
-			pthread_mutex_lock(&(ct->m_PollMutex));
-			// set the caller
-			ct->m_Caller = lct->m_TID;
-
-			stringstream ss;	
-			ss << "Connection lost from: " << GetPortFromStruct( &(lct->m_Addr) );	
-			lct->m_MSG = ss.str();
+			// connection was hungup
 		
-			// close the socket
-			close( lct->m_Sockfd );
-
-			lct->m_Sockfd = 0;
 			
-			// send the signal
-			pthread_cond_signal(&(ct->m_PollCondition));
+			// connection lost
+			LogMsgToTerminal("TCP CONNECTION LOST");
+
+			// lock the terminal mutex
+			pthread_mutex_lock(&(ct->m_TerminalMutex));
+			
+			// close the fd
+			close(lct->m_Sockfd);
+			
+			// set the fd to -1
+			lct->m_Sockfd = -1;
+			
+			// set the status to disconnected
+			lct->m_Connected = false;
+			
 			// unlock the mutex
-			pthread_mutex_unlock(&(ct->m_PollMutex));
-			
-			// set the thread as garbage
-			ct->SetThreadAsGarbage(lct->m_TID);
+			pthread_mutex_unlock(&(ct->m_TerminalMutex));
 
-			// break out of the loop
-			break;
 		}
 		else if( rv < -1 )
 		{
 			// error
+			LogMsgToTerminal(_S("TCP ERROR: ") + _S(strerror (errno)));
 		}
 		else // rv > 0 
 		{
 			// msg recieved
-			
-			// signal the main thread
-			// lock the mutex
-			pthread_mutex_lock(&(ct->m_PollMutex));
-			// set the caller
-			ct->m_Caller = lct->m_TID;
-		
-			// set the msg
-			if( rv < len )
-				buff[rv] = '\0';
-			else
-				buff[len - 1] = '\0';
+				
+			// assume that the buffer has not been overrun
+			Message msg;
+			msg.m_Data = new char[rv];
+			memcpy(msg.m_Data, buff, rv);
+			msg.m_Len = rv;
 
-			lct->m_MSG = string(buff);	
+			lct->AddToInbox(msg);
 
-			// send the signal
-			pthread_cond_signal(&(ct->m_PollCondition));
-			// unlock the mutex
-			pthread_mutex_unlock(&(ct->m_PollMutex));
-
+			LogMsgToTerminal("TCP NEW MESSAGE RCV");		
 
 		}
 		
@@ -348,7 +373,7 @@ void *InputThread(void* t)
 
 	nwindow.Init();
 	sizer->Add(hexView);
-	sizer->Add(nterminal);
+	sizer->Add(nterminal, 1.5);
 	
 	nterminal->SetStyle(STYLE_BORDER);
 	nwindow.SetSizer(sizer);
@@ -577,6 +602,7 @@ int main( int argc, char* argv[])
 	ct.m_TCPThread = ct.MakeThread(TCPRecvThread);	
 	ct.m_TCPThread->m_Sockfd = -1;
 	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
+	ct.m_TCPThread->m_Mutex = ct.m_TCPMutex;
 /*
 	// create the UDP thread
 	ct.m_TCPThread = ct.MakeThread(RecvThread);	
@@ -588,7 +614,7 @@ int main( int argc, char* argv[])
 	ct.m_TTYThread = ct.MakeThread(TTYRecvThread);	
 	ct.m_TTYThread->m_Sockfd = -1;
 	ct.m_TTYThread->m_Type = LocalContext::T_TTY;
-
+	ct.m_TTYThread->m_Mutex = ct.m_TTYMutex;
 
 	LogMsgToTerminal("INITIALIZATION COMPLETE");
 

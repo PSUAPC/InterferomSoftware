@@ -37,6 +37,8 @@ void Context::Init()
 {
 	// create the mutexes
 	pthread_mutex_init(&m_CreateMutex, NULL);
+	pthread_mutex_init(&m_TTYMutex, NULL);  
+ 	pthread_mutex_init(&m_TCPMutex, NULL);  
     	pthread_mutex_init(&m_PollMutex, NULL);
 	pthread_mutex_init(&m_TerminalMutex, NULL);
     	pthread_cond_init(&m_PollCondition, NULL);
@@ -56,7 +58,9 @@ void Context::Shutdown()
 {
 	// clean up the attributes and mutexes
     	pthread_attr_destroy(&m_Attr);
-    	pthread_mutex_destroy(&m_PollMutex);
+    	pthread_mutex_destroy(&m_TCPMutex);   
+ 	pthread_mutex_destroy(&m_TTYMutex);   
+	pthread_mutex_destroy(&m_PollMutex);
 	pthread_mutex_destroy(&m_CreateMutex);
 	pthread_mutex_destroy(&m_TerminalMutex);
     	pthread_cond_destroy(&m_PollCondition);
@@ -214,6 +218,122 @@ void Context::BroadcastAll(string msg, unsigned int exception)
 		send( lct->m_Sockfd, msg.c_str(), msg.length(), 0);
 	}
 }
+
+
+// --------------------------------------------
+// -----   L O C A L   C O N T E X T   --------
+// --------------------------------------------
+
+LocalContext::LocalContext()
+{
+}
+
+LocalContext::~LocalContext()
+{
+	for( MQueue::iterator it = m_Outbox.begin(); 
+		it != m_Outbox.end(); it++ )
+	{
+		if( (*it).m_Data != NULL )
+			delete [] (*it).m_Data;
+	}
+
+	for( MQueue::iterator it = m_Inbox.begin(); 
+		it != m_Inbox.end(); it++ )
+	{
+		if( (*it).m_Data != NULL )
+			delete [] (*it).m_Data;
+	}
+}
+
+bool LocalContext::AddToOutbox(Message msg)
+{
+	if( !m_Connected )
+		return false;
+
+	// lock the mutex
+	pthread_mutex_lock(&m_Mutex);
+
+	// add to the outbox
+	m_Outbox.push_back(msg);
+
+	// unlock the mutex
+	pthread_mutex_unlock(&m_Mutex);
+
+
+	return true;	
+}
+
+Message LocalContext::GetInboxEntry(int index)
+{
+	if( index < 0 )
+		return Message();
+
+	Message ret;
+
+	// lock the mutex
+	pthread_mutex_lock(&m_Mutex);
+
+	if( index < m_Inbox.size() )
+	{
+		int ii = 0;
+		for( MQueue::iterator it = m_Inbox.begin();
+			it != m_Inbox.end(); it++ )
+		{
+			if( ii == index )
+			{
+				ret = (*it);
+				break;
+			}
+		}
+	}
+
+	// unlock the mutex
+	pthread_mutex_unlock(&m_Mutex);
+	
+	return ret;
+}
+
+int LocalContext::GetInboxSize()
+{
+	return m_Inbox.size();
+}
+
+
+void LocalContext::AddToInbox(Message msg)
+{
+	// lock the mutex
+	pthread_mutex_lock(&m_Mutex);
+
+	m_Inbox.push_back(msg);
+
+	// unlock the mutex
+	pthread_mutex_unlock(&m_Mutex);
+}
+
+Message& LocalContext::GetNextMessage(bool pop)
+{
+
+	// lock the mutex
+	pthread_mutex_lock(&m_Mutex);
+	
+	Message& ret = m_Outbox.front();
+
+	if( pop )
+	{
+		m_Outbox.pop_front();
+	}
+
+	// unlock the mutex
+	pthread_mutex_unlock(&m_Mutex);
+
+	return ret;
+}
+
+bool LocalContext::HasMessagePending()
+{
+	return ( !m_Outbox.empty() );
+}
+
 
 // ----------------------------------
 // ---------   U I D D I C T --------

@@ -158,16 +158,25 @@ void TCPCmd::Exec(std::string str)
 					stream[k] = (*it);
 					k++;
 				}
+				
+				// create a message for this one
+				Message msg;
+				msg.m_Data = stream;
+				msg.m_Len = data.size();
 
-				int fd = ct->m_TCPThread->m_Sockfd;
-				size_t sent = send( fd, stream, data.size(), 0 );
-				if( sent != data.size() )
-				{
-					NTerminal::Get()->PrintToStdout("Error sending");
-				}
+				// add the message to the outbox
+				ct->m_TCPThread->AddToOutbox(msg);
+	
+
+				//int fd = ct->m_TCPThread->m_Sockfd;
+				//size_t sent = send( fd, stream, data.size(), 0 );
+				//if( sent != data.size() )
+				//{
+				//	NTerminal::Get()->PrintToStdout("Error sending");
+				//}
 
 				// clean up the stream 
-				delete [] stream;
+				//delete [] stream;
 
 			}
 			break;
@@ -436,15 +445,23 @@ void TTYCmd::Exec(std::string str)
 					k++;
 				}
 
-				int fd = ct->m_TTYThread->m_Sockfd;
-				size_t sent = write( fd, stream, data.size() );
-				if( sent != data.size() )
-				{
-					NTerminal::Get()->PrintToStdout("Error sending");
-				}
+				// create a message for this one
+				Message msg;
+				msg.m_Data = stream;
+				msg.m_Len = data.size();
+
+				// add the message to the outbox
+				ct->m_TTYThread->AddToOutbox(msg);
+	
+				//int fd = ct->m_TTYThread->m_Sockfd;
+				//size_t sent = write( fd, stream, data.size() );
+				//if( sent != data.size() )
+				//{
+				//	NTerminal::Get()->PrintToStdout("Error sending");
+				//}
 
 				// clean up the stream 
-				delete [] stream;
+				//delete [] stream;
 				
 			}
 			break;
