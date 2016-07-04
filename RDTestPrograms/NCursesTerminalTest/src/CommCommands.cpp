@@ -165,7 +165,7 @@ void TCPCmd::Exec(std::string str)
 				msg.m_Len = data.size();
 
 				// add the message to the outbox
-				ct->m_TCPThread->AddToOutbox(msg);
+				ct->m_TTYThread->AddToOutbox(msg);
 	
 
 				//int fd = ct->m_TCPThread->m_Sockfd;

@@ -1,5 +1,5 @@
 #include "Contexts.h"
-
+#include "NTerminal.h"
 
 // --------------------------------
 // -----   C O N T E X T   --------
@@ -225,6 +225,7 @@ void Context::BroadcastAll(string msg, unsigned int exception)
 // --------------------------------------------
 
 LocalContext::LocalContext()
+	: m_FIFO(1024)
 {
 }
 
@@ -332,6 +333,108 @@ Message& LocalContext::GetNextMessage(bool pop)
 bool LocalContext::HasMessagePending()
 {
 	return ( !m_Outbox.empty() );
+}
+
+char LocalContext::FIFORead()
+{
+	// lock the mutex
+	pthread_mutex_lock(&m_Mutex); 
+
+	char ret = m_FIFO.Read();
+
+	// unlock the mutex
+	pthread_mutex_unlock(&m_Mutex); 
+
+	return ret;
+}
+
+bool LocalContext::FIFOWrite(char c)
+{
+	// lock the mutex
+	pthread_mutex_lock(&m_Mutex); 
+
+	bool ret = m_FIFO.Write(c);
+
+	// unlock the mutex
+	pthread_mutex_unlock(&m_Mutex); 
+
+	return ret;
+
+}
+
+// ---------------------------------
+// ------- F I F O   B U F F E R ---
+// ---------------------------------
+
+
+FIFOBuffer::FIFOBuffer(size_t size)
+		: m_Size(size)
+{
+	m_Data = new char[size];
+	m_RdPtr = 0;
+	m_WrPtr = 0;
+}
+
+FIFOBuffer::~FIFOBuffer()
+{
+	if( m_Data != NULL )
+		delete [] m_Data;
+}
+
+bool FIFOBuffer::IsFull()
+{
+	//if(w_ptr>r_ptr)
+	//ptr_diff<=w_ptr-r_ptr;
+	//else if(w_ptr)
+	//ptr_diff<=((f_depth-r_ptr)+w_ptr);
+	//else ptr_diff<=0; end
+	int ptrDiff = 0;
+	if( m_WrPtr > m_RdPtr )
+		ptrDiff = m_WrPtr - m_RdPtr;
+	else if( m_WrPtr != 0 )
+		ptrDiff = ((m_Size - m_RdPtr) + m_WrPtr);
+	else
+		ptrDiff = 0;
+
+	//f_full_flag=(ptr_diff==(f_depth-1));
+	return ( ptrDiff  == (m_Size - 1));	
+}
+
+bool FIFOBuffer::IsEmpty()
+{
+	//f_empty_flag=(ptr_diff==0);
+	return ( m_RdPtr == m_WrPtr );
+}
+
+bool FIFOBuffer::Write(char c)
+{
+	if( !IsFull() )
+	{
+		m_Data[m_WrPtr] = c;
+		m_WrPtr = (m_WrPtr == (m_Size-1))? 0 : m_WrPtr + 1;
+		return true;
+	}
+	else
+	{
+		// cant write to a full buffer
+		return false;
+	}
+}
+
+char FIFOBuffer::Read()
+{
+	if( !IsEmpty() )
+	{
+		char ret = m_Data[m_RdPtr];
+		m_RdPtr = (m_RdPtr == (m_Size-1))? 0 : m_RdPtr + 1; 
+
+		return ret;
+	}
+	else
+	{
+		// it's empty...
+		return 0;
+	}
 }
 
 

@@ -41,6 +41,32 @@ struct Message
 	int 	m_Ptr;
 };
 
+
+// ---------------------------------
+// ------- F I F O   B U F F E R ---
+// ---------------------------------
+
+class FIFOBuffer
+{
+private:
+	FIFOBuffer() : m_Size(0) {}
+public:
+
+	FIFOBuffer(size_t size);
+	~FIFOBuffer();
+	
+	bool IsFull();
+	bool IsEmpty();
+	bool Write(char c);
+	char Read();
+
+private:
+	char* m_Data;
+	int   m_RdPtr;
+	int   m_WrPtr;
+	const int m_Size;
+};
+
 class LocalContext;
 
 // --------------------------------
@@ -132,12 +158,14 @@ public:
 	bool AddToOutbox(Message msg);
 	Message GetInboxEntry(int index);
 	int GetInboxSize();
+	char FIFORead();
 
 	// communication functions for the active thread
 	void AddToInbox(Message msg);
 	Message& GetNextMessage(bool pop = false);
 	bool HasMessagePending();
-
+	bool FIFOWrite(char c);
+	
     	// posix variables
     	pthread_t m_Thread;
     	Context* m_Context;
@@ -150,6 +178,7 @@ public:
 	bool m_Connected;
 
 	// tty variables
+	FIFOBuffer m_FIFO;
 
 	// context variables
 	pthread_mutex_t m_Mutex;

@@ -189,6 +189,7 @@ void *TTYRecvThread(void* t)
 
 			// always try to read
 			rv = read(lct->m_Sockfd, buff, len);
+			usleep(100);
 		}
 		else
 		{
@@ -214,14 +215,24 @@ void *TTYRecvThread(void* t)
 			// msg recieved
 				
 			// assume that the buffer has not been overrun
-			Message msg;
-			msg.m_Data = new char[rv];
-			memcpy(msg.m_Data, buff, rv);
-			msg.m_Len = rv;
+			//Message msg;
+			//msg.m_Data = new char[rv];
+			//memcpy(msg.m_Data, buff, rv);
+			//msg.m_Len = rv;
 
-			lct->AddToInbox(msg);
+			//lct->AddToInbox(msg);
 
-			LogMsgToTerminal("TTY NEW MESSAGE RCV");		
+			//LogMsgToTerminal("TTY NEW MESSAGE RCV");		
+
+			for( int k = 0; (k < rv) && !(lct->m_FIFO.IsFull()); k++ )
+			{
+				lct->FIFOWrite(buff[k]);
+			}
+
+			if( lct->m_FIFO.IsFull() )
+			{
+				LogMsgToTerminal("TTY FIFO IS FULL");
+			}
 
 		}
 	}
