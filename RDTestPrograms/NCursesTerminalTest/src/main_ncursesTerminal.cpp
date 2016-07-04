@@ -139,92 +139,91 @@ void *TTYRecvThread(void* t)
  	while( ct->m_Running )
 	{
 
-#if 0		// enter the recv state
+		// enter the recv state
 		int len = 100;
 		char buff[100];
 		int rv = 0;
 
+
+
 		// only attempt to recieve if the socket fd is valid
 		if( lct->m_Connected && ( lct->m_Sockfd >= 0 )  )
 		{
-			rv = recv(lct->m_Sockfd, buff, len, 0);
+	
+			// check to see if there is a message pending to be sent
+			if( lct->HasMessagePending() )
+			{
+				// get the top message and try to send it
+				Message& msg = lct->GetNextMessage(false);
+
+				// check to see if the msg is null
+				if( msg.m_Len != 0 )
+				{				
+					size_t sent = write( lct->m_Sockfd, msg.m_Data + msg.m_Ptr, // the start pointer
+									msg.m_Len - msg.m_Ptr); // the length if start pointer != 0
+									 
+
+					if( sent <= 0 )
+					{
+						// there was an error sending
+						LogMsgToTerminal( _S("TTY SEND ERROR: ") + _S(strerror (errno)) );
+
+						
+					}
+					else if( sent != msg.m_Len )
+					{
+						// update the pointer
+						// since the entire thing wasnt sent
+						msg.m_Ptr += sent;	
+						LogMsgToTerminal("TTY PARTIAL PACKET SENT");
+					}
+					else
+					{
+						// fully sent, so lets pop it
+						lct->GetNextMessage(true);
+						LogMsgToTerminal("TTY PACKET SENT");
+					}
+				} 	
+				
+			}
+
+			// always try to read
+			rv = read(lct->m_Sockfd, buff, len);
 		}
 		else
 		{
-			rv = -1;
+			rv = 0;
 			// sleep to prevent constant loop
 			// which could affect performance
 			sleep(1);
-			LogMsgToTerminal("waiting");
+			//LogMsgToTerminal("waiting");
 			
 		}
 
-		if( rv == -1 )
+		if( rv == 0 )
 		{
 			// no data sent - timed out
-		}
-		else if( rv == 0 )
-		{
-			// connection lost
-			//LogMsgToTerminal("CONNECTION LOST");
-
-			// signal the main thread
-			// lock the mutex
-			pthread_mutex_lock(&(ct->m_PollMutex));
-			// set the caller
-			ct->m_Caller = lct->m_TID;
-
-			stringstream ss;	
-			ss << "Connection lost from: " << GetPortFromStruct( &(lct->m_Addr) );	
-			lct->m_MSG = ss.str();
-		
-			// close the socket
-			close( lct->m_Sockfd );
-
-			lct->m_Sockfd = 0;
-			
-			// send the signal
-			pthread_cond_signal(&(ct->m_PollCondition));
-			// unlock the mutex
-			pthread_mutex_unlock(&(ct->m_PollMutex));
-			
-			// set the thread as garbage
-			ct->SetThreadAsGarbage(lct->m_TID);
-
-			// break out of the loop
-			break;
-		}
-		else if( rv < -1 )
+		}	
+		else if( rv < 0 )
 		{
 			// error
+			LogMsgToTerminal(_S("TTY ERROR: ") + _S(strerror (errno)));
 		}
 		else // rv > 0 
 		{
 			// msg recieved
-			
-			// signal the main thread
-			// lock the mutex
-			pthread_mutex_lock(&(ct->m_PollMutex));
-			// set the caller
-			ct->m_Caller = lct->m_TID;
-		
-			// set the msg
-			if( rv < len )
-				buff[rv] = '\0';
-			else
-				buff[len - 1] = '\0';
+				
+			// assume that the buffer has not been overrun
+			Message msg;
+			msg.m_Data = new char[rv];
+			memcpy(msg.m_Data, buff, rv);
+			msg.m_Len = rv;
 
-			lct->m_MSG = string(buff);	
+			lct->AddToInbox(msg);
 
-			// send the signal
-			pthread_cond_signal(&(ct->m_PollCondition));
-			// unlock the mutex
-			pthread_mutex_unlock(&(ct->m_PollMutex));
-
+			LogMsgToTerminal("TTY NEW MESSAGE RCV");		
 
 		}
-		
-#endif
 	}
 
 	pthread_exit(NULL);
