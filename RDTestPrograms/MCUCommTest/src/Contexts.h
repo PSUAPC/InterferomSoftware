@@ -27,9 +27,52 @@ private:
 
 };
 
+// ---------------------------------
+// --------   M E S S A G E  -------
+// ---------------------------------
+
+struct Message
+{
+	Message() : m_Data(NULL), m_Len(0),
+		m_Ptr(0){}
+	
+	char* 	m_Data;
+	int   	m_Len;
+	int 	m_Ptr;
+};
 
 
-struct LocalContext;
+// ---------------------------------
+// ------- F I F O   B U F F E R ---
+// ---------------------------------
+
+class LocalContext;
+
+class FIFOBuffer
+{
+private:
+	FIFOBuffer() : m_Size(0) {}
+public:
+
+friend class LocalContext;
+
+	FIFOBuffer(size_t size);
+	~FIFOBuffer();
+	
+	bool IsFull();
+	bool IsEmpty();
+	bool Write(char c);
+	char Read();
+	
+
+private:
+	char* m_Data;
+	int   m_RdPtr;
+	int   m_WrPtr;
+	const int m_Size;
+};
+
+class LocalContext;
 
 // --------------------------------
 // -----   C O N T E X T   --------
@@ -43,6 +86,11 @@ public:
 	typedef map<unsigned int, LocalContext*> CTMap;
 	typedef pair<unsigned int, LocalContext*> CTPair;
 	typedef queue<unsigned int> UIDQueu;
+
+	// ------------ Singleton ----------
+	Context();
+	~Context();
+	static Context* Get();
 	
 	// ------------ Functions ----------
 	LocalContext* MakeThread(void *(*fcn)(void*));
@@ -67,7 +115,13 @@ public:
 	UIDDict 	m_UIDDict;
 	UIDQueu 	m_Garbage;
 	int		m_Caller;
-	LocalContext* 	m_RecvThread;
+	string		m_SerialName;
+	int		m_SerialBaud;
+
+	// specific threads
+	LocalContext* 	m_TCPThread;
+	LocalContext* 	m_InputThread;
+	LocalContext*	m_TTYThread;
 
     	// socket variables
     	struct sockaddr_in m_Sa;
@@ -75,6 +129,9 @@ public:
     	// posix variables
 	pthread_mutex_t m_CreateMutex;
     	pthread_mutex_t m_PollMutex;
+	pthread_mutex_t m_TerminalMutex;
+	pthread_mutex_t m_TCPMutex;
+	pthread_mutex_t m_TTYMutex;
     	pthread_cond_t  m_PollCondition;
     	pthread_attr_t  m_Attr;
 
@@ -85,19 +142,59 @@ public:
 // --------------------------------------------
 
 
-struct LocalContext
+class LocalContext
 {
+public:
+	typedef std::list<Message> MQueue;
+	enum ContextType 
+	{
+		T_UNKNOWN = 0,
+		T_INPUT = 1,
+		T_TCP,
+		T_UDP,
+		T_TTY,
+		T_MAX
+	};
+
+	LocalContext();
+	~LocalContext();
+
+	// interfacing functions
+	bool AddToOutbox(Message msg);
+	Message GetInboxEntry(int index);
+	int GetInboxSize();
+	char FIFORead();
+
+	// communication functions for the active thread
+	void AddToInbox(Message msg);
+	Message& GetNextMessage(bool pop = false);
+	bool HasMessagePending();
+	bool FIFOWrite(char c);
+	void CheckFIFO();
+	
     	// posix variables
     	pthread_t m_Thread;
     	Context* m_Context;
     	int  m_TID;
+	
 
     	// socket variables
     	int m_Sockfd;
 	struct sockaddr_storage m_Addr;
+	bool m_Connected;
 
+	// tty variables
+	FIFOBuffer m_FIFO;
 
 	// context variables
+	pthread_mutex_t m_Mutex;
+	MQueue m_Inbox;
+	MQueue m_Outbox;
 	string m_MSG;
+	ContextType m_Type; 
+
+	// helper functions
+	int GetNextPtr(int ptr);
+
 };
 

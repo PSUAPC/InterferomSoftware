@@ -6,6 +6,14 @@
 #include <fcntl.h>
 #include <sstream>
 #include <ncurses.h>
+#include "NTerminal.h"
+#include "NWindow.h"
+#include "SizerWidget.h"
+#include "NShell.h"
+#include "CommCommands.h"
+#include "TabbedPanel.h"
+#include "HexViewer.h"
+#include <glib.h>
 
 using namespace std;
 
@@ -13,6 +21,8 @@ using namespace std;
 
 void LogMsgToTerminal(const string& msg);
 void *RecvThread(void* t);
+
+
 
 string GetIPFromStruct(struct sockaddr_storage* addr)
 {
@@ -43,6 +53,62 @@ string GetIPFromStruct(struct sockaddr_storage* addr)
 	return ss.str();
 }
 
+int TTYSetInterfaceAttribs (int fd, int speed, int parity)
+{
+        struct termios tty;
+        memset (&tty, 0, sizeof tty);
+        if (tcgetattr (fd, &tty) != 0)
+        {
+                //error_message ("error %d from tcgetattr", errno);
+                return -1;
+        }
+
+        cfsetospeed (&tty, speed);
+        cfsetispeed (&tty, speed);
+
+        tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8;     // 8-bit chars
+        // disable IGNBRK for mismatched speed tests; otherwise receive break
+        // as \000 chars
+        tty.c_iflag &= ~IGNBRK;         // disable break processing
+        tty.c_lflag = 0;                // no signaling chars, no echo,
+                                        // no canonical processing
+        tty.c_oflag = 0;                // no remapping, no delays
+        tty.c_cc[VMIN]  = 0;            // read doesn't block
+        tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
+
+        tty.c_iflag &= ~(IXON | IXOFF | IXANY); // shut off xon/xoff ctrl
+
+        tty.c_cflag |= (CLOCAL | CREAD);// ignore modem controls,
+                                        // enable reading
+        tty.c_cflag &= ~(PARENB | PARODD);      // shut off parity
+        tty.c_cflag |= parity;
+        tty.c_cflag &= ~CSTOPB;
+        tty.c_cflag &= ~CRTSCTS;
+
+        if (tcsetattr (fd, TCSANOW, &tty) != 0)
+        {
+                //error_message ("error %d from tcsetattr", errno);
+                return -1;
+        }
+        return 0;
+}
+
+void TTYSetBlocking (int fd, int should_block)
+{
+        struct termios tty;
+        memset (&tty, 0, sizeof tty);
+        if (tcgetattr (fd, &tty) != 0)
+        {
+                //error_message ("error %d from tggetattr", errno);
+                return;
+        }
+
+        tty.c_cc[VMIN]  = should_block ? 1 : 0;
+        tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
+
+        //if (tcsetattr (fd, TCSANOW, &tty) != 0)
+               // error_message ("error %d setting term attributes", errno);
+}
 
 int GetPortFromStruct(struct sockaddr_storage* addr)
 {
@@ -66,8 +132,120 @@ int GetPortFromStruct(struct sockaddr_storage* addr)
 }
 
 
+void *TTYRecvThread(void* t)
+{
+	LocalContext* lct = (LocalContext*)(t);
+	Context* ct = lct->m_Context;
+ 	while( ct->m_Running )
+	{
 
-void *RecvThread(void* t)
+		// enter the recv state
+		int len = 100;
+		char buff[100];
+		int rv = 0;
+
+		// we need to check the FIFO for msgs 
+		lct->CheckFIFO();
+		
+
+		// only attempt to recieve if the socket fd is valid
+		if( lct->m_Connected && ( lct->m_Sockfd >= 0 )  )
+		{
+	
+			// check to see if there is a message pending to be sent
+			if( lct->HasMessagePending() )
+			{
+				// get the top message and try to send it
+				Message& msg = lct->GetNextMessage(false);
+
+				// check to see if the msg is null
+				if( msg.m_Len != 0 )
+				{				
+					size_t sent = write( lct->m_Sockfd, msg.m_Data + msg.m_Ptr, // the start pointer
+									msg.m_Len - msg.m_Ptr); // the length if start pointer != 0
+									 
+					//sleep(2); //required to make flush work, for some reason
+  					//tcflush(lct->m_Sockfd, TCIOFLUSH);
+					if( sent <= 0 )
+					{
+						// there was an error sending
+						LogMsgToTerminal( _S("TTY SEND ERROR: ") + _S(strerror (errno)) );
+
+						
+					}
+					else if( sent != msg.m_Len )
+					{
+						// update the pointer
+						// since the entire thing wasnt sent
+						msg.m_Ptr += sent;	
+						LogMsgToTerminal("TTY PARTIAL PACKET SENT");
+					}
+					else
+					{
+						// fully sent, so lets pop it
+						lct->GetNextMessage(true);
+						LogMsgToTerminal("TTY PACKET SENT");
+					}
+				} 	
+				
+			}
+
+			// always try to read
+			rv = read(lct->m_Sockfd, buff, len);
+			usleep(100);
+		}
+		else
+		{
+			rv = 0;
+			// sleep to prevent constant loop
+			// which could affect performance
+			sleep(1);
+			//LogMsgToTerminal("waiting");
+			
+		}
+
+		if( rv == 0 )
+		{
+			// no data sent - timed out
+		}	
+		else if( rv < 0 )
+		{
+			// error
+			LogMsgToTerminal(_S("TTY ERROR: ") + _S(strerror (errno)));
+		}
+		else // rv > 0 
+		{
+			// msg recieved
+				
+			// assume that the buffer has not been overrun
+			//Message msg;
+			//msg.m_Data = new char[rv];
+			//memcpy(msg.m_Data, buff, rv);
+			//msg.m_Len = rv;
+
+			//lct->AddToInbox(msg);
+
+			//LogMsgToTerminal("TTY NEW MESSAGE RCV");		
+
+			for( int k = 0; (k < rv) && !(lct->m_FIFO.IsFull()); k++ )
+			{
+				lct->FIFOWrite(buff[k]);
+				LogMsgToTerminal("Writing");
+			}
+
+			if( lct->m_FIFO.IsFull() )
+			{
+				LogMsgToTerminal("TTY FIFO IS FULL");
+			}
+
+		}
+	}
+
+	pthread_exit(NULL);
+
+
+}
+void *TCPRecvThread(void* t)
 {
 	LocalContext* lct = (LocalContext*)(t);
 	Context* ct = lct->m_Context;
@@ -78,9 +256,50 @@ void *RecvThread(void* t)
 		char buff[100];
 		int rv = 0;
 
+		
+
 		// only attempt to recieve if the socket fd is valid
-		if( lct->m_Sockfd >= 0 )
+		if( lct->m_Connected && ( lct->m_Sockfd >= 0 )  )
 		{
+	
+			// check to see if there is a message pending to be sent
+			if( lct->HasMessagePending() )
+			{
+				// get the top message and try to send it
+				Message& msg = lct->GetNextMessage(false);
+
+				// check to see if the msg is null
+				if( msg.m_Len != 0 )
+				{				
+					size_t sent = send( lct->m_Sockfd, msg.m_Data + msg.m_Ptr, // the start pointer
+									msg.m_Len - msg.m_Ptr, // the length if start pointer != 0
+									0 ); 
+
+					if( sent <= 0 )
+					{
+						// there was an error sending
+						LogMsgToTerminal( _S("TCP SEND ERROR: ") + _S(strerror (errno)) );
+
+						
+					}
+					else if( sent != msg.m_Len )
+					{
+						// update the pointer
+						// since the entire thing wasnt sent
+						msg.m_Ptr += sent;	
+						LogMsgToTerminal("TCP PARTIAL PACKET SENT");
+					}
+					else
+					{
+						// fully sent, so lets pop it
+						lct->GetNextMessage(true);
+						LogMsgToTerminal("TCP PACKET SENT");
+					}
+				} 	
+				
+			}
+
+			// always try to recv
 			rv = recv(lct->m_Sockfd, buff, len, 0);
 		}
 		else
@@ -89,7 +308,7 @@ void *RecvThread(void* t)
 			// sleep to prevent constant loop
 			// which could affect performance
 			sleep(1);
-			LogMsgToTerminal("waiting");
+			//LogMsgToTerminal("waiting");
 			
 		}
 
@@ -99,102 +318,120 @@ void *RecvThread(void* t)
 		}
 		else if( rv == 0 )
 		{
-			// connection lost
-			//LogMsgToTerminal("CONNECTION LOST");
-
-			// signal the main thread
-			// lock the mutex
-			pthread_mutex_lock(&(ct->m_PollMutex));
-			// set the caller
-			ct->m_Caller = lct->m_TID;
-
-			stringstream ss;	
-			ss << "Connection lost from: " << GetPortFromStruct( &(lct->m_Addr) );	
-			lct->m_MSG = ss.str();
+			// connection was hungup
 		
-			// close the socket
-			close( lct->m_Sockfd );
-
-			lct->m_Sockfd = 0;
 			
-			// send the signal
-			pthread_cond_signal(&(ct->m_PollCondition));
+			// connection lost
+			LogMsgToTerminal("TCP CONNECTION LOST");
+
+			// lock the terminal mutex
+			pthread_mutex_lock(&(ct->m_TerminalMutex));
+			
+			// close the fd
+			close(lct->m_Sockfd);
+			
+			// set the fd to -1
+			lct->m_Sockfd = -1;
+			
+			// set the status to disconnected
+			lct->m_Connected = false;
+			
 			// unlock the mutex
-			pthread_mutex_unlock(&(ct->m_PollMutex));
-			
-			// set the thread as garbage
-			ct->SetThreadAsGarbage(lct->m_TID);
+			pthread_mutex_unlock(&(ct->m_TerminalMutex));
 
-			// break out of the loop
-			break;
 		}
 		else if( rv < -1 )
 		{
 			// error
+			LogMsgToTerminal(_S("TCP ERROR: ") + _S(strerror (errno)));
 		}
 		else // rv > 0 
 		{
 			// msg recieved
-			
-			// signal the main thread
-			// lock the mutex
-			pthread_mutex_lock(&(ct->m_PollMutex));
-			// set the caller
-			ct->m_Caller = lct->m_TID;
-		
-			// set the msg
-			if( rv < len )
-				buff[rv] = '\0';
-			else
-				buff[len - 1] = '\0';
+				
+			// assume that the buffer has not been overrun
+			Message msg;
+			msg.m_Data = new char[rv];
+			memcpy(msg.m_Data, buff, rv);
+			msg.m_Len = rv;
 
-			lct->m_MSG = string(buff);	
+			lct->AddToInbox(msg);
 
-			// send the signal
-			pthread_cond_signal(&(ct->m_PollCondition));
-			// unlock the mutex
-			pthread_mutex_unlock(&(ct->m_PollMutex));
-
+			LogMsgToTerminal("TCP NEW MESSAGE RCV");		
 
 		}
 		
 	}
 
-    pthread_exit(NULL);
+	pthread_exit(NULL);
 
 
 }
 
-//string line;
-
 void *InputThread(void* t)
 {
-    	LocalContext* lct = (LocalContext*)(t);
+
+	LocalContext* lct = (LocalContext*)(t);
 	Context* ct = lct->m_Context;
+    	
+
+	NWindow nwindow;
+	NTerminal* nterminal = new NTerminal(&nwindow);
+	nwindow.SetMutex(ct->m_TerminalMutex);
+	nterminal->SetMutex(ct->m_TerminalMutex);
+	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_VERT);
+	HexViewer* hexView = new HexViewer(&nwindow, STYLE_BORDER);
+
+	NShell::Get()->RegisterCommand("tcp", new TCPCmd() );
+	NShell::Get()->RegisterCommand("tty", new TTYCmd() );
+
+	nwindow.Init();
+	sizer->Add(hexView);
+	sizer->Add(nterminal, 1.5);
+	
+	nterminal->SetStyle(STYLE_BORDER);
+	nwindow.SetSizer(sizer);
+	nwindow.ForceResize();
+	nterminal->OnFocus(IWidget::FOCUS_FWD);
+
+	string testS = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu purus commodo, tincidunt leo ac, volutpat turpis. Nullam risus nunc, elementum et ultricies in, efficitur ac magna. Etiam maximus mi non ante tempus, sit amet porttitor massa rutrum. Aenean congue scelerisque odio sed rhoncus posueree scelerisque odio sed rhoncus posuere  .";
+	//hexView->SetStream("testing one, two, three", 24);
+	//hexView->SetStream((char*)testS.c_str(), testS.length());
+	hexView->SetLabel("Hex Viewer");
+	nterminal->SetHistorySize(10);
+        nterminal->SetStdoutSize(100);
+        nterminal->SetStdoutDispSize(-1);
+	nterminal->SetName("Terminal");
+	nwindow.ForceRedraw();
+	
     	string line;
 
 	// variable to signal the main thread
 	bool signalMain = false;
+
 
     	while( ct->m_Running )
     	{
 		// set the signal to false
 		signalMain = false;
 
-        	std::getline (std::cin, line);
-	
 
-        	if( line.find("exit") != NOT_FOUND )
+		bool isExit = false;
+		
+		isExit = !nwindow.WaitForInput();
+        	
+		if( isExit )
         	{
+			sleep(1);
 			ct->m_Running = false;
-            		cout << "exiting" << endl;
+	     		//cout << "exiting" << endl;
+			LogMsgToTerminal("EXITING");
+			nwindow.Inhibit();		
 			// set the signal flag
 			signalMain = true;
         	}
-		else if( line.length() >= 1 )
-		{
-			signalMain = true;
-		}
+
+		
 		
 		// check to see if we need to signal the main thread
 		if( signalMain )
@@ -217,6 +454,7 @@ void *InputThread(void* t)
 		}
     }
 
+    nwindow.Shutdown();
 
     pthread_exit(NULL);
 
@@ -228,39 +466,9 @@ void *InputThread(void* t)
 
 void LogMsgToTerminal(const string& msg)
 {
-
-    	// this code is for writing to the termianl, while maintaining the prompt
-    	// \033[1A - move cursor one line up
-    	// \r      - move cursor to the start of the line
-    	// \033[K  - erase from cursor to the end of the line
-    	const char preface[] = "\033[1A\r\033[K";
-    	//const char preface[] = "\r\033[K";
-
-	write(STDOUT_FILENO, preface, sizeof(preface) - 1);
-
-    	fprintf(stdout, "%s\n", msg.c_str());
-	fflush(stdout);
-
-    	const char epilogue[] = "\033[K";
-    	write(STDOUT_FILENO, epilogue, sizeof(epilogue) - 1 );
-	
-	// prompt string
-    	//fprintf(stdout, " ");
-    	fflush(stdout);
-
-    	struct termios tc;
-    	tcgetattr(STDOUT_FILENO, &tc);
-    	const tcflag_t lflag = tc.c_lflag;
-    	// disable echo of control characters
-    	tc.c_lflag &= ~ECHOK;
-    	tcsetattr(STDOUT_FILENO, TCSANOW, &tc);
-    	// reprint input buffer
-    	ioctl(STDOUT_FILENO, TIOCSTI, &tc.c_cc[VREPRINT]);
-	
-    	tc.c_lflag = lflag;
-    	tcsetattr(STDOUT_FILENO, TCSANOW, &tc);
-
-
+	// lock the terminal mutex
+	if( NTerminal::Get() != NULL )
+		NTerminal::Get()->PrintToStdout(msg);
 
 }
 
@@ -282,35 +490,57 @@ bool AttemptConnection(Context& ct, LocalContext* newCT)
 
 	LogMsgToTerminal("ATTEMPTING TO CONNECT");
 
-	if( connect(sockfd, (struct sockaddr*) &(ct.m_Sa),sizeof(ct.m_Sa)) < 0 )
+	
+	if(  connect(sockfd, (struct sockaddr*) &(ct.m_Sa),sizeof(ct.m_Sa)) < 0 )
 	{
-		LogMsgToTerminal("ERROR CONNECTING");
+	
+		switch( errno )
+		{
+		case ETIMEDOUT:
+			LogMsgToTerminal("CONNECTION TIMED OUT");
+			break;
+		case ENETUNREACH:
+			LogMsgToTerminal("NETWORK UNREACHABLE");
+			break;
+		case EISCONN:
+			LogMsgToTerminal("SOCKET ALREADY CONNECTED");
+			break;
+		case ECONNREFUSED:
+			LogMsgToTerminal("CONNECTION REFUSED");
+			break;
+		case EADDRINUSE:
+			LogMsgToTerminal("ADDRESS IN USE");
+			break;
+		default:
+			LogMsgToTerminal("ERROR CONNECTING");
+			break;
+		}
+		
 	
 		return false;
 	}
 	else
 	{
 		LogMsgToTerminal("SUCCESSFULL CONNECTION");
-		// set the socket to non-blocking
-		// and create the recv thread
-		struct timeval timeout;
-        	timeout.tv_sec = 2;
-       		timeout.tv_usec = 0;
-
-                setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
-                setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
-
+		newCT->m_Connected = true;
 		return true;
 	}
 }
 
 
-bool ConnectToServer(Context& ct, LocalContext* newCT)
+bool ConnectToServer(Context& ct, LocalContext* newCT, bool stop)
 {
+	newCT->m_Connected = false;
+
 	// close the socket if it is currently open
 	if( newCT->m_Sockfd != -1 )
 	{
 		close(newCT->m_Sockfd);
+	}
+
+	if( stop )
+	{
+		return true;
 	}
 
 	// some variables for sockets
@@ -335,7 +565,16 @@ bool ConnectToServer(Context& ct, LocalContext* newCT)
 
 	// let the kernel know we are willing to reuse the socket if still around
 	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
+	// set the socket to non-blocking
+	struct timeval timeout;
+        timeout.tv_sec = 2;
+       	timeout.tv_usec = 0;
 
+        setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+        setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
+
+
+/*
 	if( bind(sockfd, (struct sockaddr *)&saLoc, sizeof(struct sockaddr)) < 0 )
 	{
 		LogMsgToTerminal("ERROR BINDING SOCKET");
@@ -344,9 +583,9 @@ bool ConnectToServer(Context& ct, LocalContext* newCT)
 		close(sockfd);
 		return false;
 	}
-
+*/
 	newCT->m_Sockfd = sockfd;
-	
+		
 	// return success
 	return true;
 
@@ -367,18 +606,33 @@ int main( int argc, char* argv[])
 	ct.m_Running = true;
 
 	// create the input thread
-	ct.MakeThread(InputThread);
+	ct.m_InputThread = ct.MakeThread(InputThread);
+	ct.m_InputThread->m_Type = LocalContext::T_INPUT;
 
 	bool success = true;
 
 		
-	// create the recv thread
-	ct.m_RecvThread = ct.MakeThread(RecvThread);	
-	ct.m_RecvThread->m_Sockfd = -1;
+	// create the TCP thread
+	ct.m_TCPThread = ct.MakeThread(TCPRecvThread);	
+	ct.m_TCPThread->m_Sockfd = -1;
+	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
+	ct.m_TCPThread->m_Mutex = ct.m_TCPMutex;
+/*
+	// create the UDP thread
+	ct.m_TCPThread = ct.MakeThread(RecvThread);	
+	ct.m_TCPThread->m_Sockfd = -1;
+	ct.m_TCPThread->m_Type = LocalContext::T_TCP;
+
+*/
+	// create the TTY thread
+	ct.m_TTYThread = ct.MakeThread(TTYRecvThread);	
+	ct.m_TTYThread->m_Sockfd = -1;
+	ct.m_TTYThread->m_Type = LocalContext::T_TTY;
+	ct.m_TTYThread->m_Mutex = ct.m_TTYMutex;
 
 	LogMsgToTerminal("INITIALIZATION COMPLETE");
 
-	
+
 	// start the loop
 	pthread_mutex_lock(&(ct.m_PollMutex));
 	while( ct.m_Running )
@@ -404,7 +658,7 @@ int main( int argc, char* argv[])
 			if( success && ct.m_Running ) 				
 			{
 				// send the message
-				LogMsgToTerminal( tLct->m_MSG );
+				//LogMsgToTerminal( tLct->m_MSG );
 				//size_t sent = send( sockfd, tLct->m_MSG.c_str(), tLct->m_MSG.length(), 0 );
 										
 			}
@@ -422,15 +676,16 @@ int main( int argc, char* argv[])
 		}
 
 
-	}	
+	}
+	
 	pthread_mutex_unlock(&(ct.m_PollMutex));
 
 	// clean up the socket
-	if( (ct.m_RecvThread)->m_Sockfd >= 0 )
+	if( (ct.m_TCPThread)->m_Sockfd >= 0 )
 	{
 		
 		
-		close((ct.m_RecvThread)->m_Sockfd);
+		close((ct.m_TCPThread)->m_Sockfd);
 		
 	}	
 

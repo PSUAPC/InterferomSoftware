@@ -12,8 +12,8 @@ SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g # -Wall
-LIB := -pthread -lncurses #-lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
-INC := #-I include
+LIB := -pthread -lncurses -lglib-2.0#-lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
+INC := -I /usr/include/glib-2.0 -I /usr/lib64/glib-2.0/include
 
 
 $(TARGET): $(OBJECTS)
