@@ -6,7 +6,7 @@
 
 HexViewer::HexViewer(IWidget* parent, int style)
 	: PanelWidget(parent, style), m_Len(0), m_Stream(NULL),	
-	m_StartLine(0), m_Src(0), m_MsgNum(0)
+	m_StartLine(0), m_Src(0), m_MsgNum(0), m_MsgMissMatch(true)
 {
 }
 
@@ -24,6 +24,7 @@ void HexViewer::Draw(CursorReturn& cret)
 	// draw the parent first
 	PanelWidget::Draw(cret);  
 	
+
 	// get the total msg size
 	int msgTot = 0;
 	switch(m_Src)
@@ -39,14 +40,24 @@ void HexViewer::Draw(CursorReturn& cret)
 		break;
 	}	
 
-
+		
 	// draw the label at the top
 	mvprintw(m_Y0, m_X0+5, "%s", m_Label.c_str());
-	mvprintw(m_Y0, m_X0+5+m_Label.length()+2, "(%d/%d)", m_MsgNum, msgTot);
+	// print the msg number, since m_MsgNum is zero based, we need to add 1
+	mvprintw(m_Y0, m_X0+5+m_Label.length()+2, "(%d/%d)", m_MsgNum+1, msgTot);
 
 	// print the header
 	std::string temp;
-	temp = _S("offset(h)\t 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F");
+	temp = _S("offset(h)\t 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F ");
+	if( m_MsgMissMatch )
+	{
+		temp = temp + _S("[Checksum MissMatch]");
+	}
+	else
+	{
+		temp = temp + _S("[Checksum Match]");
+	}
+
 	mvprintw(m_Y0+2, m_X0+2, "%s", temp.c_str());
 
 	// now we need to go down the list
@@ -91,7 +102,7 @@ void HexViewer::Draw(CursorReturn& cret)
 
 	// print the instructions
 	mvprintw(m_Y0 + m_H-1, m_X0 + 2, "Up[Scroll up], Down[Scroll Down], \
-						n[Next Msg], p[Previous Msg]");
+						n[Next Msg], b[Previous Msg]");
 
 	if( m_Focused)
 	{
@@ -120,6 +131,7 @@ void HexViewer::SetSource(int src)
 			{
 				// get the first message
 				Message msg = lct->GetInboxEntry(0);
+				m_MsgMissMatch = msg.m_MissMatch;
 				SetStream(msg.m_Data, m_Len);
 			}
 		}
@@ -135,6 +147,7 @@ void HexViewer::SetSource(int src)
 			{
 				// get the first message
 				Message msg = lct->GetInboxEntry(0);
+				m_MsgMissMatch = msg.m_MissMatch;
 				SetStream(msg.m_Data, msg.m_Len);
 			}
 		}
@@ -193,7 +206,7 @@ bool HexViewer::OnInput(int in)
 		m_StartLine = (m_StartLine >= (m_Len/16))? m_Len/16 : m_StartLine + 1;
 		break;
 	case 'n': // next msg
-	case 'p': // previous msg
+	case 'b': // previous msg
 		
 		switch(m_Src)
 		{
@@ -228,6 +241,7 @@ bool HexViewer::OnInput(int in)
 			}	
 			
 			Message msg = lct->GetInboxEntry(m_MsgNum);
+			m_MsgMissMatch = msg.m_MissMatch;
 			SetStream(msg.m_Data, msg.m_Len);    
 				
 		}		

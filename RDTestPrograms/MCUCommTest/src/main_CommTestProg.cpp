@@ -354,6 +354,8 @@ void *TCPRecvThread(void* t)
 			msg.m_Data = new char[rv];
 			memcpy(msg.m_Data, buff, rv);
 			msg.m_Len = rv;
+			msg.m_MissMatch = false;
+			msg.m_Src = 1; // TCP
 
 			lct->AddToInbox(msg);
 

@@ -34,11 +34,13 @@ private:
 struct Message
 {
 	Message() : m_Data(NULL), m_Len(0),
-		m_Ptr(0){}
+		m_Ptr(0), m_MissMatch(true), m_Src(-1){}
 	
 	char* 	m_Data;
 	int   	m_Len;
 	int 	m_Ptr;
+	bool 	m_MissMatch;
+	int	m_Src; // 0 - TTY, 1 - TCP
 };
 
 

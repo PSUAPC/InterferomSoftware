@@ -285,7 +285,10 @@ Message LocalContext::GetInboxEntry(int index)
 				ret = (*it);
 				break;
 			}
+			// don't forget to increment
+			ii++;
 		}
+		
 	}
 
 	// unlock the mutex
@@ -407,18 +410,28 @@ void LocalContext::CheckFIFO()
 	// now lets check to see if we have a msg
 	if( (msgStart != -1) && (msgEnd != -1) )
 	{
+	
 		NTerminal::Get()->PrintToStdout("TTY: Message Packet Found");
 
 		// remove any garbage at the front by moving the ptr
 		m_FIFO.m_RdPtr = msgStart; // should be the first byte
 		
 		// create a checksum variable and clear it
-		unsigned char checksum = 0;
+		char checksum = 0;
 
-		// now the first element should be the size
+		// now the first element is the 0x01 from the frame
+		// start, pull it and dump it
+		m_FIFO.Read();
+
+	
+		// the next element is the size	
 		unsigned char size = m_FIFO.Read();
 
 		char* cdata = new char[size];
+
+		char str[100];
+		sprintf(str, "len: %d", size);
+		NTerminal::Get()->PrintToStdout(str);
 
 		// overrun value
 		bool overrun = false;
@@ -465,22 +478,37 @@ void LocalContext::CheckFIFO()
 			// we have real data here
 			if( !overrun )
 			{
+				checksum += data;
 				cdata[ii] = data;	
 			}
 		
-		}	
-
-		m_FIFO.m_RdPtr = msgEnd;
-	
+		}
+		// now we need to pull out the checksum
+		checksum += m_FIFO.Read();
+		
 		// we can now push the message
 		// if size was decreased, we can ignore the loss of bytes
 		// in cdata since it should be negligable
 		Message msg;
                 msg.m_Data = cdata;
                 msg.m_Len = size;
-
+		msg.m_Src = 0; // TTY
+		
+		if( checksum != 0 )
+		{
+			msg.m_MissMatch = true;
+			NTerminal::Get()->PrintToStdout("TTY: Checksum mismatch");
+		}
+		else
+		{
+			msg.m_MissMatch = false;
+		}
+			
 		m_Inbox.push_back(msg); 
+
+		m_FIFO.m_RdPtr = msgEnd;
 	
+			
 		
 
 		if( overrun )

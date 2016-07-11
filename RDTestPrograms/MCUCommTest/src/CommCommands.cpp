@@ -38,7 +38,7 @@ void TCPCmd::Exec(std::string str)
 	// must reset optind to 0 in case of previous call
 	// this resets the arg list and the argv index
 	optind = 0;
-	
+
 	if( argc > 0 )
 	{
 		// find the mode
@@ -66,11 +66,12 @@ void TCPCmd::Exec(std::string str)
 
 		int c;
 
+
 		switch(mode)
 		{
 		case 1: // config
 
-			while ( (c = getopt(argc, argv, "p:a:") ) != -1) 
+			while (  (c = getopt(argc, argv, "p:a:") ) != -1) 
 			{
     				switch (c) 
     				{
@@ -83,14 +84,14 @@ void TCPCmd::Exec(std::string str)
         			case '?':
 				default :
 					
-					NTerminal::Get()->PrintToStdout("Unknown argument ");	
+					//NTerminal::Get()->PrintToStdout("Unknown argument ");	
             				break;
     				}
 			}
 			break;	
 
 		case 2: // connect
-			while ( (c = getopt(argc, argv, "s") ) != -1) 
+			while (  (c = getopt(argc, argv, "s") ) != -1) 
 			{
     				switch (c) 
     				{

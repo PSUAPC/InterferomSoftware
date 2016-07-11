@@ -28,6 +28,7 @@ private:
 	int  	m_StartLine;
 	int 	m_Src; // 0 for TTY, 1 for TCP
 	int 	m_MsgNum;
+	bool 	m_MsgMissMatch;
 
 };
 
