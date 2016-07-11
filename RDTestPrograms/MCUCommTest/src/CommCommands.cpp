@@ -64,7 +64,7 @@ void TCPCmd::Exec(std::string str)
 			mode = 0; // default
 		}
 
-		char c;
+		int c;
 
 		switch(mode)
 		{
@@ -345,7 +345,7 @@ void TTYCmd::Exec(std::string str)
 			mode = 0; // default
 		}
 
-		char c;
+		int c;
 
 		switch(mode)
 		{
