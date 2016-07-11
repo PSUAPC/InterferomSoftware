@@ -156,8 +156,12 @@ uchar W5100ReadData(uint16 address, uchar *data, uchar retry)
 #else
     // Parallel Communications
     
+    TRISE;
     // set the data pins as input
     SET_IN;
+    
+    TRISE;
+    
     
     // (1) set the address
     P_WrA_Reg(address);
@@ -368,8 +372,8 @@ uchar W5100PollStatus(struct W5100Context_t *context, uchar socket)
 {
     uchar stat = 0;
 
-    // read the interrupt bits
-    W5100ReadData(S_IR(socket), &stat, RETRY_NUM);
+    // read the status bits
+    W5100ReadData(S_SR(socket), &stat, RETRY_NUM);
 
     return stat;
 }
@@ -481,7 +485,7 @@ uchar W5100Listen(struct W5100Context_t *context, uchar socket)
     // try starting the listen
     W5100WriteData(S_CR(socket), S_LISTEN, RETRY_NUM);
 
-    delay_millis(10);
+    delay_millis(100);
 
     // get the socket status
     W5100ReadData(S_SR(socket), &temp, RETRY_NUM);

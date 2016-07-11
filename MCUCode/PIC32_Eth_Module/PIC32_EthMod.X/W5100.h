@@ -23,7 +23,7 @@ extern "C" {
 #else             
 #define P_WrD_Reg(val) mPORTEWrite(val)
 #define P_WrA_Reg(val) mPORTBWrite(val)
-#define P_RdD_Reg mPORTEReadLatchBits(0x000000FF)
+#define P_RdD_Reg PORTEbits.w&0x000000FF/*mPORTEReadLatchBits(0x000000FF)*/
 #define P_Rd_BitH mPORTGSetBits(BIT_9)
 #define P_Rd_BitL mPORTGClearBits(BIT_9)
 #define P_Wr_BitH mPORTASetBits(BIT_7)

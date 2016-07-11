@@ -70,21 +70,34 @@
 // Aux Ctrl 2 RF1
 // Aux Ctrl 3 RG1
 
+void EstablishServer(struct W5100Context_t *context)
+{
+    // create TCP socket 0 on port 1492
+    W5100SetTCP( &context, 0, 1492);
+    //status = W5100PollStatus(&context, 0);
+    // set the socket to listen 
+    W5100Listen( &context, 0 );
+    //status = W5100PollStatus(&context, 0);
+}
+
+
 int main(int argc, char** argv) {
 
+    uchar status = 0;
+    
     mPORTAClearBits(BIT_6);           //Clear bits to ensure the LED is off.
     //mPORTASetPinsDigitalOut(BIT_6);   //Set port as output
   
     // lets set the digital IO bits for the ethernet module
     mPORTASetPinsDigitalOut(BIT_7|BIT_6);
-    mPORTGSetPinsDigitalOut(BIT_8 | BIT_9 | BIT_14);
+    mPORTGSetPinsDigitalOut(BIT_8 | BIT_9 | BIT_14 | BIT_0);
     mPORTBSetPinsDigitalOut(0x0000FFFF);
     mPORTESetPinsDigitalOut(0x000000FF);
     
     // set the control bits high
     mPORTASetBits(BIT_7);
     mPORTGSetBits(BIT_8 | BIT_9 | BIT_14);
-    
+    mPORTGClearBits(BIT_0);
     //mPORTGClearBits(BIT_0);
     //mPORTGClearBits(0x0000FFFF);
     //mPORTEClearBits(0x0000FFFF);
@@ -92,7 +105,7 @@ int main(int argc, char** argv) {
     //mPORTBClearBits(0x0000FFFF);
     
     //while(1){}
-    
+
     // lets init the W5100
     struct W5100Context_t context;
     context.Mode = MR_RST;
@@ -130,18 +143,41 @@ int main(int argc, char** argv) {
     ShortDelay_ms(100);
     
     W5100Init( &context );
+  
+    W5100ReadData(SHAR0, &status, 1);
+    W5100ReadData(SHAR1, &status, 1);
+    W5100ReadData(SHAR2, &status, 1);
+    W5100ReadData(SHAR3, &status, 1);
+    W5100ReadData(SHAR4, &status, 1);
+    W5100ReadData(SHAR5, &status, 1);
     
+    EstablishServer(&context);
     
     // lets try a random write
     //W5100WriteData(0x001A, 0x07, 1);
     //mPORTEWrite(0x07);
     
+    
+  
+    
      while(1)
      {
-        //PORTAbits.RA2 = ~PORTAbits.RA2;
+     
+        status = W5100PollStatus(&context, 0);
+        if( status == SOCK_ESTABLISH)
+            mPORTGSetBits(BIT_0);
+        else
+            mPORTGClearBits(BIT_0);
+        
+        if( status == SOCK_CLOSE_WAIT)
+            EstablishServer(&context);
+        
+        
+         //PORTAbits.RA2 = ~PORTAbits.RA2;
         mPORTAToggleBits(BIT_6);
         ShortDelay(US_TO_CT_TICKS*1000000);
         //delay_millis(1000);
+   
      }
      
     return (EXIT_SUCCESS);
