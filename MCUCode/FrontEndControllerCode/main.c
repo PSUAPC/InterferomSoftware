@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <xc.h>
 #include <pic16lf1947.h>
+#include "Includes.h"
+
 
 // CONFIG1
 #pragma config FOSC = INTOSC       // Oscillator Selection (ECH, External Clock, High Power Mode (4-32 MHz): device clock supplied to CLKIN pin)
@@ -31,6 +33,8 @@
 
 // Definitions
 #define _XTAL_FREQ  4000000        // this is used by the __delay_ms(xx) and __delay_us(xx) functions
+
+
 
 unsigned char
 sci_Init(unsigned long int baud, unsigned char ninebits)
@@ -86,8 +90,72 @@ sci_Init(unsigned long int baud, unsigned char ninebits)
  return 0;
 }
 
+void interrupt ISR(void)
+{
+    // disable interrupts
+    GIE = 0;
+    
+    // check who called
+    if( RCIF ) //  USART1 Receive Interrupt Flag bit
+    {
+        // reset the interrupt to 0
+        RCIF = 0;
+    }
+    else if( RC2IF ) //  USART2 Receive Interrupt Flag bit
+    {
+        // reset the interrupt to 0    
+        RC2IF = 0;
+    }
+    else if( TMR1GIF ) // Timer1 Gate Interrupt Flag bit
+    {
+        // reset the interrupt to 0
+        TMR1GIF = 0;
+    }
+    else if( SSPIF ) //  Synchronous Serial Port (MSSP1) Interrupt Flag bit
+    {
+        // reset the interrupt to 0    
+        SSPIF = 0;
+    }
+    else if( SSP2IF ) //  Synchronous Serial Port (MSSP2) Interrupt Flag bit
+    {
+        // reset the interrupt to 0   
+        SSP2IF = 0;
+    }
+    else if( TMR2IF ) // Timer2 to PR2 Interrupt Flag bit
+    {
+        // reset the interrupt to 0
+        TMR2IF = 0;
+    }
+    else if( TMR1IF  ) // Timer1 Overflow Interrupt Flag bit
+    {
+        // reset the interrupt to 0        
+        TMR1IF = 0;
+    }
+    else if ( TMR6IF ) // TMR6 to PR6 Match Interrupt Flag bit
+    {
+        // reset the interrupt to 0     
+        TMR6IF = 0;
+    }
+    else if( TMR4IF ) // TMR4 to PR4 Match Interrupt Flag bit
+    {
+        // reset the interrupt to 0    
+        TMR4IF = 0;
+    }
+    else if ( OSFIF ) // Oscillator Fail Interrupt Flag bit
+    {
+        // reset the interrupt to 0       
+        OSFIF = 0;
+    }
+    
+    // re-enable interrupts
+    GIE = 1;
+}
+
 void init()
 {
+    // start by disabling global interrupts
+    GIE = 0;
+    
     // OSCON setup
     OSCCONbits.IRCF = 0b00001101; // 4 MHz
     
@@ -103,6 +171,13 @@ void init()
     ANSELEbits.ANSELE = 0b00000000;
     
     sci_Init(0,0);
+    
+    // enable interrupts
+    float t = 4*5;
+    
+    
+    // enable the global interrupt
+    GIE = 1;
 }
 void putch(unsigned char data)
 {
@@ -129,9 +204,9 @@ void PrintStrToUART(char* str, unsigned char len)
 void main(void) 
 {
  
-    int a = 0;
-    int b = 0;
-    char str[20];
+    //int a = 0;
+    //int b = 0;
+    //char str[20];
     
     init();
     
@@ -143,9 +218,9 @@ void main(void)
         //b--;
     
        PORTEbits.RE0 = ~PORTEbits.RE0;
-       a++;
-       sprintf(str, "Alt: Az: 0x%02X\n\r", a);
-       PrintStrToUART(str, 20);
+       //a++;
+       //sprintf(str, "Alt: Az: 0x%02X\n\r", a);
+       //PrintStrToUART(str, 20);
         __delay_ms(1000);
     }
     return;
