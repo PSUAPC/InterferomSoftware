@@ -57,19 +57,19 @@ volatile uint8 newVal1;
 volatile float PIDpConst;
 volatile float PIDiConst;
 volatile float PIDdConst;
+volatile uint8 magAddr;
+volatile uint8 accAddr;
+volatile uint8 tempAddr0;
+volatile uint8 tempAddr1;
+volatile uint8 tempAddr2;
+volatile uint8 tempAddr3;
+volatile uint8 tempAddr4;
+volatile uint8 tempAddr5;
 
 // non-volatile memory(26 bytes)
 __eeprom float  sPIDpConst = 1.0;
 __eeprom float  sPIDiConst = 1.0;
 __eeprom float  sPIDdConst = 1.0;
-__eeprom uint8  magAddr = 0x1E;
-__eeprom uint8  accAddr = 0x19;
-__eeprom uint8  tempAddr0 = 0x00;
-__eeprom uint8  tempAddr1 = 0x00;
-__eeprom uint8  tempAddr2 = 0x00;
-__eeprom uint8  tempAddr3 = 0x00;
-__eeprom uint8  tempAddr4 = 0x00;
-__eeprom uint8  tempAddr5 = 0x00;
 __eeprom int8   temp0_Off = 0;
 __eeprom int8   temp1_Off = 0;
 __eeprom int8   temp2_Off = 0;
@@ -82,6 +82,12 @@ __eeprom int8   temp2_Scale = 1;
 __eeprom int8   temp3_Scale = 1;
 __eeprom int8   temp4_Scale = 1;
 __eeprom int8   temp5_Scale = 1;
+
+
+// Communication Utility Functions
+
+
+
 
 /* *****************************************************************************
  End of File

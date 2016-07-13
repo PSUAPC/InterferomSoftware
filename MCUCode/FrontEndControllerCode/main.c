@@ -9,7 +9,7 @@
 #include <xc.h>
 #include <pic16lf1947.h>
 #include "Includes.h"
-
+#include "LSM303DLHC.h"
 
 // CONFIG1
 #pragma config FOSC = INTOSC       // Oscillator Selection (ECH, External Clock, High Power Mode (4-32 MHz): device clock supplied to CLKIN pin)
@@ -34,13 +34,26 @@
 // Definitions
 #define _XTAL_FREQ  4000000        // this is used by the __delay_ms(xx) and __delay_us(xx) functions
 
+// -------------- PIN LAYOUT ---------------------
+// UART communication (UART1)
+//  RC6(31) - UART TX1
+//  RC7(32) - UART RX1
+// I2C communication (MSSP2)
+//  RD5(52) - I2C SDA2
+//  RD6(50) - I2C SCL2
+
+// define the interface function to deal with peripherals
+typedef void(*init_fcn)();
+const init_fcn init_mag = &LSM303DLHCDigitalCompass_init;
+const init_fcn init_acc = &LSM303DLHCAccelerometer_init;
 
 
-unsigned char
-sci_Init(unsigned long int baud, unsigned char ninebits)
+
+uint8
+sci_Init(uint16 baud, uint8 ninebits)
 {
- int X;
- unsigned long tmp;
+ int16 X;
+ uint16 tmp;
 
 #if 0
  /* calculate and set baud rate register */
@@ -88,6 +101,26 @@ sci_Init(unsigned long int baud, unsigned char ninebits)
  //   BRGH = 1;
  
  return 0;
+}
+
+void I2C_init2()
+{
+    // initialize I2C on MSSP2
+    SSP2CON1bits.SSPEN = 1; // enable the MSSP
+    SSP2CON1 = (SSP2CON1&0xF0)| 0b00001000; // set to I2C master mode
+    SSP2CON2 = 0x00; // clear the SSPCON2 register
+    SSP2ADD = 0x09;  // set the clock frequency to 100 KHz (based on 4MHz clk)
+    SSP2STAT = 0b11000000; 	// Slew rate disabled and input threshold compliant
+}
+
+void I2C_init1()
+{
+    // initialize I2C on MSSP2
+    SSP1CON1bits.SSPEN = 1; // enable the MSSP
+    SSP1CON1 = (SSP1CON1&0xF0)| 0b00001000; // set to I2C master mode
+    SSP1CON2 = 0x00; // clear the SSPCON2 register
+    SSP1ADD = 0x09;  // set the clock frequency to 100 KHz (based on 4MHz clk)
+    SSP1STAT = 0b11000000; 	// Slew rate disabled and input threshold compliant
 }
 
 void interrupt ISR(void)
@@ -159,6 +192,62 @@ void init()
     // OSCON setup
     OSCCONbits.IRCF = 0b00001101; // 4 MHz
     
+    // initialize the I2C addresses
+    magAddr = LSM303DLHCDigitalCompass_ADDR;
+    accAddr = LSM303DLHCAccelerometer_ADDR;
+    tempAddr0 = 0x00;
+    tempAddr1 = 0x00;
+    tempAddr2 = 0x00;
+    tempAddr3 = 0x00;
+    tempAddr4 = 0x00;
+    tempAddr5 = 0x00;
+    
+    // ---- Port assignments ------
+    // For TRIS : output(0), input(1)
+    // For ANSEL: digital(0), analog(1)
+    
+    // PORT A Assignments
+    TRISAbits.TRISA0 = 0; // RA0 = 
+    TRISAbits.TRISA1 = 0; // RA1 = 
+    TRISAbits.TRISA2 = 0; // RA2 = 
+    TRISAbits.TRISA3 = 0; // RA3 = 
+    TRISAbits.TRISA4 = 0; // RA4 = 
+    TRISAbits.TRISA5 = 0; // RA5 = 
+   
+    ANSELAbits.ANSELA = 0b00000000;
+    
+    // PORT B Assignments
+    TRISBbits.TRISB4 = 0; // RB4 = 
+    TRISBbits.TRISB5 = 0; // RB5 = 
+    TRISBbits.TRISB6 = 0; // RB6 = 
+    TRISBbits.TRISB7 = 0; // RB7 = 
+    
+    // no ANSEL option for PORT B
+    
+    // PORT C Assignments
+    TRISCbits.TRISC0 = 0; // RC0 = 
+    TRISCbits.TRISC1 = 0; // RC1 = 
+    TRISCbits.TRISC2 = 0; // RC2 = 
+    TRISCbits.TRISC3 = 0; // RC3 = 
+    TRISCbits.TRISC4 = 0; // RC4 = 
+    TRISCbits.TRISC5 = 0; // RC5 = 
+    TRISCbits.TRISC6 = 0; // RC6 = TX1
+    TRISCbits.TRISC7 = 1; // RC7 = RX1
+        
+    //  no ANSEL option for PORT C
+    
+    // PORT D Assignments
+    TRISDbits.TRISD0 = 0; // RD0 = 
+    TRISDbits.TRISD1 = 0; // RD1 = 
+    TRISDbits.TRISD2 = 0; // RD2 = 
+    TRISDbits.TRISD3 = 0; // RD3 = 
+    TRISDbits.TRISD4 = 0; // RD4 = 
+    TRISDbits.TRISD5 = 1; // RD5 = I2C SDA2
+    TRISDbits.TRISD6 = 1; // RD6 = I2C SDL2
+    TRISDbits.TRISD7 = 0; // RD7 = 
+    
+    // no ANSEL option for PORT D
+    
     //	PORT E Assignments
     TRISEbits.TRISE0 = 0; // RE0 = 
     TRISEbits.TRISE1 = 0; // RE1 = LED blink
@@ -170,10 +259,42 @@ void init()
     TRISEbits.TRISE7 = 0; // RE7 = 
     ANSELEbits.ANSELE = 0b00000000;
     
+    // PORT F Assignments
+    TRISFbits.TRISF0 = 0; // RF0 = 
+    TRISFbits.TRISF1 = 0; // RF1 = 
+    TRISFbits.TRISF2 = 0; // RF2 = 
+    TRISFbits.TRISF3 = 0; // RF3 = 
+    TRISFbits.TRISF4 = 0; // RF4 = 
+    TRISFbits.TRISF5 = 0; // RF5 = 
+    TRISFbits.TRISF6 = 0; // RF6 = 
+    TRISFbits.TRISF7 = 0; // RF7 = 
+    
+    ANSELFbits.ANSELF = 0b00000000;
+    
+    // PORT G Assignments
+    TRISGbits.TRISG0 = 0; // RG0 = 
+    TRISGbits.TRISG1 = 0; // RG1 = 
+    TRISGbits.TRISG2 = 0; // RG2 = 
+    TRISGbits.TRISG3 = 0; // RG3 = 
+    TRISGbits.TRISG4 = 0; // RG4 = 
+    TRISGbits.TRISG5 = 0; // RG5 = 
+    
+    ANSELGbits.ANSELG = 0b00000000;
+    
+    // initialize the UART1 module
     sci_Init(0,0);
     
+    I2C_init2();
+    
+    // initialize the compass 
+    init_mag();
+    
+    // initialize the accelerometer
+    init_acc();
+    
+    
     // enable interrupts
-    float t = 4*5;
+    
     
     
     // enable the global interrupt

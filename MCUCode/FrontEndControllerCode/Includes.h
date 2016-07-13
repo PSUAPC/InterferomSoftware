@@ -85,19 +85,19 @@ extern volatile uint8 newVal1;
 extern volatile float PIDpConst;
 extern volatile float PIDiConst;
 extern volatile float PIDdConst;
+extern volatile uint8 magAddr;
+extern volatile uint8 accAddr;
+extern volatile uint8 tempAddr0;
+extern volatile uint8 tempAddr1;
+extern volatile uint8 tempAddr2;
+extern volatile uint8 tempAddr3;
+extern volatile uint8 tempAddr4;
+extern volatile uint8 tempAddr5;
 
 // non-volatile memory(26 bytes)
 extern __eeprom float  sPIDpConst;
 extern __eeprom float  sPIDiConst;
 extern __eeprom float  sPIDdConst;
-extern __eeprom uint8  magAddr;
-extern __eeprom uint8  accAddr;
-extern __eeprom uint8  tempAddr0;
-extern __eeprom uint8  tempAddr1;
-extern __eeprom uint8  tempAddr2;
-extern __eeprom uint8  tempAddr3;
-extern __eeprom uint8  tempAddr4;
-extern __eeprom uint8  tempAddr5;
 extern __eeprom int8   temp0_Off;
 extern __eeprom int8   temp1_Off;
 extern __eeprom int8   temp2_Off;
@@ -110,6 +110,9 @@ extern __eeprom int8   temp2_Scale;
 extern __eeprom int8   temp3_Scale;
 extern __eeprom int8   temp4_Scale;
 extern __eeprom int8   temp5_Scale;
+
+// Communication Utility Functions
+
 
 #ifdef	__cplusplus
 extern "C" {
