@@ -42,15 +42,40 @@
 //  RD5(52) - I2C SDA2
 //  RD6(50) - I2C SCL2
 
+void null_fcn(){}
+
 // define the interface function to deal with peripherals
+// if no function is defined, use the null_fcn
+// this will allow for the pointer to be called without a null ptr check
+
 typedef void(*init_fcn)();
 const init_fcn init_mag = &LSM303DLHCDigitalCompass_init;
 const init_fcn init_acc = &LSM303DLHCAccelerometer_init;
+const init_fcn init_temp0 = &null_fcn;
+const init_fcn init_temp1 = &null_fcn;
+const init_fcn init_temp2 = &null_fcn;
+const init_fcn init_temp3 = &null_fcn;
+const init_fcn init_temp4 = &null_fcn;
+const init_fcn init_temp5 = &null_fcn;
 
+typedef void(*get_word_fcn)();
+const get_word_fcn acc_get_xword = &LSM303DLHCAccelerometer_get_xword;
+const get_word_fcn acc_get_yword = &LSM303DLHCAccelerometer_get_yword;
+const get_word_fcn acc_get_zword = &LSM303DLHCAccelerometer_get_zword;
 
+const get_word_fcn mag_get_xword = &LSM303DLHCDigitalCompass_get_xword;
+const get_word_fcn mag_get_yword = &LSM303DLHCDigitalCompass_get_yword;
+const get_word_fcn mag_get_zword = &LSM303DLHCDigitalCompass_get_zword;
+const get_word_fcn mag_get_tword = &LSM303DLHCDigitalCompass_get_tword;
 
-uint8
-sci_Init(uint16 baud, uint8 ninebits)
+const get_word_fcn temp0_get_word = &null_fcn;
+const get_word_fcn temp1_get_word = &null_fcn;
+const get_word_fcn temp2_get_word = &null_fcn;
+const get_word_fcn temp3_get_word = &null_fcn;
+const get_word_fcn temp4_get_word = &null_fcn;
+const get_word_fcn temp5_get_word = &null_fcn;
+
+uint8 UART_init(uint16 baud, uint8 ninebits)
 {
  int16 X;
  uint16 tmp;
@@ -123,65 +148,172 @@ void I2C_init1()
     SSP1STAT = 0b11000000; 	// Slew rate disabled and input threshold compliant
 }
 
+
+uint8 UART_TX_Empty()
+{
+  return TX1STAbits.TRMT;
+}
+
+uint8 UART_Data_Ready()
+{
+  return RC1IF;
+}
+
+void UART_Write(uint8 data)
+{
+    //unsigned char parity = 0;
+    //while (!TX1IF);           // wait until TXREG empty
+    while(!TX1STAbits.TRMT); 
+    // get the parity bit
+    //TX1STAbits.TX9D = data % 2;
+    TX1REG = data;           // send character
+}
+
+void PrintStrToUART(int8* str, uint8 len)
+{
+    uint8 ii;
+    for( ii = 0; ii < len; ii++)
+    {
+        UART_Write(str[ii]);
+        
+        if( (str[ii] == '\0') || (str[ii] == '\r') )
+            return;
+    }
+}
+
+uint8 UART_Read()
+{
+  while(!RC1IF);
+  return RC1REG;
+}
+
+
+
+// 
+// -------------------------------- Interrupt Table ---------------------------------------
+// + ------- + ------ + -------- + ----------- + ---------------------------------------- + 
+// | BINDING |  FLAG  | PRIORITY |  FUNCTION   |     DESCRIPTION                          | 
+// + ------- + ------ + -------- + ----------- + ---------------------------------------- + 
+// + ------- + ------ + -------- + ----------- + ---------------------------------------- + 
+// |  OSCF   | OSFIF  |    0     |      --     | Set the Oscillator fail error flag       |  
+// + ------- + ------ + -------- + ----------- + ---------------------------------------- + 
+// |  TMR2   | TMR2IF |    1     | timeout_isr | Handle Timeout assertion                 |
+// + ------- + ------ + -------- + ----------- + ---------------------------------------- + 
+// |  UART   | RCIF   |    2     | uart_isr    | Handle UART RX signal                    |
+// + ------- + ------ + -------- + ----------- + ---------------------------------------- + 
+// |  TMR4   | TMR4IF |    3     | delay_isr   | Handle Timeout for delay signal - repoll |
+// + ------- + ------ + -------- + ----------- + ---------------------------------------- + 
+
+inline void timeout_isr()
+{
+    // set the timeout
+    FEStatus |= STATUS_TIMEOUT_SET;
+}
+
+inline void uart_isr()
+{
+    // check to see if the FIFO is full
+    uint8 isFull = FIFO_FULL();
+    
+    // increment the FIFOptr
+    FIFOWrPtr = NEXT_PTR(FIFOWrPtr);
+    
+    // if full, make sure to drag the rdptr
+    if( isFull )
+    {
+        FIFORdPtr = FIFOWrPtr;
+    }
+    
+    // ignore overwriting
+    FIFOBuffer[FIFOWrPtr] = UART_Read();
+    
+    // set new data flag
+    FIFOReady = 1;
+}
+
+inline void delay_isr()
+{
+    FEStatus |= STATUS_DELAY_COMPLETE;
+}
+
 void interrupt ISR(void)
 {
     // disable interrupts
     GIE = 0;
     
     // check who called
-    if( RCIF ) //  USART1 Receive Interrupt Flag bit
+    if ( OSFIF ) // Oscillator Fail Interrupt Flag bit
     {
-        // reset the interrupt to 0
-        RCIF = 0;
-    }
-    else if( RC2IF ) //  USART2 Receive Interrupt Flag bit
-    {
-        // reset the interrupt to 0    
-        RC2IF = 0;
-    }
-    else if( TMR1GIF ) // Timer1 Gate Interrupt Flag bit
-    {
-        // reset the interrupt to 0
-        TMR1GIF = 0;
-    }
-    else if( SSPIF ) //  Synchronous Serial Port (MSSP1) Interrupt Flag bit
-    {
-        // reset the interrupt to 0    
-        SSPIF = 0;
-    }
-    else if( SSP2IF ) //  Synchronous Serial Port (MSSP2) Interrupt Flag bit
-    {
-        // reset the interrupt to 0   
-        SSP2IF = 0;
-    }
-    else if( TMR2IF ) // Timer2 to PR2 Interrupt Flag bit
-    {
-        // reset the interrupt to 0
-        TMR2IF = 0;
-    }
-    else if( TMR1IF  ) // Timer1 Overflow Interrupt Flag bit
-    {
-        // reset the interrupt to 0        
-        TMR1IF = 0;
-    }
-    else if ( TMR6IF ) // TMR6 to PR6 Match Interrupt Flag bit
-    {
-        // reset the interrupt to 0     
-        TMR6IF = 0;
-    }
-    else if( TMR4IF ) // TMR4 to PR4 Match Interrupt Flag bit
-    {
-        // reset the interrupt to 0    
-        TMR4IF = 0;
-    }
-    else if ( OSFIF ) // Oscillator Fail Interrupt Flag bit
-    {
+        // @@TODO Capture this
+        // not captured right now
         // reset the interrupt to 0       
         OSFIF = 0;
     }
-    
+    else if( TMR2IF ) // Timer2 to PR2 Interrupt Flag bit
+    {
+        timeout_isr();
+        
+        // reset the interrupt to 0
+        TMR2IF = 0;
+    }
+    else if( RCIF ) //  USART1 Receive Interrupt Flag bit
+    {
+        uart_isr();
+        // reset the interrupt to 0
+        RCIF = 0;
+    }
+    else if( TMR4IF ) // TMR4 to PR4 Match Interrupt Flag bit
+    {
+        delay_isr();
+        // reset the interrupt to 0    
+        TMR4IF = 0;
+    }
+     
     // re-enable interrupts
     GIE = 1;
+}
+
+void init_all_sensors()
+{
+    init_mag();
+    init_acc();
+    init_temp0();
+    init_temp1();
+    init_temp2();
+    init_temp3();
+    init_temp4();
+    init_temp5();
+    
+    // delay for 1 ms
+    __delay_ms(1);
+}
+
+void poll_temp_data()
+{
+    mag_get_tword();
+    temp0_get_word();
+    temp1_get_word();
+    temp2_get_word();
+    temp3_get_word();
+    temp4_get_word();
+    temp5_get_word();
+    
+}
+
+void poll_orient_data()
+{
+    acc_get_xword();
+    acc_get_yword();
+    acc_get_zword();
+    mag_get_xword();
+    mag_get_yword();
+    mag_get_zword();
+}
+
+void poll_all_data()
+{
+    poll_orient_data();
+    poll_temp_data();
 }
 
 void init()
@@ -192,15 +324,7 @@ void init()
     // OSCON setup
     OSCCONbits.IRCF = 0b00001101; // 4 MHz
     
-    // initialize the I2C addresses
-    magAddr = LSM303DLHCDigitalCompass_ADDR;
-    accAddr = LSM303DLHCAccelerometer_ADDR;
-    tempAddr0 = 0x00;
-    tempAddr1 = 0x00;
-    tempAddr2 = 0x00;
-    tempAddr3 = 0x00;
-    tempAddr4 = 0x00;
-    tempAddr5 = 0x00;
+
     
     // ---- Port assignments ------
     // For TRIS : output(0), input(1)
@@ -282,45 +406,238 @@ void init()
     ANSELGbits.ANSELG = 0b00000000;
     
     // initialize the UART1 module
-    sci_Init(0,0);
+    UART_init(0,0);
     
+    // initialize the MSSP2 module
     I2C_init2();
     
-    // initialize the compass 
-    init_mag();
+    // ---- initialize timers ---------
+    // make sure they are off
+    T2CONbits.TMR2ON = 0;
+    T4CONbits.TMR4ON = 0;
+    T6CONbits.TMR6ON = 0;
+    // timer 2
+    T2CONbits.T2OUTPS = 0x00; // 1:1 post-scaler
+    T2CONbits.T2CKPS = 0x02;  // 1:64 pre-scaler
+    // timer 4
+    T4CONbits.T4OUTPS = 0x00; // 1:1 post-scaler
+    T4CONbits.T4CKPS = 0x02;  // 1:64 pre-scaler
+    // timer 6 not used
     
-    // initialize the accelerometer
-    init_acc();
+    // set the timeout timer to 16ms
+    PR2 = 0xFF;
+    
+    // --- set default memory variables -----
+    // FIFO variables
+    FIFOReady = 0;
+    FIFORdPtr = 0;
+    FIFOWrPtr = 0;
+    FIFOTpPtr = 0;
+    
+    // general registers
+    currentOp = 0; // NOP
+    tempMag = 0;
+    temp0 = 0;
+    temp1 = 0;
+    temp2 = 0;
+    temp3 = 0;
+    temp4 = 0;
+    temp4 = 0;
+    peltierTSel = 0xFF; // for none
+    peltierTgt0 = 0;
+    peltierTgt1 = 0;
+    xMag = 0;
+    yMag = 0;
+    zMag = 0;
+    xAcc = 0;
+    yAcc = 0;
+    zAcc = 0;
+    outFlags = 0x00;
+    FEStatus = 0x00;
+    
+    // I2C passthrough variables
+    numMSGs = 0;
+    
+    // PID variables
+    prevError0 = 0.0f;
+    prevError1 = 0.0f;
+    accT0 = 0.0f;
+    accT1 = 0.0f;
+    newVal0 = 0;
+    newVal1 = 0;
+    PIDpConst = sPIDpConst;
+    PIDiConst = sPIDiConst;
+    PIDdConst = sPIDdConst;
+    
+    // I2C addresses
+    magAddr = LSM303DLHCDigitalCompass_ADDR;
+    accAddr = LSM303DLHCAccelerometer_ADDR;
+    tempAddr0 = 0x00;
+    tempAddr1 = 0x00;
+    tempAddr2 = 0x00;
+    tempAddr3 = 0x00;
+    tempAddr4 = 0x00;
+    tempAddr5 = 0x00;
+    
+    // ------ begin data setup --------
+    // initialize all sensor
+    init_all_sensors();
+    
+    // poll all data
+    poll_all_data();
     
     
-    // enable interrupts
+    // --- enable interrupts --------
+    // INTCON
+    PEIE = 1;   // enable peripheral interrupts (for UART)
+    TMR0IE = 0; // timer0 overflow disable
+    INTE = 0;   // disable external interrupts
+    IOCIE = 0;  // disable interrupt on change
     
+    //  PIE1 (Peripheral 1)
+    TMR1GIE = 0; // Timer1 Gate Interrupt Enable bit
+    ADIE = 0;    // Disable A/D Converter (ADC) Interrupt Enable bit
+    RCIE = 1;    // Enable USART1 Receive Interrupt Enable bit
+    TXIE = 0;    // Disable USART1 Transmit Interrupt Enable bit
+    SSPIE = 0;   // Synchronous Serial Port (MSSP1) Interrupt Enable bit
+    CCP1IE = 0;  // CCP1 Interrupt Enable bit
+    TMR2IE = 0;  // TMR2 to PR2 Match Interrupt Enable bit
+    TMR1IE = 0;  // Timer1 Overflow Interrupt Enable bit
     
+    //  PIE2 (Peripheral 2)
+    OSFIE = 1; // Enable Oscillator Fail Interrupt Enable bit (just in case)
+    C2IE = 0;  // Disable Comparator C2 Interrupt Enable bit
+    C1IE = 0;  // Disable Comparator C1 Interrupt Enable bit
+    EEIE = 0;  // Disable EEPROM Write Completion Interrupt Enable bit
+    BCLIE = 0; // Disable MSSP1 Bus Collision Interrupt Enable bit
+    LCDIE = 0; // Disable LCD Module Interrupt Enable bit
+    C3IE = 0;  // Disable Comparator C3 Interrupt Enable bit
+    CCP2IE = 0;// Disable CCP2 Interrupt Enable bit
+
+    //  PIE3 (Peripheral 3)
+    CCP5IE = 0;// Disable CCP5 Interrupt Enable bit
+    CCP4IE = 0;// Disable CCP4 Interrupt Enable bit
+    CCP3IE = 0;// Disable CCP3 Interrupt Enable bit
+    TMR6IE = 0;// Disable TMR6 to PR6 Match Interrupt Enable bit
+    TMR4IE = 0;// Disable TMR4 to PR4 Match Interrupt Enable bit
+    
+    //  PIE4 (Peripheral 4)
+    RC2IE = 0; // Disable USART2 Receive Interrupt Enable bit
+    TX2IE = 0; // Disable USART2 Transmit Interrupt Enable bit
+    BCL2IE = 0;// Disable MSSP2 Bus Collision Interrupt Enable bit
+    SSP2IE = 0;// Disable Synchronous Serial Port (MSSP2) Interrupt Enable bit
     
     // enable the global interrupt
     GIE = 1;
 }
-void putch(unsigned char data)
+
+void check_FIFO()
 {
-    //unsigned char parity = 0;
-    while (!TX1IF);           // wait until TXREG empty
+    if(!FIFOReady)
+        return; // the FIFO has no data for us
+    
+    // set the temp ptr to the read ptr
+    FIFOTpPtr = FIFORdPtr;
+    // set the temp op to max 0xFF to mark invalid
+    tempOp = 0xFF;
+    
+    // invalidate the checksum
+    checksum = 0xFF;
+    
+    // reset the packet count
+    packetCount = 0;
+    
+    // reset the packet size
+    packetSize = 0;
+    
+    // start cycling through the FIFO
+    while(FIFOTpPtr != FIFOWrPtr)
+    {
+        // look for escape character
+        if( FIFOBuffer[FIFOTpPtr] == 0x1B ) // escape character
+        {
+            // increment the FIFO again
+            FIFOTpPtr = NEXT_PTR(FIFOTpPtr);
+            
+            // now check to see if the next ptr is valid
+            if( FIFOTpPtr == FIFOWrPtr )
+            {
+                // exit early, the escape character is invalid
+                return;
+            }
+            else
+            {
+                // switch on the char case
+                switch(FIFOBuffer[FIFOTpPtr])
+                {
+                case 0x01: // start of packet
+                    // increment the next pointer
+                    FIFOTpPtr = NEXT_PTR(FIFOTpPtr);
+                    packetSize = FIFOBuffer[FIFOTpPtr];
+                    // set the packet count to 0
+                    packetCount = 0;
+                    checksum = packetSize; // checksum includes size
+                    break;
+                case 0x04: // end of packet
+                    // verify that we have the correct number
+                    if( (packetCount == packetSize) && (checksum == 0) )
+                    {
+                        // copy the values over
+                        currentOp = tempOp;
+                        
+                        // backstep the ptr, skip the first element for the arg
+                        argStart = FIFOTpPtr-packetSize+1; 
+                        if( argStart < 0 )
+                        {
+                            argStart = argStart + FIFO_SIZE;
+                        }
+                    }
+                    else
+                    {
+                        // move the read pointer, the previous message is bad
+                        FIFORdPtr = FIFOTpPtr;
+                    }
+                    break;
+                case 0x1B: // data in field
+                    // add it to the checksum and move on
+                    checksum = checksum + 0x1B;
+                    packetCount = packetCount + 2;
+                    break;
+                default: // unknwon escape sequence
+                    
+                    // move the read pointer and return
+                    FIFORdPtr = FIFOTpPtr;
+                    return;
+                }
+            }
+        }
+        else // no escape character
+        {
+            // check to see if we are in a packet
+            if( packetSize != 0 )
+            {
+                // check for overrun
+                if( packetCount > packetSize )
+                {
+                    // reset the read pointer and return
+                    FIFORdPtr = FIFOTpPtr;
+                    return;
+                }
+                
+                // otherwise, just add the checksum and continue
+                checksum = checksum + FIFOBuffer[FIFOTpPtr];
+                
+            }
+            // otherwise, do nothing
+            
+        }
         
-    // get the parity bit
-    //TX1STAbits.TX9D = data % 2;
-    TX1REG = data;           // send character
+        // increment the temp ptr
+        FIFOTpPtr = NEXT_PTR(FIFOTpPtr);
+    }
+    
 }
 
-void PrintStrToUART(char* str, unsigned char len)
-{
-    unsigned char ii;
-    for( ii = 0; ii < len; ii++)
-    {
-        putch(str[ii]);
-        
-        if( (str[ii] == '\0') || (str[ii] == '\r') )
-            return;
-    }
-}
 
 void main(void) 
 {
@@ -335,14 +652,15 @@ void main(void)
     
     while(1)
     {
-        //a++;
-        //b--;
-    
+
        PORTEbits.RE0 = ~PORTEbits.RE0;
-       //a++;
-       //sprintf(str, "Alt: Az: 0x%02X\n\r", a);
-       //PrintStrToUART(str, 20);
-        __delay_ms(1000);
+       
+       // check the FIFO
+       check_FIFO();
+       
+       // check the current op
+       
+       
     }
     return;
 }

@@ -52,6 +52,12 @@ extern volatile uint16 FIFORdPtr;
 extern volatile uint16 FIFOWrPtr;
 extern volatile uint16 FIFOTpPtr;
 extern volatile uint8  FIFOBuffer[FIFO_SIZE];
+extern volatile uint8  checksum;
+extern volatile uint8  currentOp;
+extern volatile uint8  tempOp;
+extern volatile uint8  packetSize;
+extern volatile uint8  packetCount;
+extern volatile int16  argStart;
 extern volatile uint16 tempMag;
 extern volatile uint16 temp0;
 extern volatile uint16 temp1;
@@ -94,6 +100,7 @@ extern volatile uint8 tempAddr3;
 extern volatile uint8 tempAddr4;
 extern volatile uint8 tempAddr5;
 
+
 // non-volatile memory(26 bytes)
 extern __eeprom float  sPIDpConst;
 extern __eeprom float  sPIDiConst;
@@ -111,7 +118,45 @@ extern __eeprom int8   temp3_Scale;
 extern __eeprom int8   temp4_Scale;
 extern __eeprom int8   temp5_Scale;
 
-// Communication Utility Functions
+// FIFO macros
+#define NEXT_PTR(c) ((c) == (FIFO_SIZE-1))? 0 : (c) + 1
+#define FIFO_EMPTY() (FIFORdPtr == FIFOWrPtr)? 1 : 0
+#define FIFO_PTR_DIFF (FIFOWrPtr > FIFORdPtr)? FIFOWrPtr-FIFORdPtr : \
+                        ((FIFOWrPtr != 0)? (FIFO_SIZE - FIFORdPtr) + FIFOWrPtr : 0)
+#define FIFO_FULL() ((FIFO_PTR_DIFF) == (FIFO_SIZE-1))? 1 : 0
+
+// Timer Macros
+// - Delay timer on TMR4
+// - Timeout timer on TMR2
+#define PAUSE_DELAY_TMR() {T4CONbits.TMR4ON = 0;}
+#define PAUSE_TO_TMR()    {T2CONbits.TMR2ON = 0;}
+#define PLAY_DELAY_TMR()  {T4CONbits.TMR4ON = 1;}
+#define PLAY_TO_TMR()     {T2CONbits.TMR2ON = 1;}
+#define RESET_DELAY_TMR() {T4CONbits.TMR4ON = 0; TMR4 = 0;}
+#define RESET_TO_TMR()    {T2CONbits.TMR2ON = 0; TMR2 = 0;}
+// set the delay timer to the maximum - 16 ms [PR4= 255]
+#define SET_DELAY_MAX()   {RESET_DELAY_TMR(); PR4 = 0xFF;}
+// set the delay timer to 1ms (1.024ms) [PR4 = 16]
+#define SET_DELAY_1MS()   {RESET_DELAY_TMR(); PR4 = 0x10;}
+
+// status register definitions
+#define STATUS_TEMP1_STABLE     0x80
+#define STATUS_TEMP0_STABLE     0x40
+#define STATUS_UART_REQUEST     0x20
+#define STATUS_DELAY_COMPLETE   0x10
+#define STATUS_PACKET_ERROR     0x08
+#define STATUS_TIMEOUT_ERROR    0x04
+#define STATUS_TIMEOUT_SET      0x02
+#define STATUS_SLEW_SET         0x01
+
+// outflag register definitions
+#define STATUS_PASSTHROUGH_SET  0x80
+#define STATUS_UART_READ_SET    0x40
+#define STATUS_TEMP_SET         0x20
+#define OUT_SOLAR_CAL_EN        0x10
+#define OUT_CAL_EN              0x08
+#define OUT_T1_EN               0x04
+#define OUT_T0_EN               0x02
 
 
 #ifdef	__cplusplus

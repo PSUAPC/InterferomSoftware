@@ -40,9 +40,16 @@
 
 //LSM303DLHCDigitalCompass
 void LSM303DLHCDigitalCompass_init();
+void LSM303DLHCDigitalCompass_get_tword();
+void LSM303DLHCDigitalCompass_get_xword();
+void LSM303DLHCDigitalCompass_get_yword();
+void LSM303DLHCDigitalCompass_get_zword();
 
 //LSM303DLHCAccelerometer
 void LSM303DLHCAccelerometer_init();
+void LSM303DLHCAccelerometer_get_xword();
+void LSM303DLHCAccelerometer_get_yword();
+void LSM303DLHCAccelerometer_get_zword();
 
 #ifdef	__cplusplus
 extern "C" {

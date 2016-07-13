@@ -24,6 +24,12 @@ volatile uint16 FIFORdPtr;
 volatile uint16 FIFOWrPtr;
 volatile uint16 FIFOTpPtr;
 volatile uint8  FIFOBuffer[FIFO_SIZE];
+volatile uint8  checksum;
+volatile uint8  currentOp;
+volatile uint8  tempOp;
+volatile uint8  packetSize;
+volatile uint8  packetCount;
+volatile int16  argStart;
 volatile uint16 tempMag;
 volatile uint16 temp0;
 volatile uint16 temp1;
@@ -65,6 +71,7 @@ volatile uint8 tempAddr2;
 volatile uint8 tempAddr3;
 volatile uint8 tempAddr4;
 volatile uint8 tempAddr5;
+
 
 // non-volatile memory(26 bytes)
 __eeprom float  sPIDpConst = 1.0;
