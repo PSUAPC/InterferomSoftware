@@ -64,7 +64,7 @@ extern volatile uint16 temp1;
 extern volatile uint16 temp2;
 extern volatile uint16 temp3;
 extern volatile uint16 temp4;
-extern volatile uint16 temp4;
+extern volatile uint16 temp5;
 extern volatile uint8  peltierTSel;
 extern volatile uint8  peltierTgt0;
 extern volatile uint8  peltierTgt1;
@@ -157,6 +157,23 @@ extern __eeprom int8   temp5_Scale;
 #define OUT_CAL_EN              0x08
 #define OUT_T1_EN               0x04
 #define OUT_T0_EN               0x02
+
+// operation definitions
+#define OP_NOP                  0x00
+#define OP_RESET_SENSORS        0x01
+#define OP_POLL_TEMP_IMMED      0x02
+#define OP_POLL_ORIENT_IMMED    0x02
+#define OP_REQ_ALL_DATA         0x03
+#define OP_SET_CAL              0x04
+#define OP_SET_SOL_CAL          0x05
+#define OP_SET_SLEW             0x06
+#define OP_SET_T0               0x07
+#define OP_SET_T1               0x07
+#define OP_SET_PID_CONSTS       0x08
+#define OP_SET_TEMP_SRC         0x09
+#define OP_SET_TEMP_FACTORS     0x0A
+#define OP_I2C_PASSSTHROUGH     0x0B
+#define OP_GET_RST_REG          0x0C
 
 
 #ifdef	__cplusplus

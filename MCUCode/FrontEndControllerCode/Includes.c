@@ -36,7 +36,7 @@ volatile uint16 temp1;
 volatile uint16 temp2;
 volatile uint16 temp3;
 volatile uint16 temp4;
-volatile uint16 temp4;
+volatile uint16 temp5;
 volatile uint8  peltierTSel;
 volatile uint8  peltierTgt0;
 volatile uint8  peltierTgt1;

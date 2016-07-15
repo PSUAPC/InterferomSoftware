@@ -162,8 +162,8 @@ uint8 UART_Data_Ready()
 void UART_Write(uint8 data)
 {
     //unsigned char parity = 0;
-    //while (!TX1IF);           // wait until TXREG empty
-    while(!TX1STAbits.TRMT); 
+    while (!TX1IF);           // wait until TXREG empty
+    //while(!TX1STAbits.TRMT); 
     // get the parity bit
     //TX1STAbits.TX9D = data % 2;
     TX1REG = data;           // send character
@@ -501,7 +501,7 @@ void init()
     TXIE = 0;    // Disable USART1 Transmit Interrupt Enable bit
     SSPIE = 0;   // Synchronous Serial Port (MSSP1) Interrupt Enable bit
     CCP1IE = 0;  // CCP1 Interrupt Enable bit
-    TMR2IE = 0;  // TMR2 to PR2 Match Interrupt Enable bit
+    TMR2IE = 1;  // TMR2 to PR2 Match Interrupt Enable bit
     TMR1IE = 0;  // Timer1 Overflow Interrupt Enable bit
     
     //  PIE2 (Peripheral 2)
@@ -519,13 +519,16 @@ void init()
     CCP4IE = 0;// Disable CCP4 Interrupt Enable bit
     CCP3IE = 0;// Disable CCP3 Interrupt Enable bit
     TMR6IE = 0;// Disable TMR6 to PR6 Match Interrupt Enable bit
-    TMR4IE = 0;// Disable TMR4 to PR4 Match Interrupt Enable bit
+    TMR4IE = 1;// Enable TMR4 to PR4 Match Interrupt Enable bit
     
     //  PIE4 (Peripheral 4)
     RC2IE = 0; // Disable USART2 Receive Interrupt Enable bit
     TX2IE = 0; // Disable USART2 Transmit Interrupt Enable bit
     BCL2IE = 0;// Disable MSSP2 Bus Collision Interrupt Enable bit
     SSP2IE = 0;// Disable Synchronous Serial Port (MSSP2) Interrupt Enable bit
+    
+    // initialize the delay timer to max
+    SET_DELAY_MAX();
     
     // enable the global interrupt
     GIE = 1;
@@ -591,6 +594,12 @@ void check_FIFO()
                         {
                             argStart = argStart + FIFO_SIZE;
                         }
+                        
+                        // reassign the read pointer (the message has been read)
+                        FIFORdPtr = FIFOTpPtr;
+                        
+                        // we finished this packet
+                        return; 
                     }
                     else
                     {
@@ -638,6 +647,233 @@ void check_FIFO()
     
 }
 
+#define WRITE_ESCD_BYTE(c) if( (c) == 0x1B ){   UART_Write(0x1B); } \
+                            UART_Write((c));
+
+#define WRITE_BYTE(c) WRITE_ESCD_BYTE((c)); \
+            checksum += (c);
+
+#define WRITE_SHORT(c)  WRITE_ESCD_BYTE((c)>>8); \
+            checksum += ((c)>>8); \
+            WRITE_ESCD_BYTE((c)&0x00FF); \
+            checksum += (c)&0x00FF;
+
+#define CHECK_ESCAPE_BYTE(c) if( (c) == 0x1B ){ packetSize += 1; } 
+#define CHECK_ESCAPE_SHORT(c) CHECK_ESCAPE_BYTE((c)>>8); \
+                              CHECK_ESCAPE_BYTE((c)&0x0FF);
+
+
+void send_UART_packet(uint8 op)
+{
+    // verify that we have a valid op
+    switch(op)
+    {
+        case (OP_POLL_TEMP_IMMED|0x80): 
+        case OP_POLL_ORIENT_IMMED:
+        case OP_REQ_ALL_DATA:
+        case OP_GET_RST_REG:
+            // valid ops
+            break;
+        default:
+            // invalid op
+            return;
+    }
+    
+    // send start of packet
+    UART_Write(0x1B);
+    UART_Write(0x01);
+    
+    // branch of operation
+    switch(op)
+    {
+        case (OP_POLL_TEMP_IMMED|0x80): 
+            // going to send ---
+            // uint8 op
+            // uint16 tempMag;
+            // uint16 temp0;
+            // uint16 temp1;
+            // uint16 temp2;
+            // uint16 temp3;
+            // uint16 temp4;
+            // uint16 temp5;
+            // size of 15
+            packetSize = 15;
+            
+            // check variables for escape characters
+            CHECK_ESCAPE_BYTE(op);
+            CHECK_ESCAPE_SHORT(tempMag);
+            CHECK_ESCAPE_SHORT(temp0);
+            CHECK_ESCAPE_SHORT(temp1);
+            CHECK_ESCAPE_SHORT(temp2);
+            CHECK_ESCAPE_SHORT(temp3);
+            CHECK_ESCAPE_SHORT(temp4);
+            CHECK_ESCAPE_SHORT(temp5);
+            
+            // write the packet size
+            UART_Write(packetSize);
+            checksum = packetSize;
+            
+            // write the packet data
+            WRITE_BYTE(op);
+            WRITE_SHORT(tempMag);
+            WRITE_SHORT(temp0);
+            WRITE_SHORT(temp1);
+            WRITE_SHORT(temp2);
+            WRITE_SHORT(temp3);
+            WRITE_SHORT(temp4);
+            WRITE_SHORT(temp5);
+            
+            // negate the checksum
+            checksum = ~checksum;
+            checksum += 1;
+            
+            // write the checksum
+            UART_Write(checksum);
+            
+            break;
+        case OP_POLL_ORIENT_IMMED:
+            // going to send ---
+            // uint8 op
+            // uint16 xMag;
+            // uint16 yMag;
+            // uint16 zMag;
+            // uint16 xAcc;
+            // uint16 yAcc;
+            // uint16 zAcc;
+            // size of 13
+            packetSize = 13;
+            
+            // check variables for escape characters
+            CHECK_ESCAPE_BYTE(op);
+            CHECK_ESCAPE_SHORT(xMag);
+            CHECK_ESCAPE_SHORT(yMag);
+            CHECK_ESCAPE_SHORT(zMag);
+            CHECK_ESCAPE_SHORT(xAcc);
+            CHECK_ESCAPE_SHORT(yAcc);
+            CHECK_ESCAPE_SHORT(zAcc);
+
+            // write the packet size
+            UART_Write(packetSize);
+            checksum = packetSize;
+            
+            // write the packet data
+            WRITE_BYTE(op);
+            WRITE_SHORT(xMag);
+            WRITE_SHORT(yMag);
+            WRITE_SHORT(zMag);
+            WRITE_SHORT(xAcc);
+            WRITE_SHORT(yAcc);
+            WRITE_SHORT(zAcc);
+
+            
+            // negate the checksum
+            checksum = ~checksum;
+            checksum += 1;
+            
+            // write the checksum
+            UART_Write(checksum);
+            
+            break;
+        case OP_REQ_ALL_DATA:
+            // going to send ---
+            // uint8 op
+            // uint16 xMag;
+            // uint16 yMag;
+            // uint16 zMag;
+            // uint16 xAcc;
+            // uint16 yAcc;
+            // uint16 zAcc;
+            // uint16 tempMag;
+            // uint16 temp0;
+            // uint16 temp1;
+            // uint16 temp2;
+            // uint16 temp3;
+            // uint16 temp4;
+            // uint16 temp5;
+            // size of 27
+            packetSize = 27;
+            
+            // check variables for escape characters
+            CHECK_ESCAPE_BYTE(op);
+            CHECK_ESCAPE_SHORT(xMag);
+            CHECK_ESCAPE_SHORT(yMag);
+            CHECK_ESCAPE_SHORT(zMag);
+            CHECK_ESCAPE_SHORT(xAcc);
+            CHECK_ESCAPE_SHORT(yAcc);
+            CHECK_ESCAPE_SHORT(zAcc);
+            CHECK_ESCAPE_SHORT(tempMag);
+            CHECK_ESCAPE_SHORT(temp0);
+            CHECK_ESCAPE_SHORT(temp1);
+            CHECK_ESCAPE_SHORT(temp2);
+            CHECK_ESCAPE_SHORT(temp3);
+            CHECK_ESCAPE_SHORT(temp4);
+            CHECK_ESCAPE_SHORT(temp5);
+            
+            // write the packet size
+            UART_Write(packetSize);
+            checksum = packetSize;
+            
+            // write the packet data
+            WRITE_BYTE(op);
+            WRITE_SHORT(xMag);
+            WRITE_SHORT(yMag);
+            WRITE_SHORT(zMag);
+            WRITE_SHORT(xAcc);
+            WRITE_SHORT(yAcc);
+            WRITE_SHORT(zAcc);
+            WRITE_SHORT(tempMag);
+            WRITE_SHORT(temp0);
+            WRITE_SHORT(temp1);
+            WRITE_SHORT(temp2);
+            WRITE_SHORT(temp3);
+            WRITE_SHORT(temp4);
+            WRITE_SHORT(temp5);
+            
+            // negate the checksum
+            checksum = ~checksum;
+            checksum += 1;
+            
+            // write the checksum
+            UART_Write(checksum);
+            
+            break;
+        case OP_GET_RST_REG:
+            // going to send ---
+            // uint8 op
+            // uint8 PCON;
+            // size of 2
+            packetSize = 2;
+            
+            // check variables for escape characters
+            CHECK_ESCAPE_BYTE(op);
+            CHECK_ESCAPE_BYTE(PCON);
+            
+            UART_Write(packetSize);
+            checksum = packetSize;
+            
+            WRITE_BYTE(op);
+            WRITE_BYTE(PCON);
+            
+            // negate the checksum
+            checksum = ~checksum;
+            checksum += 1;
+            
+            // write the checksum
+            UART_Write(checksum);
+            
+            break;
+        default:
+            // default is NOP
+            break;
+    }
+    
+    // write the checksum
+    
+    // write the end of packet
+    UART_Write(0x1B);
+    UART_Write(0x04);
+    
+}
 
 void main(void) 
 {
@@ -655,11 +891,192 @@ void main(void)
 
        PORTEbits.RE0 = ~PORTEbits.RE0;
        
-       // check the FIFO
+       
+       // always check the FIFO
        check_FIFO();
        
-       // check the current op
+       // branch on slew mode
+       if( FEStatus & STATUS_SLEW_SET )
+       {
+           // slew mode - check for valid commands
+           switch( currentOp&0x7F )
+           {
+               case OP_SET_SLEW:
+                   // check the enable bit
+                   if(currentOp&0x80)
+                   {
+                       // enable set -- do nothing
+                   }
+                   else
+                   {
+                       // disable set - disable the mode
+                       FEStatus &= (~STATUS_SLEW_SET);
+                       SET_DELAY_MAX();
+                   }
+                   break;
+               default:
+                   // do nothing - ignore all other commands
+                   break;
+           }
+       }
+       else
+       {
+           // parse the command
+           switch( currentOp&0x7F )
+           {
+               case OP_RESET_SENSORS:
+                   break;
+               case OP_POLL_TEMP_IMMED: //OP_POLL_ORIENT_IMMED  
+                   // check bit 7
+                   if(currentOp&0x80)
+                   {
+                       //OP_POLL_TEMP_IMMED
+                       poll_temp_data();
+                       send_UART_packet(OP_POLL_TEMP_IMMED|0x80); 
+                   }
+                   else
+                   {
+                       //OP_POLL_ORIENT_IMMED
+                       poll_orient_data();
+                       send_UART_packet(OP_POLL_ORIENT_IMMED); 
+                   }
+                   break;
+               case OP_REQ_ALL_DATA:
+                   // return the UART packet
+                   send_UART_packet(OP_REQ_ALL_DATA); 
+                   break;
+               case OP_SET_CAL:
+                   // check bit 7
+                   if(currentOp&0x80)
+                   {
+                       // set
+                       outFlags |= OUT_CAL_EN;
+                   }
+                   else
+                   {
+                       // unset
+                       outFlags &= ~OUT_CAL_EN;
+                   }
+                   break;
+               case OP_SET_SOL_CAL:
+                   // check bit 7
+                   if(currentOp&0x80)
+                   {
+                       // set
+                       outFlags |= OUT_SOLAR_CAL_EN;
+                   }
+                   else
+                   {
+                       // unset
+                       outFlags &= ~OUT_SOLAR_CAL_EN;
+                   }
+                   break;
+               case OP_SET_SLEW:
+                   // check bit 7
+                   if(currentOp&0x80)
+                   {
+                       // set
+                       FEStatus |= STATUS_SLEW_SET;
+                       SET_DELAY_1MS();
+                   }
+                   else
+                   {
+                       // unset
+                       FEStatus &= ~STATUS_SLEW_SET;
+                       SET_DELAY_MAX();
+                   }
+                   break;
+               case OP_SET_T0: //OP_SET_T1   
+                   // check bit 7
+                   if(currentOp&0x80)
+                   {
+                       // OP_SET_T1
+                   }
+                   else
+                   {
+                       // OP_SET_T0
+                   }
+                   break;
+               case OP_SET_PID_CONSTS:
+                   // check bit 7
+                   if(currentOp&0x80)
+                   {
+                       // save
+                   }
+                   else
+                   {
+                       // temp
+                   }
+                   break;
+               case OP_SET_TEMP_SRC:
+                   // check bit 7
+                   if(currentOp&0x80)
+                   {
+                       // Temp1
+                   }
+                   else
+                   {
+                       // Temp2
+                   }
+                   break;
+               case OP_SET_TEMP_FACTORS:
+                   // check bit 7
+                   if(currentOp&0x80)
+                   {
+                       // save
+                   }
+                   else
+                   {
+                       // temp
+                   }
+                   break;
+               case OP_I2C_PASSSTHROUGH:
+                   // @@TODO Implement this
+                   break;
+               case OP_GET_RST_REG:
+                   
+                   // return the UART packet
+                   send_UART_packet(OP_GET_RST_REG); 
+                   
+                   break;
+               default:
+                   // default is NOP
+                   break;
+           }
+       }
        
+       // clear the op
+       currentOp = 0x00; // NOP
+       
+       // pause the delay timer
+       PAUSE_DELAY_TMR();
+           
+       // check to see if woken from delay
+       if( FEStatus&STATUS_DELAY_COMPLETE )
+       {
+           
+           // branch on mode
+           if( !(FEStatus & STATUS_SLEW_SET) )
+           {
+               // poll the temp sensors
+               poll_temp_data();
+           }
+           
+           // poll the orient sensors
+           poll_orient_data();
+           
+           // return orient data (bit 7 not set)
+           send_UART_packet(OP_POLL_ORIENT_IMMED); 
+           
+           // clear the delay bit
+           FEStatus &= ~STATUS_DELAY_COMPLETE;
+           
+           // clear the delay timer
+           RESET_DELAY_TMR();
+       }
+       
+       // restart the delay timer
+       PLAY_DELAY_TMR();
        
     }
     return;
