@@ -1,4 +1,0 @@
-set tool_name "ModelSim (VHDL)"
-set corner_file_list {
-	{{"Slow Model"} {IntegratorCLPD.vho IntegratorCLPD_vhd.sdo}}
-}
