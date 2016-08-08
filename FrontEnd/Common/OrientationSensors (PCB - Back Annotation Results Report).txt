@@ -1,0 +1,26 @@
+Back Annotation Results Report
+------------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors (PCB - Back Annotation Results Report).txt
+Report Written : Saturday, December 06, 2014
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.pcb
+Design Title   : 
+Created        : 12/6/2014 4:25:40 AM
+Last Saved     : 12/6/2014 4:46:41 PM
+Editing Time   : 85 min
+Units          : mil (precision 1)
+
+Back Annotate renames from PCB "C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.pcb" to Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.sch".
+
+Renamed Component from "C2" to "C1".
+Renamed Component from "C1" to "C2".
+Renamed Component from "C6" to "C3".
+Renamed Component from "C5" to "C4".
+Renamed Component from "C3" to "C5".
+Renamed Component from "C4" to "C6".
+Renamed Component from "VR2" to "VR1".
+Renamed Component from "R2" to "R1".
+Renamed Component from "R1" to "R2".
+
+
+End Of Report.

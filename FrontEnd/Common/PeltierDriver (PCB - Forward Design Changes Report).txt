@@ -1,0 +1,36 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PeltierDriver (PCB - Forward Design Changes Report).txt
+Report Written : Sunday, April 19, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PeltierDriver.pcb
+Design Title   : 
+Created        : 4/18/2015 4:12:46 PM
+Last Saved     : 4/19/2015 4:52:29 PM
+Editing Time   : 284 min
+Units          : mil (precision 1)
+
+Disconnected pin "U3-1" from net "N0063".
+Disconnected pin "U3-2" from net "N0062".
+Disconnected pin "U3-3" from net "N0059".
+Disconnected pin "J4-3" from net "N0059".
+Disconnected pin "J4-5" from net "N0062".
+Disconnected pin "J4-6" from net "N0063".
+
+Deleted net "N0059".
+Deleted net "N0062".
+Deleted net "N0063".
+
+Added net "N0064".
+Added net "N0065".
+Added net "N0066".
+
+Connected pin "U3-1" to net "N0064".
+Connected pin "U3-2" to net "N0065".
+Connected pin "U3-3" to net "N0066".
+Connected pin "J4-3" to net "N0064".
+Connected pin "J4-4" to net "N0065".
+Connected pin "J4-5" to net "N0066".
+
+
+End Of Report.

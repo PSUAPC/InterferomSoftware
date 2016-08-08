@@ -1,0 +1,14 @@
+Pour Copper Report
+------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors (PCB - Pour Copper Report).txt
+Report Written : Saturday, December 06, 2014
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.pcb
+Design Title   : 
+Created        : 12/6/2014 4:25:40 AM
+Last Saved     : 12/6/2014 4:23:07 PM
+Editing Time   : 66 min
+Units          : mil (precision 1)
+
+
+End Of Report.

@@ -1,0 +1,15 @@
+Pour Copper Report
+------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PowerOnBoard (PCB - Pour Copper Report).txt
+Report Written : Monday, December 29, 2014
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PowerOnBoard.pcb
+Design Title   : 
+Created        : 12/9/2014 10:44:45 PM
+Last Saved     : 12/29/2014 6:25:18 PM
+Editing Time   : 473 min
+Units          : mil (precision 1)
+
+8448.7,13766.6 has no thermal spokes
+
+End Of Report.

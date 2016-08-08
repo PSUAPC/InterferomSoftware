@@ -1,0 +1,80 @@
+Schematic and PCB Check Report
+------------------------------
+
+Report File:        C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSourceMezanine (PCB - Schematic and PCB Check Report).txt
+Report Written:     Sunday, November 08, 2015
+Design Path:        C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSourceMezanine.pcb
+Design Title:       
+Created:            11/4/2015 4:47:17 AM
+Last Saved:         11/8/2015 12:26:52 AM
+Editing Time:       4289 min
+Units:              mil (precision 0)
+
+
+Checking integrity of Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSourceMezanine.sch" with PCB "C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSourceMezanine.pcb"
+======================================================================================================================================================================================
+
+Value "C4" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "C4" on component instance "3D Package" caused by library item mismatch.
+
+Value "C4" on component instance "Height" caused by library item mismatch.
+
+Value "C6" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "C6" on component instance "3D Package" caused by library item mismatch.
+
+Value "C6" on component instance "Height" caused by library item mismatch.
+
+Value "R4" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "R4" on component instance "3D Package" caused by library item mismatch.
+
+Value "R4" on component instance "Height" caused by library item mismatch.
+
+Value "C5" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "C5" on component instance "3D Package" caused by library item mismatch.
+
+Value "C5" on component instance "Height" caused by library item mismatch.
+
+Value "C23" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "C23" on component instance "3D Package" caused by library item mismatch.
+
+Value "C23" on component instance "Height" caused by library item mismatch.
+
+Value "C24" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "C24" on component instance "3D Package" caused by library item mismatch.
+
+Value "C24" on component instance "Height" caused by library item mismatch.
+
+Value "C26" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "C26" on component instance "3D Package" caused by library item mismatch.
+
+Value "C26" on component instance "Height" caused by library item mismatch.
+
+Value "C27" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "C27" on component instance "3D Package" caused by library item mismatch.
+
+Value "C27" on component instance "Height" caused by library item mismatch.
+
+Value "R10" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "R10" on component instance "3D Package" caused by library item mismatch.
+
+Value "R10" on component instance "Height" caused by library item mismatch.
+
+Value "C29" on component instance "Other Part Number" caused by library item mismatch.
+
+Value "C29" on component instance "3D Package" caused by library item mismatch.
+
+Value "C29" on component instance "Height" caused by library item mismatch.
+
+The designs are the same.
+
+
+End Of Report.

@@ -1,0 +1,287 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L 7805 U1
+U 1 1 5738F079
+P 3150 1550
+F 0 "U1" H 3300 1354 50  0000 C CNN
+F 1 "7805" H 3150 1750 50  0000 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-223" H 3150 1550 50  0001 C CNN
+F 3 "" H 3150 1550 50  0000 C CNN
+	1    3150 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X04 P2
+U 1 1 5738F129
+P 4850 1650
+F 0 "P2" H 4850 1900 50  0000 C CNN
+F 1 "CONN_01X04" V 4950 1650 50  0000 C CNN
+F 2 "Terminal_Blocks:TerminalBlock_Pheonix_MPT-2.54mm_4pol" H 4850 1650 50  0001 C CNN
+F 3 "" H 4850 1650 50  0000 C CNN
+	1    4850 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C1
+U 1 1 5738F237
+P 2400 1700
+F 0 "C1" H 2425 1800 50  0000 L CNN
+F 1 "1uF" H 2425 1600 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 2438 1550 50  0001 C CNN
+F 3 "" H 2400 1700 50  0000 C CNN
+	1    2400 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L D D1
+U 1 1 5738F2D3
+P 3150 1150
+F 0 "D1" H 3150 1250 50  0000 C CNN
+F 1 "D" H 3150 1050 50  0000 C CNN
+F 2 "LEDs:LED_0603" H 3150 1150 50  0001 C CNN
+F 3 "" H 3150 1150 50  0000 C CNN
+	1    3150 1150
+	1    0    0    -1  
+$EndComp
+Text Notes 5000 1550 0    60   ~ 0
+VCC
+Text Notes 5000 1650 0    60   ~ 0
+GND
+Text Notes 5000 1750 0    60   ~ 0
+SDA
+Text Notes 5000 1850 0    60   ~ 0
+SCL\n
+$Comp
+L R R1
+U 1 1 5738F280
+P 3900 1700
+F 0 "R1" V 3980 1700 50  0000 C CNN
+F 1 "3.3K" V 3900 1700 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 3830 1700 50  0001 C CNN
+F 3 "" H 3900 1700 50  0000 C CNN
+	1    3900 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X04 P1
+U 1 1 5738F8BF
+P 1550 1650
+F 0 "P1" H 1550 1900 50  0000 C CNN
+F 1 "CONN_01X04" V 1650 1650 50  0000 C CNN
+F 2 "Terminal_Blocks:TerminalBlock_Pheonix_MPT-2.54mm_4pol" H 1550 1650 50  0001 C CNN
+F 3 "" H 1550 1650 50  0000 C CNN
+	1    1550 1650
+	-1   0    0    -1  
+$EndComp
+$Comp
+L C C3
+U 1 1 5738FABB
+P 3650 1700
+F 0 "C3" H 3675 1800 50  0000 L CNN
+F 1 "1uF" H 3675 1600 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 3688 1550 50  0001 C CNN
+F 3 "" H 3650 1700 50  0000 C CNN
+	1    3650 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C2
+U 1 1 5738FB1A
+P 2650 1700
+F 0 "C2" H 2675 1800 50  0000 L CNN
+F 1 "10uF" H 2675 1600 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 2688 1550 50  0001 C CNN
+F 3 "" H 2650 1700 50  0000 C CNN
+	1    2650 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R2
+U 1 1 5738FC86
+P 4100 1700
+F 0 "R2" V 4180 1700 50  0000 C CNN
+F 1 "3.3k" V 4100 1700 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 4030 1700 50  0001 C CNN
+F 3 "" H 4100 1700 50  0000 C CNN
+	1    4100 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR01
+U 1 1 5738FECB
+P 3150 1900
+F 0 "#PWR01" H 3150 1650 50  0001 C CNN
+F 1 "GND" H 3150 1750 50  0000 C CNN
+F 2 "" H 3150 1900 50  0000 C CNN
+F 3 "" H 3150 1900 50  0000 C CNN
+	1    3150 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR02
+U 1 1 5738FF40
+P 4600 1950
+F 0 "#PWR02" H 4600 1700 50  0001 C CNN
+F 1 "GND" H 4600 1800 50  0000 C CNN
+F 2 "" H 4600 1950 50  0000 C CNN
+F 3 "" H 4600 1950 50  0000 C CNN
+	1    4600 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR03
+U 1 1 5738FFED
+P 1850 1950
+F 0 "#PWR03" H 1850 1700 50  0001 C CNN
+F 1 "GND" H 1850 1800 50  0000 C CNN
+F 2 "" H 1850 1950 50  0000 C CNN
+F 3 "" H 1850 1950 50  0000 C CNN
+	1    1850 1950
+	1    0    0    -1  
+$EndComp
+Text Notes 1200 1550 0    60   ~ 0
+VCC
+Text Notes 1200 1650 0    60   ~ 0
+GND
+Text Notes 1200 1750 0    60   ~ 0
+SDA
+Text Notes 1200 1850 0    60   ~ 0
+SCL\n
+Wire Wire Line
+	1750 1600 1850 1600
+Wire Wire Line
+	1850 1600 1850 1950
+Wire Wire Line
+	1750 1500 2750 1500
+Wire Wire Line
+	2400 1500 2400 1550
+Wire Wire Line
+	2650 1150 2650 1550
+Connection ~ 2400 1500
+Connection ~ 2650 1500
+Wire Wire Line
+	3550 1500 4650 1500
+Wire Wire Line
+	3650 1150 3650 1550
+Wire Wire Line
+	3900 1500 3900 1550
+Connection ~ 3650 1500
+Wire Wire Line
+	4100 1500 4100 1550
+Connection ~ 3900 1500
+Connection ~ 4100 1500
+Wire Wire Line
+	4650 1600 4600 1600
+Wire Wire Line
+	4600 1600 4600 1950
+Text GLabel 4550 1700 0    60   Input ~ 0
+SDA
+Text GLabel 4550 1800 0    60   Input ~ 0
+SCL
+Text GLabel 4150 1950 2    60   Input ~ 0
+SDA
+Text GLabel 4150 2050 2    60   Input ~ 0
+SCL
+Wire Wire Line
+	4550 1800 4650 1800
+Wire Wire Line
+	4650 1700 4550 1700
+Wire Wire Line
+	4150 1950 4100 1950
+Wire Wire Line
+	4100 1950 4100 1850
+Wire Wire Line
+	4150 2050 3900 2050
+Wire Wire Line
+	3900 2050 3900 1850
+Text GLabel 2000 1700 2    60   Input ~ 0
+SDA
+Text GLabel 2000 1800 2    60   Input ~ 0
+SCL
+Wire Wire Line
+	2000 1700 1750 1700
+Wire Wire Line
+	1750 1800 2000 1800
+Wire Wire Line
+	3150 1800 3150 1900
+$Comp
+L GND #PWR04
+U 1 1 57390B30
+P 3650 1900
+F 0 "#PWR04" H 3650 1650 50  0001 C CNN
+F 1 "GND" H 3650 1750 50  0000 C CNN
+F 2 "" H 3650 1900 50  0000 C CNN
+F 3 "" H 3650 1900 50  0000 C CNN
+	1    3650 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR05
+U 1 1 57390B56
+P 2550 1950
+F 0 "#PWR05" H 2550 1700 50  0001 C CNN
+F 1 "GND" H 2550 1800 50  0000 C CNN
+F 2 "" H 2550 1950 50  0000 C CNN
+F 3 "" H 2550 1950 50  0000 C CNN
+	1    2550 1950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2400 1850 2400 1900
+Wire Wire Line
+	2400 1900 2650 1900
+Wire Wire Line
+	2650 1900 2650 1850
+Wire Wire Line
+	2550 1950 2550 1900
+Connection ~ 2550 1900
+Wire Wire Line
+	3650 1850 3650 1900
+Wire Wire Line
+	3300 1150 3650 1150
+Wire Wire Line
+	3000 1150 2650 1150
+$EndSCHEMATC

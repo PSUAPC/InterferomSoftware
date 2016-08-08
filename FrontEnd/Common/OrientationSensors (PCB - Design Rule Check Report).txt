@@ -1,0 +1,124 @@
+Design Rule Check Report
+------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors (PCB - Design Rule Check Report).txt
+Report Written : Saturday, December 06, 2014
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.pcb
+Design Title   : 
+Created        : 12/6/2014 4:25:40 AM
+Last Saved     : 12/6/2014 4:33:45 AM
+Editing Time   : 8 min
+Units          : mil (precision 1)
+
+
+Results
+=======
+
+Pad to Pad Error (P-P) between (9280.2 11721.3) and (9280.2 11713.4) on Layer "[Top]".
+    Error between Component Pad Q1.1 (Net 'GND') and Component Pad Q1.2, Gap is 7.9 needs to be 10.0.
+Pad to Pad Error (P-P) between (9280.2 11701.6) and (9280.2 11693.7) on Layer "[Top]".
+    Error between Component Pad Q1.2 and Component Pad Q1.3 (Net 'VDD'), Gap is 7.9 needs to be 10.0.
+Pad to Pad Error (P-P) between (9280.2 11681.9) and (9280.2 11674.0) on Layer "[Top]".
+    Error between Component Pad Q1.3 (Net 'VDD') and Component Pad Q1.4 (Net 'GND'), Gap is 7.9 needs to be 10.0.
+Pad to Pad Error (P-P) between (9280.2 11662.2) and (9280.2 11654.3) on Layer "[Top]".
+    Error between Component Pad Q1.4 (Net 'GND') and Component Pad Q1.5 (Net 'N0011'), Gap is 7.9 needs to be 10.0.
+Pad to Pad Error (P-P) between (9377.9 11721.3) and (9377.9 11713.4) on Layer "[Top]".
+    Error between Component Pad Q1.6 and Component Pad Q1.7 (Net 'VDD'), Gap is 7.9 needs to be 10.0.
+Pad to Pad Error (P-P) between (9377.9 11701.6) and (9377.9 11693.7) on Layer "[Top]".
+    Error between Component Pad Q1.7 (Net 'VDD') and Component Pad Q1.8 (Net 'GND'), Gap is 7.9 needs to be 10.0.
+Pad to Pad Error (P-P) between (9377.9 11681.9) and (9377.9 11674.0) on Layer "[Top]".
+    Error between Component Pad Q1.8 (Net 'GND') and Component Pad Q1.9 (Net 'N0007'), Gap is 7.9 needs to be 10.0.
+Pad to Pad Error (P-P) between (9377.9 11662.2) and (9377.9 11654.3) on Layer "[Top]".
+    Error between Component Pad Q1.9 (Net 'N0007') and Component Pad Q1.10 (Net 'N0008'), Gap is 7.9 needs to be 10.0.
+Gap in Net "GND" between (9352.5,11290.0) and (9179.5,11521.3) 
+    GND.
+Gap in Net "GND" between (9179.5,11521.3) and (9218.7,11629.5) 
+    GND.
+Gap in Net "GND" between (9218.7,11629.5) and (9296.5,11668.1) 
+    GND.
+Gap in Net "GND" between (9296.5,11668.1) and (9296.5,11727.2) 
+    GND.
+Gap in Net "GND" between (9296.5,11668.1) and (9394.1,11687.8) 
+    GND.
+Gap in Net "GND" between (9394.1,11687.8) and (9468.7,11709.5) 
+    GND.
+Gap in Net "GND" between (9468.7,11709.5) and (9780.0,11538.3) 
+    GND.
+Gap in Net "GND" between (9780.0,11538.3) and (9780.0,11310.0) 
+    GND.
+Gap in Net "GND" between (9780.0,11310.0) and (9991.3,11360.5) 
+    GND.
+Gap in Net "N0007" between (9510.0,11290.0) and (9519.5,11401.3) 
+    N0007.
+Gap in Net "N0007" between (9519.5,11401.3) and (9394.1,11668.1) 
+    N0007.
+Gap in Net "N0008" between (9431.3,11290.0) and (9519.5,11531.3) 
+    N0008.
+Gap in Net "N0008" between (9519.5,11531.3) and (9394.1,11648.4) 
+    N0008.
+Gap in Net "N0010" between (9588.7,11290.0) and (9689.4,11310.0) 
+    N0010.
+Gap in Net "N0011" between (9296.5,11648.4) and (9236.6,11521.3) 
+    N0011.
+Gap in Net "VDD" between (9296.5,11687.8) and (9218.7,11686.6) 
+    VDD.
+Gap in Net "VDD" between (9296.5,11687.8) and (9394.1,11707.5) 
+    VDD.
+Gap in Net "VDD" between (9394.1,11707.5) and (9468.7,11766.6) 
+    VDD.
+Gap in Net "VDD" between (9394.1,11707.5) and (9576.6,11531.3) 
+    VDD.
+Gap in Net "VDD" between (9576.6,11531.3) and (9576.6,11401.3) 
+    VDD.
+Gap in Net "VDD" between (9576.6,11401.3) and (9870.6,11310.0) 
+    VDD.
+Gap in Net "VDD" between (9870.6,11310.0) and (9991.3,11303.4) 
+    VDD.
+
+Number of errors found : 30
+
+
+Settings
+========
+
+
+Spacings
+
+=========
+
+Tracks         Yes
+Pads and Vias  Yes
+Shapes         Yes
+Text           Yes
+Board          Yes
+Drills         Yes
+Components     No
+
+
+Manufacturing
+
+==============
+
+Drill Breakout                   No
+Drill Backoff                    No
+Silkscreen Overlap               No
+Copper Text In Board             No
+Min Track Width                  No
+Min Annular Ring                 No
+Min Paste Size                   No
+Vias In Pads                     No
+Unplated Vias                    No
+Unplated Pads With Inner Tracks  No
+
+
+Nets
+
+=====
+
+Net Completion                Yes
+Dangling Tracks               Yes
+Net Track Length Differences  No
+
+
+
+End Of Report.

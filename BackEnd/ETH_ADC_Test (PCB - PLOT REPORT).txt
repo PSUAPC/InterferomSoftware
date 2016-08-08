@@ -1,0 +1,254 @@
+PLOT REPORT
+-----------
+
+Report File    : C:\Users\Owner\Documents\APC\BackEnd\ETH_ADC_Test (PCB - PLOT REPORT).txt
+Report Written : Friday, February 20, 2015
+Design Path    : C:\Users\Owner\Documents\APC\BackEnd\ETH_ADC_Test.pcb
+Design Title   : 
+Created        : 2/3/2015 5:21:35 AM
+Last Saved     : 2/20/2015 8:49:00 PM
+Editing Time   : 1553 min
+Units          : mil (precision 0)
+
+
+Device Settings
+===============
+
+
+Gerber Settings
+===============
+
+    Leading zero suppression.
+    G01 assumed throughout.
+    Line termination <*> <CR> <LF>.
+    2.3 format absolute inches.
+    Format commands defined in Gerber file.
+    Aperture table defined in Gerber file.
+    Hardware arcs allowed.
+
+
+Drill Settings
+==============
+
+    Excellon Format 1    Format 2.3 absolute in mm.
+    No zero suppression.
+
+
+Plots Output
+============
+
+    Plot Job: "C:\Users\Owner\Documents\APC\BackEnd\ETH_ADC_Test.mop"
+
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\ETH_ADC_Test - Top Documentation.gbr
+
+    Layers:
+    -------------------
+    Top Documentation
+
+    D-Code  Shape  (thou)
+    ---------------------
+    D10     Round 5.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\ETH_ADC_Test - Top Copper.gbr
+
+    Layers:
+    ------------
+    Top Copper
+
+    D-Code  Shape  (thou)
+    --------------------------------------------
+    D10     Round 5.00
+    D23     Round 10.00
+    D24     Round 12.00
+    D25     Round 24.00
+    D26     Round 18.00
+    D27     Rectangle 11.81 X 59.06
+    D28     Rectangle 11.81 X 59.06  Rotation 90
+    D29     Rectangle 9.84 X 59.06  Rotation 90
+    D72     Rectangle 9.84 X 59.06
+    D73     Round 68.90
+    D74     Rectangle 37.40 X 43.31
+    D75     Rectangle 37.40 X 43.31  Rotation 90
+    D76     Round 64.96
+    D77     Rectangle 47.24 X 70.87  Rotation 90
+    D78     Rectangle 51.18 X 74.80  Rotation 90
+    D79     Round 60.00
+    D80     Square 60.00
+    D81     Rectangle 11.81 X 51.18
+    D82     Rectangle 11.81 X 51.18  Rotation 90
+    D83     Rectangle 163.39 X 163.39
+    D84     Rectangle 70.87 X 78.74  Rotation 90
+    D85     Rectangle 13.78 X 33.46
+    D86     Round 49.21
+    D87     Round 8.00
+    D88     Round 20.00
+    D89     Round 15.00
+    D90     Round 25.00
+    D104    Round 29.00
+    D105    Round 98.43
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\ETH_ADC_Test - Top Solder Mask.gbr
+
+    Layers:
+    -----------------
+    Top Solder Mask
+
+    D-Code  Shape  (thou)
+    --------------------------------------------
+    D11     Round 18.00
+    D12     Round 30.00
+    D13     Round 24.00
+    D14     Round 74.90
+    D16     Round 133.95
+    D17     Round 70.96
+    D18     Rectangle 43.40 X 49.31  Rotation 90
+    D19     Rectangle 43.40 X 49.31
+    D70     Round 66.00
+    D71     Square 66.00
+    D20     Round 55.21
+    D91     Rectangle 17.81 X 65.06
+    D92     Rectangle 17.81 X 65.06  Rotation 90
+    D93     Rectangle 15.84 X 65.06  Rotation 90
+    D94     Rectangle 15.84 X 65.06
+    D95     Rectangle 53.24 X 76.87  Rotation 90
+    D96     Rectangle 57.18 X 80.80  Rotation 90
+    D97     Rectangle 17.81 X 57.18
+    D98     Rectangle 17.81 X 57.18  Rotation 90
+    D99     Rectangle 169.39 X 169.39
+    D100    Rectangle 76.87 X 84.74  Rotation 90
+    D101    Rectangle 19.78 X 39.46
+    D106    Round 35.00
+    D107    Round 104.43
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\ETH_ADC_Test - Bottom Copper.gbr
+
+    Layers:
+    ---------------
+    Bottom Copper
+
+    D-Code  Shape  (thou)
+    --------------------------------------------
+    D10     Round 5.00
+    D23     Round 10.00
+    D24     Round 12.00
+    D25     Round 24.00
+    D26     Round 18.00
+    D73     Round 68.90
+    D74     Rectangle 37.40 X 43.31
+    D75     Rectangle 37.40 X 43.31  Rotation 90
+    D76     Round 64.96
+    D79     Round 60.00
+    D80     Square 60.00
+    D86     Round 49.21
+    D87     Round 8.00
+    D88     Round 20.00
+    D89     Round 15.00
+    D90     Round 25.00
+    D102    Rectangle 37.40 X 84.65  Rotation 90
+    D103    Rectangle 84.65 X 127.95
+    D104    Round 29.00
+    D105    Round 98.43
+    D150    Round 40.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\ETH_ADC_Test - Bottom Documentation.gbr
+
+    Layers:
+    ----------------------
+    Bottom Documentation
+
+    D-Code  Shape  (thou)
+    ---------------------
+    D10     Round 5.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\ETH_ADC_Test - Bottom Solder Mask.gbr
+
+    Layers:
+    --------------------
+    Bottom Solder Mask
+
+    D-Code  Shape  (thou)
+    --------------------------------------------
+    D11     Round 18.00
+    D12     Round 30.00
+    D13     Round 24.00
+    D14     Round 74.90
+    D16     Round 133.95
+    D17     Round 70.96
+    D18     Rectangle 43.40 X 49.31  Rotation 90
+    D19     Rectangle 43.40 X 49.31
+    D70     Round 66.00
+    D71     Square 66.00
+    D20     Round 55.21
+    D21     Rectangle 43.40 X 90.65  Rotation 90
+    D22     Rectangle 90.65 X 133.95
+    D106    Round 35.00
+    D107    Round 104.43
+
+NC Drill Output
+===============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\ETH_ADC_Test - Drill Data - Through Hole.drl
+
+    Output:
+    --------------------------
+    Plated Round Drill Holes
+    Plated Slots
+    Plated Board Outlines
+
+    Tool   Size       Count    ID
+    -----------------------------
+    T001   00.008 in  134    T
+    T002   00.012 in  28     U
+    T003   00.013 in  3      N
+    T004   00.016 in  3      V
+    T005   00.024 in  3      Z
+    T006   00.031 in  2      J
+    T007   00.033 in  6      S
+    T008   00.035 in  36     B
+    T009   00.035 in  12     Y
+    T010   00.039 in  14     G
+    T011   00.128 in  2      X
+    -----------------------------
+    Total             243
+    -----------------------------
+    Tool   Size       Count    ID
+    -----------------------------
+    T001   00.025 in  1
+    T002   00.062 in  2      W
+    -----------------------------
+    Total             3
+    -----------------------------
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\ETH_ADC_Test - Outline.gbr
+
+    Layers:
+    ----------------
+    Board Outlines
+
+    D-Code  Shape  (thou)
+    ---------------------
+    D10     Round 5.00
+
+End Of Report.

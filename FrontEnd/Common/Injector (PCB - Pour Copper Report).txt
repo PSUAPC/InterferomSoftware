@@ -1,0 +1,17 @@
+Pour Copper Report
+------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector (PCB - Pour Copper Report).txt
+Report Written : Thursday, March 26, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 3/26/2015 3:26:07 PM
+Editing Time   : 3559 min
+Units          : mil (precision 0)
+
+4421,3136 has no thermal spokes
+4204,3352 has no thermal spokes
+4220,3410 has no thermal spokes
+
+End Of Report.

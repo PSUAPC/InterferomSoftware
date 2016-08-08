@@ -1,0 +1,24 @@
+Schematic and PCB Check Report
+------------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Yagi\Yagi (PCB - Schematic and PCB Check Report).txt
+Report Written : Sunday, April 26, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Yagi\Yagi.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 4/26/2015 3:21:47 PM
+Editing Time   : 2585 min
+Units          : mil (precision 0)
+
+
+Checking integrity of Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Yagi\Yagi.sch" with PCB "C:\Users\Owner\Documents\APC\FrontEnd\Yagi\Yagi.pcb"
+====================================================================================================================================================
+
+The PCB and Schematic designs do not match.
+To bring them into line, you will need to make the following changes to the PCB design:
+
+Connect Pin BR8-3,4,5,6,7,8,9,10,11,12,13,14,15,16 to Net "GND"
+Connect Pin BR8-3,4,5,6,7,8,9,10,11,12,13,14,15,16 to Net "GND"
+
+
+End Of Report.

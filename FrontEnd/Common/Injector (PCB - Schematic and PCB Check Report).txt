@@ -1,0 +1,24 @@
+Schematic and PCB Check Report
+------------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector (PCB - Schematic and PCB Check Report).txt
+Report Written : Wednesday, March 25, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 3/25/2015 10:04:21 PM
+Editing Time   : 3069 min
+Units          : mil (precision 0)
+
+
+Checking integrity of Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.sch" with PCB "C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.pcb"
+================================================================================================================================================================
+
+The PCB and Schematic designs do not match.
+To bring them into line, you will need to make the following changes to the PCB design:
+
+Change component reference "C7" to use component "0603 Capacitor bottom", package "DIL" instead of component "0603 Capacitor", package "SM".
+Change component reference "R5" to use component "0603Resistor_bot", package "SM" instead of component "0603 resistor", package "SM".
+
+
+End Of Report.

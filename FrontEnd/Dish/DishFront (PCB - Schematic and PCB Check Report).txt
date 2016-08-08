@@ -1,0 +1,28 @@
+Schematic and PCB Check Report
+------------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\DishFront (PCB - Schematic and PCB Check Report).txt
+Report Written : Sunday, April 26, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\DishFront.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 4/26/2015 2:41:21 PM
+Editing Time   : 4025 min
+Units          : mil (precision 0)
+
+
+Checking integrity of Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Dish\DishFront.sch" with PCB "C:\Users\Owner\Documents\APC\FrontEnd\Dish\DishFront.pcb"
+==============================================================================================================================================================
+
+The PCB and Schematic designs do not match.
+To bring them into line, you will need to make the following changes to the PCB design:
+
+Component 'MC_BandPass_BPF-A400+' package 'SM' in Schematic is newer version than PCB, use Update Component to correct this.
+
+Add Net "N0062"
+
+Connect Pin L5-4 to Net "N0062"
+Connect Pin C7-1 to Net "N0062"
+
+
+End Of Report.

@@ -1,0 +1,17 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector (PCB - Forward Design Changes Report).txt
+Report Written : Wednesday, March 25, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 3/25/2015 10:04:21 PM
+Editing Time   : 3069 min
+Units          : mil (precision 0)
+
+Changed component reference "C7" from component "0603 Capacitor", package "SM" to component "0603 Capacitor bottom", package "DIL".
+Changed component reference "R5" from component "0603 resistor", package "SM" to component "0603Resistor_bot", package "SM".
+
+
+End Of Report.

@@ -1,0 +1,67 @@
+Back Annotation Results Report
+------------------------------
+
+Report File:        C:\Users\Owner\Documents\APC\BackEnd\IntegratorTest (PCB - Back Annotation Results Report).txt
+Report Written:     Sunday, October 11, 2015
+Design Path:        C:\Users\Owner\Documents\APC\BackEnd\IntegratorTest.pcb
+Design Title:       
+Created:            10/5/2015 10:57:59 PM
+Last Saved:         10/11/2015 3:57:34 PM
+Editing Time:       864 min
+Units:              mil (precision 0)
+
+Back Annotate renames from PCB "C:\Users\Owner\Documents\APC\BackEnd\IntegratorTest.pcb" to Schematic "C:\Users\Owner\Documents\APC\BackEnd\IntegratorTest.sch".
+
+Renamed Component from "J6" to "J1".
+Renamed Component from "J5" to "J2".
+Renamed Component from "J4" to "J3".
+Renamed Component from "J1" to "J4".
+Renamed Component from "J3" to "J5".
+Renamed Component from "J2" to "J6".
+Renamed Component from "R18" to "R1".
+Renamed Component from "R11" to "R2".
+Renamed Component from "R12" to "R11".
+Renamed Component from "R2" to "R12".
+Renamed Component from "R1" to "R18".
+Renamed Component from "C34" to "C2".
+Renamed Component from "C13" to "C3".
+Renamed Component from "C12" to "C4".
+Renamed Component from "C11" to "C5".
+Renamed Component from "C27" to "C6".
+Renamed Component from "C6" to "C8".
+Renamed Component from "C5" to "C9".
+Renamed Component from "C26" to "C10".
+Renamed Component from "C21" to "C11".
+Renamed Component from "C8" to "C12".
+Renamed Component from "C10" to "C13".
+Renamed Component from "C25" to "C14".
+Renamed Component from "C23" to "C17".
+Renamed Component from "C17" to "C19".
+Renamed Component from "C19" to "C20".
+Renamed Component from "C14" to "C21".
+Renamed Component from "C20" to "C23".
+Renamed Component from "U3" to "U1".
+Renamed Component from "U1" to "U3".
+Renamed Component from "R20" to "R3".
+Renamed Component from "R19" to "R4".
+Renamed Component from "R16" to "R5".
+Renamed Component from "R17" to "R6".
+Renamed Component from "R14" to "R7".
+Renamed Component from "R6" to "R8".
+Renamed Component from "R5" to "R9".
+Renamed Component from "R3" to "R10".
+Renamed Component from "R7" to "R13".
+Renamed Component from "R4" to "R14".
+Renamed Component from "R10" to "R16".
+Renamed Component from "R9" to "R17".
+Renamed Component from "R13" to "R19".
+Renamed Component from "R8" to "R20".
+Renamed Component from "C35" to "C7".
+Renamed Component from "C22" to "C15".
+Renamed Component from "C18" to "C16".
+Renamed Component from "C16" to "C18".
+Renamed Component from "C7" to "C22".
+Renamed Component from "C15" to "C25".
+
+
+End Of Report.

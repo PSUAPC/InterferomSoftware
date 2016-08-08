@@ -1,0 +1,30 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\SourceBoard (PCB - Forward Design Changes Report).txt
+Report Written : Sunday, April 19, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\SourceBoard.pcb
+Design Title   : 
+Created        : 1/11/2015 2:46:48 AM
+Last Saved     : 4/19/2015 6:14:29 PM
+Editing Time   : 804 min
+Units          : mil (precision 0)
+
+Disconnected pin "J9-1" from net "VIN".
+Disconnected pin "J9-2" from net "VIN".
+Disconnected pin "J9-3" from net "GND".
+Disconnected pin "J9-4" from net "GND".
+Disconnected pin "J9-5" from net "GND".
+Disconnected pin "J9-6" from net "GND".
+Disconnected pin "J9-7" from net "VIN".
+Disconnected pin "J9-8" from net "VIN".
+
+Deleted component reference "J9".
+
+Added component reference "J7" of component "2 PIN TE PCB Mount", package "DIL".
+
+Connected pin "J7-1" to net "GND".
+Connected pin "J7-2" to net "VIN".
+
+
+End Of Report.

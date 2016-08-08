@@ -1,0 +1,65 @@
+Design Rule Check Report
+------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PowerOnBoard (PCB - Design Rule Check Report).txt
+Report Written : Monday, December 29, 2014
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PowerOnBoard.pcb
+Design Title   : 
+Created        : 12/9/2014 10:44:45 PM
+Last Saved     : 12/29/2014 6:25:18 PM
+Editing Time   : 474 min
+Units          : mil (precision 1)
+
+
+Results
+=======
+
+Dangling Track from (7240.0,13920.0) to (7170.0,13932.5) on layer Top Copper
+
+Number of errors found : 1
+
+
+Settings
+========
+
+
+Spacings
+
+=========
+
+Tracks         No
+Pads and Vias  No
+Shapes         No
+Text           No
+Board          No
+Drills         No
+Components     No
+
+
+Manufacturing
+
+==============
+
+Drill Breakout                   No
+Drill Backoff                    No
+Silkscreen Overlap               No
+Copper Text In Board             No
+Min Track Width                  No
+Min Annular Ring                 No
+Min Paste Size                   No
+Vias In Pads                     No
+Unplated Vias                    No
+Unplated Pads With Inner Tracks  No
+
+
+Nets
+
+=====
+
+Net Completion                Yes
+Dangling Tracks               Yes
+Net Track Length Differences  No
+
+
+
+End Of Report.

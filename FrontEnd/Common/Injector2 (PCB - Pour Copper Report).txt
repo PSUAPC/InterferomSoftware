@@ -1,0 +1,14 @@
+Pour Copper Report
+------------------
+
+Report File:        C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector2 (PCB - Pour Copper Report).txt
+Report Written:     Saturday, November 07, 2015
+Design Path:        C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector2.pcb
+Design Title:       
+Created:            4/15/2015 10:49:19 AM
+Last Saved:         11/7/2015 2:42:39 PM
+Editing Time:       4730 min
+Units:              mil (precision 0)
+
+
+End Of Report.

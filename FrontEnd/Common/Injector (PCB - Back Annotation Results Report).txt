@@ -1,0 +1,33 @@
+Back Annotation Results Report
+------------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector (PCB - Back Annotation Results Report).txt
+Report Written : Wednesday, March 25, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 3/25/2015 2:19:05 PM
+Editing Time   : 2609 min
+Units          : mil (precision 0)
+
+Back Annotate renames from PCB "C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.pcb" to Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.sch".
+
+Renamed Component from "J3" to "J1".
+Renamed Component from "J9" to "J2".
+Renamed Component from "J13" to "J3".
+Renamed Component from "J1" to "J5".
+Renamed Component from "J2" to "J6".
+Renamed Component from "L2" to "L1".
+Renamed Component from "R15" to "R1".
+Renamed Component from "R1" to "R3".
+Renamed Component from "R3" to "R4".
+Renamed Component from "Q17" to "Q1".
+Renamed Component from "C15" to "C1".
+Renamed Component from "C20" to "C2".
+Renamed Component from "C17" to "C3".
+Renamed Component from "C19" to "C4".
+Renamed Component from "C16" to "C5".
+Renamed Component from "C18" to "C6".
+
+
+End Of Report.

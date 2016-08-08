@@ -1,0 +1,19 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\DishFront (PCB - Forward Design Changes Report).txt
+Report Written : Sunday, April 26, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\DishFront.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 4/26/2015 2:41:21 PM
+Editing Time   : 4025 min
+Units          : mil (precision 0)
+
+Added net "N0062".
+
+Connected pin "L5-4" to net "N0062".
+Connected pin "C7-1" to net "N0062".
+
+
+End Of Report.

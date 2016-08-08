@@ -1,0 +1,16 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PowerOnBoard (PCB - Forward Design Changes Report).txt
+Report Written : Sunday, December 28, 2014
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PowerOnBoard.pcb
+Design Title   : 
+Created        : 12/9/2014 10:44:45 PM
+Last Saved     : 12/28/2014 10:56:26 PM
+Editing Time   : 258 min
+Units          : mil (precision 1)
+
+Connected pin "R2-2" to net "GND".
+
+
+End Of Report.

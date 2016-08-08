@@ -1,0 +1,150 @@
+Schematic and PCB Check Report
+------------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\408BandPass (PCB - Schematic and PCB Check Report).txt
+Report Written : Wednesday, January 14, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\408BandPass.pcb
+Design Title   : 
+Created        : 12/4/2014 3:57:17 PM
+Last Saved     : 12/4/2014 4:03:05 PM
+Editing Time   : 11 min
+Units          : mil (precision 1)
+
+
+Checking integrity of Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Dish\408BandPass.sch" with PCB "C:\Users\Owner\Documents\APC\FrontEnd\Dish\408BandPass.pcb"
+==================================================================================================================================================================
+
+The PCB and Schematic designs do not match.
+To bring them into line, you will need to make the following changes to the PCB design:
+
+Disconnect Pin C1-1 from Net "N0003"
+Disconnect Pin C1-2 from Net "N0001"
+Disconnect Pin L1-2 from Net "N0003"
+Disconnect Pin L2-1 from Net "GND"
+Disconnect Pin L2-2 from Net "N0001"
+Disconnect Pin C3-1 from Net "N0005"
+Disconnect Pin C3-2 from Net "N0004"
+Disconnect Pin L3-1 from Net "N0001"
+Disconnect Pin L3-2 from Net "N0005"
+Disconnect Pin L4-1 from Net "GND"
+Disconnect Pin L4-2 from Net "N0004"
+Disconnect Pin C5-1 from Net "N0007"
+Disconnect Pin C5-2 from Net "N0006"
+Disconnect Pin L5-1 from Net "N0004"
+Disconnect Pin L5-2 from Net "N0007"
+Disconnect Pin L6-1 from Net "GND"
+Disconnect Pin L6-2 from Net "N0006"
+Disconnect Pin C7-1 from Net "N0009"
+Disconnect Pin C7-2 from Net "N0008"
+Disconnect Pin L7-1 from Net "N0006"
+Disconnect Pin L7-2 from Net "N0009"
+Disconnect Pin L8-1 from Net "GND"
+Disconnect Pin L8-2 from Net "N0008"
+Disconnect Pin C8-2 from Net "N0008"
+Disconnect Pin C9-1 from Net "N0011"
+Disconnect Pin C9-2 from Net "N0010"
+Disconnect Pin L9-1 from Net "N0008"
+Disconnect Pin L9-2 from Net "N0011"
+Disconnect Pin L10-1 from Net "GND"
+Disconnect Pin L10-2 from Net "N0010"
+Disconnect Pin C10-1 from Net "GND"
+Disconnect Pin C10-2 from Net "N0010"
+Disconnect Pin C11-1 from Net "N0013"
+Disconnect Pin C11-2 from Net "N0012"
+Disconnect Pin L11-1 from Net "N0010"
+Disconnect Pin L11-2 from Net "N0013"
+Disconnect Pin L12-1 from Net "GND"
+Disconnect Pin L12-2 from Net "N0012"
+Disconnect Pin C12-2 from Net "N0012"
+
+Delete Net "N0001"
+Delete Net "N0003"
+Delete Net "N0004"
+Delete Net "N0005"
+Delete Net "N0006"
+Delete Net "N0007"
+Delete Net "N0008"
+Delete Net "N0009"
+Delete Net "N0010"
+Delete Net "N0011"
+Delete Net "N0012"
+Delete Net "N0013"
+
+Delete Component "C1" [0603 Capacitor]
+Delete Component "L1" [0603 Inductor]
+Delete Component "L2" [0603 Inductor]
+Delete Component "C3" [0603 Capacitor]
+Delete Component "L3" [0603 Inductor]
+Delete Component "L4" [0603 Inductor]
+Delete Component "C5" [0603 Capacitor]
+Delete Component "L5" [0603 Inductor]
+Delete Component "L6" [0603 Inductor]
+Delete Component "C7" [0603 Capacitor]
+Delete Component "L7" [0603 Inductor]
+Delete Component "L12" [0603 Inductor]
+
+Rename from "Component "C2" [0603 Capacitor]" to "Component "C13" [0603 Capacitor]"
+Rename from "Component "C4" [0603 Capacitor]" to "Component "C14" [0603 Capacitor]"
+Rename from "Component "C6" [0603 Capacitor]" to "Component "C15" [0603 Capacitor]"
+
+Component '0603 Capacitor' package 'SM' in Schematic is newer version than PCB, use Update Component to correct this.
+
+Add Component "C16" [0603 Capacitor]
+Add Component "C17" [0603 Capacitor]
+Add Component "C18" [0603 Capacitor]
+Add Component "C19" [0603 Capacitor]
+Add Component "C20" [0603 Capacitor]
+Add Component "C21" [0603 Capacitor]
+Add Component "C22" [0603 Capacitor]
+Add Component "C23" [0603 Capacitor]
+Add Component "C24" [0603 Capacitor]
+
+Add Net "N0028"
+Add Net "N0029"
+Add Net "N0031"
+Add Net "N0033"
+Add Net "N0035"
+Add Net "N0037"
+Add Net "N0039"
+Add Net "N0042"
+
+Connect Pin L8-1 to Net "N0028"
+Connect Pin L8-2 to Net "N0029"
+Connect Pin C8-2 to Net "N0028"
+Connect Pin L9-1 to Net "N0031"
+Connect Pin L9-2 to Net "N0033"
+Connect Pin C9-1 to Net "N0029"
+Connect Pin C9-2 to Net "N0031"
+Connect Pin C10-1 to Net "N0033"
+Connect Pin C10-2 to Net "N0035"
+Connect Pin L10-1 to Net "N0035"
+Connect Pin L10-2 to Net "N0037"
+Connect Pin C11-1 to Net "N0037"
+Connect Pin C11-2 to Net "N0039"
+Connect Pin L11-1 to Net "N0039"
+Connect Pin L11-2 to Net "N0042"
+Connect Pin C12-2 to Net "N0042"
+Connect Pin C13-2 to Net "N0039"
+Connect Pin C14-2 to Net "N0037"
+Connect Pin C15-2 to Net "N0035"
+Connect Pin C16-1 to Net "GND"
+Connect Pin C16-2 to Net "N0033"
+Connect Pin C17-1 to Net "GND"
+Connect Pin C17-2 to Net "N0031"
+Connect Pin C18-1 to Net "GND"
+Connect Pin C18-2 to Net "N0029"
+Connect Pin C19-1 to Net "N0029"
+Connect Pin C19-2 to Net "GND"
+Connect Pin C20-1 to Net "N0031"
+Connect Pin C20-2 to Net "GND"
+Connect Pin C21-1 to Net "N0033"
+Connect Pin C21-2 to Net "GND"
+Connect Pin C22-1 to Net "N0035"
+Connect Pin C22-2 to Net "GND"
+Connect Pin C23-1 to Net "N0037"
+Connect Pin C23-2 to Net "GND"
+Connect Pin C24-1 to Net "N0039"
+Connect Pin C24-2 to Net "GND"
+
+
+End Of Report.

@@ -1,0 +1,20 @@
+Schematic and PCB Check Report
+------------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\1420BandPass (PCB - Schematic and PCB Check Report).txt
+Report Written : Thursday, January 15, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\1420BandPass.pcb
+Design Title   : 
+Created        : 1/15/2015 12:05:13 AM
+Last Saved     : 1/15/2015 1:09:36 AM
+Editing Time   : 64 min
+Units          : mil (precision 1)
+
+
+Checking integrity of Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Dish\1420BandPass.sch" with PCB "C:\Users\Owner\Documents\APC\FrontEnd\Dish\1420BandPass.pcb"
+====================================================================================================================================================================
+
+The designs are the same.
+
+
+End Of Report.

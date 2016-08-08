@@ -1,0 +1,18 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors (PCB - Forward Design Changes Report).txt
+Report Written : Saturday, December 06, 2014
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.pcb
+Design Title   : 
+Created        : 12/6/2014 4:25:40 AM
+Last Saved     : 12/6/2014 4:41:44 PM
+Editing Time   : 81 min
+Units          : mil (precision 1)
+
+Disconnected pin "Q2-7" from net "VDD".
+
+Changed component reference "C6" from component "0603 Capacitor", package "SM" to component "0603 Capacitor bottom", package "DIL".
+
+
+End Of Report.

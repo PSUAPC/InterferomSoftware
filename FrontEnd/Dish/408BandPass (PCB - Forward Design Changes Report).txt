@@ -1,0 +1,144 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\408BandPass (PCB - Forward Design Changes Report).txt
+Report Written : Wednesday, January 14, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\408BandPass.pcb
+Design Title   : 
+Created        : 12/4/2014 3:57:17 PM
+Last Saved     : 12/4/2014 4:03:05 PM
+Editing Time   : 12 min
+Units          : mil (precision 1)
+
+Disconnected pin "C1-1" from net "N0003".
+Disconnected pin "C1-2" from net "N0001".
+Disconnected pin "L1-2" from net "N0003".
+Disconnected pin "L2-1" from net "GND".
+Disconnected pin "L2-2" from net "N0001".
+Disconnected pin "C3-1" from net "N0005".
+Disconnected pin "C3-2" from net "N0004".
+Disconnected pin "L3-1" from net "N0001".
+Disconnected pin "L3-2" from net "N0005".
+Disconnected pin "L4-1" from net "GND".
+Disconnected pin "L4-2" from net "N0004".
+Disconnected pin "C5-1" from net "N0007".
+Disconnected pin "C5-2" from net "N0006".
+Disconnected pin "L5-1" from net "N0004".
+Disconnected pin "L5-2" from net "N0007".
+Disconnected pin "L6-1" from net "GND".
+Disconnected pin "L6-2" from net "N0006".
+Disconnected pin "C7-1" from net "N0009".
+Disconnected pin "C7-2" from net "N0008".
+Disconnected pin "L7-1" from net "N0006".
+Disconnected pin "L7-2" from net "N0009".
+Disconnected pin "L8-1" from net "GND".
+Disconnected pin "L8-2" from net "N0008".
+Disconnected pin "C8-2" from net "N0008".
+Disconnected pin "C9-1" from net "N0011".
+Disconnected pin "C9-2" from net "N0010".
+Disconnected pin "L9-1" from net "N0008".
+Disconnected pin "L9-2" from net "N0011".
+Disconnected pin "L10-1" from net "GND".
+Disconnected pin "L10-2" from net "N0010".
+Disconnected pin "C10-1" from net "GND".
+Disconnected pin "C10-2" from net "N0010".
+Disconnected pin "C11-1" from net "N0013".
+Disconnected pin "C11-2" from net "N0012".
+Disconnected pin "L11-1" from net "N0010".
+Disconnected pin "L11-2" from net "N0013".
+Disconnected pin "L12-1" from net "GND".
+Disconnected pin "L12-2" from net "N0012".
+Disconnected pin "C12-2" from net "N0012".
+
+Deleted component reference "C1".
+Deleted component reference "L1".
+Deleted component reference "L2".
+Deleted component reference "C3".
+Deleted component reference "L3".
+Deleted component reference "L4".
+Deleted component reference "C5".
+Deleted component reference "L5".
+Deleted component reference "L6".
+Deleted component reference "C7".
+Deleted component reference "L7".
+Deleted component reference "L12".
+
+Deleted net "N0001".
+Deleted net "N0003".
+Deleted net "N0004".
+Deleted net "N0005".
+Deleted net "N0006".
+Deleted net "N0007".
+Deleted net "N0008".
+Deleted net "N0009".
+Deleted net "N0010".
+Deleted net "N0011".
+Deleted net "N0012".
+Deleted net "N0013".
+
+Added net "N0028".
+Added net "N0029".
+Added net "N0031".
+Added net "N0033".
+Added net "N0035".
+Added net "N0037".
+Added net "N0039".
+Added net "N0042".
+
+Added component reference "C16" of component "0603 Capacitor", package "SM".
+Added component reference "C17" of component "0603 Capacitor", package "SM".
+Added component reference "C18" of component "0603 Capacitor", package "SM".
+Added component reference "C19" of component "0603 Capacitor", package "SM".
+Added component reference "C20" of component "0603 Capacitor", package "SM".
+Added component reference "C21" of component "0603 Capacitor", package "SM".
+Added component reference "C22" of component "0603 Capacitor", package "SM".
+Added component reference "C23" of component "0603 Capacitor", package "SM".
+Added component reference "C24" of component "0603 Capacitor", package "SM".
+
+Renamed component reference "C13" to "C13".
+
+Renamed component reference "C14" to "C14".
+
+Renamed component reference "C15" to "C15".
+
+
+Connected pin "L8-1" to net "N0028".
+Connected pin "L8-2" to net "N0029".
+Connected pin "C8-2" to net "N0028".
+Connected pin "L9-1" to net "N0031".
+Connected pin "L9-2" to net "N0033".
+Connected pin "C9-1" to net "N0029".
+Connected pin "C9-2" to net "N0031".
+Connected pin "C10-1" to net "N0033".
+Connected pin "C10-2" to net "N0035".
+Connected pin "L10-1" to net "N0035".
+Connected pin "L10-2" to net "N0037".
+Connected pin "C11-1" to net "N0037".
+Connected pin "C11-2" to net "N0039".
+Connected pin "L11-1" to net "N0039".
+Connected pin "L11-2" to net "N0042".
+Connected pin "C12-2" to net "N0042".
+Connected pin "C13-2" to net "N0039".
+Connected pin "C14-2" to net "N0037".
+Connected pin "C15-2" to net "N0035".
+Connected pin "C16-1" to net "GND".
+Connected pin "C16-2" to net "N0033".
+Connected pin "C17-1" to net "GND".
+Connected pin "C17-2" to net "N0031".
+Connected pin "C18-1" to net "GND".
+Connected pin "C18-2" to net "N0029".
+Connected pin "C19-1" to net "N0029".
+Connected pin "C19-2" to net "GND".
+Connected pin "C20-1" to net "N0031".
+Connected pin "C20-2" to net "GND".
+Connected pin "C21-1" to net "N0033".
+Connected pin "C21-2" to net "GND".
+Connected pin "C22-1" to net "N0035".
+Connected pin "C22-2" to net "GND".
+Connected pin "C23-1" to net "N0037".
+Connected pin "C23-2" to net "GND".
+Connected pin "C24-1" to net "N0039".
+Connected pin "C24-2" to net "GND".
+
+
+End Of Report.

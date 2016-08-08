@@ -1,0 +1,16 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Yagi\YagiCombiner (PCB - Forward Design Changes Report).txt
+Report Written : Tuesday, April 14, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Yagi\YagiCombiner.pcb
+Design Title   : 
+Created        : 4/12/2015 3:14:04 PM
+Last Saved     : 4/12/2015 6:55:36 PM
+Editing Time   : 222 min
+Units          : mil (precision 0)
+
+Changed component reference "J6" from component "SMA_EDGE", package "SM" to component "BoardEdgePort", package "SM".
+
+
+End Of Report.

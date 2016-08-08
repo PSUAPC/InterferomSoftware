@@ -1,0 +1,17 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Yagi\Yagi (PCB - Forward Design Changes Report).txt
+Report Written : Sunday, April 26, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Yagi\Yagi.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 4/26/2015 3:21:47 PM
+Editing Time   : 2585 min
+Units          : mil (precision 0)
+
+Connected pin "BR8-15" to net "GND".
+Connected pin "BR8-16" to net "GND".
+
+
+End Of Report.

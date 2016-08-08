@@ -1,0 +1,242 @@
+PLOT REPORT
+-----------
+
+Report File:        C:\Users\Owner\Documents\APC\BackEnd\IntegratorTest (PCB - PLOT REPORT).txt
+Report Written:     Sunday, October 11, 2015
+Design Path:        C:\Users\Owner\Documents\APC\BackEnd\IntegratorTest.pcb
+Design Title:       
+Created:            10/5/2015 10:57:59 PM
+Last Saved:         10/11/2015 4:24:15 PM
+Editing Time:       891 min
+Units:              mil (precision 0)
+
+
+Device Settings
+===============
+
+
+Gerber Settings
+===============
+
+    Leading zero suppression.
+    G01 assumed throughout.
+    Line termination <*> <CR> <LF>.
+    2.5 format absolute inches.
+    Format commands defined in Gerber file.
+    Aperture table defined in Gerber file.
+    Hardware arcs allowed.
+
+
+Drill Settings
+==============
+
+    Excellon Format 1    Format 2.4 absolute in inches.
+    No zero suppression.
+
+
+Plots Output
+============
+
+    Plot Job: "C:\Users\Owner\Documents\APC\BackEnd\IntegratorTest.mop"
+
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Top Documentation.grb
+
+    Layers:
+    ---------------------
+    Top Documentation
+    Top Silkscreen
+
+    D-Code Shape  (thou)
+    -----------------------
+    D10    Round 5.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Top Copper.grb
+
+    Layers:
+    --------------
+    Top Copper
+
+    D-Code Shape  (thou)
+    -----------------------------------------------
+    D10    Round 5.00
+    D11    Round 10.00
+    D12    Round 1.00
+    D13    Square 60.00
+    D14    Round 60.00
+    D15    Rectangle 37.40 X 43.31  Rotation 90
+    D16    Rectangle 37.40 X 43.31
+    D17    Rectangle 41.34 X 51.18  Rotation 90
+    D19    Rectangle 41.34 X 51.18
+    D70    Round 78.74
+    D71    Rectangle 96.46 X 200.00  Rotation 90
+    D21    Round 48.00
+    D22    Round 20.00
+    D23    Round 25.00
+    D24    Round 15.00
+    D25    Round 30.00
+    D26    Round 40.00
+    D76    Rectangle 13.58 X 37.40  Rotation 90
+    D77    Rectangle 13.58 X 37.40
+    D78    Rectangle 23.23 X 57.87  Rotation 90
+    D79    Rectangle 47.24 X 70.87  Rotation 90
+    D80    Rectangle 37.40 X 84.65  Rotation 90
+    D81    Rectangle 84.65 X 127.95
+    D82    Rectangle 90.16 X 200.00  Rotation 90
+    D83    Round 50.00
+    D84    Round 12.00
+    D85    Round 6.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Top Solder Mask.grb
+
+    Layers:
+    -------------------
+    Top Solder Mask
+
+    D-Code Shape  (thou)
+    ------------------------------------------------
+    D27    Square 66.00
+    D28    Round 66.00
+    D29    Rectangle 43.40 X 49.31  Rotation 90
+    D72    Rectangle 43.40 X 49.31
+    D73    Rectangle 47.34 X 57.18  Rotation 90
+    D86    Rectangle 53.24 X 76.87  Rotation 90
+    D87    Rectangle 43.40 X 90.65  Rotation 90
+    D88    Rectangle 90.65 X 133.95
+    D149   Rectangle 19.58 X 43.40  Rotation 90
+    D151   Rectangle 19.58 X 43.40
+    D152   Rectangle 47.34 X 57.18
+    D153   Rectangle 29.23 X 63.87  Rotation 90
+    D154   Round 84.74
+    D155   Rectangle 96.16 X 206.00  Rotation 90
+    D156   Rectangle 102.46 X 206.00  Rotation 90
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Bottom Copper.grb
+
+    Layers:
+    -----------------
+    Bottom Copper
+
+    D-Code Shape  (thou)
+    -----------------------------------------------
+    D10    Round 5.00
+    D11    Round 10.00
+    D12    Round 1.00
+    D13    Square 60.00
+    D14    Round 60.00
+    D15    Rectangle 37.40 X 43.31  Rotation 90
+    D16    Rectangle 37.40 X 43.31
+    D17    Rectangle 41.34 X 51.18  Rotation 90
+    D18    Rectangle 24.02 X 39.37
+    D19    Rectangle 41.34 X 51.18
+    D70    Round 78.74
+    D71    Rectangle 96.46 X 200.00  Rotation 90
+    D20    Rectangle 31.89 X 61.81  Rotation 90
+    D21    Round 48.00
+    D22    Round 20.00
+    D23    Round 25.00
+    D24    Round 15.00
+    D25    Round 30.00
+    D26    Round 40.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Bottom Documentation.grb
+
+    Layers:
+    ------------------------
+    Bottom Silkscreen
+    Bottom Documentation
+
+    D-Code Shape  (thou)
+    -----------------------
+    D10    Round 5.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Bottom Solder Mask.grb
+
+    Layers:
+    ----------------------
+    Bottom Solder Mask
+
+    D-Code Shape  (thou)
+    ------------------------------------------------
+    D27    Square 66.00
+    D28    Round 66.00
+    D29    Rectangle 43.40 X 49.31  Rotation 90
+    D72    Rectangle 43.40 X 49.31
+    D73    Rectangle 47.34 X 57.18  Rotation 90
+    D74    Rectangle 30.02 X 45.37
+    D75    Rectangle 37.89 X 67.81  Rotation 90
+    D152   Rectangle 47.34 X 57.18
+    D154   Round 84.74
+    D156   Rectangle 102.46 X 206.00  Rotation 90
+
+NC Drill Output
+===============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Drill Data - [Through Hole].XLN
+
+    Output:
+    ---------------------------
+    Plated Round Drill Holes
+    Plated Slots
+    Plated Board Outlines
+
+    Tool  Size       Count   ID
+    ----------------------------------
+    T001  00.0120 in 94    U
+    T002  00.0240 in 71    L
+    T003  00.0276 in 2     I
+    T004  00.0315 in 2     J
+    T005  00.0327 in 6     S
+    T006  00.0350 in 42    B
+    ----------------------------------
+    Total            217
+    ----------------------------------
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Drill Data - [Through Hole] (Unplated).XLN
+
+    Output:
+    -----------------------------
+    Unplated Round Drill Holes
+    Unplated Slots
+    Unplated Board Outlines
+
+    Tool  Size       Count   ID
+    ----------------------------------
+    T001  00.0250 in 1
+    ----------------------------------
+    Total            1
+    ----------------------------------
+
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\BackEnd\TestPlots\IntegratorTest - Outline.grb
+
+    Layers:
+    ------------------
+    Board Outlines
+
+    D-Code Shape  (thou)
+    -----------------------
+    D10    Round 5.00
+
+End Of Report.

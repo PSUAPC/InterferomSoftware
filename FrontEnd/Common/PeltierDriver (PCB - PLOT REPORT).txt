@@ -1,0 +1,234 @@
+PLOT REPORT
+-----------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PeltierDriver (PCB - PLOT REPORT).txt
+Report Written : Wednesday, April 22, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\PeltierDriver.pcb
+Design Title   : 
+Created        : 4/18/2015 4:12:46 PM
+Last Saved     : 4/22/2015 12:41:06 AM
+Editing Time   : 348 min
+Units          : mil (precision 1)
+
+
+Device Settings
+===============
+
+
+Gerber Settings
+===============
+
+    Leading zero suppression.
+    G01 assumed throughout.
+    Line termination <*> <CR> <LF>.
+    2.3 format absolute inches.
+    Format commands defined in Gerber file.
+    Aperture table defined in Gerber file.
+    Hardware arcs allowed.
+
+
+Drill Settings
+==============
+
+    Excellon Format 1    Format 2.3 absolute in mm.
+    No zero suppression.
+
+
+Plots Output
+============
+
+    Plot Job: "C:\Users\Owner\Documents\APC\FrontEnd\Common\PeltierDriver.mop"
+
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - Top Documentation.gbr
+
+    Layers:
+    -------------------
+    Top Documentation
+
+    D-Code  Shape  (thou)
+    ---------------------
+    D10     Round 5.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - Top Copper.gbr
+
+    Layers:
+    ------------
+    Top Copper
+
+    D-Code  Shape  (thou)
+    ----------------------------------------------
+    D74     Rectangle 37.40 X 43.31
+    D75     Rectangle 37.40 X 43.31  Rotation 90
+    D79     Round 60.00
+    D80     Square 60.00
+    D88     Round 20.00
+    D89     Round 15.00
+    D90     Round 25.00
+    D110    Round 100.00
+    D111    Rectangle 27.56 X 39.37  Rotation 90
+    D112    Round 60.00
+    D113    Rectangle 55.12 X 98.43  Rotation 90
+    D114    Rectangle 55.12 X 98.43
+    D115    Rectangle 23.62 X 59.06
+    D116    Rectangle 59.06 X 110.24
+    D117    Rectangle 240.16 X 248.03  Rotation 90
+    D118    Rectangle 41.34 X 51.18  Rotation 90
+    D119    Square 118.11
+    D120    Round 48.00
+    D121    Round 50.00
+    D124    Round 130.00
+    D150    Round 40.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - Top Solder Mask.gbr
+
+    Layers:
+    -----------------
+    Top Solder Mask
+
+    D-Code  Shape  (thou)
+    ----------------------------------------------
+    D18     Rectangle 43.40 X 49.31  Rotation 90
+    D19     Rectangle 43.40 X 49.31
+    D70     Round 66.00
+    D71     Square 66.00
+    D122    Round 66.00
+    D123    Square 124.11
+    D125    Round 136.00
+    D126    Rectangle 33.56 X 45.37  Rotation 90
+    D127    Rectangle 61.12 X 104.43  Rotation 90
+    D128    Rectangle 61.12 X 104.43
+    D129    Rectangle 29.62 X 65.06
+    D130    Rectangle 65.06 X 116.24
+    D131    Rectangle 246.16 X 254.03  Rotation 90
+    D132    Rectangle 47.34 X 57.18  Rotation 90
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - Bottom Copper.gbr
+
+    Layers:
+    ---------------
+    Bottom Copper
+
+    D-Code  Shape  (thou)
+    ---------------------
+    D10     Round 5.00
+    D23     Round 10.00
+    D79     Round 60.00
+    D80     Square 60.00
+    D88     Round 20.00
+    D110    Round 100.00
+    D112    Round 60.00
+    D119    Square 118.11
+    D120    Round 48.00
+    D121    Round 50.00
+    D124    Round 130.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - Bottom Documentation.gbr
+
+    Layers:
+    ----------------------
+    Bottom Documentation
+
+    D-Code  Shape  (thou)
+    ---------------------
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - Bottom Solder Mask.gbr
+
+    Layers:
+    --------------------
+    Bottom Solder Mask
+
+    D-Code  Shape  (thou)
+    ---------------------
+    D70     Round 66.00
+    D71     Square 66.00
+    D122    Round 66.00
+    D123    Square 124.11
+    D125    Round 136.00
+
+NC Drill Output
+===============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - Drill Data - Through Hole.drl
+
+    Output:
+    --------------------------
+    Plated Round Drill Holes
+    Plated Slots
+    Plated Board Outlines
+
+    Tool   Size       Count    ID
+    -----------------------------
+    T001   00.024 in  11     L
+    T002   00.032 in  4      AB
+    T003   00.033 in  6      S
+    T004   00.079 in  4      M
+    T005   00.080 in  4      AC
+    -----------------------------
+    Total             29
+    -----------------------------
+    Tool   Size       Count    ID
+    -----------------------------
+    T001   00.025 in  1
+    -----------------------------
+    Total             1
+    -----------------------------
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - Drill Ident Drawing - Through Hole.gbr
+
+    Layers:
+    ----------------
+    [Through Hole]
+
+
+Drill Ident Drawing
+===================
+
+    Drill  Plated  Size  Shape  ID
+    ------------------------------
+    24     Y       100   Round  L
+    79     Y       100   Round  M
+    33     Y       100   Round  S
+    32     Y       100   Round  AB
+    80     Y       100   Round  AC
+
+    D-Code  Shape  (thou)
+    ---------------------
+    D10     Round 5.00
+    D110    Round 100.00
+
+Gerber Output
+=============
+
+C:\Users\Owner\Documents\APC\FrontEnd\Common\TestPlots\PeltierDriver - BoardOutline.gbr
+
+    Layers:
+    ----------------
+    Board Outlines
+
+    D-Code  Shape  (thou)
+    ---------------------
+    D10     Round 5.00
+
+End Of Report.

@@ -1,0 +1,52 @@
+2Pin-ScrewHeader||2
+2Row_8Pos_Connector||8
+2WaySplit_Schem||4
+2x3Jack||6
+3Pin_Connector||3
+4pin_connector||4
+4PIN_OSCON||4
+4PortSplitter||6
+5PinSym||5
+6PIN-Connector||6
+8DipSW||16
+8pin_connector||8
+8Pin_Sym||8
+10PinHeader||10
+10pin_connector||10
+10Pin_Sym||10
+13Pin_Sym||11
+16Pin_Sym||16
+16Pin_Sym2||16
+20Pin_Sym||20
+24Pin_Header||24
+26Pin_Header||26
+48PinICSym||48
+64PinICSym||64
+80PinICSym||80
+100PinICSym||100
+Auto-Fuse||2
+BANDPASS||3
+BiasTee_Schem||3
+BNC Board Mount||2
+Capacitor||2
+Capacitor - Electrolytic||2
+Diode||2
+Diode - Zener||2
+DS_A3_Template_r00_APC||0
+DS_A4_Template_r00_APC||0
+DualSchmitt||6
+Dual_INVERTER||6
+IRLP3034PbF N-MOSFET||3
+IRLP3034PbF P-MOSFET||3
+Isolator_schem||4
+LM35 CAZ||3
+LM2902_QuadOpAmp||14
+LNA_QFN_Schem||5
+MagJack||15
+MC LNA 400 MHz||4
+NPN Transistor||3
+PIC18(L)F2X/45K50||0
+Redirrect||2
+Resistor||2
+RF_Switch||7
+Tab||1

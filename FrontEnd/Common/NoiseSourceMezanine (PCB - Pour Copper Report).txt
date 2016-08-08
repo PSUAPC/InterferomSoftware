@@ -1,0 +1,31 @@
+Pour Copper Report
+------------------
+
+Report File:        C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSourceMezanine (PCB - Pour Copper Report).txt
+Report Written:     Sunday, November 08, 2015
+Design Path:        C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSourceMezanine.pcb
+Design Title:       
+Created:            11/4/2015 4:47:17 AM
+Last Saved:         11/8/2015 1:38:23 AM
+Editing Time:       4363 min
+Units:              mil (precision 0)
+
+J2.9 at 12451,12047 has too few spokes (can fit 1, requires 2)
+J2.10 at 12501,12047 has too few spokes (can fit 1, requires 2)
+J5.9 at 11998,11895 has no thermal spokes
+J5.10 at 11948,11895 has no thermal spokes
+U3.2 at 11626,11969 has no thermal spokes
+Via at 11360,12210 has too few spokes (can fit 1, requires 2)
+Via at 11520,12100 has too few spokes (can fit 1, requires 2)
+Via at 11505,12320 has too few spokes (can fit 1, requires 2)
+Via at 11620,12330 has too few spokes (can fit 1, requires 2)
+Via at 11650,12030 has too few spokes (can fit 1, requires 2)
+Via at 12620,12050 has too few spokes (can fit 1, requires 2)
+Via at 12620,11950 has too few spokes (can fit 1, requires 2)
+Via at 11550,11820 has too few spokes (can fit 1, requires 2)
+Via at 11450,12020 has too few spokes (can fit 1, requires 2)
+Via at 11200,12100 has too few spokes (can fit 1, requires 2)
+Via at 11720,12150 has too few spokes (can fit 1, requires 2)
+Via at 11970,12077 has no thermal spokes
+
+End Of Report.

@@ -1,0 +1,67 @@
+Design Rule Check Report
+------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector (PCB - Design Rule Check Report).txt
+Report Written : Wednesday, March 25, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector.pcb
+Design Title   : 
+Created        : 12/3/2014 5:30:54 PM
+Last Saved     : 3/25/2015 1:53:37 PM
+Editing Time   : 2596 min
+Units          : mil (precision 0)
+
+
+Results
+=======
+
+Single pin net N0011 on L2.2 at 2570,2644
+Gap in Net "N0141" between (2990,2467) and (2990,2411) 
+    N0141.
+
+Number of errors found : 2
+
+
+Settings
+========
+
+
+Spacings
+
+=========
+
+Tracks         Yes
+Pads and Vias  No
+Shapes         No
+Text           No
+Board          No
+Drills         No
+Components     No
+
+
+Manufacturing
+
+==============
+
+Drill Breakout                   No
+Drill Backoff                    No
+Silkscreen Overlap               No
+Copper Text In Board             No
+Min Track Width                  No
+Min Annular Ring                 No
+Min Paste Size                   No
+Vias In Pads                     No
+Unplated Vias                    No
+Unplated Pads With Inner Tracks  No
+
+
+Nets
+
+=====
+
+Net Completion                Yes
+Dangling Tracks               No
+Net Track Length Differences  No
+
+
+
+End Of Report.

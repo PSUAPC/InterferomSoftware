@@ -1,0 +1,25 @@
+Schematic and PCB Check Report
+------------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors (PCB - Schematic and PCB Check Report).txt
+Report Written : Saturday, December 06, 2014
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.pcb
+Design Title   : 
+Created        : 12/6/2014 4:25:40 AM
+Last Saved     : 12/6/2014 4:41:44 PM
+Editing Time   : 81 min
+Units          : mil (precision 1)
+
+
+Checking integrity of Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.sch" with PCB "C:\Users\Owner\Documents\APC\FrontEnd\Common\OrientationSensors.pcb"
+====================================================================================================================================================================================
+
+The PCB and Schematic designs do not match.
+To bring them into line, you will need to make the following changes to the PCB design:
+
+Disconnect Pin Q2-7 from Net "VDD"
+
+Change component reference "C6" to use component "0603 Capacitor bottom", package "DIL" instead of component "0603 Capacitor", package "SM".
+
+
+End Of Report.

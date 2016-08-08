@@ -1,0 +1,31 @@
+Schematic and PCB Check Report
+------------------------------
+
+Report File:        C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector2 (PCB - Schematic and PCB Check Report).txt
+Report Written:     Saturday, November 07, 2015
+Design Path:        C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector2.pcb
+Design Title:       
+Created:            4/15/2015 10:49:19 AM
+Last Saved:         11/7/2015 2:19:12 PM
+Editing Time:       4705 min
+Units:              mil (precision 0)
+
+
+Checking integrity of Schematic "C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector2.sch" with PCB "C:\Users\Owner\Documents\APC\FrontEnd\Common\Injector2.pcb"
+==================================================================================================================================================================
+
+The PCB and Schematic designs do not match.
+To bring them into line, you will need to make the following changes to the PCB design:
+
+Add value "Other Part Number=" to component reference "L1".
+Add value "3D Package=" to component reference "L1".
+Add value "Height=" to component reference "L1".
+Add value "Other Part Number=" to component reference "C2".
+Add value "3D Package=" to component reference "C2".
+Add value "Height=" to component reference "C2".
+Add value "Other Part Number=" to component reference "C1".
+Add value "3D Package=" to component reference "C1".
+Add value "Height=" to component reference "C1".
+
+
+End Of Report.

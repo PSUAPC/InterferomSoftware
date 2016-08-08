@@ -1,0 +1,30 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File:        C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSourceMezanine (PCB - Forward Design Changes Report).txt
+Report Written:     Sunday, November 08, 2015
+Design Path:        C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSourceMezanine.pcb
+Design Title:       
+Created:            11/4/2015 4:47:17 AM
+Last Saved:         11/8/2015 12:16:42 AM
+Editing Time:       4280 min
+Units:              mil (precision 0)
+
+Disconnected pin "U1-6" from net "N0025".
+Disconnected pin "U3-1" from net "N0025".
+Disconnected pin "U3-3" from net "ASel".
+Disconnected pin "U3-4" from net "RF_Ctrl2".
+Disconnected pin "U3-6" from net "RF_Ctrl1".
+
+Deleted net "N0025".
+
+Added net "N0063".
+
+Connected pin "U1-6" to net "N0063".
+Connected pin "U3-1" to net "ASel".
+Connected pin "U3-6" to net "RF_Ctrl2".
+Connected pin "U3-3" to net "N0063".
+Connected pin "U3-4" to net "RF_Ctrl1".
+
+
+End Of Report.

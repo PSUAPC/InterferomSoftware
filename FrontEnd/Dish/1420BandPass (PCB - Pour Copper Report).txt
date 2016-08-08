@@ -1,0 +1,14 @@
+Pour Copper Report
+------------------
+
+Report File    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\1420BandPass (PCB - Pour Copper Report).txt
+Report Written : Thursday, January 15, 2015
+Design Path    : C:\Users\Owner\Documents\APC\FrontEnd\Dish\1420BandPass.pcb
+Design Title   : 
+Created        : 1/15/2015 12:05:13 AM
+Last Saved     : 1/15/2015 12:43:58 AM
+Editing Time   : 45 min
+Units          : mil (precision 1)
+
+
+End Of Report.

@@ -1,0 +1,20 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File:        C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSource (PCB - Forward Design Changes Report).txt
+Report Written:     Saturday, November 07, 2015
+Design Path:        C:\Users\Owner\Documents\APC\FrontEnd\Common\NoiseSource.pcb
+Design Title:       
+Created:            11/3/2015 12:47:51 AM
+Last Saved:         11/7/2015 2:47:15 PM
+Editing Time:       6380 min
+Units:              mil (precision 0)
+
+Disconnected pin "J5-2" from net "RF_Ctrl2".
+Disconnected pin "J5-3" from net "RF_Ctrl1".
+
+Connected pin "J5-2" to net "RF_Ctrl1".
+Connected pin "J5-3" to net "RF_Ctrl2".
+
+
+End Of Report.

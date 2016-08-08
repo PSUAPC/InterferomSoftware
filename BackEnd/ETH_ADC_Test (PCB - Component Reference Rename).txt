@@ -1,0 +1,95 @@
+Component Reference Rename
+--------------------------
+
+Report File    : C:\Users\Owner\Documents\APC\BackEnd\ETH_ADC_Test (PCB - Component Reference Rename).txt
+Report Written : Friday, February 06, 2015
+Design Path    : C:\Users\Owner\Documents\APC\BackEnd\ETH_ADC_Test.pcb
+Design Title   : 
+Created        : 2/3/2015 5:21:35 AM
+Last Saved     : 2/6/2015 9:46:11 PM
+Editing Time   : 1360 min
+Units          : mil (precision 0)
+
+Old Name  New Name
+------------------
+J10       J1
+J5        J2
+J9        J3
+J6        J4
+J3        J5
+J4        J6
+J2        J7
+J7        J8
+J1        J9
+C38       C1
+C28       C2
+C35       C3
+C34       C4
+C36       C5
+C37       C6
+C42       C7
+C25       C8
+C40       C9
+C39       C10
+C41       C11
+C43       C12
+C44       C13
+C18       C14
+C31       C15
+C22       C16
+C33       C17
+C23       C18
+C32       C19
+C27       C20
+C19       C21
+C20       C22
+C26       C23
+C29       C25
+C30       C26
+C21       C27
+C10       C28
+C9        C29
+C2        C30
+C6        C31
+C13       C32
+C8        C33
+C12       C34
+C7        C35
+C11       C36
+C3        C37
+C4        C38
+C5        C39
+C1        C40
+R24       R1
+R23       R2
+R21       R3
+R22       R4
+R20       R5
+R8        R6
+R6        R8
+R5        R9
+R9        R10
+R3        R11
+R4        R12
+R15       R13
+R11       R15
+R12       R16
+R16       R17
+R10       R18
+R13       R19
+R18       R20
+R17       R21
+R19       R22
+R1        R23
+R2        R24
+U4        U1
+U3        U2
+U1        U3
+U2        U4
+XTAL2     XTAL1
+XTAL3     XTAL2
+XTAL1     XTAL3
+D2        D1
+D1        D2
+D5        D4
+D4        D5
