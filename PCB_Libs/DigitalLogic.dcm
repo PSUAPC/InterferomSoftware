@@ -1,3 +1,36 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP 4N26
+D DIP6, DC Optocoupler Base Connected, Vce 30V, CTR 20%, Viso 1500V
+K NPN DC Optocoupler Base Connected
+$ENDCMP
+#
+$CMP LM2576_Buck
+D 300 mA Low Dropout Voltage Regulator, Fixed Output 0.9V, SOT-23-5
+K 300mA LDO Regulator Fixed Positive
+F http://www.ti.com/lit/ds/symlink/tlv71209.pdf
+$ENDCMP
+#
+$CMP Opto_H11L1M
+D DIP6, DC Optocoupler Base Connected, Vce 30V, CTR 20%, Viso 2500V
+K NPN DC Optocoupler Base Connected
+$ENDCMP
+#
+$CMP SS_Relay_VO14642AT
+D SO6, MOSFET Photorelay 1-Form-A, Voff 60V, Ion 100mA
+K MOSFET Output Photorelay 1-Form-A
+$ENDCMP
+#
+$CMP TLV71210DBV
+D 300 mA Low Dropout Voltage Regulator, Fixed Output 1.0V, SOT-23-5
+K 300mA LDO Regulator Fixed Positive
+F http://www.ti.com/lit/ds/symlink/tlv71209.pdf
+$ENDCMP
+#
+$CMP TLV71211DBV
+D 300 mA Low Dropout Voltage Regulator, Fixed Output 1.1V, SOT-23-5
+K 300mA LDO Regulator Fixed Positive
+F http://www.ti.com/lit/ds/symlink/tlv71209.pdf
+$ENDCMP
+#
 #End Doc Library
