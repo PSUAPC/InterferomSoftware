@@ -28,9 +28,9 @@
   (fp_circle (center 0 0) (end 4.953 0) (layer F.SilkS) (width 0.15))
   (pad 1 smd rect (at 4.85 0) (size 5.7 2.4003) (layers F.Cu F.Paste F.Mask))
   (pad 2 smd rect (at -4.85 0) (size 5.7 2.4003) (layers F.Cu F.Paste F.Mask))
-  (model Capacitors_SMD.3dshapes/c_elec_10x10.wrl
+  (model E:/jfixelle/Documents/APC/GitRepo/PCB_Libs/3DParts/SMTElectro13x13x16.wrl
     (at (xyz 0 0 0))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
+    (scale (xyz 10 10 10))
+    (rotate (xyz 180 0 180))
   )
 )

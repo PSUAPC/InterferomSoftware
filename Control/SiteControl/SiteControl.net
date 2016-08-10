@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source E:/jfixelle/Documents/APC/GitRepo/Control/SiteControl/SiteControl.sch)
-    (date "8/9/2016 11:05:16 PM")
+    (date "8/10/2016 1:56:07 AM")
     (tool "Eeschema 4.0.3-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -648,7 +648,7 @@
       (tstamp 57AC1E59))
     (comp (ref U9)
       (value MC34063)
-      (footprint SO-8)
+      (footprint DigitalLogic:MC34063)
       (libsource (lib DigitalLogic) (part MC34063))
       (sheetpath (names /RPiPowerControl/) (tstamps /57A9B817/))
       (tstamp 57AD6FE6))
