@@ -24,9 +24,9 @@
   )
   (pad 1 smd rect (at -3 0) (size 1.8 2.4) (layers F.Cu F.Paste F.Mask))
   (pad 2 smd rect (at 3 0) (size 1.8 2.4) (layers F.Cu F.Paste F.Mask))
-  (model Inductors.3dshapes/self_cms_we-tpc_XL.wrl
+  (model E:/jfixelle/Documents/APC/GitRepo/PCB_Libs/3DParts/SRR7045-151M.wrl
     (at (xyz 0 0 0))
-    (scale (xyz 0.9 0.9 0.9))
-    (rotate (xyz 0 0 0))
+    (scale (xyz 10 10 10))
+    (rotate (xyz 180 0 0))
   )
 )
