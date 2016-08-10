@@ -11,6 +11,12 @@ K 300mA LDO Regulator Fixed Positive
 F http://www.ti.com/lit/ds/symlink/tlv71209.pdf
 $ENDCMP
 #
+$CMP MAX17552
+D Positive 100mA 30V Linear Regulator, Fixed Output 5V, SO-8
+K Voltage Regulator 100mA Positive
+F http://www.fairchildsemi.com/ds/LM/LM78L05A.pdf
+$ENDCMP
+#
 $CMP MC34063
 D Positive 100mA 30V Linear Regulator, Fixed Output 5V, SO-8
 K Voltage Regulator 100mA Positive
