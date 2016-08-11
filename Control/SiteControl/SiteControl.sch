@@ -86,4 +86,10 @@ U 57A9B81A
 F0 "BattVoltageDetect" 60
 F1 "BattVoltageDetect.sch" 60
 $EndSheet
+Text Notes 7200 6800 0    60   ~ 0
+Applied Physics Club\nThe Pennsylvania State University
+Text Notes 9050 7650 2    60   ~ 0
+August 11, 2016
+Text Notes 9100 7500 2    60   ~ 0
+Telescope Base Station Control Board
 $EndSCHEMATC

@@ -323,10 +323,10 @@ Wire Wire Line
 Wire Wire Line
 	5100 1750 5600 1750
 $Comp
-L CONN_01X06 J?
+L CONN_01X06 J4
 U 1 1 57A9D8BD
 P 7550 3750
-F 0 "J?" H 7550 4100 50  0000 C CNN
+F 0 "J4" H 7550 4100 50  0000 C CNN
 F 1 "CONN_01X06" V 7650 3750 50  0000 C CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x06" H 7550 3750 50  0001 C CNN
 F 3 "" H 7550 3750 50  0000 C CNN
@@ -607,7 +607,7 @@ CLKOUT
 Wire Wire Line
 	5600 2250 5100 2250
 Text Notes 8750 3000 0    60   ~ 0
-Oscillator
+Crystal Oscillator
 Text Notes 6800 3000 0    60   ~ 0
 Programming Header\n
 Text Notes 6850 1050 0    60   ~ 0
@@ -715,4 +715,12 @@ Connection ~ 5200 1750
 Wire Wire Line
 	5400 1650 5400 1850
 Connection ~ 5400 1850
+Text Notes 7150 6800 0    60   ~ 0
+Applied Physics Club\nThe Pennsylvania State University
+Text Notes 9000 7650 2    60   ~ 0
+August 11, 2016
+Text Notes 9050 7500 2    60   ~ 0
+Telescope Base Station Control Board
+Text Notes 5900 1100 2    60   ~ 0
+SCL/SDA Pullup Resistors
 $EndSCHEMATC

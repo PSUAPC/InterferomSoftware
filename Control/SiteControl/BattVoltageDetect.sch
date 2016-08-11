@@ -255,4 +255,10 @@ Text Notes 3700 1050 0    60   ~ 0
 Battery Voltage ADC
 Text Notes 2700 2450 1    60   ~ 0
 Dynamic Range Expected: \n[0.6 - 1.04 VDC]
+Text Notes 7150 6800 0    60   ~ 0
+Applied Physics Club\nThe Pennsylvania State University
+Text Notes 9000 7650 2    60   ~ 0
+August 11, 2016
+Text Notes 9050 7500 2    60   ~ 0
+Telescope Base Station Control Board
 $EndSCHEMATC

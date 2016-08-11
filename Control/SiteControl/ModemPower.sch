@@ -232,4 +232,12 @@ Wire Notes Line
 	5900 1100 5900 2450
 Text Notes 5900 1200 0    60   ~ 0
 Relay Decoupling
+Text Notes 7150 6800 0    60   ~ 0
+Applied Physics Club\nThe Pennsylvania State University
+Text Notes 9000 7650 2    60   ~ 0
+August 11, 2016
+Text Notes 9050 7500 2    60   ~ 0
+Telescope Base Station Control Board
+Text Notes 1450 3200 0    60   ~ 0
+NOTES: The modem can be powered by anything between 9 VDC and 16 VDC\nindicating an internal power supply / regulator. This means that we can simply \npipe battery power directly to the modem (after a switch / relay allowing for \nhard reset / power consumption)
 $EndSCHEMATC

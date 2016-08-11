@@ -607,7 +607,7 @@ CLKOUT
 Wire Wire Line
 	5600 2250 5100 2250
 Text Notes 8750 3000 0    60   ~ 0
-Oscillator
+Crystal Oscillator
 Text Notes 6800 3000 0    60   ~ 0
 Programming Header\n
 Text Notes 6850 1050 0    60   ~ 0
@@ -715,4 +715,12 @@ Connection ~ 5200 1750
 Wire Wire Line
 	5400 1650 5400 1850
 Connection ~ 5400 1850
+Text Notes 7150 6800 0    60   ~ 0
+Applied Physics Club\nThe Pennsylvania State University
+Text Notes 9000 7650 2    60   ~ 0
+August 11, 2016
+Text Notes 9050 7500 2    60   ~ 0
+Telescope Base Station Control Board
+Text Notes 5900 1100 2    60   ~ 0
+SCL/SDA Pullup Resistors
 $EndSCHEMATC
