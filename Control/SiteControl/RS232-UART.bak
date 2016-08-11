@@ -261,10 +261,10 @@ F 3 "" H 5425 1480 50  0000 L CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L CONN_01X10 P6
+L CONN_01X10 J?
 U 1 1 57AF5F82
 P 1200 1400
-F 0 "P6" H 1200 1950 50  0000 C CNN
+F 0 "J?" H 1200 1950 50  0000 C CNN
 F 1 "RS232-Jack" V 1300 1400 50  0000 C CNN
 F 2 "Connect:DB9FC" H 1200 1400 50  0001 C CNN
 F 3 "" H 1200 1400 50  0000 C CNN
@@ -610,51 +610,6 @@ F 3 "" H 8300 1500 50  0000 C CNN
 $EndComp
 Wire Wire Line
 	8300 1500 8300 1600
-$Comp
-L CONN_01X06 P7
-U 1 1 57AFD146
-P 10200 1600
-F 0 "P7" H 10200 1950 50  0000 C CNN
-F 1 "CONN_01X06" V 10300 1600 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x06" H 10200 1600 50  0001 C CNN
-F 3 "" H 10200 1600 50  0000 C CNN
-	1    10200 1600
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR057
-U 1 1 57AFD27C
-P 9900 1950
-F 0 "#PWR057" H 9900 1700 50  0001 C CNN
-F 1 "GND" H 9900 1800 50  0000 C CNN
-F 2 "" H 9900 1950 50  0000 C CNN
-F 3 "" H 9900 1950 50  0000 C CNN
-	1    9900 1950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	10000 1550 9900 1550
-Wire Wire Line
-	9900 1550 9900 1950
-Wire Wire Line
-	10000 1750 9900 1750
-Connection ~ 9900 1750
-Text GLabel 9750 1450 0    60   Input ~ 0
-CMOS_CTS
-Text GLabel 9750 1350 0    60   Input ~ 0
-CMOS_RTS
-Text GLabel 9750 1650 0    60   Input ~ 0
-CMOS_TX
-Text GLabel 9750 1850 0    60   Input ~ 0
-CMOS_RX
-Wire Wire Line
-	9750 1650 10000 1650
-Wire Wire Line
-	10000 1850 9750 1850
-Wire Wire Line
-	9750 1450 10000 1450
-Wire Wire Line
-	10000 1350 9750 1350
 Wire Notes Line
 	3600 900  3600 2600
 Wire Notes Line
@@ -672,14 +627,6 @@ Wire Notes Line
 Wire Notes Line
 	8800 900  7550 900 
 Wire Notes Line
-	9000 900  9000 2550
-Wire Notes Line
-	9000 2550 10800 2550
-Wire Notes Line
-	10800 2550 10800 900 
-Wire Notes Line
-	10800 900  9000 900 
-Wire Notes Line
 	1650 3350 1650 6850
 Wire Notes Line
 	1650 6850 6200 6850
@@ -693,8 +640,6 @@ Text Notes 5700 1000 2    60   ~ 0
 RS232 Signal Isolaiton
 Text Notes 8700 1150 2    60   ~ 0
 RS232 Signal Isolation \nDecoupling
-Text Notes 10400 1050 2    60   ~ 0
-RS232 RPi Conn Header
 Text Notes 4400 3500 2    60   ~ 0
 RS232-UART Tranciever 
 $EndSCHEMATC
