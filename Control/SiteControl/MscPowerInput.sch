@@ -147,7 +147,7 @@ $EndComp
 Wire Wire Line
 	6050 1600 5950 1600
 Wire Wire Line
-	5950 1500 5950 1600
+	5950 1600 5950 1500
 Wire Wire Line
 	5250 1500 6050 1500
 $Comp
@@ -211,7 +211,6 @@ $EndComp
 Wire Wire Line
 	5700 1800 5700 2450
 NoConn ~ 6050 1800
-NoConn ~ 6850 1700
 Wire Wire Line
 	5250 2050 5850 2050
 Wire Wire Line
@@ -297,9 +296,9 @@ Wire Wire Line
 Wire Wire Line
 	6600 2050 6600 2250
 Wire Wire Line
-	7550 2250 6600 2250
+	6600 2250 7550 2250
 Wire Wire Line
-	7550 1250 7550 2250
+	7550 2250 7550 1250
 Wire Wire Line
 	6250 2050 6050 2050
 Connection ~ 6050 2050
@@ -619,4 +618,7 @@ Wire Wire Line
 Connection ~ 1950 1500
 Text Notes 1150 4200 0    60   ~ 0
 NOTES: The main power input terminal contains a second ground to allow \nfor electrical connection with the enclosure. Since the board should be \nattached to a metal case (for shielding) via standoffs, and the mounting holes \nare grounded, this electrical connection should already be accomplished.
+NoConn ~ 6850 1700
+Text Notes 6100 2800 0    60   ~ 0
+Application Circuit for Efficient 3V3,100 mA Regulator
 $EndSCHEMATC

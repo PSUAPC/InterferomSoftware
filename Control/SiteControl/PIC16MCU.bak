@@ -173,88 +173,88 @@ Wire Wire Line
 $Comp
 L R R3
 U 1 1 57A9C213
-P 2400 2350
-F 0 "R3" V 2480 2350 50  0000 C CNN
-F 1 "100R" V 2400 2350 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 2330 2350 50  0001 C CNN
-F 3 "" H 2400 2350 50  0000 C CNN
-	1    2400 2350
+P 1650 2350
+F 0 "R3" V 1730 2350 50  0000 C CNN
+F 1 "100R" V 1650 2350 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 1580 2350 50  0001 C CNN
+F 3 "" H 1650 2350 50  0000 C CNN
+	1    1650 2350
 	0    1    1    0   
 $EndComp
 $Comp
 L R R2
 U 1 1 57A9C390
-P 2050 2100
-F 0 "R2" V 2130 2100 50  0000 C CNN
-F 1 "10K" V 2050 2100 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 1980 2100 50  0001 C CNN
-F 3 "" H 2050 2100 50  0000 C CNN
-	1    2050 2100
+P 1300 2100
+F 0 "R2" V 1380 2100 50  0000 C CNN
+F 1 "10K" V 1300 2100 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 1230 2100 50  0001 C CNN
+F 3 "" H 1300 2100 50  0000 C CNN
+	1    1300 2100
 	-1   0    0    1   
 $EndComp
 $Comp
 L C C1
 U 1 1 57A9C483
-P 2050 2550
-F 0 "C1" H 2075 2650 50  0000 L CNN
-F 1 "100nF" H 2075 2450 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603" H 2088 2400 50  0001 C CNN
-F 3 "" H 2050 2550 50  0000 C CNN
-	1    2050 2550
+P 1300 2550
+F 0 "C1" H 1325 2650 50  0000 L CNN
+F 1 "100nF" H 1325 2450 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 1338 2400 50  0001 C CNN
+F 3 "" H 1300 2550 50  0000 C CNN
+	1    1300 2550
 	1    0    0    -1  
 $EndComp
 $Comp
 L +3.3V #PWR031
 U 1 1 57A9C7AB
-P 2050 1850
-F 0 "#PWR031" H 2050 1700 50  0001 C CNN
-F 1 "+3.3V" H 2050 1990 50  0000 C CNN
-F 2 "" H 2050 1850 50  0000 C CNN
-F 3 "" H 2050 1850 50  0000 C CNN
-	1    2050 1850
+P 1300 1850
+F 0 "#PWR031" H 1300 1700 50  0001 C CNN
+F 1 "+3.3V" H 1300 1990 50  0000 C CNN
+F 2 "" H 1300 1850 50  0000 C CNN
+F 3 "" H 1300 1850 50  0000 C CNN
+	1    1300 1850
 	1    0    0    -1  
 $EndComp
 $Comp
 L GND #PWR032
 U 1 1 57A9C7CB
-P 2050 2800
-F 0 "#PWR032" H 2050 2550 50  0001 C CNN
-F 1 "GND" H 2050 2650 50  0000 C CNN
-F 2 "" H 2050 2800 50  0000 C CNN
-F 3 "" H 2050 2800 50  0000 C CNN
-	1    2050 2800
+P 1300 2800
+F 0 "#PWR032" H 1300 2550 50  0001 C CNN
+F 1 "GND" H 1300 2650 50  0000 C CNN
+F 2 "" H 1300 2800 50  0000 C CNN
+F 3 "" H 1300 2800 50  0000 C CNN
+	1    1300 2800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2750 2350 2550 2350
+	2750 2350 1800 2350
 Wire Wire Line
-	1900 2350 2250 2350
+	1150 2350 1500 2350
 Wire Wire Line
-	2050 2250 2050 2400
-Connection ~ 2050 2350
+	1300 2250 1300 2400
+Connection ~ 1300 2350
 Wire Wire Line
-	2050 2700 2050 2800
+	1300 2700 1300 2800
 Wire Wire Line
-	2050 1950 2050 1850
-Text GLabel 1900 2350 0    60   Input ~ 0
+	1300 1950 1300 1850
+Text GLabel 1150 2350 0    60   Input ~ 0
 MCLR
-Text GLabel 2650 1750 0    60   Input ~ 0
+Text GLabel 5600 2850 2    60   Input ~ 0
 RPi_En
 Text GLabel 2650 2050 0    60   Input ~ 0
 CMOS_TX
 Text GLabel 2650 2150 0    60   Input ~ 0
 CMOS_RX
-Text GLabel 2600 3350 0    60   Input ~ 0
+Text GLabel 2600 2850 0    60   Input ~ 0
 INV_Toggle_Safe
-Text GLabel 2600 3450 0    60   Input ~ 0
+Text GLabel 2600 3050 0    60   Input ~ 0
 INV_Temp_Safe
-Text GLabel 2600 3550 0    60   Input ~ 0
+Text GLabel 2600 2750 0    60   Input ~ 0
 INV_Power_Safe
-Text GLabel 2600 3650 0    60   Input ~ 0
+Text GLabel 2600 2950 0    60   Input ~ 0
 INV_Overload_Safe
-Text GLabel 2600 3950 0    60   Input ~ 0
+Text GLabel 5600 2750 2    60   Input ~ 0
 CMOS_CTS
-Text GLabel 2600 4050 0    60   Input ~ 0
+Text GLabel 5600 2550 2    60   Input ~ 0
 CMOS_RTS
 Text GLabel 2600 4250 0    60   Input ~ 0
 INV_Data_Safe
@@ -278,32 +278,16 @@ Text GLabel 5350 3250 2    60   Input ~ 0
 SDI
 Text GLabel 5350 3350 2    60   Input ~ 0
 SDO
-Text GLabel 5350 4350 2    60   Input ~ 0
+Text GLabel 2600 4150 0    60   Input ~ 0
 Modem_En
-Wire Wire Line
-	2650 1750 2750 1750
 Wire Wire Line
 	2750 2050 2650 2050
 Wire Wire Line
 	2650 2150 2750 2150
 Wire Wire Line
-	2600 3350 2750 3350
-Wire Wire Line
-	2750 3450 2600 3450
-Wire Wire Line
-	2600 3550 2750 3550
-Wire Wire Line
-	2750 3650 2600 3650
-Wire Wire Line
-	2750 3950 2600 3950
-Wire Wire Line
-	2600 4050 2750 4050
-Wire Wire Line
 	2750 4250 2600 4250
 Wire Wire Line
 	2600 4350 2750 4350
-Wire Wire Line
-	5100 4350 5350 4350
 Wire Wire Line
 	5350 3350 5100 3350
 Wire Wire Line
@@ -619,15 +603,10 @@ NoConn ~ 2750 1950
 NoConn ~ 2750 2450
 NoConn ~ 2750 2550
 NoConn ~ 2750 2650
-NoConn ~ 2750 2750
-NoConn ~ 2750 2850
-NoConn ~ 2750 2950
-NoConn ~ 2750 3050
 NoConn ~ 2750 3150
 NoConn ~ 2750 3250
 NoConn ~ 2750 3750
 NoConn ~ 2750 3850
-NoConn ~ 2750 4150
 NoConn ~ 5100 4250
 NoConn ~ 5100 4150
 NoConn ~ 5100 4050
@@ -638,11 +617,6 @@ NoConn ~ 5100 3650
 NoConn ~ 5100 3550
 NoConn ~ 5100 3450
 NoConn ~ 5100 2950
-NoConn ~ 5100 2850
-NoConn ~ 5100 2750
-NoConn ~ 5100 2650
-NoConn ~ 5100 2550
-NoConn ~ 5100 2450
 NoConn ~ 5100 1950
 NoConn ~ 7350 4000
 NoConn ~ 2750 2250
@@ -654,19 +628,19 @@ Wire Wire Line
 	1750 4250 1700 4300
 Connection ~ 1750 4250
 Wire Wire Line
-	1550 2150 1800 2150
+	800  2150 1050 2150
 Wire Wire Line
-	1800 2150 1750 2100
+	1050 2150 1000 2100
 Wire Wire Line
-	1800 2150 1750 2200
-Connection ~ 1800 2150
+	1050 2150 1000 2200
+Connection ~ 1050 2150
 Wire Wire Line
-	1750 2050 1500 2050
+	1000 2050 750  2050
 Wire Wire Line
-	1500 2050 1550 2100
+	750  2050 800  2100
 Wire Wire Line
-	1500 2050 1550 2000
-Connection ~ 1500 2050
+	750  2050 800  2000
+Connection ~ 750  2050
 Text Notes 9200 3400 0    60   ~ 0
 DNP
 $Comp
@@ -723,4 +697,32 @@ Text Notes 9050 7500 2    60   ~ 0
 Telescope Base Station Control Board
 Text Notes 5900 1100 2    60   ~ 0
 SCL/SDA Pullup Resistors
+Wire Wire Line
+	2750 3050 2600 3050
+NoConn ~ 2750 3650
+NoConn ~ 2750 3550
+NoConn ~ 2750 3450
+Wire Wire Line
+	2600 2750 2750 2750
+Wire Wire Line
+	2750 2850 2600 2850
+Wire Wire Line
+	2600 2950 2750 2950
+Wire Wire Line
+	2750 4150 2600 4150
+Text GLabel 5600 2450 2    60   Input ~ 0
+RPi_5V_En
+Wire Wire Line
+	5600 2450 5100 2450
+NoConn ~ 5100 4350
+NoConn ~ 2750 3950
+NoConn ~ 2750 4050
+NoConn ~ 2750 1750
+Wire Wire Line
+	5600 2550 5100 2550
+Wire Wire Line
+	5100 2750 5600 2750
+Wire Wire Line
+	5600 2850 5100 2850
+NoConn ~ 5100 2650
 $EndSCHEMATC
