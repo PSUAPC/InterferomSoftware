@@ -2,38 +2,46 @@
 # 	FILE ORGANIZATION
 #################################################
 
-	I2CEnable.sh  	 -- Script to enable read after write single-go 
-			    I2C Communication on the Raspberry Pi.
-
-	main_i2cSniffer  -- Program to 'Sniff out' I2C devices. Will Enumate
-			    over all I2C addresses looking for an ACK signal.
-			    If found, it will report a device at that address.
-
-	main_i2cKernTest -- Test program to verify that the Kernel hook to access
-			    base level I2C buffer worked correctly. This allowed
-			    for the read after write single-go communication to be
-			    accessed.
-
-	main_Orient      -- Test program to dump the Original orientation sensor 
-			    registers to verify connection and response
+	bin   -- the binary location for the program
 	
-	main_Orient2     -- Test program to initialize and poll the original orientation
-			    sensors.
-
-	main_Orient3     -- Test program to initialize and poll the new orientation sensors.
-
-	main_i2c	 -- Test program to verify I2C communication with a PIC16 slave. 
-			    This is for use in the power-up control circuity. Each device will
-			    have a linked 14-pin PIC16 MCU, which will store the power status 
-			    of the device as well as activate / deactivate / restart the device
-			    via a constant logic signal or a pulse.
+	build -- the location of the intermediate object files
+	
+	src   -- the source files
 
 
-	To compile, use: make <programName>
+	The executable program is MCUTestCommTest. This program launches
+	an NCurses terminal style GUI which provides low level 
+	communication access to various telescope systems. The GUI is
+	set up to provide an asynchonous command terminal interface
+	along with user defined widgets (such as a hex viewer for packets).
+	
+	Implemented features: 
+		- Terminal
+			+ Generic Commands via Abstract Factory Paradigm
+			+ Generic Arguments for Commands using glibc
+			+ General Commands: list, help, history, clear, 
+				            run, echo, quit
+			+ Macro Script Functionality to execute a set of 
+			  commands listed on each line of the script
+		- TCP Connection 
+			+ Packet send
+			+ Packet Recv
+		- TTY Connection (via serial port)
+			+ Packet Send
+			+ Packet Recv
+			+ Front-End UART Packet Decode [WIP]
+		- Hex Viewer 
+			+ General byte block viewing (via char*)
+			+ Packet Inspection
+			+ Packet Decoding for Front-End UART [WIP]
+
+	A simple script test.s has been added to configure the terminal
+	to read Front-End TTY packets in the Raspberry Pi Environment.	
+
+	To compile, use: make 
 
 	Programs can be executed using the standard execution method ./ 
-	If the program returns "unable to open I2C bus", you may need to give the program root
-	permissions, or simply run with a preceeding sudo.
-
+	Using the TTY serial functionality may require the user to either
+	have sudo privledges or be listed on the dial-out group.
 
 

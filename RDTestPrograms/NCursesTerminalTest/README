@@ -4,11 +4,9 @@
 
 
 
-	To compile, use: make <programName>
+	To compile, use: make 
 
 	Programs can be executed using the standard execution method ./ 
-	If the program returns "unable to open I2C bus", you may need to give the program root
-	permissions, or simply run with a preceeding sudo.
 
 
 
