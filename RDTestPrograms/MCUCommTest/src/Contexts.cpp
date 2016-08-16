@@ -1,4 +1,5 @@
 #include "Contexts.h"
+#include "HexViewer.h"
 #include "NTerminal.h"
 
 // --------------------------------
@@ -18,7 +19,7 @@ Context::Context()
 	m_TCPThread = NULL;
 	m_InputThread = NULL;
 	m_TTYThread = NULL;
-
+	m_HexViewer = NULL;
 
 }
 
@@ -225,7 +226,7 @@ void Context::BroadcastAll(string msg, unsigned int exception)
 // --------------------------------------------
 
 LocalContext::LocalContext()
-	: m_FIFO(1024)
+	: m_FIFO(256), m_Verbose(false), m_Connected(false)
 {
 }
 
@@ -297,6 +298,39 @@ Message LocalContext::GetInboxEntry(int index)
 	return ret;
 }
 
+void LocalContext::RemoveInboxEntry(int index)
+{
+	if( index < 0 )
+		return;
+
+	// lock the mutex
+	pthread_mutex_lock(&m_Mutex);
+
+	if( index < m_Inbox.size() )
+	{
+		int ii = 0;
+		for( MQueue::iterator it = m_Inbox.begin();
+			it != m_Inbox.end(); it++ )
+		{
+			if( ii == index )
+			{
+				if( (*it).m_Data != NULL )
+					delete []  (*it).m_Data;
+
+				m_Inbox.erase(it);
+				break;
+			}
+			// don't forget to increment
+			ii++;
+		}
+		
+	}
+
+	// unlock the mutex
+	pthread_mutex_unlock(&m_Mutex);
+	
+}
+
 int LocalContext::GetInboxSize()
 {
 	return m_Inbox.size();
@@ -328,6 +362,8 @@ void LocalContext::CheckFIFO()
 	int tptr = m_FIFO.m_RdPtr;
 	int msgStart = -1;
 	int msgEnd = -1;
+	int mvRdPtr = m_FIFO.m_RdPtr;
+
 	while( !ended )
 	{
 	
@@ -337,6 +373,7 @@ void LocalContext::CheckFIFO()
 			// check the next character
 			int ptptr = tptr;
 		 	tptr = GetNextPtr(tptr);
+			mvRdPtr = tptr;
 			if( tptr == m_FIFO.m_WrPtr )
 			{
 				// we hit the end of the FIFO
@@ -358,8 +395,11 @@ void LocalContext::CheckFIFO()
 					}
 					else
 					{
-						NTerminal::Get()->PrintToStdout("TTY ERROR: StartFrame \
+						if( m_Verbose )
+						{
+							NTerminal::Get()->PrintToStdout("TTY ERROR: StartFrame \
 								Encountered before EndFrame");
+						}
 						// end here
 						ended = true;
 
@@ -371,8 +411,11 @@ void LocalContext::CheckFIFO()
 				case 0x04: // end of frame
 					if( msgStart == -1 )
 					{
-						NTerminal::Get()->PrintToStdout("TTY ERROR: EndFrame \
+						if( m_Verbose )
+						{
+							NTerminal::Get()->PrintToStdout("TTY ERROR: EndFrame \
 								Encountered before StartFrame");
+						}
 						// end here
 						ended = true;
 
@@ -411,7 +454,8 @@ void LocalContext::CheckFIFO()
 	if( (msgStart != -1) && (msgEnd != -1) )
 	{
 	
-		NTerminal::Get()->PrintToStdout("TTY: Message Packet Found");
+		if( m_Verbose )
+			NTerminal::Get()->PrintToStdout("TTY: Message Packet Found");
 
 		// remove any garbage at the front by moving the ptr
 		m_FIFO.m_RdPtr = msgStart; // should be the first byte
@@ -429,10 +473,12 @@ void LocalContext::CheckFIFO()
 
 		char* cdata = new char[size];
 
-		char str[100];
-		sprintf(str, "len: %d", size);
-		NTerminal::Get()->PrintToStdout(str);
-
+		if( m_Verbose )
+		{
+			char str[100];
+			sprintf(str, "len: %d", size);
+			NTerminal::Get()->PrintToStdout(str);
+		}
 		// overrun value
 		bool overrun = false;
 
@@ -483,9 +529,12 @@ void LocalContext::CheckFIFO()
 			}
 		
 		}
+		char calcChecksum = checksum;
+		char readChecksum = m_FIFO.Read();
 		// now we need to pull out the checksum
-		checksum += m_FIFO.Read();
-		
+		//checksum += m_FIFO.Read();
+		checksum += readChecksum;
+
 		// we can now push the message
 		// if size was decreased, we can ignore the loss of bytes
 		// in cdata since it should be negligable
@@ -493,11 +542,14 @@ void LocalContext::CheckFIFO()
                 msg.m_Data = cdata;
                 msg.m_Len = size;
 		msg.m_Src = 0; // TTY
-		
+		msg.m_ReadChecksum = readChecksum;
+		msg.m_CalcChecksum = calcChecksum;
+	
 		if( checksum != 0 )
 		{
 			msg.m_MissMatch = true;
-			NTerminal::Get()->PrintToStdout("TTY: Checksum mismatch");
+			if( m_Verbose )
+				NTerminal::Get()->PrintToStdout("TTY: Checksum mismatch");
 		}
 		else
 		{
@@ -505,25 +557,41 @@ void LocalContext::CheckFIFO()
 		}
 			
 		m_Inbox.push_back(msg); 
-
+		
 		m_FIFO.m_RdPtr = msgEnd;
 	
 			
 		
 
-		if( overrun )
+		if( overrun && m_Verbose )
 			NTerminal::Get()->PrintToStdout("TTY FIFO: Frame Overflow");  
 			
 	}
 
 	// unlock the mutex
 	pthread_mutex_unlock(&m_Mutex);
-	
+
+	// update the hex viewer
+	m_Context->m_HexViewer->Update();		
 }
 
 int LocalContext::GetNextPtr(int ptr)
 {
 	return (ptr == (m_FIFO.m_Size-1))? 0 : ptr + 1;
+}
+
+void LocalContext::ClearFIFO()
+{
+	// lock the mutex
+	pthread_mutex_lock(&m_Mutex); 
+
+	m_FIFO.m_RdPtr = 0;
+	m_FIFO.m_WrPtr = 0;
+
+	// unlock the mutex
+	pthread_mutex_unlock(&m_Mutex); 
+
+
 }
 
 Message& LocalContext::GetNextMessage(bool pop)

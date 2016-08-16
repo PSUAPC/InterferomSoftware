@@ -34,12 +34,15 @@ private:
 struct Message
 {
 	Message() : m_Data(NULL), m_Len(0),
-		m_Ptr(0), m_MissMatch(true), m_Src(-1){}
+		m_Ptr(0), m_MissMatch(true), m_Src(-1),
+		m_ReadChecksum(0), m_CalcChecksum(0){}
 	
 	char* 	m_Data;
 	int   	m_Len;
 	int 	m_Ptr;
 	bool 	m_MissMatch;
+	char	m_ReadChecksum;
+	char 	m_CalcChecksum;
 	int	m_Src; // 0 - TTY, 1 - TCP
 };
 
@@ -75,6 +78,7 @@ private:
 };
 
 class LocalContext;
+class HexViewer;
 
 // --------------------------------
 // -----   C O N T E X T   --------
@@ -125,6 +129,9 @@ public:
 	LocalContext* 	m_InputThread;
 	LocalContext*	m_TTYThread;
 
+	// hex viewer
+	HexViewer* 	m_HexViewer;
+
     	// socket variables
     	struct sockaddr_in m_Sa;
 
@@ -164,6 +171,7 @@ public:
 	// interfacing functions
 	bool AddToOutbox(Message msg);
 	Message GetInboxEntry(int index);
+	void RemoveInboxEntry(int index);
 	int GetInboxSize();
 	char FIFORead();
 
@@ -173,6 +181,7 @@ public:
 	bool HasMessagePending();
 	bool FIFOWrite(char c);
 	void CheckFIFO();
+	void ClearFIFO();
 	
     	// posix variables
     	pthread_t m_Thread;
@@ -184,6 +193,7 @@ public:
     	int m_Sockfd;
 	struct sockaddr_storage m_Addr;
 	bool m_Connected;
+	bool m_Verbose;
 
 	// tty variables
 	FIFOBuffer m_FIFO;

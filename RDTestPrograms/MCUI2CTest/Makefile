@@ -1,48 +1,32 @@
 CC = g++
-CFLAGS = -g -Wall
+FLAGS = -g -Wall
 LIBS = #-L../../RaspberryPi-GPIO/library
 INC = #-I../../RaspberryPi-GPIO/include
-BUILDDIR := build
-BINDIR := bin
-SRCDIR := src
-SRCEXT := cpp
 
-I2COrient3: $(BUILDDIR)/main_i2cOrient3.o
-	@mkdir -p $(BINDIR)
-	@echo $(CC) $(CFLAGS) $(LIBS) -o $(BINDIR)/I2COrient3 $(BUILDDIR)/main_i2cOrient3.o
+I2CClaibration : main_i2cOrientCal.o
+	$(CC) $(FLAGS) $(LIBS) -o I2Calibration main_i2cOrientCal.cpp
+
+I2COrient3: main_i2cOrient3.o
+	$(CC) $(FLAGS) $(LIBS) -o I2COrient3 main_i2cOrient3.o
 
 
-I2COrient2: $(BUILDDIR)/main_i2cOrient2.o
-	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(LIBS) -o $(BINDIR)/I2COrient2 $(BUILDDIR)/main_i2cOrient2.o
+I2COrient2: main_i2cOrient2.o
+	$(CC) $(FLAGS) $(LIBS) -o I2COrient2 main_i2cOrient2.o
 
 
-I2CKernTest: $(BUILDDIR)/main_i2cKernTest.o
-	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(LIBS) -o $(BINDIR)/I2CKernTest  $(BUILDDIR)/main_i2cKernTest.o
+I2CKernTest: main_i2cKernTest.o
+	$(CC) $(FLAGS) $(LIBS) -o I2CKernTest main_i2cKernTest.o
 
 
-I2COrient: $(BUILDDIR)/main_i2cOrient.o
-	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(LIBS) -o $(BINDIR)/I2COrient  $(BUILDDIR)/main_i2cOrient.o
+I2COrient: main_i2cOrient.o
+	$(CC) $(FLAGS) $(LIBS) -o I2COrient main_i2cOrient.o
 
 
-I2CSniff: $(BUILDDIR)/main_i2cSniffer.o
-	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(LIBS) -o $(BINDIR)/I2CSniffer  $(BUILDDIR)/main_i2cSniffer.o
+I2CSniff: main_i2cSniffer.o
+	$(CC) $(FLAGS) $(LIBS) -o I2CSniffer main_i2cSniffer.o
 
-I2CTest: $(BUILDDIR)/main_i2c.o
-	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(LIBS) -o $(BINDIR)/I2CProg  $(BUILDDIR)/main_i2c.o #-lm -lrpigpio
+I2CTest: main_i2c.o
+	$(CC) $(FLAGS) $(LIBS) -o I2CProg main_i2c.o #-lm -lrpigpio
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@mkdir -p $(BUILDDIR)
-	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
-
-clean:
-	@echo " Cleaning..."; 
-	@echo " $(RM) -r $(BUILDDIR)"; $(RM) -r $(BUILDDIR)
-
-
-
-.PHONY: clean 
+main_i2c.o: main_i2c.cpp
+	$(CC) $(FLAGS) $(INC) -c main_i2c.cpp

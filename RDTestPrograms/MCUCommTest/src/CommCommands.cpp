@@ -71,7 +71,7 @@ void TCPCmd::Exec(std::string str)
 		{
 		case 1: // config
 
-			while (  (c = getopt(argc, argv, "p:a:") ) != -1) 
+			while (  (c = getopt(argc, argv, "p:a:vq") ) != -1) 
 			{
     				switch (c) 
     				{
@@ -80,6 +80,12 @@ void TCPCmd::Exec(std::string str)
             				break;
 				case 'a':
 					inet_aton(optarg, &ct->m_Sa.sin_addr);
+					break;
+				case 'v':
+					ct->m_TCPThread->m_Verbose = true;
+					break;
+				case 'q':
+					ct->m_TCPThread->m_Verbose = false;
 					break;
         			case '?':
 				default :
@@ -266,7 +272,7 @@ void TCPCmd::Exec(std::string str)
 std::string TCPCmd::Help()
 {
 	return _S("Usage: \n") +
-		_S(" tcp config [-p <port>] [-a <address>]\n") +
+		_S(" tcp config [-p <port>] [-a <address>] [-v|-q]\n") +
 		_S(" tcp connect [-s] \n") +
 		_S(" tcp stop \n") +
 		_S(" tcp send <byte string>\n") +
@@ -288,7 +294,9 @@ std::string TCPCmd::Help()
 		_S("           [Returns success]\n") +  
 		_S(" -p port : the TCP Port Number to connect to\n") + 
 		_S(" -a address : the TCP Address to connect to\n") +
-		_S(" -s stop : will disconnect the TCP if connected\n");
+		_S(" -s stop : will disconnect the TCP if connected\n") +
+		_S(" -v verbose: prints verbose messages\n") +
+		_S(" -q quiet: quiets verbose messages [default]\n");
 		
 }
 
@@ -352,7 +360,7 @@ void TTYCmd::Exec(std::string str)
 		{
 		case 1: // config
 
-			while ( (c = getopt(argc, argv, "b:d:") ) != -1) 
+			while ( (c = getopt(argc, argv, "b:d:vq") ) != -1) 
 			{
     				switch (c) 
     				{
@@ -366,6 +374,12 @@ void TTYCmd::Exec(std::string str)
             				break;
 				case 'd':
 					ct->m_SerialName = _S(optarg);
+					break;
+				case 'v':
+					ct->m_TTYThread->m_Verbose = true;
+					break;
+				case 'q':
+					ct->m_TTYThread->m_Verbose = false;
 					break;
         			case '?':
 				default :
@@ -509,6 +523,8 @@ void TTYCmd::Exec(std::string str)
 
 		if( stop )
 		{
+			ct->m_TTYThread->ClearFIFO();
+
 			NTerminal::Get()->PrintToStdout("Stopping TTY Connection");
 			// stop
 			if( ct->m_TTYThread->m_Sockfd != -1 )
@@ -606,7 +622,7 @@ void TTYCmd::Exec(std::string str)
 std::string TTYCmd::Help()
 {
 	return _S("Usage: \n") +
-		_S(" tty config [-b <baud>] [-d <device>]\n") +
+		_S(" tty config [-b <baud>] [-d <device>] [-v|-q]\n") +
 		_S(" tty connect [-s] \n") +
 		_S(" tty stop \n") +
 		_S(" tty send <byte string>\n") +
@@ -628,8 +644,9 @@ std::string TTYCmd::Help()
 		_S("           [Returns success]\n") +  
 		_S(" -b baud : baud rate for the TTY connection\n") + 
 		_S(" -d device : the TTY device to connect to e.g. /dev/ttyUSB0\n") +
-		_S(" -s stop : will disconnect the TTY if connected\n");
-		
+		_S(" -s stop : will disconnect the TTY if connected\n") + 
+		_S(" -v verbose: prints verbose messages\n") +
+		_S(" -q quiet: quiets verbose messages [default]\n");
 }
 
 std::string TTYCmd::Man()

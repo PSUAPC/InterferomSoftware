@@ -13,6 +13,7 @@
 #include "CommCommands.h"
 #include "TabbedPanel.h"
 #include "HexViewer.h"
+#include "HexCommands.h"
 #include <glib.h>
 
 using namespace std;
@@ -76,8 +77,8 @@ int TTYSetInterfaceAttribs (int fd, int speed, int parity)
         tty.c_cc[VMIN]  = 0;            // read doesn't block
         tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
 
-        tty.c_iflag &= ~(IXON | IXOFF | IXANY); // shut off xon/xoff ctrl
-
+        tty.c_iflag &= ~(IXON | IXOFF | INLCR | ICRNL | IXANY); // shut off xon/xoff ctrl
+	//options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
         tty.c_cflag |= (CLOCAL | CREAD);// ignore modem controls,
                                         // enable reading
         tty.c_cflag &= ~(PARENB | PARODD);      // shut off parity
@@ -189,9 +190,14 @@ void *TTYRecvThread(void* t)
 				} 	
 				
 			}
+			// only read if the FIFO is not full
 
-			// always try to read
-			rv = read(lct->m_Sockfd, buff, len);
+			rv = 0;
+			if( !lct->m_FIFO.IsFull() )
+			{
+				rv = read(lct->m_Sockfd, buff, len);
+			}
+
 			usleep(100);
 		}
 		else
@@ -230,12 +236,19 @@ void *TTYRecvThread(void* t)
 			for( int k = 0; (k < rv) && !(lct->m_FIFO.IsFull()); k++ )
 			{
 				lct->FIFOWrite(buff[k]);
-				LogMsgToTerminal("Writing");
+				if( lct->m_Verbose)
+				{
+					char str[100];
+					sprintf(str, "0x%02X", buff[k]);
+					LogMsgToTerminal(_S("Writing ") + _S(str));
+				}
 			}
 
 			if( lct->m_FIFO.IsFull() )
 			{
 				LogMsgToTerminal("TTY FIFO IS FULL");
+				// force a reset
+				lct->ClearFIFO();
 			}
 
 		}
@@ -383,9 +396,11 @@ void *InputThread(void* t)
 	nterminal->SetMutex(ct->m_TerminalMutex);
 	SizerWidget* sizer = new SizerWidget(&nwindow, SizerWidget::DIR_VERT);
 	HexViewer* hexView = new HexViewer(&nwindow, STYLE_BORDER);
+	ct->m_HexViewer = hexView;
 
 	NShell::Get()->RegisterCommand("tcp", new TCPCmd() );
 	NShell::Get()->RegisterCommand("tty", new TTYCmd() );
+	NShell::Get()->RegisterCommand("hex", new HexCmd() );
 
 	nwindow.Init();
 	sizer->Add(hexView);
