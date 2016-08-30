@@ -1,0 +1,115 @@
+Cmp-Mod V01 Created by PcbNew   date = 8/30/2016 12:20:09 AM
+
+BeginCmp
+TimeStamp = 57C50FEB
+Path = 
+Reference = REF**;
+ValeurCmp = 10mil-30mil_Left_Taper;
+IdModule  = Minicircuits:10mil-30mil_Left_Taper;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C50332
+Path = /57C5002E
+Reference = C1;
+ValeurCmp = 100pF;
+IdModule  = Capacitors_SMD:C_0603;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C5033E
+Path = /57C4FC80
+Reference = C2;
+ValeurCmp = 100pF;
+IdModule  = Capacitors_SMD:C_0603;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C5034A
+Path = /57C502A1
+Reference = C3;
+ValeurCmp = 100pF;
+IdModule  = Capacitors_SMD:C_0603;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C50356
+Path = /57C4FFC9
+Reference = C4;
+ValeurCmp = 1uF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C50362
+Path = /57C502A7
+Reference = C5;
+ValeurCmp = 1uF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C5036E
+Path = /57C4FFF8
+Reference = C6;
+ValeurCmp = 100pF;
+IdModule  = Capacitors_SMD:C_0603;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C5037A
+Path = /57C4FC4A
+Reference = L1;
+ValeurCmp = 36nH;
+IdModule  = Capacitors_SMD:C_0603;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C50386
+Path = /57C5019B
+Reference = L2;
+ValeurCmp = 47nH;
+IdModule  = Capacitors_SMD:C_0603;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C50392
+Path = /57C4FCA3
+Reference = R1;
+ValeurCmp = 0R;
+IdModule  = Resistors_SMD:R_1210;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C505D7
+Path = /57C4FB8C
+Reference = U1;
+ValeurCmp = PMA-545G1_Amp;
+IdModule  = Minicircuits:MC_DQ849;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C50FAA
+Path = 
+Reference = REF**;
+ValeurCmp = 10mil-30mil_Left_Taper;
+IdModule  = Minicircuits:10mil-30mil_Left_Taper;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C512FA
+Path = 
+Reference = REF**;
+ValeurCmp = 10mil-30mil_Right_Taper;
+IdModule  = Minicircuits:10mil-30mil_Right_Taper;
+EndCmp
+
+BeginCmp
+TimeStamp = 57C512A9
+Path = 
+Reference = REF**;
+ValeurCmp = 10mil-30mil_Right_Taper;
+IdModule  = Minicircuits:10mil-30mil_Right_Taper;
+EndCmp
+
+EndListe
