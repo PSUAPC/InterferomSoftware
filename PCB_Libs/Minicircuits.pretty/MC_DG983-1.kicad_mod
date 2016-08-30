@@ -37,4 +37,9 @@
   (pad 19 smd rect (at -0.5 -1.845) (size 0.25 0.81) (layers F.Cu F.Paste F.Mask))
   (pad 20 smd rect (at -1 -1.845) (size 0.25 0.81) (layers F.Cu F.Paste F.Mask))
   (pad 21 smd rect (at 0 0) (size 2.06 2.06) (layers F.Cu F.Paste F.Mask))
+  (model E:/jfixelle/Documents/APC/GitRepo/PCB_Libs/3DParts/MC_DG983-1.wrl
+    (at (xyz 0 0 0))
+    (scale (xyz 10 10 10))
+    (rotate (xyz 180 0 0))
+  )
 )

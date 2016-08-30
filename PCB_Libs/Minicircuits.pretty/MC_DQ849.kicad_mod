@@ -25,4 +25,9 @@
   (pad 7 smd rect (at 0.33 -1.44) (size 0.3 0.79) (layers F.Cu F.Paste F.Mask))
   (pad 8 smd rect (at -0.33 -1.44) (size 0.3 0.79) (layers F.Cu F.Paste F.Mask))
   (pad 9 smd rect (at 0 0 90) (size 1.7 1.7) (layers F.Cu F.Paste F.Mask))
+  (model E:/jfixelle/Documents/APC/GitRepo/PCB_Libs/3DParts/MC_DQ849.wrl
+    (at (xyz 0 0 0))
+    (scale (xyz 10 10 10))
+    (rotate (xyz 180 0 0))
+  )
 )

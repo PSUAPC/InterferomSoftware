@@ -16,4 +16,9 @@
   (pad 2 smd rect (at 0 1.59) (size 0.76 1.65) (layers F.Cu F.Paste F.Mask))
   (pad 4 smd rect (at 1.27 -1.59) (size 0.76 1.65) (layers F.Cu F.Paste F.Mask))
   (pad 3 smd rect (at 1.27 1.59) (size 0.76 1.65) (layers F.Cu F.Paste F.Mask))
+  (model E:/jfixelle/Documents/APC/GitRepo/PCB_Libs/3DParts/MC_DB1627.wrl
+    (at (xyz 0 0 0))
+    (scale (xyz 10 10 10))
+    (rotate (xyz 180 0 0))
+  )
 )
