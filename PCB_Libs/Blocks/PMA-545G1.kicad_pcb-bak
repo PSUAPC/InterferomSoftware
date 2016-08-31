@@ -1,20 +1,20 @@
 (kicad_pcb (version 4) (host pcbnew 4.0.3-stable)
 
   (general
-    (links 26)
-    (no_connects 13)
-    (area 0 0 0 0)
+    (links 0)
+    (no_connects 8)
+    (area 128.72238 81.468571 150.829524 102.91762)
     (thickness 1.6)
     (drawings 0)
-    (tracks 50)
+    (tracks 49)
     (zones 0)
-    (modules 14)
+    (modules 83)
     (nets 10)
   )
 
   (page A4)
   (layers
-    (0 F.Cu signal hide)
+    (0 F.Cu signal)
     (31 B.Cu signal)
     (32 B.Adhes user)
     (33 F.Adhes user)
@@ -33,7 +33,7 @@
     (46 B.CrtYd user)
     (47 F.CrtYd user)
     (48 B.Fab user)
-    (49 F.Fab user)
+    (49 F.Fab user hide)
   )
 
   (setup
@@ -58,11 +58,11 @@
     (mod_edge_width 0.15)
     (mod_text_size 1 1)
     (mod_text_width 0.15)
-    (pad_size 0.3 0.79)
-    (pad_drill 0)
+    (pad_size 0.5 0.5)
+    (pad_drill 0.33)
     (pad_to_mask_clearance 0.2)
     (aux_axis_origin 0 0)
-    (visible_elements FFFFFF7F)
+    (visible_elements 7FFFFFFF)
     (pcbplotparams
       (layerselection 0x00030_80000001)
       (usegerberextensions false)
@@ -117,6 +117,822 @@
     (add_net "Net-(C6-Pad2)")
     (add_net "Net-(L1-Pad2)")
     (add_net "Net-(U1-Pad1)")
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A5F)
+    (at 143.26 87.72)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A5B)
+    (at 141.39 87.69)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A49)
+    (at 139.08 99.41)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A45)
+    (at 138.99 97.63)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A3F)
+    (at 135.54 96.15)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A3B)
+    (at 135.56 97.84)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A37)
+    (at 135.54 99.4)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A31)
+    (at 137.47 99.42)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A2D)
+    (at 137.49 97.86)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A29)
+    (at 137.47 96.17)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A22)
+    (at 146.47 94.9)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A1E)
+    (at 145.68 94.88)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A1A)
+    (at 146.47 94.12)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A16)
+    (at 145.68 94.1)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A12)
+    (at 148.18 94.91)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A0E)
+    (at 147.28 94.9)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A0A)
+    (at 148.18 94.13)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A06)
+    (at 147.28 94.12)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51A02)
+    (at 149.04 94.89)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519FA)
+    (at 149.04 94.11)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519F2)
+    (at 144.84 94.88)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519EE)
+    (at 144.84 94.1)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519EA)
+    (at 143.34 94.88)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519E6)
+    (at 144.07 94.88)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519E2)
+    (at 144.07 94.1)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519DE)
+    (at 143.34 94.1)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519D7)
+    (at 149.08 90.33)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519D3)
+    (at 147.32 90.35)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519CD)
+    (at 148.6 91.17)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519C9)
+    (at 148.6 91.95)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519C5)
+    (at 147.63 91.18)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519C1)
+    (at 147.63 91.96)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519BD)
+    (at 146.77 91.2)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519B9)
+    (at 146.77 91.98)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519B5)
+    (at 145.87 91.19)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519B1)
+    (at 145.87 91.97)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519AD)
+    (at 145.06 91.19)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519A9)
+    (at 145.06 91.97)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519A5)
+    (at 144.27 91.17)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C519A1)
+    (at 144.27 91.95)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C5199D)
+    (at 143.43 91.17)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51999)
+    (at 143.43 91.95)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51995)
+    (at 142.66 91.17)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51991)
+    (at 142.66 91.95)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C5194A)
+    (at 138.38 94.09)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51946)
+    (at 138.37 94.87)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51940)
+    (at 137.71 91.54)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C5193B)
+    (at 134.71 91.16)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51937)
+    (at 134.72 91.91)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51918)
+    (at 135.73 94.87)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51914)
+    (at 136.59 94.86)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51904)
+    (at 137.48 94.87)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51900)
+    (at 137.49 94.09)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518FC)
+    (at 136.61 94.09)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518F8)
+    (at 135.72 94.1)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518F4)
+    (at 137 91.14)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518F0)
+    (at 136.23 91.14)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518EC)
+    (at 135.45 91.15)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518E8)
+    (at 135.46 91.9)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518E4)
+    (at 136.25 91.88)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518E0)
+    (at 136.99 91.88)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C518C8)
+    (at 141.93 91.17)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51861)
+    (at 141.93 91.95)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C5185D)
+    (at 141.07 91.16)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51859)
+    (at 140.76 91.85)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51855)
+    (at 138.78 92.9)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C51851)
+    (at 139.56 92.91)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C5184D)
+    (at 139.58 91.99)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
   )
 
   (module Minicircuits:10mil-30mil_Left_Taper (layer F.Cu) (tedit 57C504FE) (tstamp 57C50FEB)
@@ -504,6 +1320,18 @@
     )
   )
 
+  (module DigitalLogic:Via (layer F.Cu) (tedit 57C512AC) (tstamp 57C5181A)
+    (at 138.76 91.99)
+    (fp_text reference "" (at 0 1.7) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value "" (at 0 -1.5) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.5 0.5) (drill 0.33) (layers *.Cu)
+      (net 4 GND))
+  )
+
   (segment (start 136.07 93.01) (end 137.17 93.01) (width 0.762) (layer F.Cu) (net 1))
   (segment (start 142.36 89.96) (end 144.89 89.96) (width 1) (layer F.Cu) (net 3))
   (segment (start 144.89 89.96) (end 144.9 89.97) (width 0.762) (layer F.Cu) (net 3))
@@ -511,7 +1339,6 @@
   (segment (start 140.61 90.06) (end 142.26 90.06) (width 0.762) (layer F.Cu) (net 3))
   (segment (start 142.26 90.06) (end 142.36 89.96) (width 0.762) (layer F.Cu) (net 3))
   (segment (start 140.61 90.06) (end 139.74 90.06) (width 0.762) (layer F.Cu) (net 3))
-  (segment (start 144.99 94.27) (end 144.64 94.27) (width 0.2) (layer F.Cu) (net 4) (tstamp 57C518F9))
   (segment (start 138.862 93.896) (end 138.512 93.896) (width 0.2) (layer F.Cu) (net 4))
   (segment (start 138.512 93.896) (end 137.99 94.418) (width 0.2) (layer F.Cu) (net 4))
   (segment (start 140.61 88.56) (end 140.61 87.74) (width 0.2) (layer F.Cu) (net 4))
@@ -640,11 +1467,9 @@
     (filled_polygon
       (pts
         (xy 149.558535 95.309448) (xy 142.633562 95.235482) (xy 142.662968 95.191473) (xy 142.670058 95.155828) (xy 142.672968 95.151473)
-        (xy 142.676132 95.135568) (xy 142.742732 95.092712) (xy 142.799815 95.009169) (xy 142.819897 94.91) (xy 142.819897 94.11)
-        (xy 142.802465 94.017356) (xy 142.747712 93.932268) (xy 142.664169 93.875185) (xy 142.565 93.855103) (xy 142.183837 93.855103)
-        (xy 142.185684 93.664897) (xy 142.565 93.664897) (xy 142.657644 93.647465) (xy 142.667691 93.641) (xy 147.57 93.641)
-        (xy 147.57039 93.640922) (xy 149.149713 93.649999) (xy 149.167374 93.646884) (xy 149.178652 93.639897) (xy 149.47 93.639897)
-        (xy 149.510615 93.632255)
+        (xy 142.676132 95.135568) (xy 142.742732 95.092712) (xy 142.799815 95.009169) (xy 142.819897 94.91) (xy 142.819897 94.121244)
+        (xy 142.819993 94.120806) (xy 142.827732 93.641) (xy 147.57 93.641) (xy 147.57039 93.640922) (xy 149.149713 93.649999)
+        (xy 149.167374 93.646884) (xy 149.178652 93.639897) (xy 149.47 93.639897) (xy 149.510615 93.632255)
       )
     )
   )
@@ -667,6 +1492,17 @@
     (polygon
       (pts
         (xy 134.549247 92.429045) (xy 136.279247 92.429045) (xy 136.259247 93.599045) (xy 134.519247 93.589045)
+      )
+    )
+  )
+  (zone (net 0) (net_name "") (layer F.Cu) (tstamp 0) (hatch edge 0.508)
+    (connect_pads (clearance 0.15))
+    (min_thickness 0.254)
+    (keepout (tracks allowed) (vias allowed) (copperpour not_allowed))
+    (fill (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 141.82 94.12) (xy 142.77 94.12) (xy 142.78 93.5) (xy 141.9 93.51)
       )
     )
   )
