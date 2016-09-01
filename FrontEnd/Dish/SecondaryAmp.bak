@@ -136,4 +136,8 @@ $EndComp
 Wire Wire Line
 	3200 1850 3200 1900
 Connection ~ 3200 1600
+Text GLabel 1700 1500 0    60   Input ~ 0
+AMP2_In
+Wire Wire Line
+	1700 1500 1850 1500
 $EndSCHEMATC
