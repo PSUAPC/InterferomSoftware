@@ -1,4 +1,4 @@
-update=8/31/2016 5:54:08 PM
+update=8/31/2016 6:03:17 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -23,9 +23,11 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
+[general]
+version=1
 [eeschema]
 version=1
-LibDir=
+LibDir=../../PCB_Libs
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -56,5 +58,7 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-[general]
-version=1
+LibName30=E:/jfixelle/Documents/APC/GitRepo/PCB_Libs/DigitalLogic
+LibName31=E:/jfixelle/Documents/APC/GitRepo/PCB_Libs/Minicircuits
+LibName32=DigitalLogic
+LibName33=Minicircuits
