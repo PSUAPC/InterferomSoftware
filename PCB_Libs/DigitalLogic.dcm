@@ -5,6 +5,11 @@ D DIP6, DC Optocoupler Base Connected, Vce 30V, CTR 20%, Viso 1500V
 K NPN DC Optocoupler Base Connected
 $ENDCMP
 #
+$CMP LCD-016N002L
+D 16 x 2 Character LCD
+F http://www.vishay.com/docs/37299/37299.pdf
+$ENDCMP
+#
 $CMP LM2576_Buck
 D 300 mA Low Dropout Voltage Regulator, Fixed Output 0.9V, SOT-23-5
 K 300mA LDO Regulator Fixed Positive
@@ -33,6 +38,12 @@ $CMP MC78L12ACD
 D Positive 100mA 30V Linear Regulator, Fixed Output 12V, SO-8
 K Voltage Regulator 100mA Positive
 F http://www.fairchildsemi.com/ds/LM/LM78L05A.pdf
+$ENDCMP
+#
+$CMP NHD-C12832A1Z
+D WC1602A0-SFYLYNC06
+K Generic LCD 16x2 Alphanumeric 16pin Green Backlight
+F http://www.kamami.pl/dl/wc1602a0.pdf
 $ENDCMP
 #
 $CMP Opto_H11L1M
