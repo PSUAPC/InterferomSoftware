@@ -1,4 +1,4 @@
-Started logging messages at Fri Sep 09 20:08:31 2016
+Started logging messages at Mon Sep 12 15:29:54 2016
 Info:    Using UV tolerance 1e-006
 Info:    Using UV tolerance 1e-006
 Info:    HwNlibToTSLib options selected:
@@ -21,365 +21,712 @@ Info:    Found 0 curves in file
 Info:    Found 0 surfaces in file
 Info:    Found 0 trimmed surfaces in file
 Info:    Found 1 B-reps in file
-Info:    Found 64 B-rep faces in file
+Info:    Found 51 B-rep faces in file
 Info:    
 Info:    Using 3D tolerance 1e-006
 Info:    Working on 0
-Info:        Working on 66
+Info:        Working on 47
 Info:            Created 
-Info:        Working on 67
-Info:            Created 
-Info:        Working on 97
-Info:            Created 
-Info:        Working on 101
+Info:        Working on 63
 Info:            Created 
 Info:        Working on 6
 Info:            Created 
-Info:        Working on 89
+Info:        Working on 60
 Info:            Created 
-Info:        Working on 90
-Info:            Created 
-Info:        Working on 125
-Info:            Created 
-Info:        Working on 126
+Info:        Working on 76
 Info:            Created 
 Info:        Working on 9
 Info:            Created 
-Info:        Working on 121
+Info:        Working on 75
 Info:            Created 
-Info:        Working on 122
+Info:        Working on 93
 Info:            Created 
-Info:        Working on 13
+Info:        Working on 14
 Info:            Created 
-Info:        Working on 148
+Info:        Working on 22
 Info:            Created 
-Info:        Working on 149
+Info:        Working on 103
 Info:            Created 
-Info:        Working on 21
+Info:        Working on 35
 Info:            Created 
-Info:        Working on 174
+Info:        Working on 50
 Info:            Created 
-Info:        Working on 175
-Info:            Created 
-Info:        Working on 39
-Info:            Created 
-Info:        Working on 204
-Info:            Created 
-Info:        Working on 189
-Info:            Created 
-Info:        Working on 69
-Info:            Created 
-Info:        Working on 105
-Info:            Created 
-Info:        Working on 326
-Info:            Created 
-Info:        Working on 327
-Info:            Created 
-Info:        Working on 391
-Info:            Created 
-Info:        Working on 395
-Info:            Created 
-Info:        Working on 135
-Info:            Created 
-Info:        Working on 383
-Info:            Created 
-Info:        Working on 384
-Info:            Created 
-Info:        Working on 475
-Info:            Created 
-Info:        Working on 476
-Info:            Created 
-Info:        Working on 168
-Info:            Created 
-Info:        Working on 471
-Info:            Created 
-Info:        Working on 472
-Info:            Created 
-Info:        Working on 207
-Info:            Created 
-Info:        Working on 575
-Info:            Created 
-Info:        Working on 576
-Info:            Created 
-Info:        Working on 254
-Info:            Created 
-Info:        Working on 697
-Info:            Created 
-Info:        Working on 698
-Info:            Created 
-Info:        Working on 299
-Info:            Created 
-Info:        Working on 705
-Info:            Created 
-Info:        Working on 701
-Info:            Created 
-Info:        Working on 363
-Info:            Created 
-Info:        Working on 457
-Info:            Created 
-Info:        Working on 1001
-Info:            Created 
-Info:        Working on 1002
-Info:            Created 
-Info:        Working on 1055
-Info:            Created 
-Info:        Working on 1057
-Info:            Created 
-Info:        Working on 566
-Info:            Created 
-Info:        Working on 1048
-Info:            Created 
-Info:        Working on 1049
-Info:            Created 
-Info:        Working on 1077
-Info:            Created 
-Info:        Working on 1078
-Info:            Created 
-Info:        Working on 692
-Info:            Created 
-Info:        Working on 985
-Info:            Created 
-Info:        Working on 983
-Info:            Created 
-Info:        Working on 797
-Info:            Created 
-Info:        Working on 927
-Info:            Created 
-Info:        Working on 923
-Info:            Created 
-Info:        Working on 899
-Info:            Created 
-Info:        Working on 825
-Info:            Created 
-Info:        Working on 892
-Info:            Created 
-Info:        Working on 986
-Info:            Created 
-Info:        Working on 818
-Info:            Created 
-Info:        Working on 896
-Info:            Created 
-Info:        Working on 1006
-Info:            Created 
-Info:        Working on 1058
-Info:            Created 
-Info:        Working on 536
-Info:            Created 
-Info:        Working on 454
-Info:            Created 
-Info:        Working on 778
-Info:            Created 
-Info:        Working on 686
-Info:            Created 
-Info:        Working on 683
-Info:            Created 
-Info:        Working on 407
-Info:            Created 
-Info:        Working on 729
-Info:            Created 
-Info:        Working on 663
-Info:            Created 
-Info:        Working on 455
-Info:            Created 
-Info:        Working on 687
-Info:            Created 
-Info:        Working on 563
-Info:            Created 
-Info:        Working on 689
-Info:            Created 
-Info:        Working on 794
-Info:            Created 
-Info:        Working on 611
-Info:            Created 
-Info:        Working on 665
-Info:            Created 
-Info:        Working on 544
-Info:            Created 
-Info:        Working on 804
-Info:            Created 
-Info:        Working on 781
-Info:            Created 
-Info:        Working on 584
-Info:            Created 
-Info:        Working on 489
-Info:            Created 
-Info:        Working on 710
-Info:            Created 
-Info:        Working on 704
-Info:            Created 
-Info:        Working on 402
-Info:            Created 
-Info:        Working on 707
-Info:            Created 
-Info:        Working on 671
-Info:            Created 
-Info:        Working on 782
-Info:            Created 
-Info:        Working on 803
-Info:            Created 
-Info:        Working on 597
+Info:        Working on 65
 Info:            Created 
 Info:        Working on 248
 Info:            Created 
-Info:        Working on 249
+Info:        Working on 174
 Info:            Created 
-Info:        Working on 241
+Info:        Working on 82
 Info:            Created 
-Info:        Working on 238
+Info:        Working on 305
 Info:            Created 
-Info:        Working on 161
+Info:        Working on 358
 Info:            Created 
-Info:        Working on 281
+Info:        Working on 82
 Info:            Created 
-Info:        Working on 271
+Info:        Working on 357
 Info:            Created 
-Info:        Working on 202
+Info:        Working on 397
 Info:            Created 
-Info:        Working on 282
+Info:        Working on 129
 Info:            Created 
-Info:        Working on 274
+Info:        Working on 396
 Info:            Created 
-Info:        Working on 250
+Info:        Working on 177
 Info:            Created 
-Info:        Working on 251
+Info:        Working on 237
 Info:            Created 
-Info:        Working on 217
+Info:        Working on 436
 Info:            Created 
-Info:        Working on 183
+Info:        Working on 294
 Info:            Created 
-Info:        Working on 531
+Info:        Working on 352
 Info:            Created 
-Info:        Working on 532
+Info:        Working on 359
 Info:            Created 
-Info:        Working on 657
+Info:        Working on 474
 Info:            Created 
-Info:        Working on 658
+Info:        Working on 234
 Info:            Created 
-Info:        Working on 232
-Info:            Created 
-Info:        Working on 771
-Info:            Created 
-Info:        Working on 864
-Info:            Created 
-Info:        Working on 776
-Info:            Created 
-Info:        Working on 285
-Info:            Created 
-Info:        Working on 876
-Info:            Created 
-Info:        Working on 975
-Info:            Created 
-Info:        Working on 976
-Info:            Created 
-Info:        Working on 342
-Info:            Created 
-Info:        Working on 871
-Info:            Created 
-Info:        Working on 972
-Info:            Created 
-Info:        Working on 419
-Info:            Created 
-Info:        Working on 971
-Info:            Created 
-Info:        Working on 513
-Info:            Created 
-Info:        Working on 978
-Info:            Created 
-Info:        Working on 1039
-Info:            Created 
-Info:        Working on 947
-Info:            Created 
-Info:        Working on 746
-Info:            Created 
-Info:        Working on 676
-Info:            Created 
-Info:        Working on 635
-Info:            Created 
-Info:        Working on 1013
-Info:            Created 
-Info:        Working on 1081
-Info:            Created 
-Info:        Working on 759
-Info:            Created 
-Info:        Working on 836
-Info:            Created 
-Info:        Working on 507
-Info:            Created 
-Info:        Working on 843
-Info:            Created 
-Info:        Working on 1015
-Info:            Created 
-Info:        Working on 1010
-Info:            Created 
-Info:        Working on 937
-Info:            Created 
-Info:        Working on 949
-Info:            Created 
-Info:        Working on 1019
-Info:            Created 
-Info:        Working on 552
-Info:            Created 
-Info:        Working on 716
-Info:            Created 
-Info:        Working on 914
-Info:            Created 
-Info:        Working on 809
-Info:            Created 
-Info:        Working on 285
-Info:            Created 
-Info:        Working on 886
-Info:            Created 
-Info:        Working on 865
-Info:            Created 
-Info:        Working on 840
-Info:            Created 
-Info:        Working on 622
-Info:            Created 
-Info:        Working on 742
-Info:            Created 
-Info:        Working on 843
-Info:            Created 
-Info:        Working on 965
-Info:            Created 
-Info:        Working on 966
-Info:            Created 
-Info:        Working on 1073
-Info:            Created 
-Info:        Working on 1074
-Info:            Created 
-Info:        Working on 943
-Info:            Created 
-Info:        Working on 1026
-Info:            Created 
-Info:        Working on 1084
-Info:            Created 
-Info:        Working on 1017
-Info:            Created 
-Info:        Working on 1030
-Info:            Created 
-Info:        Working on 1086
-Info:            Created 
-Info:        Working on 1061
-Info:            Created 
-Info:        Working on 1071
-Info:            Created 
-Info:        Working on 1038
-Info:            Created 
-Info:        Working on 968
-Info:            Created 
-Info:        Working on 296
-Info:            Created 
-Info:        Working on 339
-Info:            Created 
-Info:        Working on 416
+Info:        Working on 292
 Info:            Created 
 Info:        Working on 509
 Info:            Created 
+Info:        Working on 530
+Info:            Created 
+Info:        Working on 349
+Info:            Created 
+Info:        Working on 368
+Info:            Created 
+Info:        Working on 256
+Info:            Created 
+Info:        Working on 391
+Info:            Created 
+Info:        Working on 430
+Info:            Created 
+Info:        Working on 551
+Info:            Created 
+Info:        Working on 469
+Info:            Created 
+Info:        Working on 505
+Info:            Created 
+Info:        Working on 437
+Info:            Created 
+Info:        Working on 503
+Info:            Created 
+Info:        Working on 289
+Info:            Created 
+Info:        Working on 346
+Info:            Created 
+Info:        Working on 520
+Info:            Created 
+Info:        Working on 323
+Info:            Created 
+Info:        Working on 346
+Info:            Created 
+Info:        Working on 537
+Info:            Created 
+Info:        Working on 547
+Info:            Created 
+Info:        Working on 405
+Info:            Created 
+Info:        Working on 546
+Info:            Created 
+Info:        Working on 440
+Info:            Created 
+Info:        Working on 477
+Info:            Created 
+Info:        Working on 552
+Info:            Created 
+Info:        Working on 511
+Info:            Created 
+Info:        Working on 532
+Info:            Created 
+Info:        Working on 538
+Info:            Created 
+Info:        Working on 220
+Info:            Created 
+Info:        Working on 221
+Info:            Created 
+Info:        Working on 270
+Info:            Created 
+Info:        Working on 147
+Info:            Created 
+Info:        Working on 191
+Info:            Created 
+Info:        Working on 166
+Info:            Created 
+Info:        Working on 267
+Info:            Created 
+Info:        Working on 119
+Info:            Created 
+Info:        Working on 383
+Info:            Created 
+Info:        Working on 418
+Info:            Created 
+Info:        Working on 165
+Info:            Created 
+Info:        Working on 223
+Info:            Created 
+Info:        Working on 280
+Info:            Created 
+Info:        Working on 493
+Info:            Created 
+Info:        Working on 523
+Info:            Created 
+Info:        Working on 334
+Info:            Created 
+Info:        Working on 522
+Info:            Created 
+Info:        Working on 378
+Info:            Created 
+Info:        Working on 412
+Info:            Created 
+Info:        Working on 548
+Info:            Created 
+Info:        Working on 524
+Info:            Created 
+Info:        Working on 449
+Info:            Created 
+Info:        Working on 386
+Info:            Created 
+Info:        Working on 421
+Info:            Created 
+Info:        Working on 459
+Info:            Created 
+Info:        Working on 499
+Info:            Created 
+Info:        Working on 541
+Info:            Created 
+Info:        Working on 496
+Info:            Created 
+Info:        Working on 344
+Info:            Created 
+Info:        Working on 326
+Info:            Created 
+Info:        Working on 425
+Info:            Created 
+Info:        Working on 486
+Info:            Created 
+Info:        Working on 326
+Info:            Created 
+Info:        Working on 373
+Info:            Created 
+Info:        Working on 307
+Info:            Created 
+Info:        Working on 331
+Info:            Created 
+Info:        Working on 362
+Info:            Created 
+Info:        Working on 328
+Info:            Created 
+Info:        Working on 321
+Info:            Created 
+Info:        Working on 200
+Info:            Created 
+Info:        Working on 330
+Info:            Created 
+Info:        Working on 262
+Info:            Created 
+Info:        Working on 277
+Info:            Created 
+Info:        Working on 79
+Info:            Created 
 Info:        Created 
 Info:    Working on BRep 0
-Info:        Using 3D tolerance 1.92461e-005
-Info:        Using 3D tolerance 1e-006
-Info:        Created BRep 
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60236e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60236e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 2.51094e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.97027e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 8.67362e-018
+Info:        Distance between segments 8.67362e-018
+Info:        Distance between segments 1.4752e-018
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60236e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.39858e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 1, v = [0, 1], width = 4.32385e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.96262e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.10317e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.55401e-017
+Info:            Rough distance of curve to surface: 1.10505e-012
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 2.41095e-007, 1.797e-007
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.797e-007, 2.41095e-007
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60257e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60215e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 3.07996e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.96262e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.96262e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.4037e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 5.12182e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.39935e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.4037e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60229e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60236e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 2.51094e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.39858e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.10317e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 8.67362e-018
+Info:        Distance between segments 8.67362e-018
+Info:        Distance between segments 2.9504e-018
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60238e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.39858e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 1, v = [0, 1], width = 4.32385e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.92523e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.55158e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.10317e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.39049e-017
+Info:            Rough distance of curve to surface: 1.10506e-012
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 2.41095e-007, 1.797e-007
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.797e-007, 2.41095e-007
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60257e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 3.07996e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.38778e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.96262e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.4037e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 5.12182e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.39935e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.96262e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 5.55112e-017
+Info:            Rough distance of curve to surface: 6.19667e-017
+Info:            Rough distance of curve to surface: 5.73104e-017
+Info:            Rough distance of curve to surface: 3.10317e-017
+Info:            Rough distance of curve to surface: 4.65475e-017
+Info:            Rough distance of curve to surface: 3.10317e-017
+Info:            Rough distance of curve to surface: 2.46017e-017
+Info:            Rough distance of curve to surface: 2.08206e-017
+Info:            Rough distance of curve to surface: 2.49027e-017
+Info:            Rough distance of curve to surface: 2.08206e-017
+Info:            Rough distance of curve to surface: 5.99065e-017
+Info:            Rough distance of curve to surface: 6.05926e-017
+Info:            Rough distance of curve to surface: 4.65475e-017
+Info:            Rough distance of curve to surface: 6.05926e-017
+Info:            Rough distance of curve to surface: 6.3543e-017
+Info:            Rough distance of curve to surface: 6.3543e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 1.32912e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.96852e-007, 1.96852e-007
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.96852e-007, 1.96852e-007
+Info:        Distance between segments 2.9504e-018
+Info:        Distance between segments 0
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.96852e-007, 1.96852e-007
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.96852e-007, 1.96852e-007
+Info:        Distance between segments 1.4752e-018
+Info:        Distance between segments 0
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.96852e-007, 1.96852e-007
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.96852e-007, 1.96852e-007
+Info:        Distance between segments 1.4752e-018
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.50911e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.28994e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.28994e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 1.68539e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.49227e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.84119e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60235e-013
+Info:            Rough distance of curve to surface: 4.60236e-013
+Info:            Rough distance of curve to surface: 4.60236e-013
+Info:        Distance between segments 8.69453e-018
+Info:        Distance between segments 8.69453e-018
+Info:        Distance between segments 1.4752e-018
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60238e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.73472e-018
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 2.49128e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.97027e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.39049e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 8.67362e-019
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 1, v = [0, 1], width = 3.48457e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.78097e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.1798e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 8.67362e-019
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Singularity found at u = 0, v = [0, 1], width = 4.66452e-016
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 5.20417e-018
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.73472e-018
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60243e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60257e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.39049e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60229e-013
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.60257e-013
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.77556e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.96262e-017
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 7.01882e-018
+Info:            Rough distance of curve to surface: 1.10504e-012
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 2.41095e-007, 1.797e-007
+Info:        Distance between segments 3.93704e-007
+Info:              Tweaking curve ends
+Info:            Distances between ends and compromise: 1.797e-007, 2.41095e-007
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.39606e-017
+Info:            Rough distance of curve to surface: 1.38778e-017
+Info:            Rough distance of curve to surface: 1.56381e-017
+Info:            Rough distance of curve to surface: 1.73897e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 5.90079e-018
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.83419e-017
+Info:            Rough distance of curve to surface: 1.7186e-017
+Info:            Rough distance of curve to surface: 2.24632e-017
+Info:            Rough distance of curve to surface: 1.89776e-017
+Info:            Rough distance of curve to surface: 2.83602e-017
+Info:            Rough distance of curve to surface: 2.83602e-017
+Info:            Rough distance of curve to surface: 2.83419e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 1.38778e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.11232e-017
+Info:            Rough distance of curve to surface: 1.69673e-017
+Info:            Rough distance of curve to surface: 1.96262e-017
+Info:            Rough distance of curve to surface: 3.11232e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 1.09274e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 3.96865e-017
+Info:            Rough distance of curve to surface: 6.245e-017
+Info:            Rough distance of curve to surface: 6.245e-017
+Info:            Rough distance of curve to surface: 5.76388e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Trying to create B-rep face
+Info:        Trying model space trim
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 4.27742e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.4037e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.55158e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 2.4037e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.73472e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 1.04083e-017
+Info:        Distance between segments 0
+Info:        Distance of curves to surface:
+Info:            Rough distance of curve to surface: 5.05159e-017
+Info:            Rough distance of curve to surface: 5.05159e-017
+Info:            Rough distance of curve to surface: 1.65242e-017
+Info:            Rough distance of curve to surface: 2.88791e-017
+Info:        Distance between segments 0
+Info:        Distance between segments 0
+Info:        Distance between segments 5.90079e-018
+Info:        Distance between segments 1.38778e-017
 Info:    Finished with 
 Info:    Points:                 0 found       0 created       0 failed
 Info:    Coordinate Systems      0 found       0 created       0 failed
@@ -387,4 +734,4 @@ Info:    Curves:                 0 found       0 created       0 failed
 Info:    Surfaces:               0 found       0 created       0 failed
 Info:    Trimmed Surfaces:       0 found       0 created       0 failed
 Info:    Breps:                  1 found       1 created       0 failed
-Finished logging messages at Fri Sep 09 20:08:31 2016
+Finished logging messages at Mon Sep 12 15:29:55 2016
