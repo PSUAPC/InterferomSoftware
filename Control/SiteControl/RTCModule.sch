@@ -1,0 +1,661 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:DigitalLogic
+LIBS:Minicircuits
+LIBS:SiteControl-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 9 9
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCP7952 U16
+U 1 1 57EAC7B8
+P 9600 1700
+F 0 "U16" H 9300 2050 50  0000 L CNN
+F 1 "MCP7952" H 9700 2050 50  0000 L CNN
+F 2 "DigitalLogic:MSOP-10" H 9600 1700 50  0001 C CNN
+F 3 "" H 9600 1700 50  0000 C CNN
+	1    9600 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C41
+U 1 1 57EAC93B
+P 8550 2050
+F 0 "C41" H 8560 2120 50  0000 L CNN
+F 1 "8pF" H 8560 1970 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 8550 2050 50  0001 C CNN
+F 3 "" H 8550 2050 50  0000 C CNN
+	1    8550 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C42
+U 1 1 57EAC9ED
+P 8800 2050
+F 0 "C42" H 8810 2120 50  0000 L CNN
+F 1 "10pF" H 8810 1970 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 8800 2050 50  0001 C CNN
+F 3 "" H 8800 2050 50  0000 C CNN
+	1    8800 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C43
+U 1 1 57EACA17
+P 10250 3750
+F 0 "C43" H 10260 3820 50  0000 L CNN
+F 1 "0.1uF" H 10260 3670 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 10250 3750 50  0001 C CNN
+F 3 "" H 10250 3750 50  0000 C CNN
+	1    10250 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C44
+U 1 1 57EACAD3
+P 10650 3750
+F 0 "C44" H 10660 3820 50  0000 L CNN
+F 1 "0.1uF" H 10660 3670 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 10650 3750 50  0001 C CNN
+F 3 "" H 10650 3750 50  0000 C CNN
+	1    10650 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR101
+U 1 1 57EACB99
+P 9600 2300
+F 0 "#PWR101" H 9600 2050 50  0001 C CNN
+F 1 "GND" H 9600 2150 50  0000 C CNN
+F 2 "" H 9600 2300 50  0000 C CNN
+F 3 "" H 9600 2300 50  0000 C CNN
+	1    9600 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3V3 #PWR100
+U 1 1 57EACBB9
+P 9600 1150
+F 0 "#PWR100" H 9600 1000 50  0001 C CNN
+F 1 "+3V3" H 9600 1290 50  0000 C CNN
+F 2 "" H 9600 1150 50  0000 C CNN
+F 3 "" H 9600 1150 50  0000 C CNN
+	1    9600 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3VP #PWR105
+U 1 1 57EACBD9
+P 10650 3550
+F 0 "#PWR105" H 10800 3500 50  0001 C CNN
+F 1 "+3.3VP" H 10650 3650 50  0000 C CNN
+F 2 "" H 10650 3550 50  0000 C CNN
+F 3 "" H 10650 3550 50  0000 C CNN
+	1    10650 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3VP #PWR98
+U 1 1 57EACC5D
+P 9050 1150
+F 0 "#PWR98" H 9200 1100 50  0001 C CNN
+F 1 "+3.3VP" H 9050 1250 50  0000 C CNN
+F 2 "" H 9050 1150 50  0000 C CNN
+F 3 "" H 9050 1150 50  0000 C CNN
+	1    9050 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3V3 #PWR103
+U 1 1 57EACCC2
+P 10250 3550
+F 0 "#PWR103" H 10250 3400 50  0001 C CNN
+F 1 "+3V3" H 10250 3690 50  0000 C CNN
+F 2 "" H 10250 3550 50  0000 C CNN
+F 3 "" H 10250 3550 50  0000 C CNN
+	1    10250 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R49
+U 1 1 57EACEA3
+P 10200 1300
+F 0 "R49" H 10230 1320 50  0000 L CNN
+F 1 "3k" H 10230 1260 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 10200 1300 50  0001 C CNN
+F 3 "" H 10200 1300 50  0000 C CNN
+	1    10200 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3V3 #PWR102
+U 1 1 57EACFC7
+P 10200 1150
+F 0 "#PWR102" H 10200 1000 50  0001 C CNN
+F 1 "+3V3" H 10200 1290 50  0000 C CNN
+F 2 "" H 10200 1150 50  0000 C CNN
+F 3 "" H 10200 1150 50  0000 C CNN
+	1    10200 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR97
+U 1 1 57EAD0EE
+P 8650 2250
+F 0 "#PWR97" H 8650 2000 50  0001 C CNN
+F 1 "GND" H 8650 2100 50  0000 C CNN
+F 2 "" H 8650 2250 50  0000 C CNN
+F 3 "" H 8650 2250 50  0000 C CNN
+	1    8650 2250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8550 2150 8550 2200
+Wire Wire Line
+	8550 2200 8800 2200
+Wire Wire Line
+	8650 2200 8650 2250
+Wire Wire Line
+	8800 2200 8800 2150
+Connection ~ 8650 2200
+Wire Wire Line
+	8550 1850 8550 1950
+Wire Wire Line
+	8550 1900 9200 1900
+Connection ~ 8550 1900
+Wire Wire Line
+	8800 1650 8800 1950
+Connection ~ 8800 1650
+Wire Wire Line
+	9600 2100 9600 2300
+Wire Wire Line
+	9600 1300 9600 1150
+Wire Wire Line
+	9200 1500 9050 1500
+Wire Wire Line
+	9050 1500 9050 1150
+Wire Wire Line
+	10000 1800 10300 1800
+Wire Wire Line
+	10200 1800 10200 1400
+Wire Wire Line
+	10200 1200 10200 1150
+Wire Wire Line
+	10250 3650 10250 3550
+Wire Wire Line
+	10650 3550 10650 3650
+$Comp
+L GND #PWR104
+U 1 1 57EAD3F6
+P 10450 3950
+F 0 "#PWR104" H 10450 3700 50  0001 C CNN
+F 1 "GND" H 10450 3800 50  0000 C CNN
+F 2 "" H 10450 3950 50  0000 C CNN
+F 3 "" H 10450 3950 50  0000 C CNN
+	1    10450 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 3850 10250 3900
+Wire Wire Line
+	10250 3900 10650 3900
+Wire Wire Line
+	10650 3900 10650 3850
+Wire Wire Line
+	10450 3950 10450 3900
+Connection ~ 10450 3900
+$Comp
+L Battery BT1
+U 1 1 57EAD949
+P 9050 3700
+F 0 "BT1" H 9150 3750 50  0000 L CNN
+F 1 "Keystone 1056" H 9150 3650 50  0000 L CNN
+F 2 "DigitalLogic:CoinCell_12.5mm" V 9050 3740 50  0001 C CNN
+F 3 "" V 9050 3740 50  0000 C CNN
+	1    9050 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR99
+U 1 1 57EAD9BA
+P 9050 3950
+F 0 "#PWR99" H 9050 3700 50  0001 C CNN
+F 1 "GND" H 9050 3800 50  0000 C CNN
+F 2 "" H 9050 3950 50  0000 C CNN
+F 3 "" H 9050 3950 50  0000 C CNN
+	1    9050 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 3950 9050 3850
+$Comp
+L +3.3VP #PWR96
+U 1 1 57EADA96
+P 8500 3500
+F 0 "#PWR96" H 8650 3450 50  0001 C CNN
+F 1 "+3.3VP" H 8500 3600 50  0000 C CNN
+F 2 "" H 8500 3500 50  0000 C CNN
+F 3 "" H 8500 3500 50  0000 C CNN
+	1    8500 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Crystal_Small X1
+U 1 1 57EBA0BA
+P 8550 1750
+F 0 "X1" H 8550 1850 50  0000 C CNN
+F 1 "CFS-20632768EZBB_32.768kHz" H 8550 1650 50  0000 C CNN
+F 2 "Crystals:Crystal_Round_Vertical_2mm" H 8550 1750 50  0001 C CNN
+F 3 "" H 8550 1750 50  0000 C CNN
+F 4 "6pF" H 8300 1750 60  0000 C CNN "C"
+	1    8550 1750
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8550 1650 9200 1650
+$Comp
+L R_Small R50
+U 1 1 57EBBA3F
+P 8700 3500
+F 0 "R50" H 8730 3520 50  0000 L CNN
+F 1 "1R" H 8730 3460 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805" H 8700 3500 50  0001 C CNN
+F 3 "" H 8700 3500 50  0000 C CNN
+	1    8700 3500
+	0    1    1    0   
+$EndComp
+$Comp
+L D_Schottky_Small D1
+U 1 1 57EBBA8D
+P 8950 3500
+F 0 "D1" H 8900 3580 50  0000 L CNN
+F 1 "CUS520,H3F" H 8700 3650 50  0000 L CNN
+F 2 "Diodes_SMD:SOD-323" V 8950 3500 50  0001 C CNN
+F 3 "" V 8950 3500 50  0000 C CNN
+	1    8950 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 3550 9050 3500
+Wire Wire Line
+	8850 3500 8800 3500
+Wire Wire Line
+	8600 3500 8500 3500
+Text GLabel 4600 1700 0    60   Input ~ 0
+SCLK
+Text GLabel 5700 2200 2    60   Input ~ 0
+SDI
+Text GLabel 4600 1200 0    60   Input ~ 0
+SDO
+Wire Wire Line
+	10000 1500 10300 1500
+Wire Wire Line
+	10300 1600 10000 1600
+Wire Wire Line
+	10000 1700 10300 1700
+Text GLabel 1800 1750 0    60   Input ~ 0
+RTC_nCS
+Text GLabel 10300 1900 2    60   Input ~ 0
+RTC_MFP
+Connection ~ 10200 1800
+Wire Wire Line
+	10300 1900 10000 1900
+Text Notes 1600 6550 0    60   ~ 0
+NOTES:\nThe RTC Module will use a CR1220 coin cell back-up battery.\nTypical specs are 3V @ 36mAh for $0.62 each. The MCP7952 run on \napprox 700 nA stand-by current when VCC < VThrs. With a 36mAh battery,\nthe RTC should keep time for 2083 days. Since the MCP7952 requires 1.8V min,\nthen assume at least 800 days of operation.\n\nThe MCP7952 will have the SPI bus connected to both the Pi and the PIC MCU.\nThis will allow the Pi to directly access the RTC, as well as allow the MCU to\naccess the RTC while the Pi is offline.
+$Comp
+L 74LS125 U17
+U 1 1 57ED0ADE
+P 5150 1200
+F 0 "U17" H 5150 1300 50  0000 L BNN
+F 1 "74HCT125D,653" H 5200 1050 50  0000 L TNN
+F 2 "SMD_Packages:SOIC-14_N" H 5150 1200 50  0001 C CNN
+F 3 "" H 5150 1200 50  0000 C CNN
+	1    5150 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74LS125 U17
+U 4 1 57ED0C57
+P 7200 2300
+F 0 "U17" H 7200 2400 50  0000 L BNN
+F 1 "74HCT125D,653" H 7250 2150 50  0000 L TNN
+F 2 "" H 7200 2300 50  0000 C CNN
+F 3 "" H 7200 2300 50  0000 C CNN
+	4    7200 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74LS125 U17
+U 2 1 57ED0C98
+P 5150 1700
+F 0 "U17" H 5150 1800 50  0000 L BNN
+F 1 "74HCT125D,653" H 5200 1550 50  0000 L TNN
+F 2 "" H 5150 1700 50  0000 C CNN
+F 3 "" H 5150 1700 50  0000 C CNN
+	2    5150 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74LS125 U17
+U 3 1 57ED0D59
+P 5150 2200
+F 0 "U17" H 5150 2300 50  0000 L BNN
+F 1 "74HCT125D,653" H 5200 2050 50  0000 L TNN
+F 2 "" H 5150 2200 50  0000 C CNN
+F 3 "" H 5150 2200 50  0000 C CNN
+	3    5150 2200
+	1    0    0    -1  
+$EndComp
+Text GLabel 10300 1700 2    60   Input ~ 0
+PI_SCLK
+Text GLabel 10300 1600 2    60   Input ~ 0
+PI_SDI
+Text GLabel 10300 1500 2    60   Input ~ 0
+PI_SDO
+Text GLabel 5700 1700 2    60   Input ~ 0
+PI_SCLK
+Text GLabel 4600 2200 0    60   Input ~ 0
+PI_SDI
+Text GLabel 5700 1200 2    60   Input ~ 0
+PI_SDO
+Text GLabel 1800 1550 0    60   Input ~ 0
+PI_RTC_nCS
+Text Notes 8175 5200 0    60   ~ 0
+Buffer Truth Table:\n\nPi_nCS    MCU_nCS    EN    ~EN~    RTC_nCS\n   0        0          U      U       U\n   0        1          0      1       0\n   1        0          1      0       0\n   1        1          X      X       1
+Text Notes 8225 5675 0    60   ~ 0
+~EN~ = MCU_nCS\nRTC_nCS = ~ Pi_nCS (+) MCU_nCS ~
+Text GLabel 10300 1800 2    60   Input ~ 0
+nCS
+Text GLabel 3250 1650 2    60   Input ~ 0
+nCS
+$Comp
+L SN74AUP1T86_Schmitt_XOR U18
+U 1 1 57EDE78A
+P 2500 1650
+F 0 "U18" H 2150 1900 50  0000 C CNN
+F 1 "SN74AUP1T87_Schmitt_XNOR" H 2550 2050 50  0000 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-353" H 2500 1650 50  0001 C CNN
+F 3 "" H 2500 1650 50  0000 C CNN
+	1    2500 1650
+	1    0    0    -1  
+$EndComp
+Text GLabel 4600 2600 0    60   Input ~ 0
+RTC_nCS
+$Comp
+L GND #PWR93
+U 1 1 57EE1043
+P 5000 2400
+F 0 "#PWR93" H 5000 2150 50  0001 C CNN
+F 1 "GND" H 5000 2250 50  0000 C CNN
+F 2 "" H 5000 2400 50  0000 C CNN
+F 3 "" H 5000 2400 50  0000 C CNN
+	1    5000 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR91
+U 1 1 57EE125B
+P 2450 2000
+F 0 "#PWR91" H 2450 1750 50  0001 C CNN
+F 1 "GND" H 2450 1850 50  0000 C CNN
+F 2 "" H 2450 2000 50  0000 C CNN
+F 3 "" H 2450 2000 50  0000 C CNN
+	1    2450 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3V3 #PWR92
+U 1 1 57EE1635
+P 5000 1050
+F 0 "#PWR92" H 5000 900 50  0001 C CNN
+F 1 "+3V3" H 5000 1190 50  0000 C CNN
+F 2 "" H 5000 1050 50  0000 C CNN
+F 3 "" H 5000 1050 50  0000 C CNN
+	1    5000 1050
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3V3 #PWR90
+U 1 1 57EE1BB3
+P 2450 1200
+F 0 "#PWR90" H 2450 1050 50  0001 C CNN
+F 1 "+3V3" H 2450 1340 50  0000 C CNN
+F 2 "" H 2450 1200 50  0000 C CNN
+F 3 "" H 2450 1200 50  0000 C CNN
+	1    2450 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5000 2400 5000 2350
+Wire Wire Line
+	4600 2600 5150 2600
+Wire Wire Line
+	5150 2600 5150 2500
+Wire Wire Line
+	4600 1200 4700 1200
+Wire Wire Line
+	4600 1700 4700 1700
+Wire Wire Line
+	4600 2200 4700 2200
+Wire Wire Line
+	5700 2200 5600 2200
+Wire Wire Line
+	5600 1700 5700 1700
+Wire Wire Line
+	5600 1200 5700 1200
+Wire Wire Line
+	5150 1500 4800 1500
+Wire Wire Line
+	4800 1500 4800 2600
+Connection ~ 4800 2600
+Wire Wire Line
+	5150 2000 4800 2000
+Connection ~ 4800 2000
+Wire Wire Line
+	1800 1550 1900 1550
+Wire Wire Line
+	1800 1750 1900 1750
+Wire Wire Line
+	2450 2000 2450 1950
+Wire Wire Line
+	2450 1350 2450 1200
+Wire Wire Line
+	3100 1650 3250 1650
+Wire Notes Line
+	3900 2850 6450 2850
+Wire Notes Line
+	6450 2850 6450 650 
+Wire Notes Line
+	6450 650  3900 650 
+Wire Notes Line
+	3900 650  3900 2850
+Text Notes 4850 800  0    60   ~ 0
+SPI Buffers
+Text Notes 6900 2000 0    60   ~ 0
+Spare Buffer
+Wire Notes Line
+	6600 2850 8000 2850
+Wire Notes Line
+	8000 2850 8000 1800
+Wire Notes Line
+	8000 1800 6600 1800
+Wire Notes Line
+	6600 1800 6600 2850
+Text Notes 1900 950  0    60   ~ 0
+RTC nCS Control Logic\n
+Wire Notes Line
+	1000 2350 3700 2350
+Wire Notes Line
+	3700 2350 3700 650 
+Wire Notes Line
+	3700 650  1000 650 
+Wire Notes Line
+	1000 650  1000 2350
+$Comp
+L C_Small C45
+U 1 1 57EE56BD
+P 7000 1250
+F 0 "C45" H 7010 1320 50  0000 L CNN
+F 1 "0.1uF" H 7010 1170 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 7000 1250 50  0001 C CNN
+F 3 "" H 7000 1250 50  0000 C CNN
+	1    7000 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C46
+U 1 1 57EE5935
+P 7250 1250
+F 0 "C46" H 7260 1320 50  0000 L CNN
+F 1 "0.1uF" H 7260 1170 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 7250 1250 50  0001 C CNN
+F 3 "" H 7250 1250 50  0000 C CNN
+	1    7250 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3V3 #PWR94
+U 1 1 57EE59F6
+P 7150 1100
+F 0 "#PWR94" H 7150 950 50  0001 C CNN
+F 1 "+3V3" H 7150 1240 50  0000 C CNN
+F 2 "" H 7150 1100 50  0000 C CNN
+F 3 "" H 7150 1100 50  0000 C CNN
+	1    7150 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR95
+U 1 1 57EE5AEF
+P 7150 1400
+F 0 "#PWR95" H 7150 1150 50  0001 C CNN
+F 1 "GND" H 7150 1250 50  0000 C CNN
+F 2 "" H 7150 1400 50  0000 C CNN
+F 3 "" H 7150 1400 50  0000 C CNN
+	1    7150 1400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 1400 7250 1400
+Wire Wire Line
+	7250 1400 7250 1350
+Wire Wire Line
+	7000 1400 7000 1350
+Connection ~ 7150 1400
+Wire Wire Line
+	7000 1150 7000 1100
+Wire Wire Line
+	7000 1100 7250 1100
+Wire Wire Line
+	7250 1100 7250 1150
+Connection ~ 7150 1100
+Text Notes 6850 850  0    60   ~ 0
+Logic Decoupling
+Wire Notes Line
+	6600 1700 8000 1700
+Wire Notes Line
+	8000 1700 8000 650 
+Wire Notes Line
+	8000 650  6600 650 
+Wire Notes Line
+	6600 650  6600 1700
+Wire Notes Line
+	8150 2850 11050 2850
+Wire Notes Line
+	11050 2850 11050 650 
+Wire Notes Line
+	11050 650  8150 650 
+Wire Notes Line
+	8150 650  8150 2850
+Text Notes 9300 850  0    60   ~ 0
+RTC Module
+Wire Notes Line
+	8150 4350 9750 4350
+Wire Notes Line
+	9750 4350 9750 3000
+Wire Notes Line
+	9750 3000 8150 3000
+Wire Notes Line
+	8150 3000 8150 4350
+Text Notes 8500 3150 0    60   ~ 0
+RTC Backup Battery
+Wire Notes Line
+	9900 4350 11050 4350
+Wire Notes Line
+	11050 4350 11050 3000
+Wire Notes Line
+	11050 3000 9900 3000
+Wire Notes Line
+	9900 3000 9900 4350
+Text Notes 10150 3150 0    60   ~ 0
+RTC Decoupling
+Wire Notes Line
+	8175 4825 10275 4825
+Wire Notes Line
+	8575 4700 8575 5250
+Wire Notes Line
+	8175 4700 10275 4700
+Wire Notes Line
+	8175 4700 8175 5250
+Wire Notes Line
+	8175 5250 10275 5250
+Wire Notes Line
+	10275 5250 10275 4700
+Wire Notes Line
+	9150 4700 9150 5250
+Wire Notes Line
+	9450 4700 9450 5250
+Wire Notes Line
+	9800 4700 9800 5250
+Text Notes 8225 5400 0    60   ~ 0
+Final Logic Equations:
+Text Notes 1625 6800 0    60   ~ 0
+A combined logic and tri-state buffer system will be used to allow the Pi complete \naccess to the RTC without disrupting the MCU SPI bus with the ADC.
+Text Notes 7200 6800 0    60   ~ 0
+Applied Physics Club\nThe Pennsylvania State University
+Text Notes 9125 7650 2    60   ~ 0
+September 27, 2016
+Text Notes 9100 7500 2    60   ~ 0
+Telescope Base Station Control Board
+Text Notes 10625 7650 0    60   ~ 0
+B
+$EndSCHEMATC

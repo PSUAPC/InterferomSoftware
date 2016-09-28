@@ -29,12 +29,13 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:DigitalLogic
+LIBS:Minicircuits
 LIBS:SiteControl-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 8
+Sheet 2 9
 Title ""
 Date ""
 Rev ""
@@ -57,10 +58,10 @@ F 4 "RJE051AA1310" V 1850 1900 60  0000 C CNN "Model"
 	0    -1   1    0   
 $EndComp
 $Comp
-L GND #PWR01
+L GND #PWR1
 U 1 1 57AA9C99
 P 1950 2600
-F 0 "#PWR01" H 1950 2350 50  0001 C CNN
+F 0 "#PWR1" H 1950 2350 50  0001 C CNN
 F 1 "GND" H 1950 2450 50  0000 C CNN
 F 2 "" H 1950 2600 50  0000 C CNN
 F 3 "" H 1950 2600 50  0000 C CNN
@@ -231,10 +232,10 @@ F 3 "" H 9600 1750 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR02
+L GND #PWR11
 U 1 1 57AAE874
 P 9200 2000
-F 0 "#PWR02" H 9200 1750 50  0001 C CNN
+F 0 "#PWR11" H 9200 1750 50  0001 C CNN
 F 1 "GND" H 9200 1850 50  0000 C CNN
 F 2 "" H 9200 2000 50  0000 C CNN
 F 3 "" H 9200 2000 50  0000 C CNN
@@ -242,10 +243,10 @@ F 3 "" H 9200 2000 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR03
+L +3.3V #PWR10
 U 1 1 57AAE8A2
 P 9200 1500
-F 0 "#PWR03" H 9200 1350 50  0001 C CNN
+F 0 "#PWR10" H 9200 1350 50  0001 C CNN
 F 1 "+3.3V" H 9200 1650 50  0000 C CNN
 F 2 "" H 9200 1500 50  0000 C CNN
 F 3 "" H 9200 1500 50  0000 C CNN
@@ -253,10 +254,10 @@ F 3 "" H 9200 1500 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR04
+L +3.3V #PWR3
 U 1 1 57AAEEEF
 P 4000 3700
-F 0 "#PWR04" H 4000 3550 50  0001 C CNN
+F 0 "#PWR3" H 4000 3550 50  0001 C CNN
 F 1 "+3.3V" H 4000 3850 50  0000 C CNN
 F 2 "" H 4000 3700 50  0000 C CNN
 F 3 "" H 4000 3700 50  0000 C CNN
@@ -264,10 +265,10 @@ F 3 "" H 4000 3700 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR05
+L GND #PWR2
 U 1 1 57AAEF89
 P 3850 5200
-F 0 "#PWR05" H 3850 4950 50  0001 C CNN
+F 0 "#PWR2" H 3850 4950 50  0001 C CNN
 F 1 "GND" H 3850 5050 50  0000 C CNN
 F 2 "" H 3850 5200 50  0000 C CNN
 F 3 "" H 3850 5200 50  0000 C CNN
@@ -297,10 +298,10 @@ F 3 "" H 6650 1650 50  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L +3.3V #PWR06
+L +3.3V #PWR8
 U 1 1 57AB0418
 P 6650 1450
-F 0 "#PWR06" H 6650 1300 50  0001 C CNN
+F 0 "#PWR8" H 6650 1300 50  0001 C CNN
 F 1 "+3.3V" H 6650 1600 50  0000 C CNN
 F 2 "" H 6650 1450 50  0000 C CNN
 F 3 "" H 6650 1450 50  0000 C CNN
@@ -308,10 +309,10 @@ F 3 "" H 6650 1450 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR07
+L GND #PWR9
 U 1 1 57AB0450
 P 6900 2050
-F 0 "#PWR07" H 6900 1800 50  0001 C CNN
+F 0 "#PWR9" H 6900 1800 50  0001 C CNN
 F 1 "GND" H 6900 1900 50  0000 C CNN
 F 2 "" H 6900 2050 50  0000 C CNN
 F 3 "" H 6900 2050 50  0000 C CNN
@@ -497,10 +498,10 @@ Wire Wire Line
 Wire Wire Line
 	3700 3950 4750 3950
 $Comp
-L GND #PWR08
+L GND #PWR4
 U 1 1 57AB2454
 P 4150 5450
-F 0 "#PWR08" H 4150 5200 50  0001 C CNN
+F 0 "#PWR4" H 4150 5200 50  0001 C CNN
 F 1 "GND" H 4150 5300 50  0000 C CNN
 F 2 "" H 4150 5450 50  0000 C CNN
 F 3 "" H 4150 5450 50  0000 C CNN
@@ -508,10 +509,10 @@ F 3 "" H 4150 5450 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR09
+L GND #PWR5
 U 1 1 57AB2498
 P 4300 5050
-F 0 "#PWR09" H 4300 4800 50  0001 C CNN
+F 0 "#PWR5" H 4300 4800 50  0001 C CNN
 F 1 "GND" H 4300 4900 50  0000 C CNN
 F 2 "" H 4300 5050 50  0000 C CNN
 F 3 "" H 4300 5050 50  0000 C CNN
@@ -519,10 +520,10 @@ F 3 "" H 4300 5050 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR010
+L GND #PWR6
 U 1 1 57AB25BF
 P 4450 4650
-F 0 "#PWR010" H 4450 4400 50  0001 C CNN
+F 0 "#PWR6" H 4450 4400 50  0001 C CNN
 F 1 "GND" H 4450 4500 50  0000 C CNN
 F 2 "" H 4450 4650 50  0000 C CNN
 F 3 "" H 4450 4650 50  0000 C CNN
@@ -530,10 +531,10 @@ F 3 "" H 4450 4650 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR011
+L GND #PWR7
 U 1 1 57AB26C4
 P 4600 4250
-F 0 "#PWR011" H 4600 4000 50  0001 C CNN
+F 0 "#PWR7" H 4600 4000 50  0001 C CNN
 F 1 "GND" H 4600 4100 50  0000 C CNN
 F 2 "" H 4600 4250 50  0000 C CNN
 F 3 "" H 4600 4250 50  0000 C CNN
@@ -743,12 +744,14 @@ Text Notes 2500 3400 0    60   ~ 0
 Inverter Output Signal Isolation
 Text Notes 8650 1250 0    60   ~ 0
 Inverter Isolation Decoupling
-Text Notes 7200 6800 0    60   ~ 0
-Applied Physics Club\nThe Pennsylvania State University
-Text Notes 9050 7650 2    60   ~ 0
-August 11, 2016
-Text Notes 9100 7500 2    60   ~ 0
-Telescope Base Station Control Board
 Text Notes 6500 4900 0    60   ~ 0
 NOTES: The Samlex PST2000-12 inverter contains an RJ50 jack for interfacing \nwith the RC-200 remote control. The engineers at Samlex have kindly provided \napplication circuits for the basic circuitry within the RC-200 which will allow us \nto improvise our own controller which can be directly connected to the PIC 16 \nand thus the Raspberry Pi and RF Modem. This will allow us to remotely \n(from a distance of several km) activate and de-activate the inverter, as well \nas monitor information such as voltage, temperature, and power consumption.\n\nSince the inverter RJ50 jack contains inverter main board level voltages \n(supposedly VBATT), the circuit will be isolated from the rest of the control \nboard via opto-isolators. The metal case of the RJ50 jack will, however, be \ngrounded to the chassis ground.
+Text Notes 7175 6800 0    60   ~ 0
+Applied Physics Club\nThe Pennsylvania State University
+Text Notes 9100 7650 2    60   ~ 0
+September 27, 2016
+Text Notes 9075 7500 2    60   ~ 0
+Telescope Base Station Control Board
+Text Notes 10600 7650 0    60   ~ 0
+B
 $EndSCHEMATC

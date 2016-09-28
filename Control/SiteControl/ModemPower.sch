@@ -29,12 +29,13 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:DigitalLogic
+LIBS:Minicircuits
 LIBS:SiteControl-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 8
+Sheet 6 9
 Title ""
 Date ""
 Rev ""
@@ -45,10 +46,10 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L GND #PWR057
+L GND #PWR58
 U 1 1 57AC3452
 P 2300 1850
-F 0 "#PWR057" H 2300 1600 50  0001 C CNN
+F 0 "#PWR58" H 2300 1600 50  0001 C CNN
 F 1 "GND" H 2300 1700 50  0000 C CNN
 F 2 "" H 2300 1850 50  0000 C CNN
 F 3 "" H 2300 1850 50  0000 C CNN
@@ -104,10 +105,10 @@ Connection ~ 4550 1550
 Wire Wire Line
 	4100 1750 4350 1750
 $Comp
-L GND #PWR058
+L GND #PWR61
 U 1 1 57AC3486
 P 4450 2050
-F 0 "#PWR058" H 4450 1800 50  0001 C CNN
+F 0 "#PWR61" H 4450 1800 50  0001 C CNN
 F 1 "GND" H 4450 1900 50  0000 C CNN
 F 2 "" H 4450 2050 50  0000 C CNN
 F 3 "" H 4450 2050 50  0000 C CNN
@@ -148,10 +149,10 @@ Wire Wire Line
 Text GLabel 4650 1550 2    60   Input ~ 0
 Modem_En
 $Comp
-L +BATT #PWR059
+L +BATT #PWR60
 U 1 1 57AC3F1A
 P 3450 1450
-F 0 "#PWR059" H 3450 1300 50  0001 C CNN
+F 0 "#PWR60" H 3450 1300 50  0001 C CNN
 F 1 "+BATT" H 3450 1590 50  0000 C CNN
 F 2 "" H 3450 1450 50  0000 C CNN
 F 3 "" H 3450 1450 50  0000 C CNN
@@ -173,10 +174,10 @@ Wire Wire Line
 	2550 1700 2550 1650
 Connection ~ 2550 1650
 $Comp
-L GND #PWR060
+L GND #PWR59
 U 1 1 57AC73BF
 P 2550 2050
-F 0 "#PWR060" H 2550 1800 50  0001 C CNN
+F 0 "#PWR59" H 2550 1800 50  0001 C CNN
 F 1 "GND" H 2550 1900 50  0000 C CNN
 F 2 "" H 2550 2050 50  0000 C CNN
 F 3 "" H 2550 2050 50  0000 C CNN
@@ -197,10 +198,10 @@ F 3 "" H 6300 1900 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +BATT #PWR061
+L +BATT #PWR62
 U 1 1 57AC788C
 P 6300 1700
-F 0 "#PWR061" H 6300 1550 50  0001 C CNN
+F 0 "#PWR62" H 6300 1550 50  0001 C CNN
 F 1 "+BATT" H 6300 1840 50  0000 C CNN
 F 2 "" H 6300 1700 50  0000 C CNN
 F 3 "" H 6300 1700 50  0000 C CNN
@@ -208,10 +209,10 @@ F 3 "" H 6300 1700 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR062
+L GND #PWR63
 U 1 1 57AC78AC
 P 6300 2100
-F 0 "#PWR062" H 6300 1850 50  0001 C CNN
+F 0 "#PWR63" H 6300 1850 50  0001 C CNN
 F 1 "GND" H 6300 1950 50  0000 C CNN
 F 2 "" H 6300 2100 50  0000 C CNN
 F 3 "" H 6300 2100 50  0000 C CNN
@@ -232,12 +233,14 @@ Wire Notes Line
 	5900 1100 5900 2450
 Text Notes 5900 1200 0    60   ~ 0
 Relay Decoupling
-Text Notes 7150 6800 0    60   ~ 0
-Applied Physics Club\nThe Pennsylvania State University
-Text Notes 9000 7650 2    60   ~ 0
-August 11, 2016
-Text Notes 9050 7500 2    60   ~ 0
-Telescope Base Station Control Board
 Text Notes 1450 3200 0    60   ~ 0
 NOTES: The modem can be powered by anything between 9 VDC and 16 VDC\nindicating an internal power supply / regulator. This means that we can simply \npipe battery power directly to the modem (after a switch / relay allowing for \nhard reset / power consumption)
+Text Notes 7200 6800 0    60   ~ 0
+Applied Physics Club\nThe Pennsylvania State University
+Text Notes 9125 7650 2    60   ~ 0
+September 27, 2016
+Text Notes 9100 7500 2    60   ~ 0
+Telescope Base Station Control Board
+Text Notes 10625 7650 0    60   ~ 0
+B
 $EndSCHEMATC
