@@ -189,49 +189,49 @@ Wire Wire Line
 $Comp
 L CP1 C15
 U 1 1 57AC76BF
-P 6300 1900
-F 0 "C15" H 6325 2000 50  0000 L CNN
-F 1 "22uF" H 6325 1800 50  0000 L CNN
-F 2 "Capacitors_Tantalum_SMD:TantalC_SizeR_EIA-2012" H 6300 1900 50  0001 C CNN
-F 3 "" H 6300 1900 50  0000 C CNN
-	1    6300 1900
+P 5875 1950
+F 0 "C15" H 5900 2050 50  0000 L CNN
+F 1 "22uF" H 5900 1850 50  0000 L CNN
+F 2 "Capacitors_Tantalum_SMD:TantalC_SizeR_EIA-2012" H 5875 1950 50  0001 C CNN
+F 3 "" H 5875 1950 50  0000 C CNN
+	1    5875 1950
 	1    0    0    -1  
 $EndComp
 $Comp
 L +BATT #PWR66
 U 1 1 57AC788C
-P 6300 1700
-F 0 "#PWR66" H 6300 1550 50  0001 C CNN
-F 1 "+BATT" H 6300 1840 50  0000 C CNN
-F 2 "" H 6300 1700 50  0000 C CNN
-F 3 "" H 6300 1700 50  0000 C CNN
-	1    6300 1700
+P 5875 1750
+F 0 "#PWR66" H 5875 1600 50  0001 C CNN
+F 1 "+BATT" H 5875 1890 50  0000 C CNN
+F 2 "" H 5875 1750 50  0000 C CNN
+F 3 "" H 5875 1750 50  0000 C CNN
+	1    5875 1750
 	1    0    0    -1  
 $EndComp
 $Comp
 L GND #PWR67
 U 1 1 57AC78AC
-P 6300 2100
-F 0 "#PWR67" H 6300 1850 50  0001 C CNN
-F 1 "GND" H 6300 1950 50  0000 C CNN
-F 2 "" H 6300 2100 50  0000 C CNN
-F 3 "" H 6300 2100 50  0000 C CNN
-	1    6300 2100
+P 5875 2150
+F 0 "#PWR67" H 5875 1900 50  0001 C CNN
+F 1 "GND" H 5875 2000 50  0000 C CNN
+F 2 "" H 5875 2150 50  0000 C CNN
+F 3 "" H 5875 2150 50  0000 C CNN
+	1    5875 2150
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6300 1700 6300 1750
+	5875 1750 5875 1800
 Wire Wire Line
-	6300 2050 6300 2100
+	5875 2100 5875 2150
 Wire Notes Line
-	5900 2450 6700 2450
+	5475 2550 6275 2550
 Wire Notes Line
-	6700 2450 6700 1100
+	6275 2550 6275 1150
 Wire Notes Line
-	6700 1100 5900 1100
+	6275 1150 5475 1150
 Wire Notes Line
-	5900 1100 5900 2450
-Text Notes 5900 1200 0    60   ~ 0
+	5475 1150 5475 2550
+Text Notes 5475 1250 0    60   ~ 0
 Relay Decoupling
 Text Notes 1450 3200 0    60   ~ 0
 NOTES: The modem can be powered by anything between 9 VDC and 16 VDC\nindicating an internal power supply / regulator. This means that we can simply \npipe battery power directly to the modem (after a switch / relay allowing for \nhard reset / power consumption)

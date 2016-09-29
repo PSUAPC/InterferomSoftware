@@ -239,25 +239,25 @@ Wire Wire Line
 	1300 1950 1300 1850
 Text GLabel 1150 2350 0    60   Input ~ 0
 MCLR
-Text GLabel 5600 2850 2    60   Input ~ 0
+Text GLabel 5600 2550 2    60   Input ~ 0
 RPi_En
-Text GLabel 2650 2050 0    60   Input ~ 0
+Text GLabel 2600 4150 0    60   Input ~ 0
 CMOS_TX
-Text GLabel 2650 2150 0    60   Input ~ 0
+Text GLabel 2600 4250 0    60   Input ~ 0
 CMOS_RX
 Text GLabel 2600 2850 0    60   Input ~ 0
 INV_Toggle_Safe
-Text GLabel 2600 3050 0    60   Input ~ 0
-INV_Temp_Safe
-Text GLabel 2600 2750 0    60   Input ~ 0
-INV_Power_Safe
 Text GLabel 2600 2950 0    60   Input ~ 0
+INV_Temp_Safe
+Text GLabel 2600 3050 0    60   Input ~ 0
+INV_Power_Safe
+Text GLabel 2600 2750 0    60   Input ~ 0
 INV_Overload_Safe
-Text GLabel 5600 2750 2    60   Input ~ 0
+Text GLabel 5600 2450 2    60   Input ~ 0
 CMOS_CTS
-Text GLabel 5600 2550 2    60   Input ~ 0
+Text GLabel 5350 3050 2    60   Input ~ 0
 CMOS_RTS
-Text GLabel 2600 4250 0    60   Input ~ 0
+Text GLabel 2650 2150 0    60   Input ~ 0
 INV_Data_Safe
 Text GLabel 2600 4350 0    60   Input ~ 0
 Pi_VSense
@@ -279,10 +279,8 @@ Text GLabel 5350 3250 2    60   Input ~ 0
 SDI
 Text GLabel 5350 3350 2    60   Input ~ 0
 SDO
-Text GLabel 2600 4150 0    60   Input ~ 0
+Text GLabel 5600 2850 2    60   Input ~ 0
 Modem_En
-Wire Wire Line
-	2750 2050 2650 2050
 Wire Wire Line
 	2650 2150 2750 2150
 Wire Wire Line
@@ -606,38 +604,34 @@ NoConn ~ 2750 3150
 NoConn ~ 2750 3250
 NoConn ~ 2750 3750
 NoConn ~ 2750 3850
-NoConn ~ 5100 4250
 NoConn ~ 5100 4150
 NoConn ~ 5100 4050
 NoConn ~ 5100 3950
-NoConn ~ 5100 3750
-NoConn ~ 5100 3850
 NoConn ~ 5100 3650
-NoConn ~ 5100 3050
 NoConn ~ 5100 1950
 NoConn ~ 7350 4000
 NoConn ~ 2750 2250
 Wire Wire Line
-	1500 4250 1750 4250
+	1625 2150 1875 2150
 Wire Wire Line
-	1750 4250 1700 4200
+	1875 2150 1825 2100
 Wire Wire Line
-	1750 4250 1700 4300
-Connection ~ 1750 4250
+	1875 2150 1825 2200
+Connection ~ 1875 2150
 Wire Wire Line
-	800  2150 1050 2150
+	1800 4225 2050 4225
 Wire Wire Line
-	1050 2150 1000 2100
+	2050 4225 2000 4175
 Wire Wire Line
-	1050 2150 1000 2200
-Connection ~ 1050 2150
+	2050 4225 2000 4275
+Connection ~ 2050 4225
 Wire Wire Line
-	1000 2050 750  2050
+	2000 4125 1750 4125
 Wire Wire Line
-	750  2050 800  2100
+	1750 4125 1800 4175
 Wire Wire Line
-	750  2050 800  2000
-Connection ~ 750  2050
+	1750 4125 1800 4075
+Connection ~ 1750 4125
 Text Notes 9200 3400 0    60   ~ 0
 DNP
 $Comp
@@ -701,7 +695,7 @@ Wire Wire Line
 	2600 2950 2750 2950
 Wire Wire Line
 	2750 4150 2600 4150
-Text GLabel 5600 2450 2    60   Input ~ 0
+Text GLabel 5600 2650 2    60   Input ~ 0
 RPi_5V_En
 Wire Wire Line
 	5600 2450 5100 2450
@@ -715,7 +709,6 @@ Wire Wire Line
 	5100 2750 5600 2750
 Wire Wire Line
 	5600 2850 5100 2850
-NoConn ~ 5100 2650
 Wire Wire Line
 	5100 2950 5350 2950
 Text GLabel 5350 3550 2    60   Input ~ 0
@@ -734,4 +727,24 @@ Text Notes 9075 7500 2    60   ~ 0
 Telescope Base Station Control Board
 Text Notes 10600 7650 0    60   ~ 0
 B
+Wire Wire Line
+	5100 2650 5600 2650
+Text GLabel 5600 2750 2    60   Input ~ 0
+RPi_5V_PGood
+Wire Wire Line
+	5100 3050 5350 3050
+Text GLabel 5350 3750 2    60   Input ~ 0
+MCU_Active
+Text GLabel 5350 3850 2    60   Input ~ 0
+Pi_Sense
+Wire Wire Line
+	5100 3750 5350 3750
+Wire Wire Line
+	5350 3850 5100 3850
+Text GLabel 5325 4250 2    60   Input ~ 0
+MCU_Mode
+Wire Wire Line
+	5100 4250 5325 4250
+NoConn ~ 2750 3350
+NoConn ~ 2750 2050
 $EndSCHEMATC

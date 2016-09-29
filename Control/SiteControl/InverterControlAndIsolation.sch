@@ -48,24 +48,24 @@ $EndDescr
 $Comp
 L RJ50 J1
 U 1 1 57AA9980
-P 2300 1800
-F 0 "J1" H 2500 2300 50  0000 C CNN
-F 1 "RJ50" H 2150 2300 50  0000 C CNN
-F 2 "DigitalLogic:RJ50_RJE051AA1310" H 2300 1800 50  0001 C CNN
-F 3 "" H 2300 1800 50  0000 C CNN
-F 4 "RJE051AA1310" V 1850 1900 60  0000 C CNN "Model"
-	1    2300 1800
+P 2000 1725
+F 0 "J1" H 2200 2225 50  0000 C CNN
+F 1 "RJ50" H 1850 2225 50  0000 C CNN
+F 2 "DigitalLogic:RJ50_RJE051AA1310" H 2000 1725 50  0001 C CNN
+F 3 "" H 2000 1725 50  0000 C CNN
+F 4 "RJE051AA1310" V 1550 1825 60  0000 C CNN "Model"
+	1    2000 1725
 	0    -1   1    0   
 $EndComp
 $Comp
 L GND #PWR1
 U 1 1 57AA9C99
-P 1950 2600
-F 0 "#PWR1" H 1950 2350 50  0001 C CNN
-F 1 "GND" H 1950 2450 50  0000 C CNN
-F 2 "" H 1950 2600 50  0000 C CNN
-F 3 "" H 1950 2600 50  0000 C CNN
-	1    1950 2600
+P 1650 2525
+F 0 "#PWR1" H 1650 2275 50  0001 C CNN
+F 1 "GND" H 1650 2375 50  0000 C CNN
+F 2 "" H 1650 2525 50  0000 C CNN
+F 3 "" H 1650 2525 50  0000 C CNN
+	1    1650 2525
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -146,25 +146,25 @@ F 3 "" H 5400 1600 50  0000 C CNN
 	1    5400 1600
 	1    0    0    -1  
 $EndComp
-Text GLabel 2950 2350 2    60   Input ~ 0
+Text GLabel 2650 2275 2    60   Input ~ 0
 INV_LCD_GND
-Text GLabel 2950 1450 2    60   Input ~ 0
+Text GLabel 2650 1375 2    60   Input ~ 0
 INV_TOGGLE
-Text GLabel 2950 1550 2    60   Input ~ 0
+Text GLabel 2650 1475 2    60   Input ~ 0
 INV_AVCC
-Text GLabel 2950 1650 2    60   Input ~ 0
+Text GLabel 2650 1575 2    60   Input ~ 0
 INV_LCD_GND
-Text GLabel 2950 1750 2    60   Input ~ 0
+Text GLabel 2650 1675 2    60   Input ~ 0
 INV_VCC
-Text GLabel 2950 1850 2    60   Input ~ 0
+Text GLabel 2650 1775 2    60   Input ~ 0
 INV_LED_PowerOn
-Text GLabel 2950 1950 2    60   Input ~ 0
+Text GLabel 2650 1875 2    60   Input ~ 0
 INV_LED_OverTemp
-Text GLabel 2950 2050 2    60   Input ~ 0
+Text GLabel 2650 1975 2    60   Input ~ 0
 INV_LED_Overload
-Text GLabel 2950 2150 2    60   Input ~ 0
+Text GLabel 2650 2075 2    60   Input ~ 0
 INV_LCD_Light
-Text GLabel 2950 2250 2    60   Input ~ 0
+Text GLabel 2650 2175 2    60   Input ~ 0
 INV_LCD_Data
 Text GLabel 5500 1350 2    60   Input ~ 0
 INV_VCC
@@ -172,85 +172,85 @@ Text GLabel 5450 2300 2    60   Input ~ 0
 INV_LCD_GND
 Text GLabel 5100 1800 0    60   Input ~ 0
 INV_TOGGLE
-Text GLabel 9150 2800 2    60   Input ~ 0
+Text GLabel 9300 2825 2    60   Input ~ 0
 INV_VCC
-Text GLabel 9150 3150 2    60   Input ~ 0
+Text GLabel 9300 3175 2    60   Input ~ 0
 INV_LCD_GND
 $Comp
 L CP1 C9
 U 1 1 57AAC877
-P 8950 2950
-F 0 "C9" H 8975 3050 50  0000 L CNN
-F 1 "0.1uF" H 8975 2850 50  0000 L CNN
-F 2 "Capacitors_Tantalum_SMD:TantalC_SizeR_EIA-2012" H 8950 2950 50  0001 C CNN
-F 3 "" H 8950 2950 50  0000 C CNN
-	1    8950 2950
+P 9100 2975
+F 0 "C9" H 9125 3075 50  0000 L CNN
+F 1 "0.1uF" H 9125 2875 50  0000 L CNN
+F 2 "Capacitors_Tantalum_SMD:TantalC_SizeR_EIA-2012" H 9100 2975 50  0001 C CNN
+F 3 "" H 9100 2975 50  0000 C CNN
+	1    9100 2975
 	1    0    0    -1  
 $EndComp
 $Comp
 L C C10
 U 1 1 57AAE425
-P 8850 1750
-F 0 "C10" H 8875 1850 50  0000 L CNN
-F 1 "0.1uF" H 8875 1650 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603" H 8888 1600 50  0001 C CNN
-F 3 "" H 8850 1750 50  0000 C CNN
-	1    8850 1750
+P 8850 1775
+F 0 "C10" H 8875 1875 50  0000 L CNN
+F 1 "0.1uF" H 8875 1675 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 8888 1625 50  0001 C CNN
+F 3 "" H 8850 1775 50  0000 C CNN
+	1    8850 1775
 	1    0    0    -1  
 $EndComp
 $Comp
 L C C11
 U 1 1 57AAE644
-P 9100 1750
-F 0 "C11" H 9125 1850 50  0000 L CNN
-F 1 "0.1uF" H 9125 1650 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603" H 9138 1600 50  0001 C CNN
-F 3 "" H 9100 1750 50  0000 C CNN
-	1    9100 1750
+P 9100 1775
+F 0 "C11" H 9125 1875 50  0000 L CNN
+F 1 "0.1uF" H 9125 1675 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 9138 1625 50  0001 C CNN
+F 3 "" H 9100 1775 50  0000 C CNN
+	1    9100 1775
 	1    0    0    -1  
 $EndComp
 $Comp
 L C C12
 U 1 1 57AAE6B9
-P 9350 1750
-F 0 "C12" H 9375 1850 50  0000 L CNN
-F 1 "0.1uF" H 9375 1650 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603" H 9388 1600 50  0001 C CNN
-F 3 "" H 9350 1750 50  0000 C CNN
-	1    9350 1750
+P 9350 1775
+F 0 "C12" H 9375 1875 50  0000 L CNN
+F 1 "0.1uF" H 9375 1675 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 9388 1625 50  0001 C CNN
+F 3 "" H 9350 1775 50  0000 C CNN
+	1    9350 1775
 	1    0    0    -1  
 $EndComp
 $Comp
 L C C13
 U 1 1 57AAE6BF
-P 9600 1750
-F 0 "C13" H 9625 1850 50  0000 L CNN
-F 1 "0.1uF" H 9625 1650 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603" H 9638 1600 50  0001 C CNN
-F 3 "" H 9600 1750 50  0000 C CNN
-	1    9600 1750
+P 9600 1775
+F 0 "C13" H 9625 1875 50  0000 L CNN
+F 1 "0.1uF" H 9625 1675 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 9638 1625 50  0001 C CNN
+F 3 "" H 9600 1775 50  0000 C CNN
+	1    9600 1775
 	1    0    0    -1  
 $EndComp
 $Comp
 L GND #PWR11
 U 1 1 57AAE874
-P 9200 2000
-F 0 "#PWR11" H 9200 1750 50  0001 C CNN
-F 1 "GND" H 9200 1850 50  0000 C CNN
-F 2 "" H 9200 2000 50  0000 C CNN
-F 3 "" H 9200 2000 50  0000 C CNN
-	1    9200 2000
+P 9200 2025
+F 0 "#PWR11" H 9200 1775 50  0001 C CNN
+F 1 "GND" H 9200 1875 50  0000 C CNN
+F 2 "" H 9200 2025 50  0000 C CNN
+F 3 "" H 9200 2025 50  0000 C CNN
+	1    9200 2025
 	1    0    0    -1  
 $EndComp
 $Comp
 L +3.3V #PWR10
 U 1 1 57AAE8A2
-P 9200 1500
-F 0 "#PWR10" H 9200 1350 50  0001 C CNN
-F 1 "+3.3V" H 9200 1650 50  0000 C CNN
-F 2 "" H 9200 1500 50  0000 C CNN
-F 3 "" H 9200 1500 50  0000 C CNN
-	1    9200 1500
+P 9200 1525
+F 0 "#PWR10" H 9200 1375 50  0001 C CNN
+F 1 "+3.3V" H 9200 1675 50  0000 C CNN
+F 2 "" H 9200 1525 50  0000 C CNN
+F 3 "" H 9200 1525 50  0000 C CNN
+	1    9200 1525
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -366,13 +366,13 @@ F 3 "" H 4150 5300 50  0000 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	1950 2550 1950 2600
+	1650 2475 1650 2525
 Wire Wire Line
-	9150 2800 8950 2800
+	9300 2825 9100 2825
 Wire Wire Line
-	8950 3100 8950 3150
+	9100 3125 9100 3175
 Wire Wire Line
-	8950 3150 9150 3150
+	9100 3175 9300 3175
 Wire Wire Line
 	5500 1350 5400 1350
 Wire Wire Line
@@ -403,55 +403,55 @@ Wire Wire Line
 Connection ~ 5400 2200
 Connection ~ 5400 1800
 Wire Wire Line
-	2750 1450 2950 1450
+	2450 1375 2650 1375
 Wire Wire Line
-	2950 1550 2750 1550
+	2650 1475 2450 1475
 Wire Wire Line
-	2750 1650 2950 1650
+	2450 1575 2650 1575
 Wire Wire Line
-	2950 1750 2750 1750
+	2650 1675 2450 1675
 Wire Wire Line
-	2750 1850 2950 1850
+	2450 1775 2650 1775
 Wire Wire Line
-	2950 1950 2750 1950
+	2650 1875 2450 1875
 Wire Wire Line
-	2750 2050 2950 2050
+	2450 1975 2650 1975
 Wire Wire Line
-	2950 2150 2750 2150
+	2650 2075 2450 2075
 Wire Wire Line
-	2750 2250 2950 2250
+	2450 2175 2650 2175
 Wire Wire Line
-	2950 2350 2750 2350
+	2650 2275 2450 2275
 Wire Wire Line
-	8850 1600 8850 1550
+	8850 1625 8850 1575
 Wire Wire Line
-	8850 1550 9600 1550
+	8850 1575 9600 1575
 Wire Wire Line
-	9600 1550 9600 1600
+	9600 1575 9600 1625
 Wire Wire Line
-	9100 1600 9100 1550
-Connection ~ 9100 1550
+	9100 1625 9100 1575
+Connection ~ 9100 1575
 Wire Wire Line
-	9350 1600 9350 1550
-Connection ~ 9350 1550
+	9350 1625 9350 1575
+Connection ~ 9350 1575
 Wire Wire Line
-	9200 1500 9200 1550
-Connection ~ 9200 1550
+	9200 1525 9200 1575
+Connection ~ 9200 1575
 Wire Wire Line
-	8850 1900 8850 1950
+	8850 1925 8850 1975
 Wire Wire Line
-	8850 1950 9600 1950
+	8850 1975 9600 1975
 Wire Wire Line
-	9600 1950 9600 1900
+	9600 1975 9600 1925
 Wire Wire Line
-	9200 2000 9200 1950
-Connection ~ 9200 1950
+	9200 2025 9200 1975
+Connection ~ 9200 1975
 Wire Wire Line
-	9100 1900 9100 1950
-Connection ~ 9100 1950
+	9100 1925 9100 1975
+Connection ~ 9100 1975
 Wire Wire Line
-	9350 1900 9350 1950
-Connection ~ 9350 1950
+	9350 1925 9350 1975
+Connection ~ 9350 1975
 Wire Wire Line
 	3700 3750 4000 3750
 Wire Wire Line
@@ -695,37 +695,37 @@ Connection ~ 4450 4350
 Connection ~ 4300 4750
 Connection ~ 4150 5150
 Wire Notes Line
-	8600 2600 8600 3400
+	8450 2525 8450 3425
 Wire Notes Line
-	8600 3400 9950 3400
+	8450 3425 10100 3425
 Wire Notes Line
-	9950 3400 9950 2600
+	10100 3425 10100 2525
 Wire Notes Line
-	9950 2600 8600 2600
+	10100 2525 8450 2525
 Wire Notes Line
-	4400 1100 4400 2550
+	4400 1075 4400 2775
 Wire Notes Line
-	4400 2550 8050 2550
+	4400 2775 8050 2775
 Wire Notes Line
-	8050 2550 8050 1100
+	8050 2775 8050 1075
 Wire Notes Line
-	8050 1100 4400 1100
+	8050 1075 4400 1075
 Wire Notes Line
-	8450 1100 8450 2350
+	8450 1075 8450 2375
 Wire Notes Line
-	8450 2350 10100 2350
+	8450 2375 10100 2375
 Wire Notes Line
-	10100 2350 10100 1100
+	10100 2375 10100 1075
 Wire Notes Line
-	10100 1100 8450 1100
+	10100 1075 8450 1075
 Wire Notes Line
-	1550 2850 4000 2850
+	1250 2775 3700 2775
 Wire Notes Line
-	4000 2850 4000 1150
+	3700 2775 3700 1075
 Wire Notes Line
-	4000 1150 1550 1150
+	3700 1075 1250 1075
 Wire Notes Line
-	1550 1150 1550 2850
+	1250 1075 1250 2775
 Wire Notes Line
 	1200 3250 1200 5850
 Wire Notes Line
@@ -736,13 +736,13 @@ Wire Notes Line
 	5950 3250 1200 3250
 Text Notes 7100 1200 2    60   ~ 0
 Toggle Isolation Circuit
-Text Notes 8700 2700 0    60   ~ 0
+Text Notes 8850 2725 0    60   ~ 0
 Toggle Power Decoupling
-Text Notes 2050 1250 0    60   ~ 0
+Text Notes 1750 1175 0    60   ~ 0
 Inverter Input Jack
 Text Notes 2500 3400 0    60   ~ 0
 Inverter Output Signal Isolation
-Text Notes 8650 1250 0    60   ~ 0
+Text Notes 8650 1275 0    60   ~ 0
 Inverter Isolation Decoupling
 Text Notes 6500 4900 0    60   ~ 0
 NOTES: The Samlex PST2000-12 inverter contains an RJ50 jack for interfacing \nwith the RC-200 remote control. The engineers at Samlex have kindly provided \napplication circuits for the basic circuitry within the RC-200 which will allow us \nto improvise our own controller which can be directly connected to the PIC 16 \nand thus the Raspberry Pi and RF Modem. This will allow us to remotely \n(from a distance of several km) activate and de-activate the inverter, as well \nas monitor information such as voltage, temperature, and power consumption.\n\nSince the inverter RJ50 jack contains inverter main board level voltages \n(supposedly VBATT), the circuit will be isolated from the rest of the control \nboard via opto-isolators. The metal case of the RJ50 jack will, however, be \ngrounded to the chassis ground.
