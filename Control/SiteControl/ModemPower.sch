@@ -48,12 +48,12 @@ $EndDescr
 $Comp
 L GND #PWR062
 U 1 1 57AC3452
-P 2300 1850
-F 0 "#PWR062" H 2300 1600 50  0001 C CNN
-F 1 "GND" H 2300 1700 50  0000 C CNN
-F 2 "" H 2300 1850 50  0000 C CNN
-F 3 "" H 2300 1850 50  0000 C CNN
-	1    2300 1850
+P 2300 2050
+F 0 "#PWR062" H 2300 1800 50  0001 C CNN
+F 1 "GND" H 2300 1900 50  0000 C CNN
+F 2 "" H 2300 2050 50  0000 C CNN
+F 3 "" H 2300 2050 50  0000 C CNN
+	1    2300 2050
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -131,21 +131,10 @@ Wire Notes Line
 	1450 1150 1750 1150
 Text Notes 1850 1250 0    60   ~ 0
 Solid-State Switch and Connector for Modem
-$Comp
-L CONN_01X02 J6
-U 1 1 57AC36DE
-P 2000 1700
-F 0 "J6" H 2000 1850 50  0000 C CNN
-F 1 "CONN_01X02" V 2100 1700 50  0000 C CNN
-F 2 "Terminal_Blocks:TerminalBlock_Pheonix_MPT-2.54mm_2pol" H 2000 1700 50  0001 C CNN
-F 3 "" H 2000 1700 50  0000 C CNN
-	1    2000 1700
-	-1   0    0    -1  
-$EndComp
 Wire Wire Line
 	2200 1750 2300 1750
 Wire Wire Line
-	2300 1750 2300 1850
+	2300 1750 2300 2050
 Text GLabel 4650 1550 2    60   Input ~ 0
 Modem_En
 $Comp
@@ -243,4 +232,18 @@ Text Notes 9100 7500 2    60   ~ 0
 Telescope Base Station Control Board
 Text Notes 10625 7650 0    60   ~ 0
 B
+$Comp
+L CONN_01X03 J6
+U 1 1 57EF07D4
+P 2000 1750
+F 0 "J6" H 2000 1950 50  0000 C CNN
+F 1 "CONN_01X03" V 2100 1750 50  0000 C CNN
+F 2 "Terminal_Blocks:TerminalBlock_Pheonix_MPT-2.54mm_3pol" H 2000 1750 50  0001 C CNN
+F 3 "" H 2000 1750 50  0000 C CNN
+	1    2000 1750
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2200 1850 2300 1850
+Connection ~ 2300 1850
 $EndSCHEMATC
