@@ -1,170 +1,137 @@
 ** Drc report for E:\jfixelle\Documents\APC\GitRepo\Control\SiteControl\SiteControl.kicad_pcb **
 ** Created on  **
 
-** Found 59 DRC errors **
+** Found 39 DRC errors **
 ErrType(19): Pad near pad
-    @ (4.3355 in,3.6250 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
-    @ (4.4300 in,3.6250 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (5.9630 in,3.7598 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (6.0575 in,3.7598 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
 ErrType(19): Pad near pad
-    @ (4.3632 in,3.5582 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
-    @ (4.4300 in,3.6250 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (5.9907 in,3.6930 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (6.0575 in,3.7598 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
 ErrType(19): Pad near pad
-    @ (4.3632 in,3.6918 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
-    @ (4.4300 in,3.6250 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (5.9907 in,3.8267 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (6.0575 in,3.7598 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
 ErrType(19): Pad near pad
-    @ (4.4300 in,3.5305 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
-    @ (4.4300 in,3.6250 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (6.0575 in,3.6654 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (6.0575 in,3.7598 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
 ErrType(19): Pad near pad
-    @ (4.4300 in,3.6250 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
-    @ (4.4300 in,3.7195 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (6.0575 in,3.7598 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (6.0575 in,3.8543 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
 ErrType(19): Pad near pad
-    @ (5.3055 in,2.7700 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
-    @ (5.4000 in,2.7700 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (6.1205 in,5.8701 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (6.2150 in,5.8701 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
 ErrType(19): Pad near pad
-    @ (5.3332 in,2.7032 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
-    @ (5.4000 in,2.7700 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (6.1481 in,5.8033 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (6.2150 in,5.8701 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
 ErrType(19): Pad near pad
-    @ (5.3332 in,2.8368 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
-    @ (5.4000 in,2.7700 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (6.1481 in,5.9369 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (6.2150 in,5.8701 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
 ErrType(19): Pad near pad
-    @ (5.4000 in,2.6755 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
-    @ (5.4000 in,2.7700 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (6.2150 in,5.7756 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (6.2150 in,5.8701 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
 ErrType(19): Pad near pad
-    @ (5.4000 in,2.7700 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
-    @ (5.4000 in,2.8645 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (6.2150 in,5.8701 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (6.2150 in,5.9646 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
 ErrType(19): Pad near pad
-    @ (7.3355 in,3.1500 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
-    @ (7.4300 in,3.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (7.6717 in,4.3898 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (7.7661 in,4.3898 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
 ErrType(19): Pad near pad
-    @ (7.3355 in,4.1500 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
-    @ (7.4300 in,4.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (7.6993 in,4.3230 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (7.7661 in,4.3898 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
 ErrType(19): Pad near pad
-    @ (7.3632 in,3.0832 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
-    @ (7.4300 in,3.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (7.6993 in,4.4566 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (7.7661 in,4.3898 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
 ErrType(19): Pad near pad
-    @ (7.3632 in,3.2168 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
-    @ (7.4300 in,3.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (7.7150 in,2.4843 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (7.8094 in,2.4843 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
 ErrType(19): Pad near pad
-    @ (7.3632 in,4.0832 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
-    @ (7.4300 in,4.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (7.7426 in,2.4174 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (7.8094 in,2.4843 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
 ErrType(19): Pad near pad
-    @ (7.3632 in,4.2168 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
-    @ (7.4300 in,4.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (7.7426 in,2.5511 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (7.8094 in,2.4843 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
 ErrType(19): Pad near pad
-    @ (7.4300 in,3.0555 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
-    @ (7.4300 in,3.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (7.7661 in,4.2953 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (7.7661 in,4.3898 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
 ErrType(19): Pad near pad
-    @ (7.4300 in,3.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W3
-    @ (7.4300 in,3.2445 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W3
+    @ (7.7661 in,4.3898 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (7.7661 in,4.4843 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W1
 ErrType(19): Pad near pad
-    @ (7.4300 in,4.0555 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
-    @ (7.4300 in,4.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (7.8094 in,2.3898 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (7.8094 in,2.4843 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
 ErrType(19): Pad near pad
-    @ (7.4300 in,4.1500 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W4
-    @ (7.4300 in,4.2445 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W4
+    @ (7.8094 in,2.4843 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W2
+    @ (7.8094 in,2.5787 in): Pad on F.Cu, B.Cu, Internal, Non-copper of W2
+ErrType(4): Track near pad
+    @ (7.5157 in,2.9783 in): Track 0.0098 in, net [] (0) on layer B.Cu, length: 0.0125 in
+    @ (7.5043 in,2.9823 in): Pad on F.Cu, B.Cu, Internal, Non-copper of BT1
 ErrType(5): Track near via
-    @ (4.5850 in,2.8900 in): Track 0.0200 in, net [GND] (2) on layer B.Cu, length: 0.0354 in
-    @ (4.5950 in,2.9200 in): Via 0.0236 in net [CMOS_TX] (13) on layers F.Cu/B.Cu
+    @ (6.2662 in,2.5218 in): Track 0.0200 in, net [+3V3] (3) on layer F.Cu, length: 0.2175 in
+    @ (6.0726 in,2.5514 in): Via 0.0236 in net [PI_SDI] (120) on layers F.Cu/B.Cu
 ErrType(7): Via near track
-    @ (4.7250 in,3.0750 in): Track 0.0098 in, net [PGED] (34) on layer F.Cu, length: 0.1649 in
-    @ (4.7496 in,3.0050 in): Via 0.0236 in net [GND] (2) on layers F.Cu/B.Cu
+    @ (6.0124 in,2.4185 in): Track 0.0098 in, net [INV_Toggle_Safe] (21) on layer F.Cu, length: 0.0900 in
+    @ (5.9878 in,2.3838 in): Via 0.0236 in net [+3V3] (3) on layers F.Cu/B.Cu
 ErrType(4): Track near pad
-    @ (4.5833 in,2.8554 in): Track 0.0120 in, net [+3V3] (3) on layer B.Cu, length: 0.0348 in
-    @ (4.5850 in,2.8900 in): Pad 1 on F.Cu, B.Cu, Internal of 
+    @ (7.2583 in,3.3268 in): Via 0.0236 in net [+3V3] (3) on layers F.Cu/B.Cu
+    @ (7.2681 in,3.2874 in): Pad 2 on F.Cu, Non-copper of D9
 ErrType(4): Track near pad
-    @ (4.4700 in,2.7650 in): Track 0.0120 in, net [+3V3] (3) on layer B.Cu, length: 0.0852 in
-    @ (4.4409 in,2.7250 in): Pad 1 on B.Cu, Non-copper of C1
-ErrType(7): Via near track
-    @ (4.9200 in,2.7949 in): Track 0.0098 in, net [CMOS_CTS] (27) on layer F.Cu, length: 0.0751 in
-    @ (4.8954 in,2.8200 in): Via 0.0236 in net [RPi_En] (10) on layers F.Cu/B.Cu
-ErrType(7): Via near track
-    @ (5.7177 in,2.9477 in): Track 0.0098 in, net [CMOS_CTS] (27) on layer F.Cu, length: 0.1453 in
-    @ (5.6524 in,2.8476 in): Via 0.0236 in net [RPi_En] (10) on layers F.Cu/B.Cu
+    @ (6.6087 in,3.1594 in): Track 0.0098 in, net [CLKIN] (5) on layer F.Cu, length: 0.0430 in
+    @ (6.6677 in,3.1439 in): Pad 2 on F.Cu, Non-copper of R6
+ErrType(4): Track near pad
+    @ (6.6391 in,3.1290 in): Track 0.0098 in, net [CLKIN] (5) on layer F.Cu, length: 0.0743 in
+    @ (6.6677 in,3.1439 in): Pad 2 on F.Cu, Non-copper of R6
 ErrType(5): Track near via
-    @ (4.8632 in,3.3046 in): Track 0.0098 in, net [Pi_VSense] (30) on layer F.Cu, length: 0.0615 in
-    @ (4.8750 in,3.2800 in): Via 0.0236 in net [PiSDA] (32) on layers F.Cu/B.Cu
+    @ (7.4748 in,4.3701 in): Track 0.0098 in, net [SCLK] (37) on layer F.Cu, length: 0.0787 in
+    @ (7.4994 in,4.3209 in): Via 0.0236 in net [SDI] (38) on layers F.Cu/B.Cu
+ErrType(5): Track near via
+    @ (7.2583 in,2.8445 in): Track 0.0098 in, net [SDI] (38) on layer F.Cu, length: 0.1181 in
+    @ (7.3518 in,2.8199 in): Via 0.0236 in net [RTC_nCS] (125) on layers F.Cu/B.Cu
+ErrType(7): Via near track
+    @ (6.4225 in,1.8258 in): Track 0.0098 in, net [INV_LED_Overload] (54) on layer B.Cu, length: 0.6148 in
+    @ (6.5102 in,1.8504 in): Via 0.0236 in net [INV_LCD_GND] (49) on layers F.Cu/B.Cu
+ErrType(5): Track near via
+    @ (7.2189 in,5.3937 in): Track 0.0100 in, net [RPi_5V_En] (95) on layer B.Cu, length: 0.3150 in
+    @ (7.4945 in,5.3690 in): Via 0.0236 in net [RPi_5V_PGood] (147) on layers F.Cu/B.Cu
 ErrType(4): Track near pad
-    @ (4.7628 in,2.8519 in): Track 0.0098 in, net [PGED] (34) on layer F.Cu, length: 0.1231 in
-    @ (4.7441 in,2.8062 in): Pad 49 on F.Cu, Non-copper of U6
-ErrType(23): Copper areas intersect or are too close
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [GND] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [GND] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [GND] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [GND] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.7700 in,3.6150 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-    @ (5.7700 in,3.6150 in): Zone Outline  (00000000) [GND] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [GND] on F.Cu
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.7700 in,3.6150 in): Zone Outline  (00000000) [GND] on F.Cu
-    @ (5.7700 in,3.6150 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.7700 in,3.6150 in): Zone Outline  (00000000) [GND] on F.Cu
-    @ (5.7700 in,3.6150 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [GND] on F.Cu
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-ErrType(23): Copper areas intersect or are too close
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [GND] on F.Cu
-    @ (5.6900 in,3.6000 in): Zone Outline  (00000000) [Net-(C16-Pad1)] on F.Cu
-ErrType(37): Track inside a keepout area
-    @ (4.1100 in,3.3850 in): Track 0.0200 in, net [+3V3] (3) on layer F.Cu, length: 0.0451 in
-ErrType(36): Via inside a keepout area
-    @ (4.1100 in,3.3850 in): Via 0.0236 in net [+3V3] (3) on layers F.Cu/B.Cu
-ErrType(37): Track inside a keepout area
-    @ (4.0801 in,3.0250 in): Track 0.0200 in, net [+3V3] (3) on layer F.Cu, length: 0.0501 in
-ErrType(36): Via inside a keepout area
-    @ (4.0300 in,3.0250 in): Via 0.0236 in net [+3V3] (3) on layers F.Cu/B.Cu
-ErrType(37): Track inside a keepout area
-    @ (4.2400 in,4.0400 in): Track 0.0500 in, net [GND] (2) on layer B.Cu, length: 0.0300 in
-ErrType(37): Track inside a keepout area
-    @ (4.1900 in,4.0200 in): Track 0.0500 in, net [GND] (2) on layer B.Cu, length: 0.0800 in
-ErrType(37): Track inside a keepout area
-    @ (4.2100 in,4.0400 in): Track 0.0500 in, net [GND] (2) on layer B.Cu, length: 0.0283 in
-ErrType(37): Track inside a keepout area
-    @ (4.1900 in,3.9400 in): Track 0.0500 in, net [GND] (2) on layer B.Cu, length: 0.1414 in
-ErrType(37): Track inside a keepout area
-    @ (4.0300 in,3.2300 in): Track 0.0200 in, net [+3V3] (3) on layer B.Cu, length: 0.0450 in
-ErrType(37): Track inside a keepout area
-    @ (4.0300 in,3.2750 in): Track 0.0200 in, net [+3V3] (3) on layer B.Cu, length: 0.1131 in
-ErrType(37): Track inside a keepout area
-    @ (4.1100 in,3.3550 in): Track 0.0200 in, net [+3V3] (3) on layer B.Cu, length: 0.0300 in
-ErrType(37): Track inside a keepout area
-    @ (4.0300 in,3.2196 in): Track 0.0200 in, net [+3V3] (3) on layer B.Cu, length: 0.0104 in
-ErrType(37): Track inside a keepout area
-    @ (4.0300 in,3.2196 in): Track 0.0200 in, net [+3V3] (3) on layer B.Cu, length: 0.1946 in
-ErrType(36): Via inside a keepout area
-    @ (4.1100 in,3.3850 in): Via 0.0236 in net [+3V3] (3) on layers F.Cu/B.Cu
-ErrType(37): Track inside a keepout area
-    @ (4.0404 in,3.2300 in): Track 0.0300 in, net [+3V3] (3) on layer B.Cu, length: 0.0104 in
-ErrType(37): Track inside a keepout area
-    @ (4.0801 in,3.2300 in): Track 0.0300 in, net [+3V3] (3) on layer B.Cu, length: 0.0398 in
-ErrType(37): Track inside a keepout area
-    @ (4.0300 in,3.0250 in): Track 0.0200 in, net [+3V3] (3) on layer B.Cu, length: 0.1600 in
-ErrType(37): Track inside a keepout area
-    @ (4.0300 in,2.8650 in): Track 0.0200 in, net [+3V3] (3) on layer B.Cu, length: 0.0071 in
-ErrType(37): Track inside a keepout area
-    @ (4.0350 in,2.8600 in): Track 0.0200 in, net [+3V3] (3) on layer B.Cu, length: 0.0400 in
-ErrType(36): Via inside a keepout area
-    @ (4.0300 in,3.0250 in): Via 0.0236 in net [+3V3] (3) on layers F.Cu/B.Cu
-ErrType(37): Track inside a keepout area
-    @ (4.3000 in,3.9809 in): Track 0.0098 in, net [+3V3] (3) on layer B.Cu, length: 0.0600 in
+    @ (7.4668 in,2.8131 in): Track 0.0200 in, net [Net-(BT1-Pad1)] (100) on layer F.Cu, length: 0.2061 in
+    @ (7.5043 in,2.9823 in): Pad on F.Cu, B.Cu, Internal, Non-copper of BT1
+ErrType(16): Two track ends too close
+    @ (6.5654 in,5.6256 in): Track 0.0800 in, net [Net-(P1-Pad2)] (116) on layer F.Cu, length: 0.0913 in
+    @ (6.5654 in,5.7055 in): Track 0.0800 in, net [Net-(J7-Pad2)] (150) on layer F.Cu, length: 0.0799 in
+ErrType(5): Track near via
+    @ (7.5937 in,3.0090 in): Track 0.0098 in, net [PI_SDO] (119) on layer B.Cu, length: 0.1839 in
+    @ (7.5580 in,2.9385 in): Via 0.0236 in net [RTC_nCS] (125) on layers F.Cu/B.Cu
+ErrType(5): Track near via
+    @ (7.3272 in,2.8445 in): Track 0.0098 in, net [PI_SDO] (119) on layer B.Cu, length: 0.0394 in
+    @ (7.3518 in,2.8199 in): Via 0.0236 in net [RTC_nCS] (125) on layers F.Cu/B.Cu
+ErrType(7): Via near track
+    @ (7.2636 in,2.6673 in): Track 0.0098 in, net [PI_SDI] (120) on layer B.Cu, length: 0.1468 in
+    @ (7.2685 in,2.6374 in): Via 0.0236 in net [PI_SDO] (119) on layers F.Cu/B.Cu
+ErrType(7): Via near track
+    @ (7.3518 in,2.8199 in): Track 0.0098 in, net [RTC_nCS] (125) on layer B.Cu, length: 0.0492 in
+    @ (7.3272 in,2.7953 in): Via 0.0236 in net [PI_SDO] (119) on layers F.Cu/B.Cu
+ErrType(5): Track near via
+    @ (7.1261 in,2.5295 in): Track 0.0100 in, net [PI_SDI] (120) on layer B.Cu, length: 1.0194 in
+    @ (6.1165 in,2.5542 in): Via 0.0236 in net [PI_SCLK] (122) on layers F.Cu/B.Cu
+ErrType(5): Track near via
+    @ (7.1382 in,2.8268 in): Track 0.0098 in, net [RTC_nCS] (125) on layer F.Cu, length: 0.2087 in
+    @ (7.1704 in,2.8022 in): Via 0.0236 in net [MCU_Mode] (142) on layers F.Cu/B.Cu
+ErrType(4): Track near pad
+    @ (7.5437 in,3.0020 in): Via 0.0236 in net [RTC_nCS] (125) on layers F.Cu/B.Cu
+    @ (7.5043 in,2.9823 in): Pad on F.Cu, B.Cu, Internal, Non-copper of BT1
 
-** Found 2 unconnected pads **
+** Found 4 unconnected pads **
 ErrType(2): Unconnected pads
-    @ (4.5078 in,3.2550 in): Pad 20 on F.Cu, Non-copper of U6 net GND
-    @ (4.6063 in,3.2550 in): Pad 25 on F.Cu, Non-copper of U6
+    @ (6.5407 in,3.0547 in): Pad 34 on F.Cu, Non-copper of U6 net PiSCL
+    @ (6.3823 in,3.0807 in): Pad 1 on B.Cu, Non-copper of R37
 ErrType(2): Unconnected pads
-    @ (4.4300 in,3.3450 in): Pad 2 on F.Cu, Non-copper of C6 net GND
-    @ (4.4300 in,3.6250 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of W1
+    @ (6.1559 in,3.0772 in): Pad 10 on F.Cu, B.Cu, Internal, Non-copper of J3 net PiSDA
+    @ (6.3232 in,3.1004 in): Pad 1 on B.Cu, Non-copper of R38
+ErrType(2): Unconnected pads
+    @ (6.9433 in,4.2717 in): Pad 1 on F.Cu, B.Cu, Internal, Non-copper of R44 net +BATT
+    @ (6.8744 in,4.2815 in): Pad 1 on F.Cu, B.Cu, Internal of 
+ErrType(2): Unconnected pads
+    @ (6.8449 in,4.3110 in): Pad 1 on F.Cu, B.Cu, Internal of  net +BATT
+    @ (6.8154 in,4.3406 in): Pad 1 on F.Cu, B.Cu, Internal of 
 
 ** End of Report **
