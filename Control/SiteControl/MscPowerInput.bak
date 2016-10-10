@@ -337,25 +337,14 @@ L Q_PMOS_GSD Q2
 U 1 1 57EF5BDD
 P 3650 1300
 F 0 "Q2" H 3950 1350 50  0000 R CNN
-F 1 "SI2323DDS-T1-GE3" V 3475 1225 50  0000 R CNN
+F 1 "SI2323DDS-T1-GE3" V 3325 1200 50  0000 R CNN
 F 2 "TO_SOT_Packages_SMD:SOT-23" H 3850 1400 50  0001 C CNN
 F 3 "" H 3650 1300 50  0000 C CNN
 	1    3650 1300
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	3900 1200 3850 1200
-$Comp
-L R_Small R51
-U 1 1 57EF63DC
-P 3375 1375
-F 0 "R51" H 3405 1395 50  0000 L CNN
-F 1 "1M" H 3405 1335 50  0000 L CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" H 3375 1375 50  0001 C CNN
-F 3 "" H 3375 1375 50  0000 C CNN
-	1    3375 1375
-	1    0    0    -1  
-$EndComp
+	3850 1200 4050 1200
 $Comp
 L R_Small R52
 U 1 1 57EF6552
@@ -379,20 +368,15 @@ F 3 "" H 3375 1775 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3650 1500 3375 1500
-Wire Wire Line
-	3375 1475 3375 1525
-Connection ~ 3375 1500
-Wire Wire Line
-	3375 1125 3375 1275
+	3375 1500 4050 1500
 Wire Wire Line
 	3250 1200 3450 1200
 Connection ~ 3375 1200
 Wire Wire Line
 	3375 1725 3375 1775
-Text Notes 3775 1625 0    60   ~ 0
+Text Notes 3750 1750 0    60   ~ 0
 -2.5 > VGS > -5
-Text Notes 3775 1825 0    60   ~ 0
+Text Notes 3775 1950 0    60   ~ 0
 ID Max: 5.3A\nVDS MAX: 20V
 $Comp
 L VR VR1
@@ -805,4 +789,21 @@ Wire Notes Line
 	7225 725  7225 2550
 Wire Notes Line
 	7225 2550 7325 2550
+Wire Wire Line
+	3375 1200 3375 1125
+Wire Wire Line
+	3375 1500 3375 1525
+$Comp
+L D D?
+U 1 1 57FAE244
+P 4050 1350
+F 0 "D?" H 4050 1450 50  0000 C CNN
+F 1 "D_Zener - 4.5V" H 3975 1525 50  0000 C CNN
+F 2 "Diodes_ThroughHole:Diode_DO-35_SOD27_Horizontal_RM10" H 4050 1350 50  0001 C CNN
+F 3 "" H 4050 1350 50  0000 C CNN
+	1    4050 1350
+	0    1    1    0   
+$EndComp
+Connection ~ 3650 1500
+Connection ~ 3900 1200
 $EndSCHEMATC
