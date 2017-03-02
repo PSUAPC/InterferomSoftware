@@ -256,4 +256,9 @@
   (pad 238 smd rect (at -13.75 -17) (size 0.3 2) (layers F.Cu F.Paste F.Mask))
   (pad 239 smd rect (at -14.25 -17) (size 0.3 2) (layers F.Cu F.Paste F.Mask))
   (pad 240 smd rect (at -14.75 -17) (size 0.3 2) (layers F.Cu F.Paste F.Mask))
+  (model ../../../../../../jfixelle/Documents/APC/GitRepo/PCB_Libs/3DParts/Cyclone3EPQ240.wrl
+    (at (xyz 0 0 0.012))
+    (scale (xyz 10 10 10))
+    (rotate (xyz -90 0 0))
+  )
 )

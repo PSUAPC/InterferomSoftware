@@ -249,4 +249,9 @@
   (pad ~ smd rect (at 65.35 0) (size 6 7.5) (layers F.Cu F.Paste F.Mask))
   (pad ~ thru_hole circle (at -5.06 4.05) (size 2.8 2.8) (drill 2.8) (layers *.Cu *.Mask))
   (pad ~ thru_hole circle (at 65.35 4.05) (size 2.8 2.8) (drill 2.8) (layers *.Cu *.Mask))
+  (model ../../../../../../jfixelle/Documents/APC/GitRepo/PCB_Libs/3DParts/QSevenConnector.wrl
+    (at (xyz 1.18 0 0))
+    (scale (xyz 10 10 10))
+    (rotate (xyz -90 0 0))
+  )
 )
