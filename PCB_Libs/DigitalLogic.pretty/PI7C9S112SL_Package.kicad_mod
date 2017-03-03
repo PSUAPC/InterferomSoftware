@@ -150,4 +150,9 @@
   (pad 128 thru_hole circle (at 0 0) (size 1 1) (drill 1) (layers *.Cu *.Mask))
   (pad 128 thru_hole circle (at -1.5 1.5) (size 1 1) (drill 1) (layers *.Cu *.Mask))
   (pad 128 thru_hole circle (at 1.5 1.5) (size 1 1) (drill 1) (layers *.Cu *.Mask))
+  (model ../../../../../../jfixelle/Documents/APC/GitRepo/PCB_Libs/3DParts/PI7CLQ128.wrl
+    (at (xyz 0 0 0))
+    (scale (xyz 10 10 10))
+    (rotate (xyz -90 0 0))
+  )
 )

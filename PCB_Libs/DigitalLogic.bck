@@ -5,6 +5,10 @@ D DIP6, DC Optocoupler Base Connected, Vce 30V, CTR 20%, Viso 1500V
 K NPN DC Optocoupler Base Connected
 $ENDCMP
 #
+$CMP AS4C16M16SA
+D Alliance Memory SDRAM 256Mb (16Mx16)
+$ENDCMP
+#
 $CMP BUSPCI-5V
 D Connector BUS PCI
 K PCI
@@ -87,6 +91,11 @@ $ENDCMP
 $CMP SS_Relay_VO14642AT
 D SO6, MOSFET Photorelay 1-Form-A, Voff 60V, Ion 100mA
 K MOSFET Output Photorelay 1-Form-A
+$ENDCMP
+#
+$CMP TI_XIO2001
+D PCIE-PCI Bridge
+K PCI
 $ENDCMP
 #
 $CMP TLV71210DBV
