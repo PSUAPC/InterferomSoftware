@@ -5,6 +5,11 @@ D DIP6, DC Optocoupler Base Connected, Vce 30V, CTR 20%, Viso 1500V
 K NPN DC Optocoupler Base Connected
 $ENDCMP
 #
+$CMP AP2182
+D USB DUAL CHANNEL CURRENT-LIMITED POWER SWITCH
+K USB
+$ENDCMP
+#
 $CMP AS4C16M16SA
 D Alliance Memory SDRAM 256Mb (16Mx16)
 $ENDCMP
@@ -12,6 +17,11 @@ $ENDCMP
 $CMP BUSPCI-5V
 D Connector BUS PCI
 K PCI
+$ENDCMP
+#
+$CMP CM_Choke
+D Common Mode Choke
+K Choke
 $ENDCMP
 #
 $CMP LCD-016N002L
@@ -80,6 +90,11 @@ $ENDCMP
 $CMP QSevenConn
 D Connector QSevenConnector
 K QSeven
+$ENDCMP
+#
+$CMP RJMG2012119A0NR_GBEConn
+D RJ45 with transformer + leds WURTH
+K RJ45
 $ENDCMP
 #
 $CMP SN74AUP1T86_Schmitt_XOR
