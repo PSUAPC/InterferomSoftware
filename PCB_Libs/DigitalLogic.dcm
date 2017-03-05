@@ -125,6 +125,11 @@ K 300mA LDO Regulator Fixed Positive
 F http://www.ti.com/lit/ds/symlink/tlv71209.pdf
 $ENDCMP
 #
+$CMP TVDS_4CHAN_10Pin
+D TVDS Diode for 4 channels
+K TVDS
+$ENDCMP
+#
 $CMP USB_A_Stack
 D USB Type A connector Stacked
 K connector USB USB_A
