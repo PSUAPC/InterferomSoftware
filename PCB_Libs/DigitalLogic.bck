@@ -71,6 +71,11 @@ K I2C RTC Clock Calendar
 F http://www.nxp.com/documents/data_sheet/PCF8563.pdf
 $ENDCMP
 #
+$CMP MIC2039BYM6
+D USB SINGLE CHANNEL CURRENT-LIMITED POWER SWITCH
+K USB
+$ENDCMP
+#
 $CMP NHD-C12832A1Z
 D WC1602A0-SFYLYNC06
 K Generic LCD 16x2 Alphanumeric 16pin Green Backlight
@@ -128,6 +133,11 @@ $ENDCMP
 $CMP TVDS_4CHAN_10Pin
 D TVDS Diode for 4 channels
 K TVDS
+$ENDCMP
+#
+$CMP USB_A
+D USB Type A connector Stacked
+K connector USB USB_A
 $ENDCMP
 #
 $CMP USB_A_Stack
